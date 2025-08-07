@@ -98,19 +98,43 @@
   <main>
     <section class="search-section">
       <h2>Search Water Data</h2>
-      <input type="text" placeholder="River, City, or State" />
-      <select>
-        <option>5 miles</option>
-        <option>10 miles</option>
-        <option>25 miles</option>
-        <option>50 miles</option>
-      </select>
-      <button>Search</button>
+<input type="text" id="location-input" placeholder="River, City, or State" />
+<select id="radius-select">
+  <option value="5">5 miles</option>
+  <option value="10">10 miles</option>
+  <option value="25">25 miles</option>
+  <option value="50">50 miles</option>
+  <option value="100">100 miles</option>
+  <option value="250">250 miles</option>
+</select>
+<button onclick="revealSections()">Search</button>
+
     </section>
+
+<section class="gage-section" id="chart-section" style="display:none; background-color: rgba(0, 20, 10, 0.75); border-radius: 15px; box-shadow: 0 0 20px #003300; padding: 30px; width: 90%; max-width: 600px; margin-top: 20px;">
+  <h2 style="color: #b8ffb3; text-align: center;">Gage Height Chart</h2>
+  <img id="usgs-chart-img" alt="USGS Gage Height Chart" style="width: 100%; height: auto;" />
+</section>
+
+    
   </main>
 
   <footer>
     © 2025 McCoy.fish. All rights reserved.
   </footer>
+
+<script>
+  const usgsSiteId = "03146500"; // Licking River station
+
+  function revealSections() {
+    document.getElementById("chart-section").style.display = 'block';
+
+    // Set chart image
+    document.getElementById("usgs-chart-img").src =
+      `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${usgsSiteId}&parm_cd=00065&period=7`;
+  }
+</script>
+
+  
 </body>
 </html>
