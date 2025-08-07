@@ -1,149 +1,116 @@
-from pathlib import Path
-
-# Recreate the file after environment reset
-html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>McCoy.fish</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Courier New', Courier, monospace;
-            background: url('mccoyfishwallpaper.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #c7c7c7;
-            position: relative;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>McCoy.fish</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 0;
+      background-image: url('mccoyfishwallpaper.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #d6d6d6;
+    }
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: -1;
-        }
+    header {
+      text-align: center;
+      padding-top: 40px;
+    }
 
-        .logo-container {
-            text-align: center;
-            padding: 30px 0 0 0;
-        }
+    header img {
+      max-width: 160px;
+      height: auto;
+    }
 
-        .logo-container img {
-            max-width: 150px;
-        }
+    h1 {
+      font-size: 3em;
+      margin: 10px 0;
+      color: #ccc;
+    }
 
-        h1 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: #ccc;
-            margin: 10px 0;
-        }
+    main {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        .search-container {
-            background-color: rgba(0, 20, 10, 0.6);
-            padding: 30px;
-            margin: 20px auto;
-            max-width: 700px;
-            border-radius: 12px;
-            box-shadow: 0 0 15px rgba(0, 255, 100, 0.2);
-        }
+    .search-section {
+      background-color: rgba(0, 20, 10, 0.75);
+      border-radius: 15px;
+      box-shadow: 0 0 20px #003300;
+      padding: 30px;
+      width: 90%;
+      max-width: 600px;
+      margin-top: 20px;
+    }
 
-        .search-container h2 {
-            text-align: center;
-            color: #b2ffb2;
-        }
+    .search-section h2 {
+      text-align: center;
+      font-size: 1.7em;
+      color: #b8ffb3;
+      margin-bottom: 20px;
+    }
 
-        .search-container input,
-        .search-container select,
-        .search-container button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #294b3a;
-            color: #e0e0e0;
-        }
+    .search-section input,
+    .search-section select,
+    .search-section button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1em;
+      background-color: #294a38;
+      color: #ddd;
+    }
 
-        .search-container button {
-            background-color: #3a5c3d;
-            cursor: pointer;
-        }
+    .search-section button {
+      background-color: #3f6d4e;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-        .results-container {
-            background-color: rgba(0, 20, 10, 0.6);
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 700px;
-            border-radius: 12px;
-            box-shadow: 0 0 15px rgba(0, 255, 100, 0.2);
-        }
+    .search-section button:hover {
+      background-color: #51996b;
+    }
 
-        .chart-container {
-            margin-top: 30px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #aaa;
-        }
-    </style>
+    footer {
+      text-align: center;
+      padding: 30px 0 20px 0;
+      font-size: 0.9em;
+      color: #ccc;
+    }
+  </style>
 </head>
 <body>
-    <div class="logo-container">
-        <img src="McCoyFishLogo.png" alt="McCoy Fish Logo">
-        <h1>McCoy.fish</h1>
-    </div>
+  <header>
+    <img src="mccoyfishlogo.png" alt="McCoy Fish Logo" />
+    <h1>McCoy.fish</h1>
+  </header>
 
-    <div class="search-container">
-        <h2>Search Water Data</h2>
-        <input type="text" id="locationInput" placeholder="River, City, or State">
-        <select id="radiusSelect">
-            <option value="5">5 miles</option>
-            <option value="10">10 miles</option>
-            <option value="25">25 miles</option>
-        </select>
-        <button onclick="searchGageData()">Search</button>
-    </div>
+  <main>
+    <section class="search-section">
+      <h2>Search Water Data</h2>
+      <input type="text" placeholder="River, City, or State" />
+      <select>
+        <option>5 miles</option>
+        <option>10 miles</option>
+        <option>25 miles</option>
+        <option>50 miles</option>
+      </select>
+      <button>Search</button>
+    </section>
+  </main>
 
-    <div class="results-container" id="resultsSection" style="display:none;">
-        <h3>Gage Height Chart</h3>
-        <div class="chart-container" id="gageChartContainer"></div>
-    </div>
-
-    <footer>
-        © 2025 McCoy.fish. All rights reserved.
-    </footer>
-
-    <script>
-        function searchGageData() {
-            const query = document.getElementById('locationInput').value;
-            const radius = document.getElementById('radiusSelect').value;
-            
-            if (!query) {
-                alert('Please enter a location.');
-                return;
-            }
-
-            const resultsSection = document.getElementById('resultsSection');
-            const chartContainer = document.getElementById('gageChartContainer');
-            
-            resultsSection.style.display = 'block';
-            chartContainer.innerHTML = '<iframe src="https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=04135800&parm_cd=00065&period=7" width="100%" height="300px" frameborder="0"></iframe>';
-        }
-    </script>
+  <footer>
+    © 2025 McCoy.fish. All rights reserved.
+  </footer>
 </body>
 </html>
-"""
-
-output_path = "/mnt/data/mccoyfish_index_fixed.html"
-Path(output_path).write_text(html_content)
-
-output_path
