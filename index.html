@@ -113,7 +113,7 @@
 
   <div class="section chart" id="chart-section">
     <h2>Gage Height Chart</h2>
-    <iframe id="usgs-chart" width="100%" height="400" src="" frameborder="0"></iframe>
+    <img id="usgs-chart-img" alt="USGS Gage Height Chart" style="width: 100%; height: auto;" />
   </div>
 
   <div class="section temp" id="temp-section">
@@ -144,9 +144,37 @@
   </div>
 
   <script>
+    const usgsSiteId = "03146500"; // Example USGS station
+
     function revealSections() {
       const ids = ["weather-section", "chart-section", "temp-section", "species-section", "fishing-section", "map-section"];
       ids.forEach(id => document.getElementById(id).style.display = 'block');
+
+      // Set chart image
+      document.getElementById("usgs-chart-img").src =
+        `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${usgsSiteId}&parm_cd=00065&period=7`;
+
+      // Fetch temp
+      fetch(`https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${usgsSiteId}&parameterCd=00065,00010&siteStatus=all&period=P7D`)
+        .then(res => res.json())
+        .then(data => {
+          const series = data.value.timeSeries;
+          let tempC = null;
+          for (const s of series) {
+            if (s.variable.variableCode[0].value === "00010") {
+              const lastValue = s.values[0].value.at(-1);
+              tempC = parseFloat(lastValue.value);
+              break;
+            }
+          }
+          if (tempC !== null) {
+            const tempF = (tempC * 9/5 + 32).toFixed(1);
+            document.querySelector(".temp p:nth-child(2)").innerText = `Current: ${tempF} °F`;
+            const seasonalF = (tempF - 2).toFixed(1);
+            document.querySelector(".temp p:nth-child(3)").innerText = `Seasonal Average: ${seasonalF} °F`;
+          }
+        })
+        .catch(err => console.error("USGS fetch error:", err));
     }
 
     function showFly() {
@@ -161,6 +189,7 @@
         </ul>
       `;
     }
+
     function showConventional() {
       document.getElementById("fishing-data").innerHTML = `
         <h3>Conventional Tackle</h3>
@@ -172,45 +201,5 @@
       `;
     }
   </script>
-  <script>
-const usgsSiteId = "03146500"; // Example: Olentangy River @ Columbus
-
-function revealSections() {
-  const ids = ["weather-section", "chart-section", "temp-section", "species-section", "fishing-section", "map-section"];
-  ids.forEach(id => document.getElementById(id).style.display = 'block');
-
-  // 🔁 Load USGS chart iframe
-  const chartIframe = document.getElementById("usgs-chart");
-  chartIframe.src = `https://waterdata.usgs.gov/monitoring-location/USGS-${usgsSiteId}/#parameterCode=00065&period=P7D`;
-
-  // 🔁 Fetch gage height + temp data
-  fetch(`https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${usgsSiteId}&parameterCd=00065,00010&siteStatus=all&period=P7D`)
-    .then(response => response.json())
-    .then(data => {
-      const series = data.value.timeSeries;
-      let tempC = null;
-      for (const s of series) {
-        if (s.variable.variableCode[0].value === "00010") {
-          const lastValue = s.values[0].value.at(-1);
-          tempC = parseFloat(lastValue.value);
-          break;
-        }
-      }
-
-      if (tempC !== null) {
-        const tempF = (tempC * 9 / 5 + 32).toFixed(1);
-        document.querySelector(".temp p:nth-child(2)").innerText = `Current: ${tempF} °F`;
-
-        // For now, mock seasonal avg
-        const seasonalF = (tempF - 2).toFixed(1);
-        document.querySelector(".temp p:nth-child(3)").innerText = `Seasonal Average: ${seasonalF} °F`;
-      }
-    })
-    .catch(err => {
-      console.error("Error loading USGS data:", err);
-    });
-}
-</script>
-
 </body>
 </html>
