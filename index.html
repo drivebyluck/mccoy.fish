@@ -1,3 +1,4 @@
+<!-- REPLACE YOUR ENTIRE CURRENT index.html WITH THIS -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +50,7 @@
       max-width: 900px;
       margin: 40px auto;
       padding: 25px;
-      background-color: rgba(13, 31, 29, 0.9);
+      background-color: rgba(13, 31, 29, 0.8); /* semi-transparent */
       border-radius: 15px;
       box-shadow: 0 0 15px var(--color-jade-green);
       transition: box-shadow 0.5s;
@@ -144,17 +145,18 @@
   </div>
 
   <script>
-    const usgsSiteId = "03146500"; // Example USGS station
+    const usgsSiteId = "03146500"; // Locked for now
 
-    function revealSections() {
+    async function revealSections() {
+      const query = document.getElementById("location-input").value;
       const ids = ["weather-section", "chart-section", "temp-section", "species-section", "fishing-section", "map-section"];
       ids.forEach(id => document.getElementById(id).style.display = 'block');
 
-      // Set chart image
+      // Update Gage Chart
       document.getElementById("usgs-chart-img").src =
         `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${usgsSiteId}&parm_cd=00065&period=7`;
 
-      // Fetch temp
+      // Fetch temperature
       fetch(`https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${usgsSiteId}&parameterCd=00065,00010&siteStatus=all&period=P7D`)
         .then(res => res.json())
         .then(data => {
@@ -175,6 +177,26 @@
           }
         })
         .catch(err => console.error("USGS fetch error:", err));
+
+      // 🔥 Weather Lookup
+      const geoRes = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(query)}&limit=1&appid=YOUR_API_KEY`);
+      const geoData = await geoRes.json();
+      if (geoData.length === 0) {
+        document.getElementById("weather-content").innerText = "Location not found.";
+        return;
+      }
+      const { lat, lon } = geoData[0];
+
+      const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=imperial&appid=YOUR_API_KEY`);
+      const weatherData = await weatherRes.json();
+      const daily = weatherData.daily;
+      let html = "<ul>";
+      for (const day of daily) {
+        const date = new Date(day.dt * 1000);
+        html += `<li>${date.toDateString()}: High ${day.temp.max}°F / Low ${day.temp.min}°F, ${day.weather[0].description}</li>`;
+      }
+      html += "</ul>";
+      document.getElementById("weather-content").innerHTML = html;
     }
 
     function showFly() {
