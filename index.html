@@ -129,10 +129,14 @@
       <button onclick="showChart()" id="search-btn" disabled>Search</button>
     </section>
 
-    <section class="gage-section" id="chart-section">
-      <h2>Gage Height Chart</h2>
-     <img id="usgs-chart-img" style="width: 100%; height: auto;" alt="USGS Gage Height Chart" />
-    </section>
+<section class="gage-section" id="chart-section">
+  <h2>Gage Height Chart</h2>
+  <img id="usgs-chart-img" style="width: 100%; height: auto; margin-bottom: 20px;" alt="USGS Gage Height Chart" />
+
+  <h2>Discharge (CFS) – Last 7 Days</h2>
+  <img id="usgs-discharge-img" style="width: 100%; height: auto;" alt="USGS Discharge Chart" />
+</section>
+
   </main>
 
   <script>
@@ -180,9 +184,15 @@ function showChart() {
   const chartSection = document.getElementById("chart-section");
   chartSection.style.display = 'block';
 
+  // Gage Height Chart
   const chartImg = document.getElementById("usgs-chart-img");
   chartImg.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&period=7`;
-    }
+
+  // Discharge Chart (CFS)
+  const dischargeImg = document.getElementById("usgs-discharge-img");
+  dischargeImg.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&period=7`;
+}
+
   </script>
 </body>
 </html>
