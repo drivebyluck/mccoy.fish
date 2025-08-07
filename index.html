@@ -124,16 +124,73 @@
   </footer>
 
 <script>
-  const usgsSiteId = "03146500"; // Licking River station
+  async function revealSections() {
+    const locationInput = document.getElementById("location-input").value;
+    const radius = document.getElementById("radius-select").value;
 
-  function revealSections() {
+    if (!locationInput) {
+      alert("Please enter a location.");
+      return;
+    }
+
+    // Fetch matching USGS gages from API
+    const query = encodeURIComponent(locationInput);
+    const url = `https://waterservices.usgs.gov/nwis/site/?format=rdb&siteType=ST&siteOutput=expanded&stateCd=all&outputDataTypeCd=iv&parameterCd=00065&siteName=${query}`;
+
+    try {
+      const response = await fetch(url);
+      const text = await response.text();
+
+      // Parse site numbers from the response
+      const lines = text.split('\n');
+      const dataLines = lines.filter(line => !line.startsWith('#') && !line.startsWith('agency_cd') && line.trim() !== '');
+
+      if (dataLines.length === 0) {
+        alert("No matching gages found.");
+        return;
+      }
+
+      // Create a list of matching options if more than one
+      if (dataLines.length > 1) {
+        const options = dataLines.map(line => {
+          const parts = line.split('\t');
+          return {
+            siteId: parts[1],
+            name: parts[2]
+          };
+        });
+
+        const choice = prompt(
+          "Multiple gages found:\n\n" +
+          options.map((opt, i) => `${i + 1}: ${opt.name} (${opt.siteId})`).join('\n') +
+          "\n\nEnter the number of the one you want:"
+        );
+
+        const selected = options[parseInt(choice) - 1];
+        if (!selected) {
+          alert("Invalid selection.");
+          return;
+        }
+
+        updateChart(selected.siteId);
+      } else {
+        const parts = dataLines[0].split('\t');
+        const siteId = parts[1];
+        updateChart(siteId);
+      }
+    } catch (error) {
+      console.error("Error fetching gage data:", error);
+      alert("Failed to fetch gage data.");
+    }
+  }
+
+  function updateChart(siteId) {
     document.getElementById("chart-section").style.display = 'block';
-
-    // Set chart image
     document.getElementById("usgs-chart-img").src =
-      `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${usgsSiteId}&parm_cd=00065&period=7`;
+      `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&period=7`;
   }
 </script>
+
 
   
 </body>
