@@ -137,6 +137,23 @@
   <img id="usgs-discharge-img" style="width: 100%; height: auto;" alt="USGS Discharge Chart" />
 </section>
 
+<section class="weather-section" id="weather-section" style="display: none;">
+  <h2>Hourly Weather Report</h2>
+  <table id="weather-table">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Temp (°F)</th>
+        <th>Precip (mm)</th>
+        <th>Pressure (hPa)</th>
+        <th>Sky</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+    
   </main>
 
   <script>
@@ -184,24 +201,113 @@ function showChart() {
   const chartSection = document.getElementById("chart-section");
   chartSection.style.display = 'block';
 
-  // Dates
   const today = new Date();
   const endDate = today.toISOString().split('T')[0];
-
   const past = new Date();
   past.setDate(today.getDate() - 7);
   const startDate = past.toISOString().split('T')[0];
 
   // Gage Height Chart
-  const chartImg = document.getElementById("usgs-chart-img");
-  chartImg.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&period=7`;
+  document.getElementById("usgs-chart-img").src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&period=7`;
 
-  // Discharge Chart with correct date range
-  const dischargeImg = document.getElementById("usgs-discharge-img");
-  dischargeImg.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
+  // Discharge Chart
+  document.getElementById("usgs-discharge-img").src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
+
+  // Weather Report
+  const selectedOption = document.getElementById("station-select").selectedOptions[0];
+  const label = selectedOption.textContent;
+  const locationText = label.split(', ').slice(-2).join(', ').trim(); // Last 2 parts
+
+  fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(locationText)}&count=1`)
+    .then(res => res.json())
+    .then(data => {
+      if (!data.results || data.results.length === 0) throw new Error("Location not found");
+      const { latitude, longitude } = data.results[0];
+      const now = new Date();
+      const start = new Date(now);
+      start.setHours(now.getHours() - 12);
+      const end = new Date(now);
+      end.setHours(now.getHours() + 12);
+
+      const startISO = start.toISOString();
+      const endISO = end.toISOString();
+
+      return fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,precipitation,weathercode,surface_pressure&past_days=1&timezone=auto`);
+    })
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById("weather-container");
+      const section = document.getElementById("weather-section");
+      container.innerHTML = '';
+      section.style.display = 'block';
+
+      const { time, temperature_2m, precipitation, weathercode, surface_pressure } = data.hourly;
+      const now = new Date();
+
+      for (let i = 0; i < time.length; i++) {
+        const entryTime = new Date(time[i]);
+        const hoursDiff = (entryTime - now) / 3600000;
+        if (hoursDiff < -12 || hoursDiff > 12) continue;
+
+        const card = document.createElement("div");
+        card.style.background = "rgba(0,0,0,0.5)";
+        card.style.borderRadius = "8px";
+        card.style.padding = "10px";
+        card.style.margin = "10px";
+        card.style.fontSize = "0.9em";
+
+        card.innerHTML = `
+          <strong>${entryTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</strong><br/>
+          Temp: ${temperature_2m[i]}°C<br/>
+          Precip: ${precipitation[i]} mm<br/>
+          Pressure: ${surface_pressure[i]} hPa<br/>
+          Sky: ${describeWeather(weathercode[i])}
+        `;
+        container.appendChild(card);
+      }
+    })
+    .catch(err => {
+      console.error("Weather error:", err);
+      document.getElementById("weather-container").innerHTML = `<p>Unable to load weather for this location.</p>`;
+    });
 }
 
-  </script>
+function describeWeather(code) {
+  const descriptions = {
+    0: "Clear",
+    1: "Mainly clear",
+    2: "Partly cloudy",
+    3: "Overcast",
+    45: "Fog",
+    48: "Depositing rime fog",
+    51: "Drizzle: Light",
+    53: "Drizzle: Moderate",
+    55: "Drizzle: Dense",
+    56: "Freezing drizzle: Light",
+    57: "Freezing drizzle: Dense",
+    61: "Rain: Slight",
+    63: "Rain: Moderate",
+    65: "Rain: Heavy",
+    66: "Freezing rain: Light",
+    67: "Freezing rain: Heavy",
+    71: "Snow fall: Slight",
+    73: "Snow fall: Moderate",
+    75: "Snow fall: Heavy",
+    77: "Snow grains",
+    80: "Rain showers: Slight",
+    81: "Rain showers: Moderate",
+    82: "Rain showers: Violent",
+    85: "Snow showers: Slight",
+    86: "Snow showers: Heavy",
+    95: "Thunderstorm",
+    96: "Thunderstorm w/ slight hail",
+    99: "Thunderstorm w/ heavy hail"
+  };
+  return descriptions[code] || "Unknown";
+}
+</script>
+
+  
 </body>
 </html>
 
