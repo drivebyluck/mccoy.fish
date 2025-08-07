@@ -188,9 +188,9 @@ function showChart() {
   const chartImg = document.getElementById("usgs-chart-img");
   chartImg.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&period=7`;
 
-  // Discharge Chart (CFS)
+  // ✅ Discharge Chart (00060) – fixed with correct URL format
   const dischargeImg = document.getElementById("usgs-discharge-img");
-  dischargeImg.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&period=7`;
+  dischargeImg.src = `https://waterdata.usgs.gov/nwis/dv?cb_00060=on&format=gif_meas&site_no=${siteId}&period=7&agency_cd=USGS`;
 }
 
   </script>
