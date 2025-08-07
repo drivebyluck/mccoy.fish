@@ -49,11 +49,11 @@
       max-width: 900px;
       margin: 40px auto;
       padding: 25px;
-      background-color: rgba(13, 31, 29, 0.9);
+      background-color: rgba(64, 136, 84, 0.5);
       border-radius: 15px;
       box-shadow: 0 0 15px var(--color-jade-green);
       transition: box-shadow 0.5s;
-      display: none; /* Hide by default */
+      display: none;
     }
     .section:hover {
       box-shadow: 0 0 25px var(--color-soft-green);
@@ -108,69 +108,24 @@
 
   <div class="section weather" id="weather-section">
     <h2>7 Day Weather Forecast</h2>
-    <div id="weather-content">Loading...</div>
+    <table id="weather-table" style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+      <thead>
+        <tr style="border-bottom: 1px solid var(--color-soft-green);">
+          <th style="padding: 8px;">Day</th>
+          <th style="padding: 8px;">Icon</th>
+          <th style="padding: 8px;">High</th>
+          <th style="padding: 8px;">Low</th>
+        </tr>
+      </thead>
+      <tbody id="weather-body"></tbody>
+    </table>
   </div>
 
   <div class="section chart" id="chart-section">
     <h2>Gage Height Chart</h2>
-    <iframe id="usgs-chart" width="100%" height="400" src="" frameborder="0"></iframe>
+    <img id="usgs-chart-img" alt="USGS Gage Height Chart" style="width: 100%; height: auto;" src="https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=03146500&parm_cd=00065&period=7" />
   </div>
 
   <div class="section temp" id="temp-section">
     <h2>Water Temperature</h2>
     <p>Current: -- °F</p>
-    <p>Seasonal Average: -- °F</p>
-  </div>
-
-  <div class="section species" id="species-section">
-    <h2>Fish Species in This Water</h2>
-    <ul id="fish-list"></ul>
-  </div>
-
-  <div class="section fishing" id="fishing-section">
-    <h2>Fishing Info</h2>
-    <button onclick="showFly()">Fly Fishing</button>
-    <button onclick="showConventional()">Conventional Fishing</button>
-    <div id="fishing-data"></div>
-  </div>
-
-  <div class="section map" id="map-section">
-    <h2>Interactive Terrain Map</h2>
-    <iframe id="map-frame" width="100%" height="400" src="" frameborder="0"></iframe>
-  </div>
-
-  <div class="footer">
-    &copy; 2025 McCoy.fish. All rights reserved.
-  </div>
-
-  <script>
-    function revealSections() {
-      const ids = ["weather-section", "chart-section", "temp-section", "species-section", "fishing-section", "map-section"];
-      ids.forEach(id => document.getElementById(id).style.display = 'block');
-    }
-
-    function showFly() {
-      document.getElementById("fishing-data").innerHTML = `
-        <h3>Fly Hatches</h3>
-        <p>Current hatch: ...</p>
-        <p>Coming next: ...</p>
-        <h4>Suggested Flies:</h4>
-        <ul>
-          <li>Dry Flies: ...</li>
-          <li>Wet Flies & Streamers: ...</li>
-        </ul>
-      `;
-    }
-    function showConventional() {
-      document.getElementById("fishing-data").innerHTML = `
-        <h3>Conventional Tackle</h3>
-        <ul>
-          <li>Live Bait: ...</li>
-          <li>Lures: ...</li>
-          <li>Soft Plastics: ...</li>
-        </ul>
-      `;
-    }
-  </script>
-</body>
-</html>
