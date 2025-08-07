@@ -17,6 +17,7 @@
       background-size: cover;
       background-position: center center;
       background-attachment: fixed;
+      position: relative;
     }
 
     body::before {
@@ -29,8 +30,19 @@
       background: url('mccoyfishwallpaper.png') center center no-repeat;
       background-size: cover;
       opacity: 1;
-      z-index: -1;
+      z-index: -2;
       animation: zoomWall 100s infinite linear;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* 50% darker overlay */
+      z-index: -1;
     }
 
     @keyframes zoomWall {
@@ -55,7 +67,7 @@
     }
 
     .section {
-      background-color: rgba(13, 31, 29, 0.8); /* less transparent now */
+      background-color: rgba(13, 31, 29, 0.8); /* semi-transparent block */
       margin: 20px;
       padding: 20px;
       border-radius: 12px;
@@ -98,7 +110,7 @@
 </head>
 <body>
   <header>
-    <img src="mccoyfishlogo.png" alt="McCoy Fish Logo"/>
+    <img src="mccoylogo.png" alt="McCoy Fish Logo"/>
     <h1>McCoy.fish</h1>
   </header>
 
@@ -140,3 +152,4 @@
   </script>
 </body>
 </html>
+
