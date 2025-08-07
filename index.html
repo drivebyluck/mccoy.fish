@@ -96,95 +96,83 @@
   </header>
 
   <main>
-    <section class="search-section">
-      <h2>Search Water Data</h2>
-<input type="text" id="location-input" placeholder="River, City, or State" />
-<select id="radius-select">
-  <option value="5">5 miles</option>
-  <option value="10">10 miles</option>
-  <option value="25">25 miles</option>
-  <option value="50">50 miles</option>
-  <option value="100">100 miles</option>
-  <option value="250">250 miles</option>
-</select>
-<button onclick="revealSections()">Search</button>
+<section class="search-section">
+  <h2>Search Water Data</h2>
+  <select id="state-select" onchange="populateStations()">
+    <option value="">Select a state</option>
+    <option value="OH">Ohio</option>
+    <option value="MI">Michigan</option>
+    <option value="PA">Pennsylvania</option>
+    <option value="IN">Indiana</option>
+    <option value="WI">Wisconsin</option>
+    <!-- Add other states as needed -->
+  </select>
 
-    </section>
+  <select id="station-select" disabled>
+    <option value="">Select a station</option>
+  </select>
+
+  <button onclick="showChart()" id="search-btn" disabled>Search</button>
+</section>
 
 <section class="gage-section" id="chart-section" style="display:none; background-color: rgba(0, 20, 10, 0.75); border-radius: 15px; box-shadow: 0 0 20px #003300; padding: 30px; width: 90%; max-width: 600px; margin-top: 20px;">
   <h2 style="color: #b8ffb3; text-align: center;">Gage Height Chart</h2>
   <img id="usgs-chart-img" alt="USGS Gage Height Chart" style="width: 100%; height: auto;" />
 </section>
 
-    
-  </main>
-
-  <footer>
-    © 2025 McCoy.fish. All rights reserved.
-  </footer>
-
 <script>
-  async function revealSections() {
-    const locationInput = document.getElementById("location-input").value;
-    const radius = document.getElementById("radius-select").value;
+  const stationData = {
+    "OH": [
+      { name: "Licking River at Newark", id: "03146500" },
+      { name: "Scioto River at Columbus", id: "03230500" },
+      { name: "Olentangy River at Columbus", id: "03227500" }
+    ],
+    "MI": [
+      { name: "Au Sable River at Grayling", id: "04137400" },
+      { name: "Pine River near Hoxeyville", id: "04128000" }
+    ],
+    "PA": [
+      { name: "Allegheny River at Natrona", id: "03049500" },
+      { name: "Susquehanna River at Harrisburg", id: "01570500" }
+    ],
+    "IN": [
+      { name: "White River at Indianapolis", id: "03353000" },
+      { name: "Wabash River at Lafayette", id: "03335500" }
+    ],
+    "WI": [
+      { name: "Wisconsin River at Wisconsin Dells", id: "05404000" },
+      { name: "Black River at Black River Falls", id: "05382500" }
+    ]
+  };
 
-    if (!locationInput) {
-      alert("Please enter a location.");
-      return;
+  function populateStations() {
+    const state = document.getElementById("state-select").value;
+    const stationSelect = document.getElementById("station-select");
+    const searchBtn = document.getElementById("search-btn");
+
+    stationSelect.innerHTML = '<option value="">Select a station</option>';
+    stationSelect.disabled = true;
+    searchBtn.disabled = true;
+
+    if (stationData[state]) {
+      stationData[state].forEach(station => {
+        const option = document.createElement("option");
+        option.value = station.id;
+        option.text = station.name;
+        stationSelect.appendChild(option);
+      });
+      stationSelect.disabled = false;
     }
 
-    // Fetch matching USGS gages from API
-    const query = encodeURIComponent(locationInput);
-    const url = `https://waterservices.usgs.gov/nwis/site/?format=rdb&siteType=ST&siteOutput=expanded&stateCd=all&outputDataTypeCd=iv&parameterCd=00065&siteName=${query}`;
-
-    try {
-      const response = await fetch(url);
-      const text = await response.text();
-
-      // Parse site numbers from the response
-      const lines = text.split('\n');
-      const dataLines = lines.filter(line => !line.startsWith('#') && !line.startsWith('agency_cd') && line.trim() !== '');
-
-      if (dataLines.length === 0) {
-        alert("No matching gages found.");
-        return;
-      }
-
-      // Create a list of matching options if more than one
-      if (dataLines.length > 1) {
-        const options = dataLines.map(line => {
-          const parts = line.split('\t');
-          return {
-            siteId: parts[1],
-            name: parts[2]
-          };
-        });
-
-        const choice = prompt(
-          "Multiple gages found:\n\n" +
-          options.map((opt, i) => `${i + 1}: ${opt.name} (${opt.siteId})`).join('\n') +
-          "\n\nEnter the number of the one you want:"
-        );
-
-        const selected = options[parseInt(choice) - 1];
-        if (!selected) {
-          alert("Invalid selection.");
-          return;
-        }
-
-        updateChart(selected.siteId);
-      } else {
-        const parts = dataLines[0].split('\t');
-        const siteId = parts[1];
-        updateChart(siteId);
-      }
-    } catch (error) {
-      console.error("Error fetching gage data:", error);
-      alert("Failed to fetch gage data.");
-    }
+    stationSelect.onchange = () => {
+      searchBtn.disabled = stationSelect.value === "";
+    };
   }
 
-  function updateChart(siteId) {
+  function showChart() {
+    const siteId = document.getElementById("station-select").value;
+    if (!siteId) return;
+
     document.getElementById("chart-section").style.display = 'block';
     document.getElementById("usgs-chart-img").src =
       `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&period=7`;
