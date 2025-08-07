@@ -172,5 +172,45 @@
       `;
     }
   </script>
+  <script>
+const usgsSiteId = "03146500"; // Example: Olentangy River @ Columbus
+
+function revealSections() {
+  const ids = ["weather-section", "chart-section", "temp-section", "species-section", "fishing-section", "map-section"];
+  ids.forEach(id => document.getElementById(id).style.display = 'block');
+
+  // 🔁 Load USGS chart iframe
+  const chartIframe = document.getElementById("usgs-chart");
+  chartIframe.src = `https://waterdata.usgs.gov/monitoring-location/USGS-${usgsSiteId}/#parameterCode=00065&period=P7D`;
+
+  // 🔁 Fetch gage height + temp data
+  fetch(`https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${usgsSiteId}&parameterCd=00065,00010&siteStatus=all&period=P7D`)
+    .then(response => response.json())
+    .then(data => {
+      const series = data.value.timeSeries;
+      let tempC = null;
+      for (const s of series) {
+        if (s.variable.variableCode[0].value === "00010") {
+          const lastValue = s.values[0].value.at(-1);
+          tempC = parseFloat(lastValue.value);
+          break;
+        }
+      }
+
+      if (tempC !== null) {
+        const tempF = (tempC * 9 / 5 + 32).toFixed(1);
+        document.querySelector(".temp p:nth-child(2)").innerText = `Current: ${tempF} °F`;
+
+        // For now, mock seasonal avg
+        const seasonalF = (tempF - 2).toFixed(1);
+        document.querySelector(".temp p:nth-child(3)").innerText = `Seasonal Average: ${seasonalF} °F`;
+      }
+    })
+    .catch(err => {
+      console.error("Error loading USGS data:", err);
+    });
+}
+</script>
+
 </body>
 </html>
