@@ -1,27 +1,24 @@
-<!-- REPLACE YOUR ENTIRE CURRENT index.html WITH THIS -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>McCoy.fish</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --color-deep-green: #1a4d3d;
-      --color-jade-green: #2a7b59;
-      --color-soft-green: #97c89f;
-      --color-dark-teal: #0d1f1d;
-      --color-bright-red: #ff2d2d;
-    }
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
-      font-family: 'Ubuntu Mono', monospace;
-      color: var(--color-soft-green);
-      background: var(--color-dark-teal);
-      overflow-x: hidden;
+      font-family: 'Share Tech Mono', monospace;
+      color: #c9f0c3;
+      background-color: #0d1f1d;
+      background-image: url('mccoyfishwallpaper.png');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
     }
+
     body::before {
       content: "";
       position: fixed;
@@ -31,196 +28,114 @@
       height: 100%;
       background: url('mccoyfishwallpaper.png') center center no-repeat;
       background-size: cover;
-      transform-origin: top;
+      opacity: 1;
       z-index: -1;
       animation: zoomWall 100s infinite linear;
     }
+
     @keyframes zoomWall {
       0% { transform: scale(1); }
-      100% { transform: scale(1.2); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
+
     header {
-      padding: 20px;
       text-align: center;
+      padding: 20px;
     }
+
     header img {
-      max-width: 250px;
+      max-width: 150px;
     }
+
+    header h1 {
+      margin: 10px 0 0;
+      font-size: 2.5rem;
+      color: #c9c9c9;
+    }
+
     .section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 25px;
-      background-color: rgba(13, 31, 29, 0.8); /* semi-transparent */
-      border-radius: 15px;
-      box-shadow: 0 0 15px var(--color-jade-green);
-      transition: box-shadow 0.5s;
-      display: none;
-    }
-    .section:hover {
-      box-shadow: 0 0 25px var(--color-soft-green);
-    }
-    input, select {
-      padding: 10px;
-      width: 100%;
-      margin-top: 10px;
-      border: none;
-      border-radius: 8px;
-      background: var(--color-deep-green);
-      color: #fff;
-    }
-    .footer {
-      text-align: center;
+      background-color: rgba(13, 31, 29, 0.6); /* semi-transparent */
+      margin: 20px;
       padding: 20px;
-      font-size: 0.9em;
-      color: #ccc;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #234636;
     }
-    button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      background: var(--color-jade-green);
-      color: #fff;
+
+    .search-box {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .search-box input,
+    .search-box select,
+    .search-box button {
+      padding: 10px;
+      margin: 5px;
       border: none;
-      border-radius: 8px;
-      cursor: pointer;
+      border-radius: 6px;
+      background-color: #264d3c;
+      color: #c9f0c3;
+      font-size: 1rem;
     }
-    button:hover {
-      background: var(--color-bright-red);
+
+    .search-box button {
+      cursor: pointer;
+      background-color: #2c6b4b;
+    }
+
+    .search-box button:hover {
+      background-color: #3d8560;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      color: #ccc;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="mccoyfishlogo.png" alt="McCoy Fish Logo" />
+    <img src="mccoylogo.png" alt="McCoy Fish Logo"/>
+    <h1>McCoy.fish</h1>
   </header>
 
-  <div class="section" id="search-section" style="display:block;">
+  <div class="section search-box">
     <h2>Search Water Data</h2>
-    <input type="text" id="location-input" placeholder="River, City, or State" />
-    <select id="radius-select">
+    <input type="text" id="searchInput" placeholder="River, City, or State"/>
+    <select id="radiusSelect">
       <option value="5">5 miles</option>
       <option value="10">10 miles</option>
       <option value="25">25 miles</option>
       <option value="50">50 miles</option>
-      <option value="100">100 miles</option>
-      <option value="250">250 miles</option>
     </select>
-    <button onclick="revealSections()">Search</button>
+    <button onclick="searchData()">Search</button>
   </div>
 
-  <div class="section weather" id="weather-section">
-    <h2>7 Day Weather Forecast</h2>
-    <div id="weather-content">Loading...</div>
-  </div>
+  <div id="results"></div>
 
-  <div class="section chart" id="chart-section">
-    <h2>Gage Height Chart</h2>
-    <img id="usgs-chart-img" alt="USGS Gage Height Chart" style="width: 100%; height: auto;" />
-  </div>
-
-  <div class="section temp" id="temp-section">
-    <h2>Water Temperature</h2>
-    <p>Current: -- °F</p>
-    <p>Seasonal Average: -- °F</p>
-  </div>
-
-  <div class="section species" id="species-section">
-    <h2>Fish Species in This Water</h2>
-    <ul id="fish-list"></ul>
-  </div>
-
-  <div class="section fishing" id="fishing-section">
-    <h2>Fishing Info</h2>
-    <button onclick="showFly()">Fly Fishing</button>
-    <button onclick="showConventional()">Conventional Fishing</button>
-    <div id="fishing-data"></div>
-  </div>
-
-  <div class="section map" id="map-section">
-    <h2>Interactive Terrain Map</h2>
-    <iframe id="map-frame" width="100%" height="400" src="" frameborder="0"></iframe>
-  </div>
-
-  <div class="footer">
+  <footer>
     &copy; 2025 McCoy.fish. All rights reserved.
-  </div>
+  </footer>
 
   <script>
-    const usgsSiteId = "03146500"; // Locked for now
+    async function searchData() {
+      const input = document.getElementById('searchInput').value;
+      const radius = document.getElementById('radiusSelect').value;
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = `<div class="section"><h3>Loading results for "${input}"...</h3></div>`;
 
-    async function revealSections() {
-      const query = document.getElementById("location-input").value;
-      const ids = ["weather-section", "chart-section", "temp-section", "species-section", "fishing-section", "map-section"];
-      ids.forEach(id => document.getElementById(id).style.display = 'block');
-
-      // Update Gage Chart
-      document.getElementById("usgs-chart-img").src =
-        `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${usgsSiteId}&parm_cd=00065&period=7`;
-
-      // Fetch temperature
-      fetch(`https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${usgsSiteId}&parameterCd=00065,00010&siteStatus=all&period=P7D`)
-        .then(res => res.json())
-        .then(data => {
-          const series = data.value.timeSeries;
-          let tempC = null;
-          for (const s of series) {
-            if (s.variable.variableCode[0].value === "00010") {
-              const lastValue = s.values[0].value.at(-1);
-              tempC = parseFloat(lastValue.value);
-              break;
-            }
-          }
-          if (tempC !== null) {
-            const tempF = (tempC * 9/5 + 32).toFixed(1);
-            document.querySelector(".temp p:nth-child(2)").innerText = `Current: ${tempF} °F`;
-            const seasonalF = (tempF - 2).toFixed(1);
-            document.querySelector(".temp p:nth-child(3)").innerText = `Seasonal Average: ${seasonalF} °F`;
-          }
-        })
-        .catch(err => console.error("USGS fetch error:", err));
-
-      // 🔥 Weather Lookup
-      const geoRes = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(query)}&limit=1&appid=YOUR_API_KEY`);
-      const geoData = await geoRes.json();
-      if (geoData.length === 0) {
-        document.getElementById("weather-content").innerText = "Location not found.";
-        return;
-      }
-      const { lat, lon } = geoData[0];
-
-      const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=imperial&appid=YOUR_API_KEY`);
-      const weatherData = await weatherRes.json();
-      const daily = weatherData.daily;
-      let html = "<ul>";
-      for (const day of daily) {
-        const date = new Date(day.dt * 1000);
-        html += `<li>${date.toDateString()}: High ${day.temp.max}°F / Low ${day.temp.min}°F, ${day.weather[0].description}</li>`;
-      }
-      html += "</ul>";
-      document.getElementById("weather-content").innerHTML = html;
-    }
-
-    function showFly() {
-      document.getElementById("fishing-data").innerHTML = `
-        <h3>Fly Hatches</h3>
-        <p>Current hatch: ...</p>
-        <p>Coming next: ...</p>
-        <h4>Suggested Flies:</h4>
-        <ul>
-          <li>Dry Flies: ...</li>
-          <li>Wet Flies & Streamers: ...</li>
-        </ul>
-      `;
-    }
-
-    function showConventional() {
-      document.getElementById("fishing-data").innerHTML = `
-        <h3>Conventional Tackle</h3>
-        <ul>
-          <li>Live Bait: ...</li>
-          <li>Lures: ...</li>
-          <li>Soft Plastics: ...</li>
-        </ul>
-      `;
+      // Simulated fetch
+      setTimeout(() => {
+        resultsDiv.innerHTML = `
+          <div class="section">
+            <h3>Results near "${input}"</h3>
+            <p>Gauge height chart and data will display here.</p>
+          </div>
+        `;
+      }, 1000);
     }
   </script>
 </body>
