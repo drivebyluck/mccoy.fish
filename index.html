@@ -184,20 +184,21 @@ function showChart() {
   const chartSection = document.getElementById("chart-section");
   chartSection.style.display = 'block';
 
-  // Format today's date (YYYY-MM-DD)
+  // Dates
   const today = new Date();
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, '0');
-  const dd = String(today.getDate()).padStart(2, '0');
-  const formattedDate = `${yyyy}-${mm}-${dd}`;
+  const endDate = today.toISOString().split('T')[0];
 
-  // Gage Height Chart (7-day)
+  const past = new Date();
+  past.setDate(today.getDate() - 7);
+  const startDate = past.toISOString().split('T')[0];
+
+  // Gage Height Chart
   const chartImg = document.getElementById("usgs-chart-img");
   chartImg.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&period=7`;
 
-  // Discharge Chart (CFS)
+  // Discharge Chart with correct date range
   const dischargeImg = document.getElementById("usgs-discharge-img");
-  dischargeImg.src = `https://waterdata.usgs.gov/nwis/dv?cb_00060=on&format=gif_default&site_no=${siteId}&begin_date=${formattedDate}&end_date=${formattedDate}&agency_cd=USGS&referred_module=sw`;
+  dischargeImg.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
 }
 
   </script>
