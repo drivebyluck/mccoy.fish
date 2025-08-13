@@ -1,7 +1,11 @@
-<!-- ✅ UPDATED: Global keyword search (lower-48, full coverage) -->
+<!-- ✅ Add-only: global station keyword search (lower-48) -->
 <script>
 (function(){
-  // Lower-48 states (matches your dropdown)
+  // Bail out if the search UI isn't present (keeps this add-on harmless)
+  const input = document.getElementById('global-search');
+  const box   = document.getElementById('search-results');
+  if (!input || !box) return;
+
   const LOWER48 = [
     "AL","AR","AZ","CA","CO","CT","DE","FL","GA","IA","ID","IL","IN","KS","KY",
     "LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM",
@@ -9,156 +13,118 @@
     "WI","WV","WY"
   ];
 
-  const stationIndex = []; // { id, name, state, norm }
-  let building = false;
-  let built = false;
+  const index = []; // {id,name,state,norm}
+  let built = false, building = false;
 
-  const searchInput = document.getElementById('global-search');
-  const resultsBox  = document.getElementById('search-results');
-
-  // Build the nationwide index on page load (fast, batched)
-  document.addEventListener('DOMContentLoaded', buildGlobalIndex);
-
-  async function buildGlobalIndex(){
+  // Build nationwide index after load, in small batches (won't block UI)
+  window.addEventListener('DOMContentLoaded', () => {
     if (building || built) return;
     building = true;
-    try {
-      const batchSize = 6; // fetch 6 states at a time
-      for (let i = 0; i < LOWER48.length; i += batchSize) {
-        const batch = LOWER48.slice(i, i + batchSize);
-        await Promise.all(batch.map(fetchStateStations));
-        // stash lightweight progress (used in results header)
-        resultsBox.dataset.progress = Math.min(i + batch.length, LOWER48.length);
+    const batchSize = 6;
+    (async () => {
+      try {
+        for (let i = 0; i < LOWER48.length; i += batchSize) {
+          const batch = LOWER48.slice(i, i + batchSize);
+          await Promise.all(batch.map(async (st) => {
+            const url = `https://waterservices.usgs.gov/nwis/site/?format=rdb&stateCd=${st}&parameterCd=00065&siteStatus=active`;
+            const txt = await fetch(url).then(r => r.text()).catch(()=>null);
+            if (!txt) return;
+            const lines = txt.split('\n');
+            const headerIdx = lines.findIndex(l => l.startsWith('agency_cd'));
+            for (let j = (headerIdx === -1 ? 0 : headerIdx + 1); j < lines.length; j++) {
+              const line = lines[j];
+              if (!line || line[0] === '#') continue;
+              const parts = line.split('\t');
+              if (parts.length < 3) continue;
+              const id = parts[1], name = parts[2];
+              if (!id || !name) continue;
+              index.push({ id, name, state: st, norm: name.toLowerCase() });
+            }
+          }));
+        }
+        built = true;
+      } catch(e) {
+        console.warn('Global index build error:', e);
+      } finally {
+        building = false;
       }
-      built = true;
-    } catch (e) {
-      console.error('Global index build failed:', e);
-    } finally {
-      building = false;
-    }
-  }
+    })();
+  });
 
-  async function fetchStateStations(state){
-    // Limit to stations with gage height param 00065 (matches your 2nd dropdown)
-    const url = `https://waterservices.usgs.gov/nwis/site/?format=rdb&stateCd=${state}&parameterCd=00065&siteStatus=active`;
-    const txt = await fetch(url).then(r => r.text());
-    const lines = txt.split('\n');
+  // Debounced search
+  const debounce = (fn, ms=150) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a),ms); }; };
 
-    // Find header row (starts with 'agency_cd') then parse following data rows
-    const headerIdx = lines.findIndex(l => l.startsWith('agency_cd'));
-    for (let i = (headerIdx === -1 ? 0 : headerIdx + 1); i < lines.length; i++) {
-      const line = lines[i];
-      if (!line || line[0] === '#') continue;
-      const parts = line.split('\t');
-      if (parts.length < 3) continue;
-      const id   = parts[1];
-      const name = parts[2];
-      if (!id || !name) continue;
-      stationIndex.push({ id, name, state, norm: name.toLowerCase() });
-    }
-  }
-
-  // Debounce helper
-  function debounce(fn, ms = 120) {
-    let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
-  }
-
-  // Render results (top 150)
-  function renderResults(items){
-    if (!items.length) {
-      resultsBox.style.display = 'none';
-      resultsBox.innerHTML = '';
-      return;
-    }
-    resultsBox.style.display = 'block';
-
-    let html = '';
-    if (!built) {
-      const done = Number(resultsBox.dataset.progress || 0);
-      html += `<div style="padding:6px 8px; color:#ddd;">Indexing stations… ${done}/${LOWER48.length}</div>`;
-    }
-    html += items.slice(0, 150).map(it => `
+  const render = (items) => {
+    if (!items.length) { box.style.display='none'; box.innerHTML=''; return; }
+    box.style.display='block';
+    box.innerHTML = items.slice(0,150).map(it => `
       <button type="button" data-id="${it.id}" data-state="${it.state}"
         style="display:block;width:100%;text-align:left;padding:8px 10px;margin:4px 0;
                background:#294a38;color:#ddd;border:none;border-radius:6px;cursor:pointer;">
         ${it.name} (${it.state})
       </button>
     `).join('');
-
-    resultsBox.innerHTML = html;
-    resultsBox.querySelectorAll('button').forEach(btn => {
+    box.querySelectorAll('button').forEach(btn => {
       btn.onmouseenter = () => btn.style.background = '#3f6d4e';
       btn.onmouseleave = () => btn.style.background = '#294a38';
-      btn.onclick = () => chooseStationFromSearch({
-        id: btn.dataset.id, state: btn.dataset.state
-      });
+      btn.onclick = () => choose({ id: btn.dataset.id, state: btn.dataset.state });
     });
-  }
+  };
 
-  // Search behavior (keyword match anywhere in station name or by id)
-  const handleSearch = debounce(() => {
-    const q = (searchInput.value || '').trim().toLowerCase();
-    if (!q) {
-      resultsBox.style.display = 'none';
-      resultsBox.innerHTML = '';
-      return;
-    }
+  const doSearch = debounce(() => {
+    const q = (input.value || '').trim().toLowerCase();
+    if (!q) { box.style.display='none'; box.innerHTML=''; return; }
     const tokens = q.split(/\s+/).filter(Boolean);
-    const res = stationIndex.filter(s =>
+    const results = index.filter(s =>
       tokens.every(t => s.norm.includes(t) || s.id.includes(t))
     );
-    renderResults(res);
-  }, 150);
+    render(results);
+  }, 160);
 
-  searchInput.addEventListener('focus',  () => { buildGlobalIndex(); handleSearch(); });
-  searchInput.addEventListener('input',  handleSearch);
-
-  // Close results if clicking outside
+  input.addEventListener('focus', doSearch);
+  input.addEventListener('input', doSearch);
   document.addEventListener('click', (e) => {
     const wrap = document.getElementById('global-search-wrap');
-    if (wrap && !wrap.contains(e.target)) resultsBox.style.display = 'none';
+    if (wrap && !wrap.contains(e.target)) { box.style.display='none'; }
   });
 
-  // Choose from search: set state, load stations, pick station, trigger your existing showChart()
-  async function chooseStationFromSearch(item){
-    const stateSel   = document.getElementById('state-select');
-    const stationSel = document.getElementById('station-select');
-    const searchBtn  = document.getElementById('search-btn');
+  // Choose from results: set state -> load stations -> select station -> run existing showChart()
+  async function choose(item){
+    try {
+      const stateSel   = document.getElementById('state-select');
+      const stationSel = document.getElementById('station-select');
+      const searchBtn  = document.getElementById('search-btn');
+      if (!stateSel || !stationSel) return;
 
-    if (stateSel.value !== item.state) {
-      stateSel.value = item.state;
-      if (typeof fetchStations === 'function') {
-        await fetchStations(); // your existing loader
-      } else {
-        stateSel.dispatchEvent(new Event('change'));
+      if (stateSel.value !== item.state) {
+        stateSel.value = item.state;
+        if (typeof fetchStations === 'function') {
+          await fetchStations(); // your existing function
+        } else {
+          stateSel.dispatchEvent(new Event('change'));
+        }
       }
-    }
 
-    // Wait for the specific station option to appear
-    await waitForOption(stationSel, item.id, 15000).catch(() => {});
+      await waitFor(() =>
+        Array.from(stationSel.options).some(o => o.value === item.id), 15000);
 
-    stationSel.value = item.id;
-    if (typeof stationSel.onchange === 'function') stationSel.onchange();
-    if (searchBtn) searchBtn.disabled = false;
+      stationSel.value = item.id;
+      if (typeof stationSel.onchange === 'function') stationSel.onchange();
+      if (searchBtn) searchBtn.disabled = false;
 
-    // Hide results and clear input
-    resultsBox.style.display = 'none';
-    resultsBox.innerHTML = '';
-    searchInput.value = '';
-
-    if (typeof showChart === 'function') showChart(); // reuse your logic
+      box.style.display='none'; input.value = '';
+      if (typeof showChart === 'function') showChart(); // reuse your logic
+    } catch(e){ console.warn('choose error', e); }
   }
 
-  function waitForOption(selectEl, value, timeoutMs = 15000) {
-    return new Promise((resolve, reject) => {
+  function waitFor(testFn, timeoutMs=15000){
+    return new Promise((res, rej) => {
       const t0 = Date.now();
       const iv = setInterval(() => {
-        const found = Array.from(selectEl.options).some(o => o.value === value);
-        if (found) { clearInterval(iv); resolve(true); }
-        else if (Date.now() - t0 > timeoutMs) { clearInterval(iv); reject(new Error('Option not found')); }
-      }, 150);
+        if (testFn()) { clearInterval(iv); res(true); }
+        else if (Date.now() - t0 > timeoutMs) { clearInterval(iv); rej(new Error('timeout')); }
+      }, 120);
     });
   }
 })();
 </script>
-<!-- 🔚 UPDATED -->
