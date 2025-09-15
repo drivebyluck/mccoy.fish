@@ -139,6 +139,43 @@
       font-size: 0.98em;
       line-height: 1.35em;
     }
+
+    /* ADDED: Global search UI */
+    .global-search-wrap {
+      margin-top: 8px;
+    }
+    .global-results {
+      background: rgba(41, 74, 56, 0.96);
+      border: 1px solid rgba(184,255,179,0.25);
+      box-shadow: 0 0 16px #003300;
+      border-radius: 10px;
+      max-height: 280px;
+      overflow: auto;
+      display: none;
+    }
+    .global-result-item {
+      padding: 10px 12px;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(184,255,179,0.12);
+      font-size: 0.95em;
+      color: #e6ffe4;
+    }
+    .global-result-item:hover {
+      background: rgba(81,153,107,0.25);
+    }
+    .global-results .empty {
+      padding: 10px 12px;
+      color: #dfe7df;
+      opacity: 0.9;
+    }
+    .hint {
+      font-size: 0.9em;
+      color: #cfe9cc;
+      opacity: 0.9;
+      margin-top: -6px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -150,6 +187,15 @@
   <main>
     <section class="search-section">
       <h2>Search Water Data</h2>
+
+      <!-- ADDED: Global river search (keeps your dropdowns intact) -->
+      <div class="global-search-wrap">
+        <input id="global-search" type="text" placeholder="Type a river, creek, or station name from any state…" autocomplete="off">
+        <div class="hint">Start typing to search every USGS station in every state. Select a result to auto load charts and weather.</div>
+        <div id="global-results" class="global-results"></div>
+      </div>
+      <!-- /ADDED -->
+
       <select id="state-select" onchange="fetchStations()">
         <option value="">Select a state</option>
         <option value="AL">Alabama</option><option value="AR">Arkansas</option><option value="AZ">Arizona</option>
@@ -408,6 +454,170 @@ function showChart() {
         95:"Thunderstorm",96:"Thunderstorm w/ slight hail",99:"Thunderstorm w/ heavy hail"
       };
       return map[code] || "Unknown";
+    }
+  </script>
+  <!-- /ADDED -->
+
+  <!-- ADDED: Global search logic that leaves your original code untouched -->
+  <script>
+    // State codes to crawl for the global index
+    const __ALL_STATES = ["AL","AR","AZ","CA","CO","CT","DE","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"];
+    let __globalStations = []; // {id, name, state}
+    let __globalIndexBuilt = false;
+    let __buildingIndex = false;
+
+    // Build index lazily on first focus or first keystroke
+    document.addEventListener('DOMContentLoaded', () => {
+      const input = document.getElementById('global-search');
+      const box = document.getElementById('global-results');
+      if (!input) return;
+
+      input.addEventListener('focus', ensureGlobalIndex);
+      input.addEventListener('input', () => {
+        ensureGlobalIndex();
+        renderGlobalMatches(input.value.trim());
+      });
+
+      // Close results if clicking outside
+      document.addEventListener('click', (e) => {
+        if (!box.contains(e.target) && e.target !== input) {
+          box.style.display = 'none';
+        }
+      });
+    });
+
+    async function ensureGlobalIndex() {
+      if (__globalIndexBuilt || __buildingIndex) return;
+      __buildingIndex = true;
+
+      const resultsBox = document.getElementById('global-results');
+      resultsBox.style.display = 'block';
+      resultsBox.innerHTML = '<div class="empty">Loading stations from all states…</div>';
+
+      // Fetch in small batches to be friendly
+      const batchSize = 6;
+      const stateBatches = [];
+      for (let i = 0; i < __ALL_STATES.length; i += batchSize) {
+        stateBatches.push(__ALL_STATES.slice(i, i + batchSize));
+      }
+
+      try {
+        for (const group of stateBatches) {
+          await Promise.all(group.map(async (st) => {
+            const url = `https://waterservices.usgs.gov/nwis/site/?format=rdb&stateCd=${st}&parameterCd=00065`;
+            const res = await fetch(url);
+            const text = await res.text();
+            const lines = text.split('\n').filter(line => !line.startsWith('#') && line.trim() && !line.startsWith('agency_cd'));
+            const rows = lines.map(line => {
+              const p = line.split('\t');
+              return { id: p[1], name: p[2], state: st };
+            });
+            __globalStations.push(...rows);
+          }));
+          // Give the UI a chance to update
+          await new Promise(r => setTimeout(r, 40));
+          resultsBox.innerHTML = '<div class="empty">Indexing… ' + __globalStations.length.toLocaleString() + ' stations loaded</div>';
+        }
+        // Sort once for consistent search results
+        __globalStations.sort((a, b) => a.name.localeCompare(b.name));
+        __globalIndexBuilt = true;
+        renderGlobalMatches(document.getElementById('global-search').value.trim());
+      } catch (e) {
+        resultsBox.innerHTML = '<div class="empty">Problem loading stations. Try again.</div>';
+        console.warn('Global index build error:', e);
+      } finally {
+        __buildingIndex = false;
+      }
+    }
+
+    function renderGlobalMatches(query) {
+      const box = document.getElementById('global-results');
+      if (!box) return;
+
+      if (!query) {
+        box.style.display = 'none';
+        return;
+      }
+      box.style.display = 'block';
+
+      let matches = [];
+      if (__globalStations.length) {
+        const q = query.toLowerCase();
+        matches = __globalStations.filter(s => (s.name || '').toLowerCase().includes(q)).slice(0, 80);
+      }
+
+      if (!matches.length) {
+        box.innerHTML = '<div class="empty">No matches yet. Keep typing.</div>';
+        return;
+      }
+
+      box.innerHTML = '';
+      for (const m of matches) {
+        const div = document.createElement('div');
+        div.className = 'global-result-item';
+        div.textContent = `${m.name}  [${m.state}]`;
+        div.addEventListener('click', () => handleGlobalPick(m));
+        box.appendChild(div);
+      }
+    }
+
+    // Populate the native dropdowns to mirror the same selection path, then run your existing actions
+    async function handleGlobalPick(station) {
+      try {
+        await loadStationsForState(station.state);        // fill station dropdown for that state without touching your original function
+        const stationSelect = document.getElementById('station-select');
+        const searchBtn = document.getElementById('search-btn');
+        stationSelect.value = station.id;                 // select the station
+        searchBtn.disabled = stationSelect.value === "";  // enable button
+        // Trigger your existing flows
+        searchBtn.click();
+      } catch (e) {
+        console.warn('Global pick failed:', e);
+      } finally {
+        const box = document.getElementById('global-results');
+        if (box) box.style.display = 'none';
+      }
+    }
+
+    // This helper duplicates the logic of your fetchStations, but targets a specific state and returns when the dropdown is ready.
+    // Your original fetchStations remains untouched.
+    async function loadStationsForState(state) {
+      const stateSelect = document.getElementById('state-select');
+      const stationSelect = document.getElementById('station-select');
+      const searchBtn = document.getElementById('search-btn');
+
+      if (stateSelect.value !== state) {
+        stateSelect.value = state;
+      }
+
+      stationSelect.innerHTML = '<option value="">Loading stations...</option>';
+      stationSelect.disabled = true;
+      searchBtn.disabled = true;
+
+      const response = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=rdb&stateCd=${state}&parameterCd=00065`);
+      const text = await response.text();
+
+      const lines = text.split('\n').filter(line => !line.startsWith('#') && line.trim() && !line.startsWith('agency_cd'));
+      let stations = lines.map(line => {
+        const parts = line.split('\t');
+        return { id: parts[1], name: parts[2] };
+      });
+
+      stations.sort((a, b) => a.name.localeCompare(b.name));
+
+      stationSelect.innerHTML = '<option value="">Select a station</option>';
+      stations.forEach(station => {
+        const option = document.createElement('option');
+        option.value = station.id;
+        option.textContent = station.name;
+        stationSelect.appendChild(option);
+      });
+
+      stationSelect.disabled = false;
+      stationSelect.onchange = () => {
+        searchBtn.disabled = stationSelect.value === "";
+      };
+      return true;
     }
   </script>
   <!-- /ADDED -->
