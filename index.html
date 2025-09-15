@@ -620,6 +620,35 @@ function showChart() {
       return true;
     }
   </script>
+
+  <script>
+async function __resolveLatLon(siteId) {
+  // Try the site service first
+  try {
+    const r1 = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=json&sites=${siteId}`);
+    const j1 = await r1.json();
+    const s1 = (j1?.value?.site?.[0]) || (j1?.value?.timeSeries?.[0]?.sourceInfo);
+    const g1 = s1?.geoLocation?.geogLocation;
+    if (g1?.latitude != null && g1?.longitude != null) {
+      return { lat: g1.latitude, lon: g1.longitude, name: s1?.siteName || '' };
+    }
+  } catch {}
+
+  // Fallback to the instantaneous-values endpoint which often includes coords
+  try {
+    const r2 = await fetch(`https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${siteId}&parameterCd=00065`);
+    const j2 = await r2.json();
+    const s2 = j2?.value?.timeSeries?.[0]?.sourceInfo;
+    const g2 = s2?.geoLocation?.geogLocation;
+    if (g2?.latitude != null && g2?.longitude != null) {
+      return { lat: g2.latitude, lon: g2.longitude, name: s2?.siteName || '' };
+    }
+  } catch {}
+
+  return { lat: null, lon: null, name: '' };
+}
+</script>
+
   <!-- /ADDED -->
 
 </body>
