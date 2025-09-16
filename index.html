@@ -5,65 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>McCoy.fish</title>
   <style>
-    body {
-      font-family: 'Courier New', monospace;
-      margin: 0;
-      padding: 0;
-      background-image: url('mccoyfishwallpaper.jpg');
-      background-size: cover;
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: #d6d6d6;
-    }
+    body { font-family: 'Courier New', monospace; margin: 0; padding: 0;
+      background-image: url('mccoyfishwallpaper.jpg'); background-size: cover;
+      background-attachment: fixed; background-position: center; background-repeat: no-repeat; color: #d6d6d6; }
     header { text-align: center; padding-top: 40px; }
     header img { max-width: 160px; height: auto; }
     h1 { font-size: 3em; margin: 10px 0; color: #ccc; }
     main { padding: 20px; display: flex; flex-direction: column; align-items: center; }
 
-    .search-section {
-      background-color: rgba(0, 20, 10, 0.75);
-      border-radius: 15px;
-      box-shadow: 0 0 20px #003300;
-      padding: 30px;
-      width: 90%;
-      max-width: 600px;
-      margin-top: 20px;
-    }
+    .search-section { background-color: rgba(0, 20, 10, 0.75); border-radius: 15px;
+      box-shadow: 0 0 20px #003300; padding: 30px; width: 90%; max-width: 600px; margin-top: 20px; }
     .search-section h2 { text-align: center; font-size: 1.7em; color: #b8ffb3; margin-bottom: 20px; }
-    .search-section input, .search-section select, .search-section button {
-      width: 100%; padding: 12px; margin-top: 10px; margin-bottom: 15px;
-      border-radius: 8px; border: none; font-size: 1em; background-color: #294a38; color: #ddd;
-    }
+    .search-section input,.search-section select,.search-section button {
+      width: 100%; padding: 12px; margin-top: 10px; margin-bottom: 15px; border-radius: 8px;
+      border: none; font-size: 1em; background-color: #294a38; color: #ddd; }
     .search-section button { background-color: #3f6d4e; cursor: pointer; transition: background-color 0.3s ease; }
     .search-section button:hover { background-color: #51996b; }
 
-    .gage-section {
-      background-color: rgba(0, 20, 10, 0.75);
-      border-radius: 15px; box-shadow: 0 0 20px #003300;
-      padding: 30px; width: 90%; max-width: 600px; margin-top: 20px; display: none;
-    }
+    .gage-section { background-color: rgba(0, 20, 10, 0.75); border-radius: 15px; box-shadow: 0 0 20px #003300;
+      padding: 30px; width: 90%; max-width: 600px; margin-top: 20px; display: none; }
     .gage-section h2 { color: #b8ffb3; text-align: center; }
 
-    .forecast-section {
-      background-color: rgba(0, 20, 10, 0.75);
-      border-radius: 15px; box-shadow: 0 0 20px #003300;
-      padding: 24px; width: 90%; max-width: 900px; margin-top: 20px; display: none;
-    }
+    .forecast-section { background-color: rgba(0, 20, 10, 0.75); border-radius: 15px; box-shadow: 0 0 20px #003300;
+      padding: 24px; width: 90%; max-width: 900px; margin-top: 20px; display: none; }
     .forecast-title { color: #b8ffb3; text-align: center; margin: 0 0 16px 0; font-size: 1.6em; }
     .forecast-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
     .forecast-card { background: rgba(41, 74, 56, 0.6); border: 1px solid rgba(184,255,179,0.15); border-radius: 12px; padding: 14px; }
     .forecast-card h4 { margin: 0 0 6px 0; color: #e1ffe0; font-weight: 600; font-size: 1.05em; }
     .forecast-line { margin: 4px 0; font-size: 0.95em; color: #dfe7df; }
-    .forecast-narrative { margin-top: 14px; padding-top: 12px; border-top: 1px dashed rgba(184,255,179,0.25); color: #dfe7df; font-size: 0.98em; line-height: 1.35em; }
+    .forecast-narrative { margin-top: 14px; padding-top: 12px; border-top: 1px dashed rgba(184,255,179,0.25);
+      color: #dfe7df; font-size: 0.98em; line-height: 1.35em; }
 
-    /* Global search UI (unchanged) */
     .global-search-wrap { margin-top: 8px; }
-    .global-results {
-      background: rgba(41, 74, 56, 0.96); border: 1px solid rgba(184,255,179,0.25);
-      box-shadow: 0 0 16px #003300; border-radius: 10px; max-height: 280px; overflow: auto; display: none;
-    }
-    .global-result-item { padding: 10px 12px; cursor: pointer; border-bottom: 1px solid rgba(184,255,179,0.12); font-size: 0.95em; color: #e6ffe4; }
+    .global-results { background: rgba(41, 74, 56, 0.96); border: 1px solid rgba(184,255,179,0.25);
+      box-shadow: 0 0 16px #003300; border-radius: 10px; max-height: 280px; overflow: auto; display: none; }
+    .global-result-item { padding: 10px 12px; cursor: pointer; border-bottom: 1px solid rgba(184,255,179,0.12);
+      font-size: 0.95em; color: #e6ffe4; }
     .global-result-item:hover { background: rgba(81,153,107,0.25); }
     .global-results .empty { padding: 10px 12px; color: #dfe7df; opacity: 0.9; }
     .hint { font-size: 0.9em; color: #cfe9cc; opacity: 0.9; margin-top: -6px; margin-bottom: 10px; text-align: center; }
@@ -126,7 +103,6 @@
     </section>
   </main>
 
-  <!-- DROPDOWNS + CHARTS (unchanged) -->
   <script>
     async function fetchStations() {
       const state = document.getElementById("state-select").value;
@@ -136,7 +112,6 @@
       stationSelect.innerHTML = '<option value="">Loading stations...</option>';
       stationSelect.disabled = true;
       searchBtn.disabled = true;
-
       if (!state) return;
 
       const response = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=rdb&stateCd=${state}&parameterCd=00065`);
@@ -147,7 +122,6 @@
         const parts = line.split('\t');
         return { id: parts[1], name: parts[2] };
       });
-
       stations.sort((a, b) => a.name.localeCompare(b.name));
 
       stationSelect.innerHTML = '<option value="">Select a station</option>';
@@ -159,9 +133,7 @@
       });
 
       stationSelect.disabled = false;
-      stationSelect.onchange = () => {
-        searchBtn.disabled = stationSelect.value === "";
-      };
+      stationSelect.onchange = () => { searchBtn.disabled = stationSelect.value === ""; };
     }
 
     function showChart() {
@@ -173,8 +145,7 @@
 
       const today = new Date();
       const endDate = today.toISOString().split('T')[0];
-      const past = new Date();
-      past.setDate(today.getDate() - 7);
+      const past = new Date(); past.setDate(today.getDate() - 7);
       const startDate = past.toISOString().split('T')[0];
 
       const chartImg = document.getElementById("usgs-chart-img");
@@ -185,36 +156,18 @@
     }
   </script>
 
-  <!-- WEATHER: NWS primary + Open-Meteo fallback (timezone-correct sunrise/sunset) -->
+  <!-- WEATHER (reliable NWS + clean sunrise/sunset parsing; pressure omitted to avoid wrong values) -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const btn = document.getElementById('search-btn');
       if (btn) btn.addEventListener('click', loadForecastForSelectedStation);
     });
 
-    async function loadForecastForSelectedStation() {
-      const siteId = document.getElementById('station-select').value;
-      if (!siteId) return;
+    // Robust USGS metadata: prefer expanded RDB row for dec_lat_va/dec_long_va
+    async function getUsgsMeta(siteId) {
+      const meta = { lat: null, lon: null, name: '' };
 
-      const meta = await __getUsgsMeta(siteId);
-      if (meta.lat == null || meta.lon == null) {
-        showForecastError('Weather forecast not available.');
-        return;
-      }
-
-      // Try NWS → fallback to Open-Meteo if anything fails.
-      try {
-        const ok = await __renderForecastNWS(meta.lat, meta.lon);
-        if (!ok) throw new Error('NWS unavailable');
-      } catch (e) {
-        console.warn('NWS failed, using Open-Meteo fallback:', e);
-        await __renderForecastOpenMeteo(meta.lat, meta.lon);
-      }
-    }
-
-    // USGS meta: expanded RDB (preferred), then JSON
-    async function __getUsgsMeta(siteId) {
-      let meta = { lat:null, lon:null };
+      // 1) Expanded RDB is most consistent
       try {
         const r = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=rdb&sites=${siteId}&siteOutput=expanded`);
         const txt = await r.text();
@@ -226,9 +179,12 @@
           const get = k => (H[k] != null ? cols[H[k]] : "");
           const la = parseFloat(get("dec_lat_va"));
           const lo = parseFloat(get("dec_long_va"));
-          if (!isNaN(la) && !isNaN(lo)) { meta.lat = la; meta.lon = lo; }
+          if (Number.isFinite(la) && Number.isFinite(lo)) { meta.lat = la; meta.lon = lo; }
+          meta.name = get("station_nm") || '';
         }
       } catch {}
+
+      // 2) JSON fallback
       if (meta.lat == null || meta.lon == null) {
         try {
           const r2 = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=json&sites=${siteId}`);
@@ -238,97 +194,111 @@
           if (g?.latitude != null && g?.longitude != null) {
             meta.lat = g.latitude; meta.lon = g.longitude;
           }
+          meta.name = s?.siteName || meta.name;
         } catch {}
       }
       return meta;
     }
 
-    // ---------- PRIMARY: NWS ----------
-    async function __renderForecastNWS(lat, lon) {
+    async function loadForecastForSelectedStation() {
+      const siteId = document.getElementById('station-select').value;
+      if (!siteId) return;
+
       const section = document.getElementById('forecast-section');
       const grid = document.getElementById('forecast-grid');
       const narrative = document.getElementById('forecast-narrative');
+      section.style.display = 'block'; grid.innerHTML = ''; narrative.innerHTML = '';
 
+      const meta = await getUsgsMeta(siteId);
+      if (meta.lat == null || meta.lon == null) { showForecastError('Weather forecast not available.'); return; }
+
+      // Try NWS; if anything looks implausible, fall back to Open-Meteo daily.
+      let ok = await renderNWS(meta.lat, meta.lon);
+      if (!ok) ok = await renderOpenMeteo(meta.lat, meta.lon);
+      if (!ok) showForecastError('Weather forecast not available.');
+    }
+
+    // ---------- NWS primary (temps/sky/PoP) ----------
+    async function renderNWS(lat, lon) {
       let points;
       try {
-        const ptRes = await fetch(`https://api.weather.gov/points/${lat.toFixed(4)},${lon.toFixed(4)}`, {
-          headers: { 'Accept': 'application/geo+json' }
-        });
-        if (!ptRes.ok) return false;
-        points = await ptRes.json();
+        const resp = await fetch(`https://api.weather.gov/points/${lat},${lon}`, { headers: { 'Accept': 'application/geo+json' }});
+        if (!resp.ok) return false;
+        points = await resp.json();
       } catch { return false; }
 
       const tz = points?.properties?.timeZone || 'America/New_York';
       const city = points?.properties?.relativeLocation?.properties?.city;
       const state = points?.properties?.relativeLocation?.properties?.state;
-      const locLabel = city && state ? `${city}, ${state}` : '';
+      const label = city && state ? `${city}, ${state}` : '';
 
-      const forecastUrl = points?.properties?.forecast;
-      if (!forecastUrl) return false;
+      const fcUrl = points?.properties?.forecast;
+      if (!fcUrl) return false;
 
-      let fc;
+      let data;
       try {
-        const fRes = await fetch(forecastUrl, { headers: { 'Accept': 'application/geo+json' } });
-        if (!fRes.ok) return false;
-        fc = await fRes.json();
+        const resp2 = await fetch(fcUrl, { headers: { 'Accept': 'application/geo+json' }});
+        if (!resp2.ok) return false;
+        data = await resp2.json();
       } catch { return false; }
 
-      const periods = fc?.properties?.periods || [];
+      const periods = data?.properties?.periods || [];
       if (!periods.length) return false;
 
-      // Build next 3 days from day/night pairs
+      // Build 3 day cards from day/night pairs
       let i = periods.findIndex(p => p.isDaytime === true);
       if (i < 0) i = 0;
+
       const days = [];
       while (i < periods.length && days.length < 3) {
         const day = periods[i];
         const night = periods[i+1] && periods[i+1].isDaytime === false ? periods[i+1] : null;
-
         const hi = day.temperatureUnit === 'F' ? day.temperature : Math.round(day.temperature * 9/5 + 32);
         const lo = night ? (night.temperatureUnit === 'F' ? night.temperature : Math.round(night.temperature * 9/5 + 32)) : null;
         const pop = Math.max(day.probabilityOfPrecipitation?.value ?? 0, night?.probabilityOfPrecipitation?.value ?? 0);
+        const dateStr = day.startTime.slice(0, 10);
+        const labelDate = new Intl.DateTimeFormat([], { weekday:'short', month:'short', day:'numeric', timeZone: tz }).format(new Date(day.startTime));
 
-        days.push({
-          dateStr: day.startTime.slice(0,10),
-          label: new Intl.DateTimeFormat([], { weekday:'short', month:'short', day:'numeric', timeZone: tz }).format(new Date(day.startTime)),
-          hi, lo, sky: day.shortForecast, pop
-        });
+        days.push({ dateStr, labelDate, hi, lo, sky: day.shortForecast, pop });
         i += night ? 2 : 1;
       }
 
-      // Sunrise/Sunset (Open-Meteo daily)
-      const sun = await __getSunTimes(lat, lon, tz, days.map(d => d.dateStr));
+      // Sunrise/sunset from Open-Meteo, but parse as strings (no Date()) to avoid TZ drift
+      const sun = await getSunStrings(lat, lon, tz, days.map(d => d.dateStr));
 
-      section.style.display = 'block';
-      grid.innerHTML = '';
+      // Sanity check: if any high is absurd, bail to fallback
+      const absurd = days.some(d => d.hi > 115 || d.hi < -40 || (d.lo != null && (d.lo > 110 || d.lo < -60)) || (d.lo != null && d.hi < d.lo));
+      if (absurd) return false;
+
+      // Render
+      const section = document.getElementById('forecast-section');
+      const grid = document.getElementById('forecast-grid');
+      const narrative = document.getElementById('forecast-narrative');
+      section.style.display = 'block'; grid.innerHTML = ''; narrative.innerHTML = '';
+
       const pieces = [];
-
-      for (let k = 0; k < days.length; k++) {
-        const d = days[k];
-        const s = sun[d.dateStr] || { sunrise:'—', sunset:'—' };
-
+      for (const d of days) {
+        const s = sun[d.dateStr] || { sr: '—', ss: '—' };
         grid.innerHTML += `
           <div class="forecast-card">
-            <h4>${d.label}</h4>
+            <h4>${d.labelDate}</h4>
             <div class="forecast-line">Sky: ${d.sky}</div>
             <div class="forecast-line">High / Low: ${d.hi}°F / ${d.lo ?? '—'}°F</div>
             <div class="forecast-line">Barometric Pressure: —</div>
-            <div class="forecast-line">Sunrise: ${s.sunrise} &nbsp;•&nbsp; Sunset: ${s.sunset}</div>
+            <div class="forecast-line">Sunrise: ${s.sr} &nbsp;•&nbsp; Sunset: ${s.ss}</div>
             <div class="forecast-line">Precip: — in &nbsp; (Max Prob: ${Number.isFinite(d.pop) ? d.pop + '%' : '—'})</div>
           </div>
         `;
-        pieces.push(`${k===0?'Today':k===1?'Tomorrow':d.label}: ${d.sky.toLowerCase()} with a high near ${d.hi}°F${d.lo!=null?` and a low around ${d.lo}°F`:''}. Max precip probability ${Number.isFinite(d.pop)?d.pop+'%':'N/A'}. Sunrise ${s.sunrise}, sunset ${s.sunset}.`);
+        pieces.push(`${pieces.length===0?'Today':pieces.length===1?'Tomorrow':d.labelDate}: ${d.sky.toLowerCase()} with a high near ${d.hi}°F${d.lo!=null?` and a low around ${d.lo}°F`:''}. Max precip probability ${Number.isFinite(d.pop)?d.pop+'%':'N/A'}. Sunrise ${s.sr}, sunset ${s.ss}.`);
       }
-      const locText = locLabel ? ` near <strong>${locLabel}</strong>` : '';
+      const locText = label ? ` near <strong>${label}</strong>` : '';
       narrative.innerHTML = `<strong>Outlook${locText}:</strong> ${pieces.join(' ')}`;
-
       return true;
     }
 
-    // Get sunrise/sunset for specific dates via Open-Meteo (timezone accurate)
-    async function __getSunTimes(lat, lon, tz, dateList) {
-      const start = dateList[0];
-      const end = dateList[dateList.length - 1];
+    // Return sunrise/sunset strings like "06:51 AM" for each date (no Date() parsing)
+    async function getSunStrings(lat, lon, tz, dateList) {
+      const start = dateList[0], end = dateList[dateList.length - 1];
       const url = new URL('https://api.open-meteo.com/v1/forecast');
       url.searchParams.set('latitude', lat);
       url.searchParams.set('longitude', lon);
@@ -343,30 +313,33 @@
         const j = await r.json();
         const time = j?.daily?.time || [];
         const sunrise = j?.daily?.sunrise || [];
-        const sunset = j?.daily?.sunset || [];
+        const sunset  = j?.daily?.sunset  || [];
+
         for (let i = 0; i < time.length; i++) {
-          const t = time[i];
-          out[t] = {
-            sunrise: sunrise[i] ? new Intl.DateTimeFormat([], { hour:'2-digit', minute:'2-digit', timeZone: tz }).format(new Date(sunrise[i])) : '—',
-            sunset:  sunset[i]  ? new Intl.DateTimeFormat([], { hour:'2-digit', minute:'2-digit', timeZone: tz }).format(new Date(sunset[i]))  : '—'
-          };
+          const sr = (sunrise[i] || '').split('T')[1] || '';
+          const ss = (sunset[i]  || '').split('T')[1] || '';
+          out[time[i]] = { sr: to12h(sr), ss: to12h(ss) };
         }
       } catch {}
       return out;
+
+      function to12h(hhmm) {
+        if (!hhmm) return '—';
+        const [h, m] = hhmm.split(':').map(Number);
+        if (!Number.isFinite(h) || !Number.isFinite(m)) return '—';
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        const h12 = ((h + 11) % 12) + 1;
+        return `${h12.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')} ${ampm}`;
+        }
     }
 
-    // ---------- FALLBACK: Open-Meteo (temps/sky/precip + sunrise/sunset) ----------
-    async function __renderForecastOpenMeteo(lat, lon) {
-      const section = document.getElementById('forecast-section');
-      const grid = document.getElementById('forecast-grid');
-      const narrative = document.getElementById('forecast-narrative');
-
+    // ---------- Open-Meteo fallback (temps/sky/PoP + sunrise/sunset) ----------
+    async function renderOpenMeteo(lat, lon) {
       const url = new URL('https://api.open-meteo.com/v1/forecast');
       url.searchParams.set('latitude', lat);
       url.searchParams.set('longitude', lon);
       url.searchParams.set('timezone', 'auto');
       url.searchParams.set('temperature_unit', 'fahrenheit');
-      url.searchParams.set('pressure_unit', 'hPa');
       url.searchParams.set('precipitation_unit', 'inch');
       url.searchParams.set('forecast_days', '3');
       url.searchParams.set('daily', 'temperature_2m_max,temperature_2m_min,sunrise,sunset,weathercode,precipitation_probability_max,precipitation_sum');
@@ -375,28 +348,25 @@
       try {
         const res = await fetch(url.toString());
         data = await res.json();
-      } catch {
-        showForecastError('Weather forecast not available.');
-        return;
-      }
-      if (!data?.daily?.time?.length) { showForecastError('Weather forecast not available.'); return; }
+      } catch { return false; }
+      if (!data?.daily?.time?.length) return false;
 
       const tz = data.timezone || 'UTC';
-      const { time, temperature_2m_max: tMax, temperature_2m_min: tMin, sunrise, sunset, weathercode: wCode, precipitation_probability_max: pProb, precipitation_sum: pSum } = data.daily;
+      const { time, temperature_2m_max: tMax, temperature_2m_min: tMin, sunrise, sunset, weathercode: wCode, precipitation_probability_max: pProb } = data.daily;
 
-      section.style.display = 'block';
-      grid.innerHTML = '';
+      const section = document.getElementById('forecast-section');
+      const grid = document.getElementById('forecast-grid');
+      const narrative = document.getElementById('forecast-narrative');
+      section.style.display = 'block'; grid.innerHTML = ''; narrative.innerHTML = '';
+
       const pieces = [];
-
       for (let i = 0; i < time.length; i++) {
         const label = new Intl.DateTimeFormat([], { weekday:'short', month:'short', day:'numeric', timeZone: tz }).format(new Date(time[i]));
-        const hi = Math.round(tMax[i]);
-        const lo = Math.round(tMin[i]);
-        const sr = sunrise[i] ? new Intl.DateTimeFormat([], { hour:'2-digit', minute:'2-digit', timeZone: tz }).format(new Date(sunrise[i])) : '—';
-        const ss = sunset[i]  ? new Intl.DateTimeFormat([], { hour:'2-digit', minute:'2-digit', timeZone: tz }).format(new Date(sunset[i]))  : '—';
-        const sky = __weatherDescription(wCode[i]);
-        const prob = (pProb?.[i] ?? '—');
-        const precip = (pSum?.[i] ?? '—');
+        const hi = Math.round(tMax[i]); const lo = Math.round(tMin[i]);
+        const sr = (sunrise[i] || '').split('T')[1]; const ss = (sunset[i] || '').split('T')[1];
+        const sr12 = sr ? str12(sr) : '—'; const ss12 = ss ? str12(ss) : '—';
+        const sky = weatherDescription(wCode[i]);
+        const pop = (pProb?.[i] ?? '—');
 
         grid.innerHTML += `
           <div class="forecast-card">
@@ -404,25 +374,24 @@
             <div class="forecast-line">Sky: ${sky}</div>
             <div class="forecast-line">High / Low: ${hi}°F / ${lo}°F</div>
             <div class="forecast-line">Barometric Pressure: —</div>
-            <div class="forecast-line">Sunrise: ${sr} &nbsp;•&nbsp; Sunset: ${ss}</div>
-            <div class="forecast-line">Precip: ${precip} in &nbsp; (Max Prob: ${prob === '—' ? '—' : prob + '%'})</div>
+            <div class="forecast-line">Sunrise: ${sr12} &nbsp;•&nbsp; Sunset: ${ss12}</div>
+            <div class="forecast-line">Precip: — in &nbsp; (Max Prob: ${pop === '—' ? '—' : pop + '%'})</div>
           </div>
         `;
-        pieces.push(`${i===0?'Today':i===1?'Tomorrow':label}: ${sky.toLowerCase()} with a high near ${hi}°F and a low around ${lo}°F. Precipitation total ${precip} in (max probability ${prob==='—'?'N/A':prob+'%'}). Sunrise ${sr}, sunset ${ss}.`);
+        pieces.push(`${i===0?'Today':i===1?'Tomorrow':label}: ${sky.toLowerCase()} with a high near ${hi}°F and a low around ${lo}°F. Max precip probability ${pop==='—'?'N/A':pop+'%'}. Sunrise ${sr12}, sunset ${ss12}.`);
       }
       narrative.innerHTML = `<strong>Outlook:</strong> ${pieces.join(' ')}`;
+      return true;
+
+      function str12(hm) {
+        const [h, m] = hm.split(':').map(Number);
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        const h12 = ((h + 11) % 12) + 1;
+        return `${h12.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')} ${ampm}`;
+      }
     }
 
-    function showForecastError(msg) {
-      const section = document.getElementById('forecast-section');
-      const grid = document.getElementById('forecast-grid');
-      const narrative = document.getElementById('forecast-narrative');
-      grid.innerHTML = '';
-      narrative.innerHTML = msg || 'Weather unavailable.';
-      section.style.display = 'block';
-    }
-
-    function __weatherDescription(code) {
+    function weatherDescription(code) {
       const map = {
         0:"Clear",1:"Mainly clear",2:"Partly cloudy",3:"Overcast",
         45:"Fog",48:"Rime fog",
@@ -438,17 +407,26 @@
       };
       return map[code] || "Unknown";
     }
+
+    function showForecastError(msg) {
+      const section = document.getElementById('forecast-section');
+      const grid = document.getElementById('forecast-grid');
+      const narrative = document.getElementById('forecast-narrative');
+      grid.innerHTML = '';
+      narrative.innerHTML = msg || 'Weather unavailable.';
+      section.style.display = 'block';
+    }
   </script>
 
-  <!-- GLOBAL SEARCH (unchanged) -->
+  <!-- Global search logic (unchanged) -->
   <script>
     const __ALL_STATES = ["AL","AR","AZ","CA","CO","CT","DE","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"];
     let __globalStations = []; let __globalIndexBuilt = false; let __buildingIndex = false;
 
     document.addEventListener('DOMContentLoaded', () => {
       const input = document.getElementById('global-search');
-      const box   = document.getElementById('global-results');
-      if (!input || !box) return;
+      const box = document.getElementById('global-results');
+      if (!input) return;
 
       input.addEventListener('focus', ensureGlobalIndex);
       input.addEventListener('input', () => { ensureGlobalIndex(); renderGlobalMatches(input.value.trim()); });
@@ -459,6 +437,7 @@
     async function ensureGlobalIndex() {
       if (__globalIndexBuilt || __buildingIndex) return;
       __buildingIndex = true;
+
       const resultsBox = document.getElementById('global-results');
       resultsBox.style.display = 'block';
       resultsBox.innerHTML = '<div class="empty">Building full USGS index…</div>';
@@ -488,13 +467,9 @@
     function renderGlobalMatches(query) {
       const box = document.getElementById('global-results');
       if (!box) return;
-      if (!query) { box.style.display = 'none'; return; }
 
-      if (!__globalIndexBuilt) {
-        box.style.display = 'block';
-        box.innerHTML = '<div class="empty">Building full USGS index…</div>';
-        return;
-      }
+      if (!query) { box.style.display = 'none'; return; }
+      if (!__globalIndexBuilt) { box.style.display = 'block'; box.innerHTML = '<div class="empty">Building full USGS index…</div>'; return; }
 
       box.style.display = 'block';
       const q = query.toLowerCase();
@@ -531,6 +506,7 @@
       const searchBtn = document.getElementById('search-btn');
 
       if (stateSelect.value !== state) stateSelect.value = state;
+
       stationSelect.innerHTML = '<option value="">Loading stations...</option>';
       stationSelect.disabled = true; searchBtn.disabled = true;
 
