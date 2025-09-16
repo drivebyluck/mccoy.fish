@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -17,9 +17,22 @@
       background-repeat: no-repeat;
       color: #d6d6d6;
     }
-    header { text-align: center; padding-top: 40px; }
+    header { 
+      text-align: center; 
+      padding-top: 40px; 
+      /* enable absolute positioning of the H1 relative to the header */
+      position: relative;
+    }
     header img { max-width: 160px; height: auto; }
-    h1 { font-size: 3em; margin: 10px 0; color: #ccc; }
+    h1 { 
+      font-size: 3em; 
+      margin: 10px 0; 
+      color: #ccc;
+      /* allow precise placement between logo & search */
+      position: absolute; 
+      left: 0; 
+      right: 0;
+    }
 
     main { padding: 20px; display: flex; flex-direction: column; align-items: center; }
     .card {
@@ -113,24 +126,14 @@
     .inputs > * {
       display: block;
       width: 100%;
-      box-sizing: border-box;   /* include padding/border in the 100% width */
-      min-width: 0;             /* prevents some browsers from overflowing */
-    }
-    /* (optional) keep the dropdown arrow but prevent width quirks on some browsers */
-    .inputs select {
-      -webkit-appearance: menulist; /* don’t remove the native arrow */
-      appearance: menulist;
+      box-sizing: border-box;
+      min-width: 0;
     }
 
-    /* ===== Center the H1 between logo and search card (minimal change) ===== */
-    header { position: relative; }                /* create containing block for absolute child */
-    header h1 {
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%, -50%);          /* center on its own height */
-      margin: 0;                                  /* avoid extra offset */
-      text-align: center;
-      pointer-events: none;                       /* clicks pass through */
+    /* keep the dropdown arrow but prevent width quirks on some browsers */
+    .inputs select {
+      -webkit-appearance: menulist;
+      appearance: menulist;
     }
   </style>
 </head>
@@ -361,7 +364,7 @@
       // Charts (unchanged)
       showCharts(siteId);
 
-      // Weather: now driven by USGS coordinates (new, robust)
+      // Weather: pull via USGS coordinates
       fetchWeatherUsingUSGS(siteId);
     }
 
@@ -379,7 +382,7 @@
       img60.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
     }
 
-    /* ====== WEATHER: pull lat/lon directly from USGS (three fallbacks), then Open-Meteo ====== */
+    /* ====== WEATHER: pull lat/lon directly from USGS, then Open-Meteo ====== */
     async function fetchWeatherUsingUSGS(siteId) {
       wxEl.style.display = 'block';
       wxGrid.innerHTML = '';
@@ -512,26 +515,44 @@
       return siteName || '';
     }
 
-    /* ===== Center the H1 between logo and search card ===== */
+    /* ===== Center the H1 between logo and search card, with spacing ===== */
     function placeTitleBetweenLogoAndSearch() {
+      const GAP = 28; // pixels of minimum space above & below the title
+
       const header = document.querySelector('header');
       const logo   = header?.querySelector('img');
       const title  = header?.querySelector('h1');
-      const search = document.querySelector('main .card'); // first card is the search section
+      const search = document.querySelector('main .card'); // first card = Search
       if (!header || !logo || !title || !search) return;
 
+      // Current document positions
       const headerTop  = header.getBoundingClientRect().top + window.scrollY;
       const logoBottom = logo.getBoundingClientRect().bottom + window.scrollY;
       const searchTop  = search.getBoundingClientRect().top + window.scrollY;
 
-      const mid = (logoBottom + searchTop) / 2;           // midpoint in page coords
-      title.style.top = (mid - headerTop) + 'px';         // convert to header's coord space
-    }
-    window.addEventListener('load', placeTitleBetweenLogoAndSearch);
-    window.addEventListener('resize', placeTitleBetweenLogoAndSearch);
+      // Measure title height
+      const titleRect = title.getBoundingClientRect();
+      const titleH = titleRect.height || 0;
 
-    /* ====== BOOT ====== */
-    document.addEventListener('DOMContentLoaded', loadIndex);
+      // Ideal midpoint
+      let targetTop = (logoBottom + searchTop - titleH) / 2;
+
+      // Enforce a comfortable buffer
+      const minTop = logoBottom + GAP;         // at least GAP below logo
+      const maxTop = searchTop - titleH - GAP; // at least GAP above search
+      if (isFinite(minTop) && isFinite(maxTop)) {
+        targetTop = Math.max(minTop, Math.min(maxTop, targetTop));
+      }
+
+      // Convert to header-local coordinates
+      title.style.top = (targetTop - headerTop) + 'px';
+    }
+
+    window.addEventListener('load', () => {
+      loadIndex();
+      placeTitleBetweenLogoAndSearch();
+    });
+    window.addEventListener('resize', placeTitleBetweenLogoAndSearch);
   </script>
 </body>
 </html>
