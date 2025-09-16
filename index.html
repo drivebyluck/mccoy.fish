@@ -57,7 +57,7 @@
     .forecast-line { margin: 4px 0; font-size: 0.95em; color: #dfe7df; }
     .forecast-narrative { margin-top: 14px; padding-top: 12px; border-top: 1px dashed rgba(184,255,179,0.25); color: #dfe7df; font-size: 0.98em; line-height: 1.35em; }
 
-    /* Global search UI */
+    /* Global search UI (unchanged) */
     .global-search-wrap { margin-top: 8px; }
     .global-results {
       background: rgba(41, 74, 56, 0.96); border: 1px solid rgba(184,255,179,0.25);
@@ -185,7 +185,7 @@
     }
   </script>
 
-  <!-- WEATHER (NWS forecast + sunrise/sunset; accurate timezone) -->
+  <!-- WEATHER: NWS primary + Open-Meteo fallback (timezone-correct sunrise/sunset) -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const btn = document.getElementById('search-btn');
@@ -198,19 +198,21 @@
 
       const meta = await __getUsgsMeta(siteId);
       if (meta.lat == null || meta.lon == null) {
-        showForecastError('Unable to determine station location for weather.');
+        showForecastError('Weather forecast not available.');
         return;
       }
 
+      // Try NWS → fallback to Open-Meteo if anything fails.
       try {
-        await __renderForecastNWS(meta.lat, meta.lon);
+        const ok = await __renderForecastNWS(meta.lat, meta.lon);
+        if (!ok) throw new Error('NWS unavailable');
       } catch (e) {
-        console.warn('NWS render failed:', e);
-        showForecastError('Weather forecast not available.');
+        console.warn('NWS failed, using Open-Meteo fallback:', e);
+        await __renderForecastOpenMeteo(meta.lat, meta.lon);
       }
     }
 
-    // Robust USGS site meta (expanded RDB preferred; JSON as fallback)
+    // USGS meta: expanded RDB (preferred), then JSON
     async function __getUsgsMeta(siteId) {
       let meta = { lat:null, lon:null };
       try {
@@ -241,35 +243,40 @@
       return meta;
     }
 
-    // Format a Date (UTC) in a specific IANA timezone HH:MM
-    function __fmtTimeInTZ(dateUTC, tz) {
-      try {
-        return new Intl.DateTimeFormat([], { hour:'2-digit', minute:'2-digit', timeZone: tz }).format(dateUTC);
-      } catch { return '—'; }
-    }
-
+    // ---------- PRIMARY: NWS ----------
     async function __renderForecastNWS(lat, lon) {
       const section = document.getElementById('forecast-section');
       const grid = document.getElementById('forecast-grid');
       const narrative = document.getElementById('forecast-narrative');
 
-      // 1) NWS gridpoint (gets timezone, location, and forecast URL)
-      const ptRes = await fetch(`https://api.weather.gov/points/${lat.toFixed(4)},${lon.toFixed(4)}`);
-      const pt = await ptRes.json();
-      const tz = pt?.properties?.timeZone || 'America/New_York';
-      const city = pt?.properties?.relativeLocation?.properties?.city;
-      const state = pt?.properties?.relativeLocation?.properties?.state;
+      let points;
+      try {
+        const ptRes = await fetch(`https://api.weather.gov/points/${lat.toFixed(4)},${lon.toFixed(4)}`, {
+          headers: { 'Accept': 'application/geo+json' }
+        });
+        if (!ptRes.ok) return false;
+        points = await ptRes.json();
+      } catch { return false; }
+
+      const tz = points?.properties?.timeZone || 'America/New_York';
+      const city = points?.properties?.relativeLocation?.properties?.city;
+      const state = points?.properties?.relativeLocation?.properties?.state;
       const locLabel = city && state ? `${city}, ${state}` : '';
 
-      const forecastUrl = pt?.properties?.forecast;
-      if (!forecastUrl) { showForecastError('Weather forecast not available.'); return; }
+      const forecastUrl = points?.properties?.forecast;
+      if (!forecastUrl) return false;
 
-      // 2) 12-hour forecast periods from NWS
-      const fRes = await fetch(forecastUrl);
-      const fc = await fRes.json();
+      let fc;
+      try {
+        const fRes = await fetch(forecastUrl, { headers: { 'Accept': 'application/geo+json' } });
+        if (!fRes.ok) return false;
+        fc = await fRes.json();
+      } catch { return false; }
+
       const periods = fc?.properties?.periods || [];
+      if (!periods.length) return false;
 
-      // Build next 3 day/night pairs
+      // Build next 3 days from day/night pairs
       let i = periods.findIndex(p => p.isDaytime === true);
       if (i < 0) i = 0;
       const days = [];
@@ -282,37 +289,23 @@
         const pop = Math.max(day.probabilityOfPrecipitation?.value ?? 0, night?.probabilityOfPrecipitation?.value ?? 0);
 
         days.push({
-          dateISO: day.startTime,                     // e.g. 2025-09-15T06:00:00-04:00
-          dateStr: day.startTime.slice(0,10),         // YYYY-MM-DD
+          dateStr: day.startTime.slice(0,10),
           label: new Intl.DateTimeFormat([], { weekday:'short', month:'short', day:'numeric', timeZone: tz }).format(new Date(day.startTime)),
           hi, lo, sky: day.shortForecast, pop
         });
         i += night ? 2 : 1;
       }
-      if (!days.length) { showForecastError('Weather forecast not available.'); return; }
 
-      // 3) Sunrise/Sunset (UTC -> tz) using sunrise-sunset.org
-      async function sunTimes(ymd) {
-        try {
-          const r = await fetch(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=${ymd}&formatted=0`);
-          const j = await r.json();
-          const sr = j?.results?.sunrise ? new Date(j.results.sunrise) : null;
-          const ss = j?.results?.sunset ? new Date(j.results.sunset) : null;
-          return {
-            sunrise: sr ? __fmtTimeInTZ(sr, tz) : '—',
-            sunset:  ss ? __fmtTimeInTZ(ss, tz) : '—'
-          };
-        } catch { return { sunrise: '—', sunset: '—' }; }
-      }
+      // Sunrise/Sunset (Open-Meteo daily)
+      const sun = await __getSunTimes(lat, lon, tz, days.map(d => d.dateStr));
 
-      // 4) Render UI
       section.style.display = 'block';
       grid.innerHTML = '';
       const pieces = [];
 
       for (let k = 0; k < days.length; k++) {
         const d = days[k];
-        const sun = await sunTimes(d.dateStr);
+        const s = sun[d.dateStr] || { sunrise:'—', sunset:'—' };
 
         grid.innerHTML += `
           <div class="forecast-card">
@@ -320,16 +313,104 @@
             <div class="forecast-line">Sky: ${d.sky}</div>
             <div class="forecast-line">High / Low: ${d.hi}°F / ${d.lo ?? '—'}°F</div>
             <div class="forecast-line">Barometric Pressure: —</div>
-            <div class="forecast-line">Sunrise: ${sun.sunrise} &nbsp;•&nbsp; Sunset: ${sun.sunset}</div>
+            <div class="forecast-line">Sunrise: ${s.sunrise} &nbsp;•&nbsp; Sunset: ${s.sunset}</div>
             <div class="forecast-line">Precip: — in &nbsp; (Max Prob: ${Number.isFinite(d.pop) ? d.pop + '%' : '—'})</div>
           </div>
         `;
-
-        pieces.push(`${k===0?'Today':k===1?'Tomorrow':d.label}: ${d.sky.toLowerCase()} with a high near ${d.hi}°F${d.lo!=null?` and a low around ${d.lo}°F`:''}. Max precip probability ${Number.isFinite(d.pop)?d.pop+'%':'N/A'}. Sunrise ${sun.sunrise}, sunset ${sun.sunset}.`);
+        pieces.push(`${k===0?'Today':k===1?'Tomorrow':d.label}: ${d.sky.toLowerCase()} with a high near ${d.hi}°F${d.lo!=null?` and a low around ${d.lo}°F`:''}. Max precip probability ${Number.isFinite(d.pop)?d.pop+'%':'N/A'}. Sunrise ${s.sunrise}, sunset ${s.sunset}.`);
       }
-
       const locText = locLabel ? ` near <strong>${locLabel}</strong>` : '';
       narrative.innerHTML = `<strong>Outlook${locText}:</strong> ${pieces.join(' ')}`;
+
+      return true;
+    }
+
+    // Get sunrise/sunset for specific dates via Open-Meteo (timezone accurate)
+    async function __getSunTimes(lat, lon, tz, dateList) {
+      const start = dateList[0];
+      const end = dateList[dateList.length - 1];
+      const url = new URL('https://api.open-meteo.com/v1/forecast');
+      url.searchParams.set('latitude', lat);
+      url.searchParams.set('longitude', lon);
+      url.searchParams.set('timezone', tz);
+      url.searchParams.set('start_date', start);
+      url.searchParams.set('end_date', end);
+      url.searchParams.set('daily', 'sunrise,sunset');
+
+      const out = {};
+      try {
+        const r = await fetch(url.toString());
+        const j = await r.json();
+        const time = j?.daily?.time || [];
+        const sunrise = j?.daily?.sunrise || [];
+        const sunset = j?.daily?.sunset || [];
+        for (let i = 0; i < time.length; i++) {
+          const t = time[i];
+          out[t] = {
+            sunrise: sunrise[i] ? new Intl.DateTimeFormat([], { hour:'2-digit', minute:'2-digit', timeZone: tz }).format(new Date(sunrise[i])) : '—',
+            sunset:  sunset[i]  ? new Intl.DateTimeFormat([], { hour:'2-digit', minute:'2-digit', timeZone: tz }).format(new Date(sunset[i]))  : '—'
+          };
+        }
+      } catch {}
+      return out;
+    }
+
+    // ---------- FALLBACK: Open-Meteo (temps/sky/precip + sunrise/sunset) ----------
+    async function __renderForecastOpenMeteo(lat, lon) {
+      const section = document.getElementById('forecast-section');
+      const grid = document.getElementById('forecast-grid');
+      const narrative = document.getElementById('forecast-narrative');
+
+      const url = new URL('https://api.open-meteo.com/v1/forecast');
+      url.searchParams.set('latitude', lat);
+      url.searchParams.set('longitude', lon);
+      url.searchParams.set('timezone', 'auto');
+      url.searchParams.set('temperature_unit', 'fahrenheit');
+      url.searchParams.set('pressure_unit', 'hPa');
+      url.searchParams.set('precipitation_unit', 'inch');
+      url.searchParams.set('forecast_days', '3');
+      url.searchParams.set('daily', 'temperature_2m_max,temperature_2m_min,sunrise,sunset,weathercode,precipitation_probability_max,precipitation_sum');
+
+      let data;
+      try {
+        const res = await fetch(url.toString());
+        data = await res.json();
+      } catch {
+        showForecastError('Weather forecast not available.');
+        return;
+      }
+      if (!data?.daily?.time?.length) { showForecastError('Weather forecast not available.'); return; }
+
+      const tz = data.timezone || 'UTC';
+      const { time, temperature_2m_max: tMax, temperature_2m_min: tMin, sunrise, sunset, weathercode: wCode, precipitation_probability_max: pProb, precipitation_sum: pSum } = data.daily;
+
+      section.style.display = 'block';
+      grid.innerHTML = '';
+      const pieces = [];
+
+      for (let i = 0; i < time.length; i++) {
+        const label = new Intl.DateTimeFormat([], { weekday:'short', month:'short', day:'numeric', timeZone: tz }).format(new Date(time[i]));
+        const hi = Math.round(tMax[i]);
+        const lo = Math.round(tMin[i]);
+        const sr = sunrise[i] ? new Intl.DateTimeFormat([], { hour:'2-digit', minute:'2-digit', timeZone: tz }).format(new Date(sunrise[i])) : '—';
+        const ss = sunset[i]  ? new Intl.DateTimeFormat([], { hour:'2-digit', minute:'2-digit', timeZone: tz }).format(new Date(sunset[i]))  : '—';
+        const sky = __weatherDescription(wCode[i]);
+        const prob = (pProb?.[i] ?? '—');
+        const precip = (pSum?.[i] ?? '—');
+
+        grid.innerHTML += `
+          <div class="forecast-card">
+            <h4>${label}</h4>
+            <div class="forecast-line">Sky: ${sky}</div>
+            <div class="forecast-line">High / Low: ${hi}°F / ${lo}°F</div>
+            <div class="forecast-line">Barometric Pressure: —</div>
+            <div class="forecast-line">Sunrise: ${sr} &nbsp;•&nbsp; Sunset: ${ss}</div>
+            <div class="forecast-line">Precip: ${precip} in &nbsp; (Max Prob: ${prob === '—' ? '—' : prob + '%'})</div>
+          </div>
+        `;
+        pieces.push(`${i===0?'Today':i===1?'Tomorrow':label}: ${sky.toLowerCase()} with a high near ${hi}°F and a low around ${lo}°F. Precipitation total ${precip} in (max probability ${prob==='—'?'N/A':prob+'%'}). Sunrise ${sr}, sunset ${ss}.`);
+      }
+      narrative.innerHTML = `<strong>Outlook:</strong> ${pieces.join(' ')}`;
     }
 
     function showForecastError(msg) {
@@ -340,9 +421,26 @@
       narrative.innerHTML = msg || 'Weather unavailable.';
       section.style.display = 'block';
     }
+
+    function __weatherDescription(code) {
+      const map = {
+        0:"Clear",1:"Mainly clear",2:"Partly cloudy",3:"Overcast",
+        45:"Fog",48:"Rime fog",
+        51:"Drizzle: Light",53:"Drizzle: Moderate",55:"Drizzle: Dense",
+        56:"Freezing drizzle: Light",57:"Freezing drizzle: Dense",
+        61:"Rain: Slight",63:"Rain: Moderate",65:"Rain: Heavy",
+        66:"Freezing rain: Light",67:"Freezing rain: Heavy",
+        71:"Snow: Slight",73:"Snow: Moderate",75:"Snow: Heavy",
+        77:"Snow grains",
+        80:"Rain showers: Slight",81:"Rain showers: Moderate",82:"Rain showers: Violent",
+        85:"Snow showers: Slight",86:"Snow showers: Heavy",
+        95:"Thunderstorm",96:"Thunderstorm w/ slight hail",99:"Thunderstorm w/ heavy hail"
+      };
+      return map[code] || "Unknown";
+    }
   </script>
 
-  <!-- GLOBAL SEARCH (unchanged behavior; we’ll optimize next) -->
+  <!-- GLOBAL SEARCH (unchanged) -->
   <script>
     const __ALL_STATES = ["AL","AR","AZ","CA","CO","CT","DE","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"];
     let __globalStations = []; let __globalIndexBuilt = false; let __buildingIndex = false;
