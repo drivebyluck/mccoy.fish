@@ -143,12 +143,12 @@
     <!-- Charts -->
     <section id="charts" class="card" style="display:none;">
       <h2>Gage Height & Discharge</h2>
-      <div class="img-row">
-        <img id="img-00065" alt="USGS Gage Height Chart">
+      <div class="img-row" id="row-00065">
+        <img id="img-00065" alt="USGS Gage Height Chart" referrerpolicy="no-referrer">
       </div>
       <h2 style="margin-top: 30px;">Discharge (CFS) – Last 7 Days</h2>
-      <div class="img-row">
-        <img id="img-00060" alt="USGS Discharge Chart">
+      <div class="img-row" id="row-00060">
+        <img id="img-00060" alt="USGS Discharge Chart" referrerpolicy="no-referrer">
       </div>
     </section>
 
@@ -182,7 +182,6 @@
       WV:"West Virginia", WY:"Wyoming"
     };
     function parseCityFromName(name, st) {
-      // Examples: "LICKING RIVER AT NEWARK, OH", "BIG RIVER NEAR TOWN, KY"
       if (!name) return '';
       const m = name.match(/\b(?:AT|NEAR|NR|ABOVE|BELOW)\s+([^,]+),\s*([A-Z]{2})\b/i);
       if (m && (!st || m[2].toUpperCase() === st.toUpperCase())) {
@@ -190,7 +189,7 @@
       }
       return '';
     }
-    function fmtTimeHHMM(iso) { // just show local HH:MM from ISO
+    function fmtTimeHHMM(iso) {
       if (!iso) return '—';
       const t = iso.split('T')[1] || '';
       return t ? t.slice(0,5) : '—';
@@ -223,6 +222,8 @@
     const chartsEl = document.getElementById('charts');
     const img65 = document.getElementById('img-00065');
     const img60 = document.getElementById('img-00060');
+    const row65 = document.getElementById('row-00065');
+    const row60 = document.getElementById('row-00060');
 
     const wxEl = document.getElementById('wx');
     const wxGrid = document.getElementById('wx-grid');
@@ -237,18 +238,15 @@
         allStations = await res.json();
         if (!Array.isArray(allStations)) throw new Error('Stations JSON malformed.');
 
-        // Normalize and bucket
         for (const s of allStations) {
           s.state = (s.state || '').toUpperCase();
           if (!s.city) s.city = parseCityFromName(s.name || '', s.state);
           if (!byState.has(s.state)) byState.set(s.state, []);
           byState.get(s.state).push(s);
         }
-        // sort stations within state for stable dropdown
         for (const [st, arr] of byState.entries()) {
           arr.sort((a,b) => (a.name||'').localeCompare(b.name||''));
         }
-        // populate state select
         const statesSorted = Array.from(byState.keys()).sort();
         for (const st of statesSorted) {
           const opt = document.createElement('option');
@@ -291,13 +289,11 @@
       if (!item) return;
       const st = item.getAttribute('data-state');
       const id = item.getAttribute('data-id');
-      // Load state dropdown & select this station
       stateEl.value = st;
       populateStateStations(st, id);
       resEl.style.display = 'none';
       qEl.blur();
       goEl.disabled = false;
-      // auto-run
       runSelection();
     });
 
@@ -338,41 +334,133 @@
       const siteId = stationEl.value;
       if (!siteId) return;
 
-      // Find selected station object
       const st = stateEl.value;
       const s = (byState.get(st) || []).find(x => x.id === siteId);
-      // Charts
       showCharts(siteId);
-      // Weather (city+state)
       const city = s?.city || parseCityFromName(s?.name || '', st) || '';
       const label = city ? `${city}, ${st}` : st;
       fetchWeather(city, st, label);
     }
 
-    /* ====== USGS CHARTS (sanitized ID + cache-buster + fallback) ====== */
+    /* ====== LIGHTWEIGHT SVG FALLBACK CHART RENDERER ====== */
+    function renderSvgLine(container, points, label) {
+      // Clear any previous fallback
+      const old = container.querySelector('svg[data-fallback="1"]');
+      if (old) old.remove();
+
+      if (!points || points.length < 2) return;
+
+      const W = container.clientWidth || 800;
+      const H = Math.round(W * 0.4); // keep a similar aspect
+      const pad = 30;
+
+      const xs = points.map(p => +p.t);
+      const ys = points.map(p => +p.v).filter(v => !Number.isNaN(v));
+
+      const minX = Math.min(...xs), maxX = Math.max(...xs);
+      const minY = Math.min(...ys), maxY = Math.max(...ys);
+      const spanX = maxX - minX || 1;
+      const spanY = (maxY - minY) || 1;
+
+      const scaleX = x => pad + ( (x - minX) / spanX ) * (W - pad*2);
+      const scaleY = y => H - pad - ( (y - minY) / spanY ) * (H - pad*2);
+
+      let d = '';
+      points.forEach((p, i) => {
+        const x = scaleX(p.t);
+        const y = scaleY(p.v);
+        d += (i ? ' L ' : 'M ') + x + ' ' + y;
+      });
+
+      const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+      svg.setAttribute('width', '100%');
+      svg.setAttribute('height', 'auto');
+      svg.setAttribute('data-fallback', '1');
+
+      // background (subtle)
+      const bg = document.createElementNS(svg.namespaceURI,'rect');
+      bg.setAttribute('x', 0); bg.setAttribute('y', 0);
+      bg.setAttribute('width', W); bg.setAttribute('height', H);
+      bg.setAttribute('fill', 'rgba(0,0,0,0)');
+      svg.appendChild(bg);
+
+      // path
+      const path = document.createElementNS(svg.namespaceURI,'path');
+      path.setAttribute('d', d);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', '#b8ffb3');
+      path.setAttribute('stroke-width', '2');
+      path.setAttribute('stroke-linecap', 'round');
+      path.setAttribute('stroke-linejoin', 'round');
+      svg.appendChild(path);
+
+      // label (small)
+      if (label) {
+        const txt = document.createElementNS(svg.namespaceURI,'text');
+        txt.setAttribute('x', pad);
+        txt.setAttribute('y', pad - 8);
+        txt.setAttribute('fill', '#dfe7df');
+        txt.setAttribute('font-size', '12');
+        txt.textContent = label;
+        svg.appendChild(txt);
+      }
+
+      container.appendChild(svg);
+    }
+
+    async function fetchUSGSSeries(siteId, parmCd) {
+      // P7D of 1-hr or 15-min IV data; we’ll accept any step interval
+      const url = `https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${siteId}&parameterCd=${parmCd}&period=P7D`;
+      const res = await fetch(url);
+      const j = await res.json();
+      const ts = j?.value?.timeSeries?.[0]?.values?.[0]?.value || [];
+      return ts
+        .filter(row => row?.value != null)
+        .map(row => ({
+          t: new Date(row.dateTime).getTime(),
+          v: parseFloat(row.value)
+        }))
+        .filter(p => !Number.isNaN(p.v) && !Number.isNaN(p.t))
+        .sort((a,b) => a.t - b.t);
+    }
+
+    /* ====== USGS CHARTS (PNG first, SVG fallback on error) ====== */
     function showCharts(siteId) {
       if (!siteId) return;
       chartsEl.style.display = 'block';
 
-      // sanitize incoming id to digits only (handles stray spaces, CR, etc.)
       const cleanId = String(siteId).trim().replace(/\D/g, '');
-      const t = Date.now(); // cache-buster to avoid stale 404s
-
       const today = new Date();
       const endDate = today.toISOString().split('T')[0];
       const past = new Date(); past.setDate(today.getDate() - 7);
       const startDate = past.toISOString().split('T')[0];
 
-      // Gage height (00065)
-      img65.onerror = () => console.warn('Gage image failed:', img65.src);
-      img65.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${cleanId}&parm_cd=00065&period=7&_=${t}`;
-
-      // Discharge (00060) – try explicit date range first; if it fails, fall back to period=7
-      img60.onerror = () => {
-        const fallback = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${cleanId}&parm_cd=00060&period=7&_=${Date.now()}`;
-        if (img60.src !== fallback) img60.src = fallback;
+      // 00065: Gage Height
+      img65.style.display = '';
+      img65.onerror = async () => {
+        img65.style.display = 'none';
+        try {
+          const pts = await fetchUSGSSeries(cleanId, '00065');
+          renderSvgLine(row65, pts, 'Gage height (ft) – last 7 days');
+        } catch (e) {
+          console.warn('Fallback render failed (00065):', e);
+        }
       };
-      img60.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${cleanId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}&_=${t}`;
+      img65.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${cleanId}&parm_cd=00065&period=7`;
+
+      // 00060: Discharge
+      img60.style.display = '';
+      img60.onerror = async () => {
+        img60.style.display = 'none';
+        try {
+          const pts = await fetchUSGSSeries(cleanId, '00060');
+          renderSvgLine(row60, pts, 'Discharge (cfs) – last 7 days');
+        } catch (e) {
+          console.warn('Fallback render failed (00060):', e);
+        }
+      };
+      img60.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${cleanId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
     }
 
     /* ====== WEATHER via City+State ====== */
@@ -381,7 +469,6 @@
       wxGrid.innerHTML = '';
       wxNote.textContent = 'Fetching weather…';
 
-      // Geocode city, state -> lat/lon (Open-Meteo)
       let q = state ? (city ? `${city}, ${state}` : state) : (city || '');
       try {
         const geo = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=1&language=en&format=json`);
@@ -391,7 +478,6 @@
 
         const lat = best.latitude, lon = best.longitude;
 
-        // 3-day forecast + hourly pressure for daily avg
         const url = new URL('https://api.open-meteo.com/v1/forecast');
         url.searchParams.set('latitude', lat);
         url.searchParams.set('longitude', lon);
@@ -408,7 +494,6 @@
         const data = await r2.json();
         if (!data?.daily?.time) throw new Error('Weather unavailable');
 
-        // Daily avg pressure (hPa->inHg)
         const pTimes = data?.hourly?.time || [];
         const pVals  = data?.hourly?.pressure_msl || [];
         const avgInHg = data.daily.time.map(dayStr => {
@@ -420,7 +505,6 @@
           return hPa ? (hPa/33.8639).toFixed(2) : '—';
         });
 
-        // Render 3 cards
         const { time, temperature_2m_max: tMax, temperature_2m_min: tMin,
                 sunrise, sunset, weathercode: wCode, precipitation_probability_max: pProb,
                 precipitation_sum: pSum, wind_speed_10m_max: windMax } = data.daily;
