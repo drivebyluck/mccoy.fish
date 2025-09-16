@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -166,7 +165,7 @@
     const STATIONS_JSON_URL = '/data/stations.min.json'; // your local JSON index
 
     /* ====== STATE ====== */
-    let allStations = [];   // {id, name, state, city?}
+    let allStations = [];   // {id, name, state, city?, (maybe) lat/lon?}
     let byState = new Map();
     let indexReady = false;
 
@@ -335,10 +334,10 @@
       // Charts (unchanged)
       showCharts(siteId);
 
-      // Weather using City + full State from JSON
+      // Weather label from JSON, but location via USGS coordinates
       const city = (s?.city || '').trim();
       const label = city ? `${city}, ${st}` : st;
-      fetchWeather(city, st, label);
+      fetchWeather(label, s); // pass label + station record for JSON lat/lon fallback
     }
 
     /* ====== USGS CHARTS ====== */
@@ -355,25 +354,71 @@
       img60.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
     }
 
-    /* ====== WEATHER (city + full state name -> geocode) ====== */
-    async function fetchWeather(city, stateCode, label) {
+    /* ====== WEATHER (USGS RDB coords -> Open-Meteo; JSON coords fallback; last-resort geocode) ====== */
+    async function fetchWeather(label, stationRec) {
       wxEl.style.display = 'block';
       wxGrid.innerHTML = '';
       wxNote.textContent = 'Fetching weather…';
 
+      const siteId = stationEl.value;
+      let lat = null, lon = null, place = label || '';
+
+      // 1) Try USGS RDB "expanded" for precise coordinates
       try {
-        // Build a strong geocoding query from JSON city + full state name + USA
-        const stateFull = STATE_NAMES[stateCode] || stateCode;
-        const query = (city ? `${city}, ${stateFull}, USA` : `${stateFull}, USA`).trim();
+        const r = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=rdb&sites=${siteId}&siteOutput=expanded`);
+        const txt = await r.text();
+        const lines = txt.split('\n').filter(L => L.trim() && !L.startsWith('#'));
+        // find header row and the first data row after it
+        const headerIdx = lines.findIndex(L => L.startsWith('agency_cd'));
+        if (headerIdx >= 0 && headerIdx + 1 < lines.length) {
+          const header = lines[headerIdx].split('\t');
+          // find the first data line (skip any repeated headers)
+          const dataLine = lines.slice(headerIdx + 1).find(L => !L.startsWith('agency_cd'));
+          if (dataLine) {
+            const cols = dataLine.split('\t');
+            const H = Object.fromEntries(header.map((h,i)=>[h,i]));
+            const la = parseFloat(cols[H['dec_lat_va']]);
+            const lo = parseFloat(cols[H['dec_long_va']]);
+            if (!isNaN(la) && !isNaN(lo)) {
+              lat = la; lon = lo;
+            }
+            // use station name if present
+            if (!place && H['station_nm']) place = cols[H['station_nm']];
+          }
+        }
+      } catch (e) {
+        console.warn('USGS RDB coordinate fetch failed:', e);
+      }
 
-        const geoURL = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=1&language=en&format=json`;
-        const geo = await fetch(geoURL);
-        const gj = await geo.json();
-        const best = gj?.results?.[0];
-        if (!best) throw new Error('No geocode match');
+      // 2) Fallback: coordinates embedded in your local JSON (if any fields exist)
+      if (lat == null || lon == null) {
+        const candLat = stationRec?.lat ?? stationRec?.latitude ?? stationRec?.dec_lat_va ?? stationRec?.lat_dd;
+        const candLon = stationRec?.lon ?? stationRec?.longitude ?? stationRec?.dec_long_va ?? stationRec?.lon_dd;
+        const la = parseFloat(candLat), lo = parseFloat(candLon);
+        if (!isNaN(la) && !isNaN(lo)) { lat = la; lon = lo; }
+      }
 
-        const lat = best.latitude, lon = best.longitude;
+      // 3) Last resort: geocode the label (rarely needed now)
+      if (lat == null || lon == null) {
+        try {
+          const geoURL = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(place)}&count=1&language=en&format=json`;
+          const geo = await fetch(geoURL);
+          const gj = await geo.json();
+          const best = gj?.results?.[0];
+          if (best) { lat = best.latitude; lon = best.longitude; }
+        } catch (e) {
+          console.warn('Geocoding fallback failed:', e);
+        }
+      }
 
+      if (lat == null || lon == null) {
+        wxGrid.innerHTML = '';
+        wxNote.textContent = 'Weather forecast not available (no coordinates).';
+        return;
+      }
+
+      // 4) Open-Meteo forecast (3-day) with daily avg pressure from hourly
+      try {
         const url = new URL('https://api.open-meteo.com/v1/forecast');
         url.searchParams.set('latitude', lat);
         url.searchParams.set('longitude', lon);
@@ -425,11 +470,12 @@
           `;
           parts.push(`${i===0?'Today':i===1?'Tomorrow':dateLabel}: ${desc.toLowerCase()} high near ${hi}°F, low around ${lo}°F, avg pressure ~${avgInHg[i]} inHg, wind up to ${wind === '—' ? 'N/A' : wind + ' mph'}, precip ${precip} in (max prob ${prob === '—' ? 'N/A' : prob + '%'}).`);
         }
-        wxNote.innerHTML = `<strong>Outlook ${label ? 'near ' + label : ''}:</strong> ${parts.join(' ')}`;
+
+        wxNote.innerHTML = `<strong>Outlook ${place ? 'near ' + place : ''}:</strong> ${parts.join(' ')}`;
       } catch (e) {
+        console.warn('Weather fetch failed:', e);
         wxGrid.innerHTML = '';
         wxNote.textContent = 'Weather forecast not available.';
-        console.warn(e);
       }
     }
 
@@ -438,4 +484,3 @@
   </script>
 </body>
 </html>
-
