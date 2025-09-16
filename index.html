@@ -144,11 +144,11 @@
     <section id="charts" class="card" style="display:none;">
       <h2>Gage Height & Discharge</h2>
       <div class="img-row" id="row-00065">
-        <img id="img-00065" alt="USGS Gage Height Chart" referrerpolicy="no-referrer">
+        <img id="img-00065" alt="USGS Gage Height Chart">
       </div>
       <h2 style="margin-top: 30px;">Discharge (CFS) – Last 7 Days</h2>
       <div class="img-row" id="row-00060">
-        <img id="img-00060" alt="USGS Discharge Chart" referrerpolicy="no-referrer">
+        <img id="img-00060" alt="USGS Discharge Chart">
       </div>
     </section>
 
@@ -342,21 +342,42 @@
       fetchWeather(city, st, label);
     }
 
-    /* ---------- LIGHTWEIGHT SVG FALLBACK ---------- */
-    function renderSvgLine(container, points, label) {
+    /* ========= SVG CHART RENDERING (reliable, no external PNG dependency) ========= */
+
+    // Grab 7-day instantaneous values for a parameter and station
+    async function fetchUSGSSeries(siteId, parmCd) {
+      const id = String(siteId).trim().replace(/\D/g, '');
+      const url = `https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${id}&parameterCd=${parmCd}&period=P7D`;
+      const res = await fetch(url);
+      const j = await res.json();
+      const ts = j?.value?.timeSeries?.[0]?.values?.[0]?.value || [];
+      return ts
+        .filter(row => row?.value != null)
+        .map(row => ({ t: new Date(row.dateTime).getTime(), v: parseFloat(row.value) }))
+        .filter(p => !Number.isNaN(p.v) && !Number.isNaN(p.t))
+        .sort((a,b) => a.t - b.t);
+    }
+
+    function clearFallback(container) {
       const old = container.querySelector('svg[data-fallback="1"]');
       if (old) old.remove();
+    }
+
+    function renderSvgLine(container, points, label) {
+      clearFallback(container);
       if (!points || points.length < 2) return;
 
       const W = container.clientWidth || 800;
-      const H = Math.round(W * 0.4);
+      const H = Math.round(W * 0.45);
       const pad = 30;
-      const xs = points.map(p => +p.t);
-      const ys = points.map(p => +p.v).filter(v => !Number.isNaN(v));
+
+      const xs = points.map(p => p.t);
+      const ys = points.map(p => p.v);
       const minX = Math.min(...xs), maxX = Math.max(...xs);
       const minY = Math.min(...ys), maxY = Math.max(...ys);
       const spanX = maxX - minX || 1;
       const spanY = (maxY - minY) || 1;
+
       const scaleX = x => pad + ((x - minX) / spanX) * (W - pad*2);
       const scaleY = y => H - pad - ((y - minY) / spanY) * (H - pad*2);
 
@@ -373,6 +394,16 @@
       svg.setAttribute('height', 'auto');
       svg.setAttribute('data-fallback', '1');
 
+      // subtle grid baseline
+      const axis = document.createElementNS(svg.namespaceURI,'line');
+      axis.setAttribute('x1', pad);
+      axis.setAttribute('x2', W - pad);
+      axis.setAttribute('y1', H - pad);
+      axis.setAttribute('y2', H - pad);
+      axis.setAttribute('stroke', 'rgba(184,255,179,0.25)');
+      axis.setAttribute('stroke-width', '1');
+      svg.appendChild(axis);
+
       const path = document.createElementNS(svg.namespaceURI,'path');
       path.setAttribute('d', d);
       path.setAttribute('fill', 'none');
@@ -384,91 +415,39 @@
 
       if (label) {
         const txt = document.createElementNS(svg.namespaceURI,'text');
-        txt.setAttribute('x', 30);
-        txt.setAttribute('y', 20);
+        txt.setAttribute('x', pad);
+        txt.setAttribute('y', 18);
         txt.setAttribute('fill', '#dfe7df');
         txt.setAttribute('font-size', '12');
         txt.textContent = label;
         svg.appendChild(txt);
       }
+
       container.appendChild(svg);
     }
 
-    async function fetchUSGSSeries(siteId, parmCd) {
-      const id = String(siteId).trim().replace(/\D/g, '');
-      const url = `https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${id}&parameterCd=${parmCd}&period=P7D`;
-      const res = await fetch(url);
-      const j = await res.json();
-      const ts = j?.value?.timeSeries?.[0]?.values?.[0]?.value || [];
-      return ts
-        .filter(row => row?.value != null)
-        .map(row => ({ t: new Date(row.dateTime).getTime(), v: parseFloat(row.value) }))
-        .filter(p => !Number.isNaN(p.v) && !Number.isNaN(p.t))
-        .sort((a,b) => a.t - b.t);
+    async function drawChart(container, stationId, parmCd, label) {
+      try {
+        const pts = await fetchUSGSSeries(stationId, parmCd);
+        renderSvgLine(container, pts, label);
+      } catch (e) {
+        console.warn('Chart render error', parmCd, e);
+        clearFallback(container);
+      }
     }
 
-    function wireImgWithFallback(img, container, parmCd, url, label, siteId) {
-      // clear any prior fallback
-      const old = container.querySelector('svg[data-fallback="1"]');
-      if (old) old.remove();
-
-      img.style.display = '';
-      img.removeAttribute('data-fallback');
-
-      const fail = async () => {
-        if (img.getAttribute('data-fallback') === '1') return;
-        img.setAttribute('data-fallback', '1');
-        img.style.display = 'none';
-        try {
-          const pts = await fetchUSGSSeries(siteId, parmCd);
-          renderSvgLine(container, pts, label);
-        } catch (e) {
-          console.warn('Fallback render failed', parmCd, e);
-        }
-      };
-
-      img.onerror = fail;
-      img.onload = () => {
-        // Some USGS responses return a tiny/blank image but "load" succeeds.
-        const w = img.naturalWidth || 0;
-        const h = img.naturalHeight || 0;
-        if (w < 10 || h < 10) {
-          fail();
-          return;
-        }
-        // good image; ensure fallback removed
-        const old2 = container.querySelector('svg[data-fallback="1"]');
-        if (old2) old2.remove();
-        img.style.display = '';
-      };
-
-      // cache-bust so we don't reuse a previous tiny/blank response
-      img.src = `${url}${url.includes('?') ? '&' : '?'}_=${Date.now()}`;
-    }
-
-    /* ====== USGS CHARTS (PNG first, SVG fallback on error or tiny image) ====== */
+    /* ====== USGS CHARTS (render reliably from JSON) ====== */
     function showCharts(siteId) {
       if (!siteId) return;
       chartsEl.style.display = 'block';
-
       const cleanId = String(siteId).trim().replace(/\D/g, '');
-      const today = new Date();
-      const endDate = today.toISOString().split('T')[0];
-      const past = new Date(); past.setDate(today.getDate() - 7);
-      const startDate = past.toISOString().split('T')[0];
 
-      const url65 = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${cleanId}&parm_cd=00065&period=7`;
-      const url60 = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${cleanId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
-
-      wireImgWithFallback(
-        img65, row65, '00065', url65, 'Gage height (ft) – last 7 days', cleanId
-      );
-      wireImgWithFallback(
-        img60, row60, '00060', url60, 'Discharge (cfs) – last 7 days', cleanId
-      );
+      // Render both charts from API (no dependency on remote PNGs)
+      drawChart(row65, cleanId, '00065', 'Gage height (ft) – last 7 days');
+      drawChart(row60, cleanId, '00060', 'Discharge (cfs) – last 7 days');
     }
 
-    /* ====== WEATHER via City+State ====== */
+    /* ====== WEATHER via City+State (unchanged) ====== */
     async function fetchWeather(city, state, label) {
       wxEl.style.display = 'block';
       wxGrid.innerHTML = '';
