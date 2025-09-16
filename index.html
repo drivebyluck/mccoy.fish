@@ -833,6 +833,100 @@ async function __resolveLatLon(siteId) {
   </script>
   <!-- /ADDED -->
 
+<!-- ADDED: Loader styles for the global search (non-destructive) -->
+<style>
+  #global-progress {
+    display: none;
+    padding: 8px 10px 6px 10px;
+    position: sticky;
+    top: 0;
+    background: rgba(41, 74, 56, 0.96);
+    border-bottom: 1px solid rgba(184,255,179,0.20);
+    z-index: 2;
+  }
+  .mccoy-progress-wrap {
+    height: 6px;
+    border-radius: 6px;
+    background: rgba(184,255,179,0.18);
+    overflow: hidden;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.25);
+  }
+  .mccoy-progress-bar {
+    height: 100%;
+    width: 40%;
+    background: #b8ffb3;
+    filter: drop-shadow(0 0 6px #003300);
+    animation: mccoy-indeterminate 1.2s linear infinite;
+  }
+  @keyframes mccoy-indeterminate {
+    0%   { margin-left: -45%; }
+    100% { margin-left: 105%; }
+  }
+  .mccoy-progress-text {
+    margin-top: 6px;
+    font-size: 0.9em;
+    color: #dfe7df;
+    opacity: 0.9;
+    text-align: center;
+  }
+</style>
+
+<!-- ADDED: Loader logic for global search (no changes to existing functions) -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const box   = document.getElementById('global-results');
+    const input = document.getElementById('global-search');
+    if (!box || !input) return;
+
+    // Create loader UI at the top of the results box
+    const prog = document.createElement('div');
+    prog.id = 'global-progress';
+    prog.innerHTML = `
+      <div class="mccoy-progress-wrap"><div class="mccoy-progress-bar"></div></div>
+      <div class="mccoy-progress-text">Loading stations…</div>
+    `;
+    box.prepend(prog);
+
+    // Helper to show/hide loader without touching your existing code
+    const showLoader = () => { prog.style.display = 'block'; };
+    const hideLoader = () => { prog.style.display = 'none'; };
+
+    // If the user focuses/types while the global index is still building, keep the menu open and show the loader.
+    input.addEventListener('focus', () => {
+      if (window.__buildingIndex && input.value.trim()) {
+        box.style.display = 'block';
+        showLoader();
+      }
+    });
+    input.addEventListener('input', () => {
+      if (window.__buildingIndex && input.value.trim()) {
+        box.style.display = 'block';
+        showLoader();
+      }
+    });
+
+    // Watch the results box and global flags; hide the loader once indexing is complete.
+    const refresh = () => {
+      if (window.__buildingIndex && !window.__globalIndexBuilt && input.value.trim()) {
+        showLoader();
+      } else {
+        hideLoader();
+      }
+    };
+
+    // Mutation observer to catch innerHTML changes from existing code (e.g., “Indexing… X stations loaded” updates)
+    const mo = new MutationObserver(refresh);
+    mo.observe(box, { childList: true, subtree: true });
+
+    // Poll a tiny bit as a belt-and-suspenders with those globals you already set
+    const iv = setInterval(() => {
+      refresh();
+      if (window.__globalIndexBuilt) clearInterval(iv);
+    }, 150);
+  });
+</script>
+
+  
 </body>
 </html>
 
