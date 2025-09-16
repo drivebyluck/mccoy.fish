@@ -140,7 +140,7 @@
       </div>
     </section>
 
-    <!-- Charts (UNCHANGED, note referrerpolicy) -->
+    <!-- Charts (UNCHANGED; keep referrerpolicy) -->
     <section id="charts" class="card" style="display:none;">
       <h2>Gage Height & Discharge</h2>
       <div class="img-row">
@@ -190,14 +190,18 @@
       return s;
     }
 
+    // FIX: grab the **last** AT/NEAR...CITY, ST occurrence
     function parseCityFromName(name, st) {
       if (!name) return '';
-      const m = name.match(/\b(?:AT|NEAR|NR|ABOVE|BELOW)\s+([^,]+),\s*([A-Z]{2})\b/i);
-      if (m && (!st || m[2].toUpperCase() === st.toUpperCase())) {
-        return m[1].trim().replace(/\s+/g,' ');
+      const re = /\b(?:AT|NEAR|NR|ABOVE|BELOW)\s+([^,]+),\s*([A-Z]{2})\b/gi;
+      let m, last = null;
+      while ((m = re.exec(name))) last = m;
+      if (last && (!st || last[2].toUpperCase() === st.toUpperCase())) {
+        return last[1].trim().replace(/\s+/g, ' ');
       }
       return '';
     }
+
     function fmtTimeHHMM(iso) {
       if (!iso) return '—';
       const t = iso.split('T')[1] || '';
@@ -334,7 +338,7 @@
       // Charts (UNCHANGED)
       showCharts(siteId);
 
-      // Weather using robust lat/lon from USGS (no extra files)
+      // Weather (prefer USGS lat/lon; label uses parsed city)
       const city = (s?.city || '').trim();
       const label = city ? `${city}, ${st}` : st;
       fetchWeather(city, st, label);
@@ -354,36 +358,33 @@
       img60.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
     }
 
-    /* ====== WEATHER (USGS lat/lon first; JSON → RDB → geocode) ====== */
-
+    /* ====== WEATHER (USGS lat/lon first; JSON → RDB → geocode US-only) ====== */
     async function getLatLonForCurrentSite(siteId) {
-      // 1) Try USGS JSON (fast, simple)
+      // 1) JSON
       try {
         const r = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=json&sites=${siteId}`);
         const j = await r.json();
         const s = (j?.value?.timeSeries?.[0]?.sourceInfo) || (j?.value?.site?.[0]);
-        let lat = s?.geoLocation?.geogLocation?.latitude ?? s?.location?.latitude ?? null;
-        let lon = s?.geoLocation?.geogLocation?.longitude ?? s?.location?.longitude ?? null;
+        const lat = s?.geoLocation?.geogLocation?.latitude ?? s?.location?.latitude;
+        const lon = s?.geoLocation?.geogLocation?.longitude ?? s?.location?.longitude;
         if (lat != null && lon != null) return { lat: Number(lat), lon: Number(lon) };
-      } catch(e) { /* continue to RDB */ }
-
-      // 2) Try RDB expanded (very reliable)
+      } catch {}
+      // 2) RDB expanded
       try {
         const r2 = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=rdb&sites=${siteId}&siteOutput=expanded`);
         const txt = await r2.text();
         const lines = txt.split('\n').filter(L => L && !L.startsWith('#'));
         const headerIdx = lines.findIndex(L => L.startsWith('agency_cd'));
-        if (headerIdx >= 0 && lines.length > headerIdx + 1) {
+        if (headerIdx >= 0) {
           const header = lines[headerIdx].split('\t');
-          const data = lines[headerIdx + 1].split('\t');
+          const data = lines[headerIdx + 1]?.split('\t') || [];
           const H = {}; header.forEach((h,i)=>H[h]=i);
           const lat = parseFloat(data[H['dec_lat_va']]);
           const lon = parseFloat(data[H['dec_long_va']]);
           if (!Number.isNaN(lat) && !Number.isNaN(lon)) return { lat, lon };
         }
-      } catch(e) { /* continue to fallback */ }
-
-      return null; // caller will geocode city/state
+      } catch {}
+      return null;
     }
 
     async function fetchWeather(city, stateCode, label) {
@@ -391,21 +392,21 @@
       wxGrid.innerHTML = '';
       wxNote.textContent = 'Fetching weather…';
 
-      // Try to get lat/lon for the selected site directly (easiest & most accurate)
       const siteId = stationEl.value;
 
-      let latlon = null;
-      try { latlon = await getLatLonForCurrentSite(siteId); } catch {}
-
-      // If lat/lon not available, geocode City + FullState + USA
+      // Prefer exact site coordinates
       let lat = null, lon = null;
-      if (latlon && latlon.lat != null && latlon.lon != null) {
-        lat = latlon.lat; lon = latlon.lon;
-      } else {
+      try {
+        const ll = await getLatLonForCurrentSite(siteId);
+        if (ll) { lat = ll.lat; lon = ll.lon; }
+      } catch {}
+
+      // Fallback: geocode (force US and state)
+      if (lat == null || lon == null) {
         try {
           const fullState = STATE_NAMES[stateCode] || stateCode;
-          const query = (city ? `${city}, ${fullState}, USA` : `${fullState}, USA`).trim();
-          const geoURL = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=1&language=en&format=json`;
+          const query = (city ? `${city}, ${fullState}` : `${fullState}`); // Open-Meteo + country_code
+          const geoURL = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=1&language=en&format=json&country_code=US&admin1=${encodeURIComponent(fullState)}`;
           const geo = await fetch(geoURL);
           const gj = await geo.json();
           const best = gj?.results?.[0];
@@ -441,9 +442,7 @@
         const pVals  = data?.hourly?.pressure_msl || [];
         const avgInHg = data.daily.time.map(dayStr => {
           let total=0, cnt=0;
-          for (let i=0;i<pTimes.length;i++) {
-            if (pTimes[i].startsWith(dayStr)) { total+=pVals[i]; cnt++; }
-          }
+          for (let i=0;i<pTimes.length;i++) if (pTimes[i].startsWith(dayStr)) { total+=pVals[i]; cnt++; }
           const hPa = cnt ? total/cnt : null;
           return hPa ? (hPa/33.8639).toFixed(2) : '—';
         });
@@ -457,7 +456,8 @@
         for (let i=0;i<time.length;i++) {
           const dateLabel = new Date(time[i]).toLocaleDateString([], { weekday:'short', month:'short', day:'numeric' });
           const desc = weatherDescription(wCode[i]);
-          const hi = Math.round(tMax[i]), lo = Math.round(tMin[i]);
+          const hi = Math.round(tMax[i]);
+          const lo = Math.round(tMin[i]);
           const prob = (pProb?.[i] ?? '—');
           const precip = (pSum?.[i] ?? '—');
           const wind = (windMax?.[i] ?? '—');
