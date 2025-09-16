@@ -17,21 +17,15 @@
       background-repeat: no-repeat;
       color: #d6d6d6;
     }
-    header { 
-      text-align: center; 
-      padding-top: 40px; 
-      /* enable absolute positioning of the H1 relative to the header */
-      position: relative;
-    }
+    header { text-align: center; padding-top: 40px; }
     header img { max-width: 160px; height: auto; }
-    h1 { 
-      font-size: 3em; 
-      margin: 10px 0; 
+
+    /* Title now lives outside the card; keep normal flow */
+    h1#page-title {
+      font-size: 3em;
+      margin: 10px 0; /* JS will override top/bottom to center it */
       color: #ccc;
-      /* allow precise placement between logo & search */
-      position: absolute; 
-      left: 0; 
-      right: 0;
+      text-align: center;
     }
 
     main { padding: 20px; display: flex; flex-direction: column; align-items: center; }
@@ -140,8 +134,10 @@
 <body>
   <header>
     <img src="mccoyfishlogo.png" alt="McCoy Fish Logo" />
-    <h1>Gage Height, Flow, and Weather</h1>
   </header>
+
+  <!-- Title OUTSIDE the search card, between logo and search -->
+  <h1 id="page-title">Gage Height, Flow, and Weather</h1>
 
   <main>
     <!-- Search + selectors (UNCHANGED) -->
@@ -226,7 +222,6 @@
       return '';
     }
     function fmtTimeLocalHHMM(iso) {
-      // Open-Meteo daily times are local strings like "2025-09-16T06:45"
       return (iso && iso.includes('T')) ? iso.split('T')[1].slice(0,5) : '—';
     }
     function weatherDescription(code) {
@@ -392,7 +387,6 @@
         const meta = await getUSGSCoordsRobust(siteId);
         if (!meta || meta.lat == null || meta.lon == null) throw new Error('No coordinates');
 
-        // Open-Meteo request (temps in °F)
         const url = new URL('https://api.open-meteo.com/v1/forecast');
         url.searchParams.set('latitude', meta.lat);
         url.searchParams.set('longitude', meta.lon);
@@ -409,7 +403,6 @@
         const data = await r.json();
         if (!data?.daily?.time) throw new Error('Weather unavailable');
 
-        // Daily avg pressure (hPa -> inHg)
         const pTimes = data?.hourly?.time || [];
         const pVals  = data?.hourly?.pressure_msl || [];
         const avgInHg = data.daily.time.map(dayStr => {
@@ -459,35 +452,27 @@
 
     // Robust USGS coordinate fetcher with validation and fallbacks
     async function getUSGSCoordsRobust(siteId) {
-      // Helper: sanity check for CONUS-ish coords
       const ok = (lat, lon) => lat!=null && lon!=null && isFinite(lat) && isFinite(lon) &&
                                lat >= 24 && lat <= 50 && lon <= -66 && lon >= -125;
 
-      // 1) IV endpoint (fastest, most common)
       try {
         const iv = await (await fetch(`https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${siteId}`)).json();
         const ts = iv?.value?.timeSeries?.[0]?.sourceInfo;
         const g  = ts?.geoLocation?.geogLocation;
         const lat = g?.latitude, lon = g?.longitude;
         const siteName = ts?.siteName || '';
-        if (ok(lat, lon)) {
-          return { lat, lon, siteName, pretty: makePrettyFromSiteName(siteName) };
-        }
+        if (ok(lat, lon)) return { lat, lon, siteName, pretty: makePrettyFromSiteName(siteName) };
       } catch {}
 
-      // 2) Site JSON
       try {
         const sj = await (await fetch(`https://waterservices.usgs.gov/nwis/site/?format=json&sites=${siteId}`)).json();
         const s = (sj?.value?.site?.[0]) || (sj?.value?.timeSeries?.[0]?.sourceInfo);
         const g = s?.geoLocation?.geogLocation;
         const lat = g?.latitude, lon = g?.longitude;
         const siteName = s?.siteName || '';
-        if (ok(lat, lon)) {
-          return { lat, lon, siteName, pretty: makePrettyFromSiteName(siteName) };
-        }
+        if (ok(lat, lon)) return { lat, lon, siteName, pretty: makePrettyFromSiteName(siteName) };
       } catch {}
 
-      // 3) Expanded RDB
       try {
         const rdb = await (await fetch(`https://waterservices.usgs.gov/nwis/site/?format=rdb&sites=${siteId}&siteOutput=expanded`)).text();
         const header = rdb.split("\n").find(L => L.startsWith("agency_cd"));
@@ -499,9 +484,7 @@
           const lat = parseFloat(get("dec_lat_va"));
           const lon = parseFloat(get("dec_long_va"));
           const siteName = get("station_nm") || '';
-          if (ok(lat, lon)) {
-            return { lat, lon, siteName, pretty: makePrettyFromSiteName(siteName) };
-          }
+          if (ok(lat, lon)) return { lat, lon, siteName, pretty: makePrettyFromSiteName(siteName) };
         }
       } catch {}
 
@@ -509,50 +492,43 @@
     }
 
     function makePrettyFromSiteName(siteName) {
-      // Try to extract "City, ST" for the narrative
       const m = siteName && siteName.match(/\b(?:AT|NEAR|NR|ABOVE|BELOW)\s+([^,]+),\s*([A-Z]{2})\b/i);
       if (m) return `${m[1].trim().replace(/\s+/g,' ')}, ${m[2].toUpperCase()}`;
       return siteName || '';
     }
 
-    /* ===== Center the H1 between logo and search card, with spacing ===== */
-    function placeTitleBetweenLogoAndSearch() {
-      const GAP = 28; // pixels of minimum space above & below the title
+    /* === Center the title BETWEEN the logo bottom and the search card top === */
+    function centerTitleBetweenLogoAndSearch() {
+      const GAP = 24; // minimum padding above/below the title
 
-      const header = document.querySelector('header');
-      const logo   = header?.querySelector('img');
-      const title  = header?.querySelector('h1');
+      const logo   = document.querySelector('header img');
+      const title  = document.getElementById('page-title');
       const search = document.querySelector('main .card'); // first card = Search
-      if (!header || !logo || !title || !search) return;
+      if (!logo || !title || !search) return;
 
-      // Current document positions
-      const headerTop  = header.getBoundingClientRect().top + window.scrollY;
+      // Positions on page
       const logoBottom = logo.getBoundingClientRect().bottom + window.scrollY;
       const searchTop  = search.getBoundingClientRect().top + window.scrollY;
 
-      // Measure title height
-      const titleRect = title.getBoundingClientRect();
-      const titleH = titleRect.height || 0;
+      // Current title height
+      const titleH = title.getBoundingClientRect().height || 0;
 
-      // Ideal midpoint
-      let targetTop = (logoBottom + searchTop - titleH) / 2;
+      // Total space between logo bottom and search top
+      const total = Math.max(searchTop - logoBottom, GAP*2 + titleH);
 
-      // Enforce a comfortable buffer
-      const minTop = logoBottom + GAP;         // at least GAP below logo
-      const maxTop = searchTop - titleH - GAP; // at least GAP above search
-      if (isFinite(minTop) && isFinite(maxTop)) {
-        targetTop = Math.max(minTop, Math.min(maxTop, targetTop));
-      }
+      // Equal margins above/below title (clamped with GAP)
+      const freeSpace = total - titleH;
+      const half = Math.max(GAP, freeSpace / 2);
 
-      // Convert to header-local coordinates
-      title.style.top = (targetTop - headerTop) + 'px';
+      title.style.marginTop = half + 'px';
+      title.style.marginBottom = half + 'px';
     }
 
     window.addEventListener('load', () => {
       loadIndex();
-      placeTitleBetweenLogoAndSearch();
+      centerTitleBetweenLogoAndSearch();
     });
-    window.addEventListener('resize', placeTitleBetweenLogoAndSearch);
+    window.addEventListener('resize', centerTitleBetweenLogoAndSearch);
   </script>
 </body>
 </html>
