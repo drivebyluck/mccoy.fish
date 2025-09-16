@@ -144,11 +144,11 @@
     <section id="charts" class="card" style="display:none;">
       <h2>Gage Height & Discharge</h2>
       <div class="img-row">
-        <img id="img-00065" alt="USGS Gage Height Chart" referrerpolicy="no-referrer">
+        <img id="img-00065" alt="USGS Gage Height Chart">
       </div>
       <h2 style="margin-top: 30px;">Discharge (CFS) – Last 7 Days</h2>
       <div class="img-row">
-        <img id="img-00060" alt="USGS Discharge Chart" referrerpolicy="no-referrer">
+        <img id="img-00060" alt="USGS Discharge Chart">
       </div>
     </section>
 
@@ -162,11 +162,11 @@
 
   <script>
     /* ========= CONFIG ========= */
-    const STATIONS_JSON_URL = '/data/stations.min.json'; // your local JSON index
+    const STATIONS_JSON_URL = '/data/stations.min.json'; // change if you host elsewhere
 
     /* ====== STATE ====== */
-    let allStations = [];   // {id, name, state, city?}
-    let byState = new Map();
+    let allStations = [];  // {id, name, state, city?}
+    let byState = new Map(); // state -> array
     let indexReady = false;
 
     /* ====== UTILS ====== */
@@ -181,16 +181,8 @@
       TX:"Texas", UT:"Utah", VA:"Virginia", VT:"Vermont", WA:"Washington", WI:"Wisconsin",
       WV:"West Virginia", WY:"Wyoming"
     };
-
-    // Keep leading zeros from JSON for charts
-    function normalizeSiteId(raw) {
-      let s = (raw == null ? '' : String(raw)).trim();
-      s = s.replace(/\D/g, '');
-      if (s.length < 8) s = s.padStart(8, '0');
-      return s;
-    }
-
     function parseCityFromName(name, st) {
+      // Examples: "LICKING RIVER AT NEWARK, OH", "BIG RIVER NEAR TOWN, KY"
       if (!name) return '';
       const m = name.match(/\b(?:AT|NEAR|NR|ABOVE|BELOW)\s+([^,]+),\s*([A-Z]{2})\b/i);
       if (m && (!st || m[2].toUpperCase() === st.toUpperCase())) {
@@ -198,13 +190,25 @@
       }
       return '';
     }
-    function fmtTimeHHMM(iso) {
+    function fmtTimeHHMM(iso) { // just show local HH:MM from ISO
       if (!iso) return '—';
       const t = iso.split('T')[1] || '';
       return t ? t.slice(0,5) : '—';
     }
     function weatherDescription(code) {
-      const map = {0:"Clear",1:"Mainly clear",2:"Partly cloudy",3:"Overcast",45:"Fog",48:"Rime fog",51:"Drizzle: Light",53:"Drizzle: Moderate",55:"Drizzle: Dense",56:"Freezing drizzle: Light",57:"Freezing drizzle: Dense",61:"Rain: Slight",63:"Rain: Moderate",65:"Rain: Heavy",66:"Freezing rain: Light",67:"Freezing rain: Heavy",71:"Snow: Slight",73:"Snow: Moderate",75:"Snow: Heavy",77:"Snow grains",80:"Rain showers: Slight",81:"Rain showers: Moderate",82:"Rain showers: Violent",85:"Snow showers: Slight",86:"Snow showers: Heavy",95:"Thunderstorm",96:"Thunderstorm w/ slight hail",99:"Thunderstorm w/ heavy hail"};
+      const map = {
+        0:"Clear",1:"Mainly clear",2:"Partly cloudy",3:"Overcast",
+        45:"Fog",48:"Rime fog",
+        51:"Drizzle: Light",53:"Drizzle: Moderate",55:"Drizzle: Dense",
+        56:"Freezing drizzle: Light",57:"Freezing drizzle: Dense",
+        61:"Rain: Slight",63:"Rain: Moderate",65:"Rain: Heavy",
+        66:"Freezing rain: Light",67:"Freezing rain: Heavy",
+        71:"Snow: Slight",73:"Snow: Moderate",75:"Snow: Heavy",
+        77:"Snow grains",
+        80:"Rain showers: Slight",81:"Rain showers: Moderate",82:"Rain showers: Violent",
+        85:"Snow showers: Slight",86:"Snow showers: Heavy",
+        95:"Thunderstorm",96:"Thunderstorm w/ slight hail",99:"Thunderstorm w/ heavy hail"
+      };
       return map[code] || "Unknown";
     }
 
@@ -224,7 +228,7 @@
     const wxGrid = document.getElementById('wx-grid');
     const wxNote = document.getElementById('wx-note');
 
-    /* ====== INDEX LOADING ====== */
+    /* ====== INDEX LOADING (no flicker) ====== */
     async function loadIndex() {
       loaderEl.style.display = 'block';
       try {
@@ -233,16 +237,20 @@
         allStations = await res.json();
         if (!Array.isArray(allStations)) throw new Error('Stations JSON malformed.');
 
+        // Normalize and bucket
         for (const s of allStations) {
-          s.id = normalizeSiteId(s.id ?? s.site_no ?? s.code ?? s.number);
           s.state = (s.state || '').toUpperCase();
           if (!s.city) s.city = parseCityFromName(s.name || '', s.state);
           if (!byState.has(s.state)) byState.set(s.state, []);
           byState.get(s.state).push(s);
         }
-
-        for (const [st, arr] of byState.entries()) arr.sort((a,b) => (a.name||'').localeCompare(b.name||''));
-        for (const st of Array.from(byState.keys()).sort()) {
+        // sort stations within state for stable dropdown
+        for (const [st, arr] of byState.entries()) {
+          arr.sort((a,b) => (a.name||'').localeCompare(b.name||''));
+        }
+        // populate state select
+        const statesSorted = Array.from(byState.keys()).sort();
+        for (const st of statesSorted) {
           const opt = document.createElement('option');
           opt.value = st;
           opt.textContent = STATE_NAMES[st] ? `${STATE_NAMES[st]} (${st})` : st;
@@ -258,7 +266,7 @@
       }
     }
 
-    /* ====== SEARCH ====== */
+    /* ====== SEARCH (only after index is ready) ====== */
     qEl.addEventListener('input', () => {
       const q = qEl.value.trim().toLowerCase();
       if (!indexReady) { resEl.style.display='none'; return; }
@@ -283,11 +291,13 @@
       if (!item) return;
       const st = item.getAttribute('data-state');
       const id = item.getAttribute('data-id');
+      // Load state dropdown & select this station
       stateEl.value = st;
       populateStateStations(st, id);
       resEl.style.display = 'none';
       qEl.blur();
       goEl.disabled = false;
+      // auto-run
       runSelection();
     });
 
@@ -328,19 +338,18 @@
       const siteId = stationEl.value;
       if (!siteId) return;
 
+      // Find selected station object
       const st = stateEl.value;
       const s = (byState.get(st) || []).find(x => x.id === siteId);
-
-      // Charts (unchanged)
+      // Charts
       showCharts(siteId);
-
-      // Weather using City + full State from JSON
-      const city = (s?.city || '').trim();
+      // Weather (city+state)
+      const city = s?.city || parseCityFromName(s?.name || '', st) || '';
       const label = city ? `${city}, ${st}` : st;
       fetchWeather(city, st, label);
     }
 
-    /* ====== USGS CHARTS ====== */
+    /* ====== USGS CHARTS (unchanged behavior) ====== */
     function showCharts(siteId) {
       if (!siteId) return;
       chartsEl.style.display = 'block';
@@ -354,25 +363,23 @@
       img60.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
     }
 
-    /* ====== WEATHER (city + full state name -> geocode) ====== */
-    async function fetchWeather(city, stateCode, label) {
+    /* ====== WEATHER via City+State (working version) ====== */
+    async function fetchWeather(city, state, label) {
       wxEl.style.display = 'block';
       wxGrid.innerHTML = '';
       wxNote.textContent = 'Fetching weather…';
 
+      // Geocode city, state -> lat/lon (Open-Meteo)
+      let q = state ? (city ? `${city}, ${state}` : state) : (city || '');
       try {
-        // Build a strong geocoding query from JSON city + full state name + USA
-        const stateFull = STATE_NAMES[stateCode] || stateCode;
-        const query = (city ? `${city}, ${stateFull}, USA` : `${stateFull}, USA`).trim();
-
-        const geoURL = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=1&language=en&format=json`;
-        const geo = await fetch(geoURL);
+        const geo = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=1&language=en&format=json`);
         const gj = await geo.json();
         const best = gj?.results?.[0];
         if (!best) throw new Error('No geocode match');
 
         const lat = best.latitude, lon = best.longitude;
 
+        // 3-day forecast + hourly pressure for daily avg
         const url = new URL('https://api.open-meteo.com/v1/forecast');
         url.searchParams.set('latitude', lat);
         url.searchParams.set('longitude', lon);
@@ -389,15 +396,19 @@
         const data = await r2.json();
         if (!data?.daily?.time) throw new Error('Weather unavailable');
 
+        // Daily avg pressure (hPa->inHg)
         const pTimes = data?.hourly?.time || [];
         const pVals  = data?.hourly?.pressure_msl || [];
         const avgInHg = data.daily.time.map(dayStr => {
           let total=0, cnt=0;
-          for (let i=0;i<pTimes.length;i++) if (pTimes[i].startsWith(dayStr)) { total+=pVals[i]; cnt++; }
+          for (let i=0;i<pTimes.length;i++) {
+            if (pTimes[i].startsWith(dayStr)) { total+=pVals[i]; cnt++; }
+          }
           const hPa = cnt ? total/cnt : null;
           return hPa ? (hPa/33.8639).toFixed(2) : '—';
         });
 
+        // Render 3 cards
         const { time, temperature_2m_max: tMax, temperature_2m_min: tMin,
                 sunrise, sunset, weathercode: wCode, precipitation_probability_max: pProb,
                 precipitation_sum: pSum, wind_speed_10m_max: windMax } = data.daily;
@@ -437,4 +448,5 @@
   </script>
 </body>
 </html>
+
 
