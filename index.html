@@ -89,7 +89,6 @@
 
     /* Gage section */
     .img-row img { width: 100%; height: auto; }
-    /* ensure the container has space even before svg draws */
     .img-row { min-height: 220px; }
 
     /* Weather layout */
@@ -146,11 +145,11 @@
     <section id="charts" class="card" style="display:none;">
       <h2>Gage Height & Discharge</h2>
       <div class="img-row" id="row-00065">
-        <img id="img-00065" alt="USGS Gage Height Chart">
+        <img id="img-00065" alt="USGS Gage Height Chart" loading="eager">
       </div>
       <h2 style="margin-top: 30px;">Discharge (CFS) – Last 7 Days</h2>
       <div class="img-row" id="row-00060">
-        <img id="img-00060" alt="USGS Discharge Chart">
+        <img id="img-00060" alt="USGS Discharge Chart" loading="eager">
       </div>
     </section>
 
@@ -327,121 +326,67 @@
       fetchWeather(city, st, label);
     }
 
-    /* ====== SVG CHARTS (reliable, no remote PNGs) ====== */
-    async function fetchUSGSSeries(siteId, parmCd) {
-      const id = String(siteId).trim().replace(/\D/g, '');
-      const url = `https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${id}&parameterCd=${parmCd}&period=P7D`;
-      const res = await fetch(url, { cache: 'no-store' });
-      const j = await res.json();
-      const ts = j?.value?.timeSeries?.[0]?.values?.[0]?.value || [];
-      return ts
-        .filter(row => row?.value != null)
-        .map(row => ({ t: new Date(row.dateTime).getTime(), v: parseFloat(row.value) }))
-        .filter(p => Number.isFinite(p.v) && Number.isFinite(p.t))
-        .sort((a,b) => a.t - b.t);
+    /* ====== USGS CHARTS (reverted to image endpoints with robust retry) ====== */
+    function isoDate(d) {
+      return new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().split('T')[0];
     }
-
-    function clearRow(rowEl) {
-      // hide the broken <img> if present
-      const img = rowEl.querySelector('img');
-      if (img) img.style.display = 'none';
-      // remove any existing fallback SVG
-      Array.from(rowEl.querySelectorAll('svg[data-livechart="1"], .chart-msg')).forEach(n => n.remove());
-    }
-
-    function renderMsg(rowEl, text) {
-      const p = document.createElement('div');
-      p.className = 'chart-msg';
-      p.style.color = '#dfe7df';
-      p.style.opacity = '0.9';
-      p.style.fontSize = '0.95em';
-      p.style.padding = '6px 0';
-      p.textContent = text;
-      rowEl.appendChild(p);
-    }
-
-    function renderSvg(rowEl, points, label) {
-      clearRow(rowEl);
-      if (!points || points.length < 2) {
-        renderMsg(rowEl, 'No recent data available.');
-        return;
+    function graphUrl(host, siteId, parm, start, end) {
+      const u = new URL(`https://${host}/nwisweb/graph`);
+      u.searchParams.set('agency_cd', 'USGS');
+      u.searchParams.set('site_no', siteId);
+      u.searchParams.set('parm_cd', parm);
+      if (start && end) {
+        u.searchParams.set('begin_date', start);
+        u.searchParams.set('end_date', end);
+      } else {
+        u.searchParams.set('period', '7');
       }
-
-      const W = Math.max(rowEl.clientWidth || 0, 600);
-      const H = Math.round(W * 0.45);
-      const pad = 30;
-
-      const xs = points.map(p => p.t);
-      const ys = points.map(p => p.v);
-      const minX = Math.min(...xs), maxX = Math.max(...xs);
-      const minY = Math.min(...ys), maxY = Math.max(...ys);
-      const spanX = Math.max(maxX - minX, 1);
-      const spanY = Math.max(maxY - minY, 1);
-
-      const x = v => pad + ( (v - minX) / spanX ) * (W - pad*2);
-      const y = v => H - pad - ( (v - minY) / spanY ) * (H - pad*2);
-
-      let d = '';
-      for (let i = 0; i < points.length; i++) {
-        d += (i ? ' L ' : 'M ') + x(points[i].t) + ' ' + y(points[i].v);
-      }
-
-      const svgNS = 'http://www.w3.org/2000/svg';
-      const svg = document.createElementNS(svgNS, 'svg');
-      svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-      svg.setAttribute('width', '100%');
-      svg.setAttribute('height', 'auto');
-      svg.setAttribute('data-livechart', '1');
-
-      const axis = document.createElementNS(svgNS, 'line');
-      axis.setAttribute('x1', pad);
-      axis.setAttribute('x2', W - pad);
-      axis.setAttribute('y1', H - pad);
-      axis.setAttribute('y2', H - pad);
-      axis.setAttribute('stroke', 'rgba(184,255,179,0.25)');
-      axis.setAttribute('stroke-width', '1');
-      svg.appendChild(axis);
-
-      const path = document.createElementNS(svgNS, 'path');
-      path.setAttribute('d', d);
-      path.setAttribute('fill', 'none');
-      path.setAttribute('stroke', '#b8ffb3');
-      path.setAttribute('stroke-width', '2');
-      path.setAttribute('stroke-linecap', 'round');
-      path.setAttribute('stroke-linejoin', 'round');
-      svg.appendChild(path);
-
-      if (label) {
-        const txt = document.createElementNS(svgNS, 'text');
-        txt.setAttribute('x', pad);
-        txt.setAttribute('y', 18);
-        txt.setAttribute('fill', '#dfe7df');
-        txt.setAttribute('font-size', '12');
-        txt.textContent = label;
-        svg.appendChild(txt);
-      }
-
-      rowEl.appendChild(svg);
+      u.searchParams.set('_', Date.now()); // cache-buster
+      return u.toString();
     }
+    function setChart(imgEl, rowEl, urlPrimary, urlFallback) {
+      // clear prior message
+      const oldMsg = rowEl.querySelector('.chart-msg');
+      if (oldMsg) oldMsg.remove();
 
-    async function drawChart(rowEl, siteId, parmCd, label) {
-      try {
-        // make sure the card is visible so clientWidth is non-zero
-        chartsEl.style.display = 'block';
-        const pts = await fetchUSGSSeries(siteId, parmCd);
-        renderSvg(rowEl, pts, label);
-      } catch (err) {
-        clearRow(rowEl);
-        renderMsg(rowEl, 'Chart unavailable.');
-        console.warn('USGS chart error', parmCd, err);
-      }
+      imgEl.style.display = 'block';
+      imgEl.referrerPolicy = 'strict-origin-when-cross-origin';
+      imgEl.onerror = () => {
+        // retry once on alternate host with no-referrer
+        if (imgEl.dataset.retried === '1') {
+          const p = document.createElement('div');
+          p.className = 'chart-msg';
+          p.style.color = '#dfe7df';
+          p.style.opacity = '0.9';
+          p.style.fontSize = '0.95em';
+          p.style.padding = '6px 0';
+          p.textContent = 'Chart unavailable.';
+          rowEl.appendChild(p);
+          return;
+        }
+        imgEl.dataset.retried = '1';
+        imgEl.referrerPolicy = 'no-referrer';
+        imgEl.src = urlFallback;
+      };
+      imgEl.onload = () => { imgEl.dataset.retried = '0'; };
+      imgEl.src = urlPrimary;
     }
-
     function showCharts(siteId) {
       if (!siteId) return;
-      // draw both charts from live JSON (reliable)
-      drawChart(row65, siteId, '00065', 'Gage height (ft) – last 7 days');
-      drawChart(row60, siteId, '00060', 'Discharge (cfs) – last 7 days');
+      chartsEl.style.display = 'block';
+
+      const today = new Date();
+      const endDate = isoDate(today);
+      const startDate = isoDate(new Date(today.getTime() - 7*864e5));
+
+      const u65a = graphUrl('waterdata.usgs.gov', siteId, '00065');
+      const u65b = graphUrl('nwis.waterdata.usgs.gov', siteId, '00065');
+
+      const u60a = graphUrl('waterdata.usgs.gov', siteId, '00060', startDate, endDate);
+      const u60b = graphUrl('nwis.waterdata.usgs.gov', siteId, '00060', startDate, endDate);
+
+      setChart(img65, row65, u65a, u65b);
+      setChart(img60, row60, u60a, u60b);
     }
 
     /* ====== WEATHER via City+State (unchanged) ====== */
