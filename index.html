@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -109,21 +109,29 @@
       color: #dfe7df; font-size: 0.98em; line-height: 1.35em;
     }
 
-/* Make the text box exactly the same width as the selects & button */
-.inputs > * {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;   /* include padding/border in the 100% width */
-  min-width: 0;             /* prevents some browsers from overflowing */
-}
+    /* Make the text box exactly the same width as the selects & button */
+    .inputs > * {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;   /* include padding/border in the 100% width */
+      min-width: 0;             /* prevents some browsers from overflowing */
+    }
+    /* (optional) keep the dropdown arrow but prevent width quirks on some browsers */
+    .inputs select {
+      -webkit-appearance: menulist; /* don’t remove the native arrow */
+      appearance: menulist;
+    }
 
-/* (optional) keep the dropdown arrow but prevent width quirks on some browsers */
-.inputs select {
-  -webkit-appearance: menulist; /* don’t remove the native arrow */
-  appearance: menulist;
-}
-
-    
+    /* ===== Center the H1 between logo and search card (minimal change) ===== */
+    header { position: relative; }                /* create containing block for absolute child */
+    header h1 {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);          /* center on its own height */
+      margin: 0;                                  /* avoid extra offset */
+      text-align: center;
+      pointer-events: none;                       /* clicks pass through */
+    }
   </style>
 </head>
 <body>
@@ -503,6 +511,24 @@
       if (m) return `${m[1].trim().replace(/\s+/g,' ')}, ${m[2].toUpperCase()}`;
       return siteName || '';
     }
+
+    /* ===== Center the H1 between logo and search card ===== */
+    function placeTitleBetweenLogoAndSearch() {
+      const header = document.querySelector('header');
+      const logo   = header?.querySelector('img');
+      const title  = header?.querySelector('h1');
+      const search = document.querySelector('main .card'); // first card is the search section
+      if (!header || !logo || !title || !search) return;
+
+      const headerTop  = header.getBoundingClientRect().top + window.scrollY;
+      const logoBottom = logo.getBoundingClientRect().bottom + window.scrollY;
+      const searchTop  = search.getBoundingClientRect().top + window.scrollY;
+
+      const mid = (logoBottom + searchTop) / 2;           // midpoint in page coords
+      title.style.top = (mid - headerTop) + 'px';         // convert to header's coord space
+    }
+    window.addEventListener('load', placeTitleBetweenLogoAndSearch);
+    window.addEventListener('resize', placeTitleBetweenLogoAndSearch);
 
     /* ====== BOOT ====== */
     document.addEventListener('DOMContentLoaded', loadIndex);
