@@ -342,28 +342,23 @@
       fetchWeather(city, st, label);
     }
 
-    /* ====== LIGHTWEIGHT SVG FALLBACK CHART RENDERER ====== */
+    /* ---------- LIGHTWEIGHT SVG FALLBACK ---------- */
     function renderSvgLine(container, points, label) {
-      // Clear any previous fallback
       const old = container.querySelector('svg[data-fallback="1"]');
       if (old) old.remove();
-
       if (!points || points.length < 2) return;
 
       const W = container.clientWidth || 800;
-      const H = Math.round(W * 0.4); // keep a similar aspect
+      const H = Math.round(W * 0.4);
       const pad = 30;
-
       const xs = points.map(p => +p.t);
       const ys = points.map(p => +p.v).filter(v => !Number.isNaN(v));
-
       const minX = Math.min(...xs), maxX = Math.max(...xs);
       const minY = Math.min(...ys), maxY = Math.max(...ys);
       const spanX = maxX - minX || 1;
       const spanY = (maxY - minY) || 1;
-
-      const scaleX = x => pad + ( (x - minX) / spanX ) * (W - pad*2);
-      const scaleY = y => H - pad - ( (y - minY) / spanY ) * (H - pad*2);
+      const scaleX = x => pad + ((x - minX) / spanX) * (W - pad*2);
+      const scaleY = y => H - pad - ((y - minY) / spanY) * (H - pad*2);
 
       let d = '';
       points.forEach((p, i) => {
@@ -378,14 +373,6 @@
       svg.setAttribute('height', 'auto');
       svg.setAttribute('data-fallback', '1');
 
-      // background (subtle)
-      const bg = document.createElementNS(svg.namespaceURI,'rect');
-      bg.setAttribute('x', 0); bg.setAttribute('y', 0);
-      bg.setAttribute('width', W); bg.setAttribute('height', H);
-      bg.setAttribute('fill', 'rgba(0,0,0,0)');
-      svg.appendChild(bg);
-
-      // path
       const path = document.createElementNS(svg.namespaceURI,'path');
       path.setAttribute('d', d);
       path.setAttribute('fill', 'none');
@@ -395,37 +382,71 @@
       path.setAttribute('stroke-linejoin', 'round');
       svg.appendChild(path);
 
-      // label (small)
       if (label) {
         const txt = document.createElementNS(svg.namespaceURI,'text');
-        txt.setAttribute('x', pad);
-        txt.setAttribute('y', pad - 8);
+        txt.setAttribute('x', 30);
+        txt.setAttribute('y', 20);
         txt.setAttribute('fill', '#dfe7df');
         txt.setAttribute('font-size', '12');
         txt.textContent = label;
         svg.appendChild(txt);
       }
-
       container.appendChild(svg);
     }
 
     async function fetchUSGSSeries(siteId, parmCd) {
-      // P7D of 1-hr or 15-min IV data; we’ll accept any step interval
-      const url = `https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${siteId}&parameterCd=${parmCd}&period=P7D`;
+      const id = String(siteId).trim().replace(/\D/g, '');
+      const url = `https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${id}&parameterCd=${parmCd}&period=P7D`;
       const res = await fetch(url);
       const j = await res.json();
       const ts = j?.value?.timeSeries?.[0]?.values?.[0]?.value || [];
       return ts
         .filter(row => row?.value != null)
-        .map(row => ({
-          t: new Date(row.dateTime).getTime(),
-          v: parseFloat(row.value)
-        }))
+        .map(row => ({ t: new Date(row.dateTime).getTime(), v: parseFloat(row.value) }))
         .filter(p => !Number.isNaN(p.v) && !Number.isNaN(p.t))
         .sort((a,b) => a.t - b.t);
     }
 
-    /* ====== USGS CHARTS (PNG first, SVG fallback on error) ====== */
+    function wireImgWithFallback(img, container, parmCd, url, label, siteId) {
+      // clear any prior fallback
+      const old = container.querySelector('svg[data-fallback="1"]');
+      if (old) old.remove();
+
+      img.style.display = '';
+      img.removeAttribute('data-fallback');
+
+      const fail = async () => {
+        if (img.getAttribute('data-fallback') === '1') return;
+        img.setAttribute('data-fallback', '1');
+        img.style.display = 'none';
+        try {
+          const pts = await fetchUSGSSeries(siteId, parmCd);
+          renderSvgLine(container, pts, label);
+        } catch (e) {
+          console.warn('Fallback render failed', parmCd, e);
+        }
+      };
+
+      img.onerror = fail;
+      img.onload = () => {
+        // Some USGS responses return a tiny/blank image but "load" succeeds.
+        const w = img.naturalWidth || 0;
+        const h = img.naturalHeight || 0;
+        if (w < 10 || h < 10) {
+          fail();
+          return;
+        }
+        // good image; ensure fallback removed
+        const old2 = container.querySelector('svg[data-fallback="1"]');
+        if (old2) old2.remove();
+        img.style.display = '';
+      };
+
+      // cache-bust so we don't reuse a previous tiny/blank response
+      img.src = `${url}${url.includes('?') ? '&' : '?'}_=${Date.now()}`;
+    }
+
+    /* ====== USGS CHARTS (PNG first, SVG fallback on error or tiny image) ====== */
     function showCharts(siteId) {
       if (!siteId) return;
       chartsEl.style.display = 'block';
@@ -436,31 +457,15 @@
       const past = new Date(); past.setDate(today.getDate() - 7);
       const startDate = past.toISOString().split('T')[0];
 
-      // 00065: Gage Height
-      img65.style.display = '';
-      img65.onerror = async () => {
-        img65.style.display = 'none';
-        try {
-          const pts = await fetchUSGSSeries(cleanId, '00065');
-          renderSvgLine(row65, pts, 'Gage height (ft) – last 7 days');
-        } catch (e) {
-          console.warn('Fallback render failed (00065):', e);
-        }
-      };
-      img65.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${cleanId}&parm_cd=00065&period=7`;
+      const url65 = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${cleanId}&parm_cd=00065&period=7`;
+      const url60 = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${cleanId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
 
-      // 00060: Discharge
-      img60.style.display = '';
-      img60.onerror = async () => {
-        img60.style.display = 'none';
-        try {
-          const pts = await fetchUSGSSeries(cleanId, '00060');
-          renderSvgLine(row60, pts, 'Discharge (cfs) – last 7 days');
-        } catch (e) {
-          console.warn('Fallback render failed (00060):', e);
-        }
-      };
-      img60.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${cleanId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
+      wireImgWithFallback(
+        img65, row65, '00065', url65, 'Gage height (ft) – last 7 days', cleanId
+      );
+      wireImgWithFallback(
+        img60, row60, '00060', url60, 'Discharge (cfs) – last 7 days', cleanId
+      );
     }
 
     /* ====== WEATHER via City+State ====== */
