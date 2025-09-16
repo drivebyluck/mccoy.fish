@@ -337,32 +337,55 @@
     function runSelection() {
       const siteId = stationEl.value;
       if (!siteId) return;
+  function showCharts(siteId) {
+    if (!siteId) return;
+    const chartsEl = document.getElementById('charts');
+    const img65 = document.getElementById('img-00065');
+    const img60 = document.getElementById('img-00060');
+    chartsEl.style.display = 'block';
 
-      // Find selected station object
-      const st = stateEl.value;
-      const s = (byState.get(st) || []).find(x => x.id === siteId);
-      // Charts
-      showCharts(siteId);
-      // Weather (city+state)
-      const city = s?.city || parseCityFromName(s?.name || '', st) || '';
-      const label = city ? `${city}, ${st}` : st;
-      fetchWeather(city, st, label);
+    // Dates for the last 7 days
+    const today = new Date();
+    const endDate = today.toISOString().split('T')[0];
+    const past = new Date(); past.setDate(today.getDate() - 7);
+    const startDate = past.toISOString().split('T')[0];
+
+    const hosts = [
+      'https://waterdata.usgs.gov',
+      'https://nwis.waterdata.usgs.gov' // fallback host
+    ];
+
+    // Helper: set an <img> with a list of fallbacks
+    function setWithFallback(img, urlList) {
+      let i = 0;
+      const tryNext = () => {
+        if (i >= urlList.length) { img.onerror = null; return; }
+        // Cache-buster so a previous 404 doesn't stick in some browsers/CDNs
+        const cacheBust = (urlList[i].includes('?') ? '&' : '?') + '_=' + Date.now();
+        img.src = urlList[i++] + cacheBust;
+        img.onerror = tryNext;
+      };
+      tryNext();
     }
 
-    /* ====== USGS CHARTS (unchanged behavior) ====== */
-    function showCharts(siteId) {
-      if (!siteId) return;
-      chartsEl.style.display = 'block';
+    // 00065 = Gage height: prefer "period", fall back to begin/end
+    const urls65 = [
+      `${hosts[0]}/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&period=7&referred_module=sw`,
+      `${hosts[1]}/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&period=7&referred_module=sw`,
+      `${hosts[0]}/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&begin_date=${startDate}&end_date=${endDate}&referred_module=sw`,
+      `${hosts[1]}/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&begin_date=${startDate}&end_date=${endDate}&referred_module=sw`,
+    ];
+    setWithFallback(img65, urls65);
 
-      const today = new Date();
-      const endDate = today.toISOString().split('T')[0];
-      const past = new Date(); past.setDate(today.getDate() - 7);
-      const startDate = past.toISOString().split('T')[0];
-
-      img65.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&period=7`;
-      img60.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
-    }
-
+    // 00060 = Discharge: prefer begin/end, fall back to "period"
+    const urls60 = [
+      `${hosts[0]}/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}&referred_module=sw`,
+      `${hosts[1]}/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}&referred_module=sw`,
+      `${hosts[0]}/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&period=7&referred_module=sw`,
+      `${hosts[1]}/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&period=7&referred_module=sw`,
+    ];
+    setWithFallback(img60, urls60);
+  }
     /* ====== WEATHER via City+State ====== */
     async function fetchWeather(city, state, label) {
       wxEl.style.display = 'block';
