@@ -352,50 +352,29 @@
     }
 
     /* ====== USGS CHARTS (with robust fallback, visuals unchanged) ====== */
-    function showCharts(siteId) {
-      if (!siteId) return;
-      chartsEl.style.display = 'block';
+function showChart() {
+  const siteId = document.getElementById("station-select").value;
+  if (!siteId) return;
 
-      const today = new Date();
-      const endDate = today.toISOString().split('T')[0];
-      const past = new Date(); past.setDate(today.getDate() - 7);
-      const startDate = past.toISOString().split('T')[0];
+  const chartSection = document.getElementById("chart-section");
+  chartSection.style.display = 'block';
 
-      // Fallback loader: try multiple official endpoints w/ cache-busting
-      const hosts = [
-        'https://waterdata.usgs.gov',
-        'https://nwis.waterdata.usgs.gov'
-      ];
-      function addBuster(u){ return u + (u.includes('?') ? '&' : '?') + '_=' + Date.now(); }
-      function setWithFallback(img, urlList) {
-        let i = 0;
-        img.onerror = () => {
-          if (i >= urlList.length) { img.onerror = null; return; }
-          img.src = addBuster(urlList[i++]);
-        };
-        img.onload = () => { img.onerror = null; };
-        img.src = addBuster(urlList[i++]);
-      }
+  // Dates
+  const today = new Date();
+  const endDate = today.toISOString().split('T')[0];
 
-      // Height (00065)
-      const urls65 = [
-        `${hosts[0]}/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&period=7&referred_module=sw`,
-        `${hosts[1]}/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&period=7&referred_module=sw`,
-        `${hosts[0]}/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&begin_date=${startDate}&end_date=${endDate}&referred_module=sw`,
-        // Official Chart Service export (PNG)
-        `https://chart.waterdata.usgs.gov/monitoring-location/${siteId}/parameter-code/00065/period/P7D/export?width=980&height=420&legend=true&median=true&bgColor=transparent`
-      ];
-      setWithFallback(img65, urls65);
+  const past = new Date();
+  past.setDate(today.getDate() - 7);
+  const startDate = past.toISOString().split('T')[0];
 
-      // Discharge (00060)
-      const urls60 = [
-        `${hosts[0]}/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}&referred_module=sw`,
-        `${hosts[1]}/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}&referred_module=sw`,
-        `${hosts[0]}/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&period=7&referred_module=sw`,
-        `https://chart.waterdata.usgs.gov/monitoring-location/${siteId}/parameter-code/00060/period/P7D/export?width=980&height=420&legend=true&median=true&bgColor=transparent`
-      ];
-      setWithFallback(img60, urls60);
-    }
+  // Gage Height Chart
+  const chartImg = document.getElementById("usgs-chart-img");
+  chartImg.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&period=7`;
+
+  // Discharge Chart with correct date range
+  const dischargeImg = document.getElementById("usgs-discharge-img");
+  dischargeImg.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
+}
 
     /* ====== WEATHER via City+State ====== */
     async function fetchWeather(city, state, label) {
