@@ -182,7 +182,6 @@
       WV:"West Virginia", WY:"Wyoming"
     };
     function parseCityFromName(name, st) {
-      // Examples: "LICKING RIVER AT NEWARK, OH", "BIG RIVER NEAR TOWN, KY"
       if (!name) return '';
       const m = name.match(/\b(?:AT|NEAR|NR|ABOVE|BELOW)\s+([^,]+),\s*([A-Z]{2})\b/i);
       if (m && (!st || m[2].toUpperCase() === st.toUpperCase())) {
@@ -190,7 +189,7 @@
       }
       return '';
     }
-    function fmtTimeHHMM(iso) { // just show local HH:MM from ISO
+    function fmtTimeHHMM(iso) {
       if (!iso) return '—';
       const t = iso.split('T')[1] || '';
       return t ? t.slice(0,5) : '—';
@@ -237,18 +236,15 @@
         allStations = await res.json();
         if (!Array.isArray(allStations)) throw new Error('Stations JSON malformed.');
 
-        // Normalize and bucket
         for (const s of allStations) {
           s.state = (s.state || '').toUpperCase();
           if (!s.city) s.city = parseCityFromName(s.name || '', s.state);
           if (!byState.has(s.state)) byState.set(s.state, []);
           byState.get(s.state).push(s);
         }
-        // sort stations within state for stable dropdown
         for (const [st, arr] of byState.entries()) {
           arr.sort((a,b) => (a.name||'').localeCompare(b.name||''));
         }
-        // populate state select
         const statesSorted = Array.from(byState.keys()).sort();
         for (const st of statesSorted) {
           const opt = document.createElement('option');
@@ -291,13 +287,11 @@
       if (!item) return;
       const st = item.getAttribute('data-state');
       const id = item.getAttribute('data-id');
-      // Load state dropdown & select this station
       stateEl.value = st;
       populateStateStations(st, id);
       resEl.style.display = 'none';
       qEl.blur();
       goEl.disabled = false;
-      // auto-run
       runSelection();
     });
 
@@ -338,15 +332,14 @@
       const siteId = stationEl.value;
       if (!siteId) return;
 
-      // Find selected station object
       const st = stateEl.value;
       const s = (byState.get(st) || []).find(x => x.id === siteId);
-      // Charts
+
       showCharts(siteId);
-      // Weather (city+state)
+
       const city = s?.city || parseCityFromName(s?.name || '', st) || '';
       const label = city ? `${city}, ${st}` : st;
-      fetchWeather(city, st, label);
+      fetchWeather(city, st, label); // (signature unchanged; weather will use siteId internally)
     }
 
     /* ====== USGS CHARTS (unchanged behavior) ====== */
@@ -363,23 +356,62 @@
       img60.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
     }
 
-    /* ====== WEATHER via City+State (working version) ====== */
+    /* ====== WEATHER (from USGS lat/lon) ====== */
     async function fetchWeather(city, state, label) {
       wxEl.style.display = 'block';
       wxGrid.innerHTML = '';
       wxNote.textContent = 'Fetching weather…';
 
-      // Geocode city, state -> lat/lon (Open-Meteo)
-      let q = state ? (city ? `${city}, ${state}` : state) : (city || '');
+      // Derive siteId from the current selection; do NOT change caller signature
+      const siteId = document.getElementById('station')?.value;
+      if (!siteId) {
+        wxNote.textContent = 'Select a station to load weather.';
+        return;
+      }
+
+      // 1) Get precise lat/lon from USGS site metadata (JSON first, RDB fallback)
+      let lat = null, lon = null, siteName = '';
       try {
-        const geo = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=1&language=en&format=json`);
-        const gj = await geo.json();
-        const best = gj?.results?.[0];
-        if (!best) throw new Error('No geocode match');
+        const r = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=json&sites=${siteId}`);
+        const j = await r.json();
+        const s = (j?.value?.timeSeries?.[0]?.sourceInfo) || (j?.value?.site?.[0]);
+        if (s?.geoLocation?.geogLocation) {
+          lat = s.geoLocation.geogLocation.latitude;
+          lon = s.geoLocation.geogLocation.longitude;
+        }
+        siteName = s?.siteName || '';
+      } catch (e) {
+        console.warn('USGS JSON metadata failed', e);
+      }
 
-        const lat = best.latitude, lon = best.longitude;
+      if (lat == null || lon == null) {
+        try {
+          const r2 = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=rdb&sites=${siteId}&siteOutput=expanded`);
+          const txt = await r2.text();
+          const lines = txt.split('\n').filter(L => L && !L.startsWith('#'));
+          const header = lines.find(L => L.startsWith('agency_cd'));
+          const data = lines.find(L => !L.startsWith('agency_cd'));
+          if (header && data) {
+            const H = {}; header.split('\t').forEach((h,i)=>H[h]=i);
+            const cols = data.split('\t');
+            const la = parseFloat(cols[H['dec_lat_va']]);
+            const lo = parseFloat(cols[H['dec_long_va']]);
+            if (!isNaN(la) && !isNaN(lo)) { lat = la; lon = lo; }
+            siteName = siteName || cols[H['station_nm']] || '';
+          }
+        } catch (e) {
+          console.warn('USGS RDB fallback failed', e);
+        }
+      }
 
-        // 3-day forecast + hourly pressure for daily avg
+      if (lat == null || lon == null) {
+        wxGrid.innerHTML = '';
+        wxNote.textContent = 'Weather unavailable (no station coordinates).';
+        return;
+      }
+
+      // 2) Fetch 3-day forecast from Open-Meteo with hourly pressure for daily averages
+      try {
         const url = new URL('https://api.open-meteo.com/v1/forecast');
         url.searchParams.set('latitude', lat);
         url.searchParams.set('longitude', lon);
@@ -392,11 +424,10 @@
         url.searchParams.set('daily', 'temperature_2m_max,temperature_2m_min,sunrise,sunset,weathercode,precipitation_probability_max,precipitation_sum,wind_speed_10m_max');
         url.searchParams.set('hourly', 'pressure_msl');
 
-        const r2 = await fetch(url.toString());
-        const data = await r2.json();
-        if (!data?.daily?.time) throw new Error('Weather unavailable');
+        const r = await fetch(url.toString());
+        const data = await r.json();
+        if (!data?.daily?.time?.length) throw new Error('No daily forecast');
 
-        // Daily avg pressure (hPa->inHg)
         const pTimes = data?.hourly?.time || [];
         const pVals  = data?.hourly?.pressure_msl || [];
         const avgInHg = data.daily.time.map(dayStr => {
@@ -408,7 +439,6 @@
           return hPa ? (hPa/33.8639).toFixed(2) : '—';
         });
 
-        // Render 3 cards
         const { time, temperature_2m_max: tMax, temperature_2m_min: tMin,
                 sunrise, sunset, weathercode: wCode, precipitation_probability_max: pProb,
                 precipitation_sum: pSum, wind_speed_10m_max: windMax } = data.daily;
@@ -435,11 +465,13 @@
           `;
           parts.push(`${i===0?'Today':i===1?'Tomorrow':dateLabel}: ${desc.toLowerCase()} high near ${hi}°F, low around ${lo}°F, avg pressure ~${avgInHg[i]} inHg, wind up to ${wind === '—' ? 'N/A' : wind + ' mph'}, precip ${precip} in (max prob ${prob === '—' ? 'N/A' : prob + '%'}).`);
         }
-        wxNote.innerHTML = `<strong>Outlook ${label ? 'near ' + label : ''}:</strong> ${parts.join(' ')}`;
+
+        const place = siteName || label || '';
+        wxNote.innerHTML = `<strong>Outlook ${place ? 'near ' + place : ''}:</strong> ${parts.join(' ')}`;
       } catch (e) {
+        console.warn('Weather fetch failed', e);
         wxGrid.innerHTML = '';
         wxNote.textContent = 'Weather forecast not available.';
-        console.warn(e);
       }
     }
 
@@ -448,5 +480,3 @@
   </script>
 </body>
 </html>
-
-
