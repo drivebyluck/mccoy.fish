@@ -89,6 +89,8 @@
 
     /* Gage section */
     .img-row img { width: 100%; height: auto; }
+    /* ensure the container has space even before svg draws */
+    .img-row { min-height: 220px; }
 
     /* Weather layout */
     .forecast-grid {
@@ -189,25 +191,9 @@
       }
       return '';
     }
-    function fmtTimeHHMM(iso) {
-      if (!iso) return '—';
-      const t = iso.split('T')[1] || '';
-      return t ? t.slice(0,5) : '—';
-    }
+    function fmtTimeHHMM(iso) { if (!iso) return '—'; const t = iso.split('T')[1] || ''; return t ? t.slice(0,5) : '—'; }
     function weatherDescription(code) {
-      const map = {
-        0:"Clear",1:"Mainly clear",2:"Partly cloudy",3:"Overcast",
-        45:"Fog",48:"Rime fog",
-        51:"Drizzle: Light",53:"Drizzle: Moderate",55:"Drizzle: Dense",
-        56:"Freezing drizzle: Light",57:"Freezing drizzle: Dense",
-        61:"Rain: Slight",63:"Rain: Moderate",65:"Rain: Heavy",
-        66:"Freezing rain: Light",67:"Freezing rain: Heavy",
-        71:"Snow: Slight",73:"Snow: Moderate",75:"Snow: Heavy",
-        77:"Snow grains",
-        80:"Rain showers: Slight",81:"Rain showers: Moderate",82:"Rain showers: Violent",
-        85:"Snow showers: Slight",86:"Snow showers: Heavy",
-        95:"Thunderstorm",96:"Thunderstorm w/ slight hail",99:"Thunderstorm w/ heavy hail"
-      };
+      const map = {0:"Clear",1:"Mainly clear",2:"Partly cloudy",3:"Overcast",45:"Fog",48:"Rime fog",51:"Drizzle: Light",53:"Drizzle: Moderate",55:"Drizzle: Dense",56:"Freezing drizzle: Light",57:"Freezing drizzle: Dense",61:"Rain: Slight",63:"Rain: Moderate",65:"Rain: Heavy",66:"Freezing rain: Light",67:"Freezing rain: Heavy",71:"Snow: Slight",73:"Snow: Moderate",75:"Snow: Heavy",77:"Snow grains",80:"Rain showers: Slight",81:"Rain showers: Moderate",82:"Rain showers: Violent",85:"Snow showers: Slight",86:"Snow showers: Heavy",95:"Thunderstorm",96:"Thunderstorm w/ slight hail",99:"Thunderstorm w/ heavy hail"};
       return map[code] || "Unknown";
     }
 
@@ -244,9 +230,8 @@
           if (!byState.has(s.state)) byState.set(s.state, []);
           byState.get(s.state).push(s);
         }
-        for (const [st, arr] of byState.entries()) {
-          arr.sort((a,b) => (a.name||'').localeCompare(b.name||''));
-        }
+        for (const [st, arr] of byState.entries()) arr.sort((a,b) => (a.name||'').localeCompare(b.name||''));
+
         const statesSorted = Array.from(byState.keys()).sort();
         for (const st of statesSorted) {
           const opt = document.createElement('option');
@@ -342,32 +327,47 @@
       fetchWeather(city, st, label);
     }
 
-    /* ========= SVG CHART RENDERING (reliable, no external PNG dependency) ========= */
-
-    // Grab 7-day instantaneous values for a parameter and station
+    /* ====== SVG CHARTS (reliable, no remote PNGs) ====== */
     async function fetchUSGSSeries(siteId, parmCd) {
       const id = String(siteId).trim().replace(/\D/g, '');
       const url = `https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${id}&parameterCd=${parmCd}&period=P7D`;
-      const res = await fetch(url);
+      const res = await fetch(url, { cache: 'no-store' });
       const j = await res.json();
       const ts = j?.value?.timeSeries?.[0]?.values?.[0]?.value || [];
       return ts
         .filter(row => row?.value != null)
         .map(row => ({ t: new Date(row.dateTime).getTime(), v: parseFloat(row.value) }))
-        .filter(p => !Number.isNaN(p.v) && !Number.isNaN(p.t))
+        .filter(p => Number.isFinite(p.v) && Number.isFinite(p.t))
         .sort((a,b) => a.t - b.t);
     }
 
-    function clearFallback(container) {
-      const old = container.querySelector('svg[data-fallback="1"]');
-      if (old) old.remove();
+    function clearRow(rowEl) {
+      // hide the broken <img> if present
+      const img = rowEl.querySelector('img');
+      if (img) img.style.display = 'none';
+      // remove any existing fallback SVG
+      Array.from(rowEl.querySelectorAll('svg[data-livechart="1"], .chart-msg')).forEach(n => n.remove());
     }
 
-    function renderSvgLine(container, points, label) {
-      clearFallback(container);
-      if (!points || points.length < 2) return;
+    function renderMsg(rowEl, text) {
+      const p = document.createElement('div');
+      p.className = 'chart-msg';
+      p.style.color = '#dfe7df';
+      p.style.opacity = '0.9';
+      p.style.fontSize = '0.95em';
+      p.style.padding = '6px 0';
+      p.textContent = text;
+      rowEl.appendChild(p);
+    }
 
-      const W = container.clientWidth || 800;
+    function renderSvg(rowEl, points, label) {
+      clearRow(rowEl);
+      if (!points || points.length < 2) {
+        renderMsg(rowEl, 'No recent data available.');
+        return;
+      }
+
+      const W = Math.max(rowEl.clientWidth || 0, 600);
       const H = Math.round(W * 0.45);
       const pad = 30;
 
@@ -375,27 +375,25 @@
       const ys = points.map(p => p.v);
       const minX = Math.min(...xs), maxX = Math.max(...xs);
       const minY = Math.min(...ys), maxY = Math.max(...ys);
-      const spanX = maxX - minX || 1;
-      const spanY = (maxY - minY) || 1;
+      const spanX = Math.max(maxX - minX, 1);
+      const spanY = Math.max(maxY - minY, 1);
 
-      const scaleX = x => pad + ((x - minX) / spanX) * (W - pad*2);
-      const scaleY = y => H - pad - ((y - minY) / spanY) * (H - pad*2);
+      const x = v => pad + ( (v - minX) / spanX ) * (W - pad*2);
+      const y = v => H - pad - ( (v - minY) / spanY ) * (H - pad*2);
 
       let d = '';
-      points.forEach((p, i) => {
-        const x = scaleX(p.t);
-        const y = scaleY(p.v);
-        d += (i ? ' L ' : 'M ') + x + ' ' + y;
-      });
+      for (let i = 0; i < points.length; i++) {
+        d += (i ? ' L ' : 'M ') + x(points[i].t) + ' ' + y(points[i].v);
+      }
 
-      const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      const svgNS = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(svgNS, 'svg');
       svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
       svg.setAttribute('width', '100%');
       svg.setAttribute('height', 'auto');
-      svg.setAttribute('data-fallback', '1');
+      svg.setAttribute('data-livechart', '1');
 
-      // subtle grid baseline
-      const axis = document.createElementNS(svg.namespaceURI,'line');
+      const axis = document.createElementNS(svgNS, 'line');
       axis.setAttribute('x1', pad);
       axis.setAttribute('x2', W - pad);
       axis.setAttribute('y1', H - pad);
@@ -404,7 +402,7 @@
       axis.setAttribute('stroke-width', '1');
       svg.appendChild(axis);
 
-      const path = document.createElementNS(svg.namespaceURI,'path');
+      const path = document.createElementNS(svgNS, 'path');
       path.setAttribute('d', d);
       path.setAttribute('fill', 'none');
       path.setAttribute('stroke', '#b8ffb3');
@@ -414,7 +412,7 @@
       svg.appendChild(path);
 
       if (label) {
-        const txt = document.createElementNS(svg.namespaceURI,'text');
+        const txt = document.createElementNS(svgNS, 'text');
         txt.setAttribute('x', pad);
         txt.setAttribute('y', 18);
         txt.setAttribute('fill', '#dfe7df');
@@ -423,28 +421,27 @@
         svg.appendChild(txt);
       }
 
-      container.appendChild(svg);
+      rowEl.appendChild(svg);
     }
 
-    async function drawChart(container, stationId, parmCd, label) {
+    async function drawChart(rowEl, siteId, parmCd, label) {
       try {
-        const pts = await fetchUSGSSeries(stationId, parmCd);
-        renderSvgLine(container, pts, label);
-      } catch (e) {
-        console.warn('Chart render error', parmCd, e);
-        clearFallback(container);
+        // make sure the card is visible so clientWidth is non-zero
+        chartsEl.style.display = 'block';
+        const pts = await fetchUSGSSeries(siteId, parmCd);
+        renderSvg(rowEl, pts, label);
+      } catch (err) {
+        clearRow(rowEl);
+        renderMsg(rowEl, 'Chart unavailable.');
+        console.warn('USGS chart error', parmCd, err);
       }
     }
 
-    /* ====== USGS CHARTS (render reliably from JSON) ====== */
     function showCharts(siteId) {
       if (!siteId) return;
-      chartsEl.style.display = 'block';
-      const cleanId = String(siteId).trim().replace(/\D/g, '');
-
-      // Render both charts from API (no dependency on remote PNGs)
-      drawChart(row65, cleanId, '00065', 'Gage height (ft) – last 7 days');
-      drawChart(row60, cleanId, '00060', 'Discharge (cfs) – last 7 days');
+      // draw both charts from live JSON (reliable)
+      drawChart(row65, siteId, '00065', 'Gage height (ft) – last 7 days');
+      drawChart(row60, siteId, '00060', 'Discharge (cfs) – last 7 days');
     }
 
     /* ====== WEATHER via City+State (unchanged) ====== */
@@ -482,9 +479,7 @@
         const pVals  = data?.hourly?.pressure_msl || [];
         const avgInHg = data.daily.time.map(dayStr => {
           let total=0, cnt=0;
-          for (let i=0;i<pTimes.length;i++) {
-            if (pTimes[i].startsWith(dayStr)) { total+=pVals[i]; cnt++; }
-          }
+          for (let i=0;i<pTimes.length;i++) if (pTimes[i].startsWith(dayStr)) { total+=pVals[i]; cnt++; }
           const hPa = cnt ? total/cnt : null;
           return hPa ? (hPa/33.8639).toFixed(2) : '—';
         });
