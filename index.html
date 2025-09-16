@@ -144,13 +144,11 @@
     <section id="charts" class="card" style="display:none;">
       <h2>Gage Height & Discharge</h2>
       <div class="img-row">
-        <!-- ADDED: referrerpolicy to avoid hotlink/referrer blocking -->
-        <img id="img-00065" alt="USGS Gage Height Chart" referrerpolicy="no-referrer">
+        <img id="img-00065" alt="USGS Gage Height Chart">
       </div>
       <h2 style="margin-top: 30px;">Discharge (CFS) – Last 7 Days</h2>
       <div class="img-row">
-        <!-- ADDED: referrerpolicy to avoid hotlink/referrer blocking -->
-        <img id="img-00060" alt="USGS Discharge Chart" referrerpolicy="no-referrer">
+        <img id="img-00060" alt="USGS Discharge Chart">
       </div>
     </section>
 
@@ -351,30 +349,31 @@
       fetchWeather(city, st, label);
     }
 
-    /* ====== USGS CHARTS (with robust fallback, visuals unchanged) ====== */
-function showChart() {
-  const siteId = document.getElementById("station-select").value;
-  if (!siteId) return;
+    /* ====== USGS CHARTS (sanitized ID + cache-buster + fallback) ====== */
+    function showCharts(siteId) {
+      if (!siteId) return;
+      chartsEl.style.display = 'block';
 
-  const chartSection = document.getElementById("chart-section");
-  chartSection.style.display = 'block';
+      // sanitize incoming id to digits only (handles stray spaces, CR, etc.)
+      const cleanId = String(siteId).trim().replace(/\D/g, '');
+      const t = Date.now(); // cache-buster to avoid stale 404s
 
-  // Dates
-  const today = new Date();
-  const endDate = today.toISOString().split('T')[0];
+      const today = new Date();
+      const endDate = today.toISOString().split('T')[0];
+      const past = new Date(); past.setDate(today.getDate() - 7);
+      const startDate = past.toISOString().split('T')[0];
 
-  const past = new Date();
-  past.setDate(today.getDate() - 7);
-  const startDate = past.toISOString().split('T')[0];
+      // Gage height (00065)
+      img65.onerror = () => console.warn('Gage image failed:', img65.src);
+      img65.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${cleanId}&parm_cd=00065&period=7&_=${t}`;
 
-  // Gage Height Chart
-  const chartImg = document.getElementById("usgs-chart-img");
-  chartImg.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&period=7`;
-
-  // Discharge Chart with correct date range
-  const dischargeImg = document.getElementById("usgs-discharge-img");
-  dischargeImg.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
-}
+      // Discharge (00060) – try explicit date range first; if it fails, fall back to period=7
+      img60.onerror = () => {
+        const fallback = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${cleanId}&parm_cd=00060&period=7&_=${Date.now()}`;
+        if (img60.src !== fallback) img60.src = fallback;
+      };
+      img60.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${cleanId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}&_=${t}`;
+    }
 
     /* ====== WEATHER via City+State ====== */
     async function fetchWeather(city, state, label) {
