@@ -926,6 +926,178 @@ async function __resolveLatLon(siteId) {
   });
 </script>
 
+<!-- ADDED: Accurate timezone + location re-render (non-destructive) -->
+<script>
+  // Parse "YYYY-MM-DDTHH:MM" as *local wall time of the station's timezone*.
+  function __tzLocalISOToUTC(isoLocal, utcOffsetSeconds) {
+    try {
+      const [d, t] = isoLocal.split('T');
+      const [Y, M, D] = d.split('-').map(Number);
+      const [h, m] = t.split(':').map(Number);
+      // Build a UTC instant that corresponds to that wall time in the station timezone
+      return new Date(Date.UTC(Y, M - 1, D, h, m) - (utcOffsetSeconds || 0) * 1000);
+    } catch { return null; }
+  }
+
+  // Format a UTC Date in a specific IANA timezone, HH:MM (12h/24h follows browser locale).
+  function __fmtTimeInTZ(dateUTC, tz) {
+    try {
+      return new Intl.DateTimeFormat([], { hour: '2-digit', minute: '2-digit', timeZone: tz }).format(dateUTC);
+    } catch { return '—'; }
+  }
+
+  // If a "friendly place" looks bogus (e.g., "2S"), fall back to station name or county.
+  async function __bestPlaceLabel(meta, friendly) {
+    const looksBad = !friendly || friendly.length < 3 || /^\d+\s*[A-Z]{0,3}$/i.test(friendly);
+    if (!looksBad) return friendly;
+    if (meta.siteName && meta.siteName.length > 3) return meta.siteName;
+
+    // county name fallback
+    if (meta.countyCd && meta.stateCd) {
+      try {
+        const r = await fetch(`https://help.waterdata.usgs.gov/code/county_query?fmt=json&state_cd=${meta.stateCd.toUpperCase()}`);
+        const j = await r.json();
+        const rec = j?.codes?.find(c => c.value === meta.countyCd);
+        if (rec?.name) return `${rec.name} County, ${meta.stateCd.toUpperCase()}`;
+      } catch {}
+    }
+    return (meta.stateCd || '').toUpperCase();
+  }
+
+  // Render a fresh, timezone-accurate 3-day forecast (same visual style as yours)
+  async function __renderForecast_TZ(lat, lon, label) {
+    const section = document.getElementById('forecast-section');
+    const grid = document.getElementById('forecast-grid');
+    const narrative = document.getElementById('forecast-narrative');
+    if (!section || !grid || !narrative) return;
+
+    const url = new URL('https://api.open-meteo.com/v1/forecast');
+    url.searchParams.set('latitude', lat);
+    url.searchParams.set('longitude', lon);
+    url.searchParams.set('timezone', 'auto'); // server returns timezone + utc_offset_seconds
+    url.searchParams.set('temperature_unit', 'fahrenheit');
+    url.searchParams.set('pressure_unit', 'hPa');
+    url.searchParams.set('precipitation_unit', 'inch');
+    url.searchParams.set('forecast_days', '3');
+    url.searchParams.set('daily', 'temperature_2m_max,temperature_2m_min,sunrise,sunset,weathercode,precipitation_probability_max,precipitation_sum');
+    url.searchParams.set('hourly', 'pressure_msl');
+
+    let data;
+    try {
+      const res = await fetch(url.toString());
+      data = await res.json();
+    } catch {
+      return; // leave whatever is already on screen
+    }
+    if (!data?.daily?.time?.length) return;
+
+    const tz = data.timezone || 'UTC';
+    const ofs = data.utc_offset_seconds || 0;
+
+    section.style.display = 'block';
+    grid.innerHTML = '';
+    narrative.innerHTML = '';
+
+    const {
+      time,
+      temperature_2m_max: tMax,
+      temperature_2m_min: tMin,
+      sunrise, sunset,
+      weathercode: wCode,
+      precipitation_probability_max: pProb,
+      precipitation_sum: pSum
+    } = data.daily;
+
+    // Average pressure per day (hPa -> inHg) using hourly series
+    const pTimes = data?.hourly?.time || [];
+    const pVals  = data?.hourly?.pressure_msl || [];
+    const dayAvgInHg = time.map(dayStr => {
+      let total = 0, cnt = 0;
+      for (let i = 0; i < pTimes.length; i++) {
+        if (pTimes[i].startsWith(dayStr)) { total += pVals[i]; cnt++; }
+      }
+      const hPa = cnt ? total / cnt : null;
+      return hPa ? (hPa / 33.8639).toFixed(2) : '—';
+    });
+
+    const pieces = [];
+    for (let i = 0; i < time.length; i++) {
+      const dateLabel = new Date(time[i]).toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
+      const desc = weatherDescription(wCode[i]);
+      const hi = Math.round(tMax[i]);
+      const lo = Math.round(tMin[i]);
+      const prob = (pProb?.[i] ?? '—');
+      const precip = (pSum?.[i] ?? '—');
+      const srUTC = __tzLocalISOToUTC(sunrise[i], ofs);
+      const ssUTC = __tzLocalISOToUTC(sunset[i], ofs);
+      const sr = srUTC ? __fmtTimeInTZ(srUTC, tz) : '—';
+      const ss = ssUTC ? __fmtTimeInTZ(ssUTC, tz) : '—';
+      const pinhg = dayAvgInHg[i];
+
+      grid.innerHTML += `
+        <div class="forecast-card">
+          <h4>${dateLabel}</h4>
+          <div class="forecast-line">Sky: ${desc}</div>
+          <div class="forecast-line">High / Low: ${hi}°F / ${lo}°F</div>
+          <div class="forecast-line">Barometric Pressure: ${pinhg} inHg</div>
+          <div class="forecast-line">Sunrise: ${sr} &nbsp;•&nbsp; Sunset: ${ss}</div>
+          <div class="forecast-line">Precip: ${precip} in &nbsp; (Max Prob: ${prob === '—' ? '—' : prob + '%'})</div>
+        </div>
+      `;
+
+      pieces.push(`${i===0?'Today':i===1?'Tomorrow':dateLabel}: ${desc.toLowerCase()} with a high near ${hi}°F and a low around ${lo}°F. Average barometric pressure ~${pinhg} inHg. Precipitation total ${precip} in (max probability ${prob==='—'?'N/A':prob+'%'}). Sunrise ${sr}, sunset ${ss}.`);
+    }
+
+    const locText = label ? ` near <strong>${label}</strong>` : '';
+    narrative.innerHTML = `<strong>Outlook${locText}:</strong> ${pieces.join(' ')}`;
+  }
+
+  // Rebuild forecast accurately after your existing code paints, or if values look off.
+  async function __rebuildForecastAccurate() {
+    try {
+      const siteId = document.getElementById('station-select')?.value;
+      const section = document.getElementById('forecast-section');
+      if (!siteId || !section || section.dataset.accurate === '1') return;
+
+      // If the first card shows an implausible high/low, or sunrise/sunset seems off, we refresh.
+      const firstCard = document.querySelector('#forecast-grid .forecast-card');
+      let needsFix = !firstCard;
+      if (firstCard) {
+        const hl = Array.from(firstCard.querySelectorAll('.forecast-line'))
+          .find(el => /High\s*\/\s*Low/i.test(el.textContent || ''));
+        if (hl) {
+          const m = hl.textContent.match(/High\s*\/\s*Low:\s*([-\d.]+).*?([-\d.]+)/i);
+          if (m) {
+            const hi = parseFloat(m[1]), lo = parseFloat(m[2]);
+            if (!isFinite(hi) || !isFinite(lo) || hi > 120 || lo < -40 || hi < lo) needsFix = true;
+          }
+        }
+      }
+
+      // Always compute with robust USGS meta; even if not "needsFix", we gently prefer accurate TZ.
+      const meta = await __getUsgsMeta(siteId);
+      if (meta.lat == null || meta.lon == null) return;
+      const friendly = await __friendlyPlace(meta);
+      const label = await __bestPlaceLabel(meta, friendly);
+
+      await __renderForecast_TZ(meta.lat, meta.lon, label);
+      section.dataset.accurate = '1'; // prevent multiple re-renders on the same click
+    } catch (e) {
+      console.warn('Accurate forecast rebuild failed:', e);
+    }
+  }
+
+  // Run after your existing click handlers (and any previous fallbacks).
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('search-btn');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      // Give your original code time to render, then fix if needed.
+      setTimeout(__rebuildForecastAccurate, 800);
+    });
+  });
+</script>
+
   
 </body>
 </html>
