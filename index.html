@@ -182,12 +182,10 @@
       WV:"West Virginia", WY:"Wyoming"
     };
 
-    // --- IMPORTANT: keep leading zeros from your JSON (fix for broken charts) ---
+    // Keep leading zeros from JSON for charts
     function normalizeSiteId(raw) {
       let s = (raw == null ? '' : String(raw)).trim();
-      // Only digits are valid for NWIS site_no; strip any accidental non-digits
       s = s.replace(/\D/g, '');
-      // Many USGS site numbers are 8+ digits; pad to at least 8 to restore dropped leading zeros
       if (s.length < 8) s = s.padStart(8, '0');
       return s;
     }
@@ -235,7 +233,6 @@
         allStations = await res.json();
         if (!Array.isArray(allStations)) throw new Error('Stations JSON malformed.');
 
-        // Normalize, including forcing id to a zero-padded string
         for (const s of allStations) {
           s.id = normalizeSiteId(s.id ?? s.site_no ?? s.code ?? s.number);
           s.state = (s.state || '').toUpperCase();
@@ -244,7 +241,6 @@
           byState.get(s.state).push(s);
         }
 
-        // Sort stations within state for stable dropdown; populate state list
         for (const [st, arr] of byState.entries()) arr.sort((a,b) => (a.name||'').localeCompare(b.name||''));
         for (const st of Array.from(byState.keys()).sort()) {
           const opt = document.createElement('option');
@@ -335,16 +331,16 @@
       const st = stateEl.value;
       const s = (byState.get(st) || []).find(x => x.id === siteId);
 
-      // === CHARTS: use the known-good image endpoints from your older version ===
+      // Charts (unchanged)
       showCharts(siteId);
 
-      // Weather using current approach (city+state -> geocode)
-      const city = s?.city || parseCityFromName(s?.name || '', st) || '';
+      // Weather using City + full State from JSON
+      const city = (s?.city || '').trim();
       const label = city ? `${city}, ${st}` : st;
       fetchWeather(city, st, label);
     }
 
-    /* ====== USGS CHARTS (from your working snippet) ====== */
+    /* ====== USGS CHARTS ====== */
     function showCharts(siteId) {
       if (!siteId) return;
       chartsEl.style.display = 'block';
@@ -354,22 +350,23 @@
       const past = new Date(); past.setDate(today.getDate() - 7);
       const startDate = past.toISOString().split('T')[0];
 
-      // Gage height last 7 days
       img65.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00065&period=7`;
-
-      // Discharge with explicit date range
       img60.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}`;
     }
 
-    /* ====== WEATHER via City+State (your current version) ====== */
-    async function fetchWeather(city, state, label) {
+    /* ====== WEATHER (city + full state name -> geocode) ====== */
+    async function fetchWeather(city, stateCode, label) {
       wxEl.style.display = 'block';
       wxGrid.innerHTML = '';
       wxNote.textContent = 'Fetching weather…';
 
-      let q = state ? (city ? `${city}, ${state}` : state) : (city || '');
       try {
-        const geo = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=1&language=en&format=json`);
+        // Build a strong geocoding query from JSON city + full state name + USA
+        const stateFull = STATE_NAMES[stateCode] || stateCode;
+        const query = (city ? `${city}, ${stateFull}, USA` : `${stateFull}, USA`).trim();
+
+        const geoURL = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=1&language=en&format=json`;
+        const geo = await fetch(geoURL);
         const gj = await geo.json();
         const best = gj?.results?.[0];
         if (!best) throw new Error('No geocode match');
@@ -440,3 +437,4 @@
   </script>
 </body>
 </html>
+
