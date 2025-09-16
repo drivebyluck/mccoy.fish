@@ -108,6 +108,22 @@
       margin-top: 14px; padding-top: 12px; border-top: 1px dashed rgba(184,255,179,0.25);
       color: #dfe7df; font-size: 0.98em; line-height: 1.35em;
     }
+
+/* Make the text box exactly the same width as the selects & button */
+.inputs > * {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;   /* include padding/border in the 100% width */
+  min-width: 0;             /* prevents some browsers from overflowing */
+}
+
+/* (optional) keep the dropdown arrow but prevent width quirks on some browsers */
+.inputs select {
+  -webkit-appearance: menulist; /* don’t remove the native arrow */
+  appearance: menulist;
+}
+
+    
   </style>
 </head>
 <body>
