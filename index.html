@@ -232,7 +232,7 @@
     </section>
   </main>
 
-  <!-- Your original dropdown logic (unchanged) -->
+  <!-- Your original dropdown + chart code (UNCHANGED) -->
   <script>
     async function fetchStations() {
       const state = document.getElementById("state-select").value;
@@ -291,7 +291,7 @@
     }
   </script>
 
-  <!-- Your original weather call (left in place) -->
+  <!-- Your original weather call (left intact) -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const btn = document.getElementById('search-btn');
@@ -417,10 +417,10 @@
     }
   </script>
 
-  <!-- GLOBAL SEARCH (index once; no partial results) -->
+  <!-- GLOBAL SEARCH: build index fully before showing matches (no mobile flicker) -->
   <script>
     const __ALL_STATES = ["AL","AR","AZ","CA","CO","CT","DE","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"];
-    let __globalStations = [];              // {id, name, state}
+    let __globalStations = [];       // {id, name, state}
     let __globalIndexBuilt = false;
     let __buildingIndex = false;
 
@@ -479,12 +479,11 @@
 
     function renderGlobalMatches(query) {
       const box = document.getElementById('global-results');
-      const input = document.getElementById('global-search');
-      if (!box || !input) return;
+      if (!box) return;
 
       if (!query) { box.style.display = 'none'; return; }
 
-      // NEW: do not show any partial matches while building (prevents mobile flicker)
+      // Do not display partial results while index is building (prevents mobile close/reopen)
       if (!__globalIndexBuilt) {
         box.style.display = 'block';
         box.innerHTML = '<div class="empty">Building full USGS index…</div>';
@@ -492,7 +491,6 @@
       }
 
       box.style.display = 'block';
-
       const q = query.toLowerCase();
       const matches = __globalStations.filter(s => (s.name || '').toLowerCase().includes(q)).slice(0, 80);
 
@@ -562,7 +560,7 @@
     }
   </script>
 
-  <!-- WEATHER: single accurate re-render (timezone-aware) -->
+  <!-- ACCURATE WEATHER RE-RENDER: robust coords + correct timezone -->
   <script>
     const __STATE_NAME = {
       AL:"Alabama", AR:"Arkansas", AZ:"Arizona", CA:"California", CO:"Colorado", CT:"Connecticut",
@@ -576,47 +574,55 @@
       WV:"West Virginia", WY:"Wyoming"
     };
 
+    // Reliable USGS site metadata (expanded RDB first; JSON fallback)
     async function __getUsgsMeta(siteId) {
       let meta = { lat:null, lon:null, siteName:"", stateCd:"", countyCd:"" };
+
+      // Prefer expanded RDB to grab dec_lat/dec_long/state/county reliably
       try {
-        const r = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=json&sites=${siteId}`);
-        const j = await r.json();
-        const s = (j?.value?.site?.[0]) || (j?.value?.timeSeries?.[0]?.sourceInfo);
-        if (s) {
-          meta.siteName = s.siteName || "";
-          const sp = s?.siteProperty || [];
-          meta.stateCd = sp.find(p=>p.name==="stateCd")?.value || "";
-          meta.countyCd = sp.find(p=>p.name==="countyCd")?.value || "";
-          const g = s?.geoLocation?.geogLocation;
-          if (g?.latitude!=null && g?.longitude!=null){ meta.lat=g.latitude; meta.lon=g.longitude; }
+        const r = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=rdb&sites=${siteId}&siteOutput=expanded`);
+        const txt = await r.text();
+        const header = txt.split("\n").find(L => L.startsWith("agency_cd"));
+        const dataLine = txt.split("\n").find(L => L && !L.startsWith("#") && !L.startsWith("agency_cd"));
+        if (header && dataLine) {
+          const H = {}; header.split("\t").forEach((h,i)=>H[h]=i);
+          const cols = dataLine.split("\t");
+          const get = k => (H[k] != null ? cols[H[k]] : "");
+          const la = parseFloat(get("dec_lat_va"));
+          const lo = parseFloat(get("dec_long_va"));
+          if (!isNaN(la) && !isNaN(lo)) { meta.lat = la; meta.lon = lo; }
+          meta.stateCd = get("state_cd") || "";
+          meta.countyCd = get("county_cd") || "";
+          meta.siteName = get("station_nm") || "";
         }
       } catch {}
-      if (meta.lat==null || meta.lon==null || !meta.stateCd || !meta.countyCd) {
+
+      // JSON fallback if anything is missing
+      if (meta.lat == null || meta.lon == null || !meta.stateCd || !meta.countyCd || !meta.siteName) {
         try {
-          const r2 = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=rdb&sites=${siteId}&siteOutput=expanded`);
-          const txt = await r2.text();
-          const header = txt.split("\n").find(L => L.startsWith("agency_cd"));
-          const dataLine = txt.split("\n").find(L => L && !L.startsWith("#") && !L.startsWith("agency_cd"));
-          if (header && dataLine) {
-            const H = {}; header.split("\t").forEach((h,i)=>H[h]=i);
-            const cols = dataLine.split("\t"); const get = k => (H[k]!=null?cols[H[k]]:"");
-            const la = parseFloat(get("dec_lat_va")), lo = parseFloat(get("dec_long_va"));
-            if (!isNaN(la)&&!isNaN(lo)){ meta.lat=la; meta.lon=lo; }
-            meta.stateCd = meta.stateCd || get("state_cd");
-            meta.countyCd = meta.countyCd || get("county_cd");
-            meta.siteName = meta.siteName || get("station_nm");
+          const r2 = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=json&sites=${siteId}`);
+          const j = await r2.json();
+          const s = (j?.value?.site?.[0]) || (j?.value?.timeSeries?.[0]?.sourceInfo);
+          if (s) {
+            meta.siteName = meta.siteName || s.siteName || "";
+            const sp = s?.siteProperty || [];
+            meta.stateCd = meta.stateCd || sp.find(p=>p.name==="stateCd")?.value || "";
+            meta.countyCd = meta.countyCd || sp.find(p=>p.name==="countyCd")?.value || "";
+            const g = s?.geoLocation?.geogLocation;
+            if (g?.latitude != null && g?.longitude != null) { meta.lat = meta.lat ?? g.latitude; meta.lon = meta.lon ?? g.longitude; }
           }
         } catch {}
       }
       return meta;
     }
 
+    // Friendly “City, ST” from site name; fallback to County, ST; then State
     async function __friendlyPlace(meta) {
-      const st = (meta.stateCd||"").toUpperCase();
+      const st = (meta.stateCd || "").toUpperCase();
       let city = "";
       if (meta.siteName) {
         const m = meta.siteName.match(/\b(?:AT|NEAR|NR|ABOVE|BELOW)\s+([^,]+),\s*([A-Z]{2})\b/i);
-        if (m && m[2].toUpperCase()===st) city = m[1].trim().replace(/\s+/g," ");
+        if (m && m[2].toUpperCase() === st) city = m[1].trim().replace(/\s+/g," ");
       }
       if (city) return `${city}, ${st}`;
       if (meta.countyCd && st) {
@@ -630,6 +636,7 @@
       return __STATE_NAME[st] || st || "";
     }
 
+    // Convert “YYYY-MM-DDTHH:MM” (local wall time of Open-Meteo’s timezone) → UTC Date
     function __tzLocalISOToUTC(isoLocal, utcOffsetSeconds) {
       try {
         const [d, t] = isoLocal.split('T');
@@ -643,7 +650,8 @@
       catch { return '—'; }
     }
 
-    async function __renderForecast_TZ(lat, lon, label) {
+    // Render 3-day forecast with timezone-correct sunrise/sunset
+    async function __renderForecastAccurate(lat, lon, label) {
       const section = document.getElementById('forecast-section');
       const grid = document.getElementById('forecast-grid');
       const narrative = document.getElementById('forecast-narrative');
@@ -660,7 +668,7 @@
       url.searchParams.set('daily', 'temperature_2m_max,temperature_2m_min,sunrise,sunset,weathercode,precipitation_probability_max,precipitation_sum');
       url.searchParams.set('hourly', 'pressure_msl');
 
-      let data; try { const r = await fetch(url.toString()); data = await r.json(); } catch { return; }
+      let data; try { const res = await fetch(url.toString()); data = await res.json(); } catch { return; }
       if (!data?.daily?.time?.length) return;
 
       const tz = data.timezone || 'UTC';
@@ -671,25 +679,35 @@
       narrative.innerHTML = '';
 
       const { time, temperature_2m_max:tMax, temperature_2m_min:tMin, sunrise, sunset, weathercode:wCode, precipitation_probability_max:pProb, precipitation_sum:pSum } = data.daily;
+
+      // Daily avg pressure from hourly series
       const pTimes = data?.hourly?.time || [];
       const pVals  = data?.hourly?.pressure_msl || [];
       const dayAvgInHg = time.map(dayStr => {
-        let total=0,cnt=0; for (let i=0;i<pTimes.length;i++) if (pTimes[i].startsWith(dayStr)){ total+=pVals[i]; cnt++; }
-        const hPa = cnt ? total/cnt : null; return hPa ? (hPa/33.8639).toFixed(2) : '—';
+        let total=0,cnt=0;
+        for (let i=0;i<pTimes.length;i++) if (pTimes[i].startsWith(dayStr)) { total+=pVals[i]; cnt++; }
+        const hPa = cnt ? total/cnt : null;
+        return hPa ? (hPa/33.8639).toFixed(2) : '—';
       });
 
-      const pieces=[];
-      for (let i=0;i<time.length;i++){
-        const dateLabel = new Date(time[i]).toLocaleDateString([], {weekday:'short', month:'short', day:'numeric'});
-        const desc = weatherDescription(wCode[i]);
+      const pieces = [];
+      for (let i = 0; i < time.length; i++) {
+        const dateLabel = new Date(time[i]).toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
+        const desc = (function(code){
+          const map = {0:"Clear",1:"Mainly clear",2:"Partly cloudy",3:"Overcast",45:"Fog",48:"Rime fog",51:"Drizzle: Light",53:"Drizzle: Moderate",55:"Drizzle: Dense",56:"Freezing drizzle: Light",57:"Freezing drizzle: Dense",61:"Rain: Slight",63:"Rain: Moderate",65:"Rain: Heavy",66:"Freezing rain: Light",67:"Freezing rain: Heavy",71:"Snow: Slight",73:"Snow: Moderate",75:"Snow: Heavy",77:"Snow grains",80:"Rain showers: Slight",81:"Rain showers: Moderate",82:"Rain showers: Violent",85:"Snow showers: Slight",86:"Snow showers: Heavy",95:"Thunderstorm",96:"Thunderstorm w/ slight hail",99:"Thunderstorm w/ heavy hail"};
+          return map[code] || "Unknown";
+        })(wCode[i]);
+
         const hi = Math.round(tMax[i]);
         const lo = Math.round(tMin[i]);
         const prob = (pProb?.[i] ?? '—');
         const precip = (pSum?.[i] ?? '—');
+
         const srUTC = __tzLocalISOToUTC(sunrise[i], ofs);
         const ssUTC = __tzLocalISOToUTC(sunset[i], ofs);
         const sr = srUTC ? __fmtTimeInTZ(srUTC, tz) : '—';
         const ss = ssUTC ? __fmtTimeInTZ(ssUTC, tz) : '—';
+
         const pinhg = dayAvgInHg[i];
 
         grid.innerHTML += `
@@ -704,30 +722,32 @@
         `;
         pieces.push(`${i===0?'Today':i===1?'Tomorrow':dateLabel}: ${desc.toLowerCase()} with a high near ${hi}°F and a low around ${lo}°F. Average barometric pressure ~${pinhg} inHg. Precipitation total ${precip} in (max probability ${prob==='—'?'N/A':prob+'%'}). Sunrise ${sr}, sunset ${ss}.`);
       }
+
       const labelText = label ? ` near <strong>${label}</strong>` : '';
       narrative.innerHTML = `<strong>Outlook${labelText}:</strong> ${pieces.join(' ')}`;
     }
 
+    // Always repaint with accurate coords/timezone after your original render completes
     async function __accurateWeather() {
       const siteId = document.getElementById('station-select')?.value;
       if (!siteId) return;
       try {
         const meta = await __getUsgsMeta(siteId);
-        if (meta.lat==null || meta.lon==null) return;
+        if (meta.lat == null || meta.lon == null) return;
         const place = await __friendlyPlace(meta);
-        await __renderForecast_TZ(meta.lat, meta.lon, place);
+        await __renderForecastAccurate(meta.lat, meta.lon, place);
       } catch {}
     }
 
-    // Always run our accurate re-render after your original click flow finishes.
     document.addEventListener('DOMContentLoaded', () => {
       const btn = document.getElementById('search-btn');
       if (!btn) return;
-      btn.addEventListener('click', () => setTimeout(__accurateWeather, 700));
+      btn.addEventListener('click', () => setTimeout(__accurateWeather, 600));
     });
   </script>
 
 </body>
 </html>
+
 
 
