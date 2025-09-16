@@ -651,5 +651,188 @@ async function __resolveLatLon(siteId) {
 
   <!-- /ADDED -->
 
+  <!-- ADDED: Robust USGS place resolution + weather fallback (no changes to your code) -->
+  <script>
+    // State name map for friendly labels
+    const __STATE_NAME = {
+      AL:"Alabama", AR:"Arkansas", AZ:"Arizona", CA:"California", CO:"Colorado", CT:"Connecticut",
+      DE:"Delaware", FL:"Florida", GA:"Georgia", IA:"Iowa", ID:"Idaho", IL:"Illinois",
+      IN:"Indiana", KS:"Kansas", KY:"Kentucky", LA:"Louisiana", MA:"Massachusetts", MD:"Maryland",
+      ME:"Maine", MI:"Michigan", MN:"Minnesota", MO:"Missouri", MS:"Mississippi", MT:"Montana",
+      NC:"North Carolina", ND:"North Dakota", NE:"Nebraska", NH:"New Hampshire", NJ:"New Jersey",
+      NM:"New Mexico", NV:"Nevada", NY:"New York", OH:"Ohio", OK:"Oklahoma", OR:"Oregon",
+      PA:"Pennsylvania", RI:"Rhode Island", SC:"South Carolina", SD:"South Dakota", TN:"Tennessee",
+      TX:"Texas", UT:"Utah", VA:"Virginia", VT:"Vermont", WA:"Washington", WI:"Wisconsin",
+      WV:"West Virginia", WY:"Wyoming"
+    };
+
+    // Pull lat/lon + state/county/siteName using JSON first, then RDB expanded as fallback
+    async function __getUsgsMeta(siteId) {
+      let meta = { lat:null, lon:null, siteName:"", stateCd:"", countyCd:"" };
+
+      // JSON
+      try {
+        const r = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=json&sites=${siteId}`);
+        const j = await r.json();
+        const s = (j?.value?.site?.[0]) || (j?.value?.timeSeries?.[0]?.sourceInfo);
+        if (s) {
+          meta.siteName = s.siteName || meta.siteName;
+          const sp = s?.siteProperty || [];
+          meta.stateCd = sp.find(p=>p.name==="stateCd")?.value || meta.stateCd;
+          meta.countyCd = sp.find(p=>p.name==="countyCd")?.value || meta.countyCd;
+          const g = s?.geoLocation?.geogLocation;
+          if (g?.latitude != null && g?.longitude != null) {
+            meta.lat = g.latitude; meta.lon = g.longitude;
+          }
+        }
+      } catch {}
+
+      // RDB expanded fallback
+      if (meta.lat == null || meta.lon == null || !meta.stateCd || !meta.countyCd) {
+        try {
+          const r2 = await fetch(`https://waterservices.usgs.gov/nwis/site/?format=rdb&sites=${siteId}&siteOutput=expanded`);
+          const txt = await r2.text();
+          const header = txt.split("\n").find(L => L.startsWith("agency_cd"));
+          const dataLine = txt.split("\n").find(L => L && !L.startsWith("#") && !L.startsWith("agency_cd"));
+          if (header && dataLine) {
+            const H = {}; header.split("\t").forEach((h,i)=>H[h]=i);
+            const cols = dataLine.split("\t");
+            const get = k => (H[k] != null ? cols[H[k]] : "");
+            const decLat = parseFloat(get("dec_lat_va"));
+            const decLon = parseFloat(get("dec_long_va"));
+            if (!isNaN(decLat) && !isNaN(decLon)) { meta.lat = decLat; meta.lon = decLon; }
+            meta.stateCd = meta.stateCd || get("state_cd");
+            meta.countyCd = meta.countyCd || get("county_cd");
+            meta.siteName = meta.siteName || get("station_nm");
+          }
+        } catch {}
+      }
+      return meta;
+    }
+
+    // Prefer city parsed from siteName; else county name via USGS codes; else state
+    async function __friendlyPlace(meta) {
+      const st = (meta.stateCd || "").toUpperCase();
+      // Parse "AT CITY, ST" or "NEAR CITY, ST" style names
+      let city = "";
+      if (meta.siteName) {
+        const m = meta.siteName.match(/\b(?:AT|NEAR|NR|ABOVE|BELOW)\s+([^,]+),\s*([A-Z]{2})\b/i);
+        if (m && m[2].toUpperCase() === st) city = m[1].trim().replace(/\s+/g," ");
+      }
+      if (city) return `${city}, ${st}`;
+
+      if (meta.countyCd && st) {
+        try {
+          const r = await fetch(`https://help.waterdata.usgs.gov/code/county_query?fmt=json&state_cd=${st}`);
+          const j = await r.json();
+          const rec = j?.codes?.find(c => c.value === meta.countyCd);
+          if (rec?.name) return `${rec.name} County, ${st}`;
+        } catch {}
+      }
+      return __STATE_NAME[st] ? __STATE_NAME[st] : (st || "");
+    }
+
+    // Build the same 3-day cards your code uses, but driven by a known lat/lon and friendly label
+    async function __renderForecast(lat, lon, friendlyLoc) {
+      const section = document.getElementById('forecast-section');
+      const grid = document.getElementById('forecast-grid');
+      const narrative = document.getElementById('forecast-narrative');
+      if (!section || !grid || !narrative) return;
+
+      const url = new URL('https://api.open-meteo.com/v1/forecast');
+      url.searchParams.set('latitude', lat);
+      url.searchParams.set('longitude', lon);
+      url.searchParams.set('timezone', 'auto');
+      url.searchParams.set('temperature_unit', 'fahrenheit');
+      url.searchParams.set('pressure_unit', 'hPa');
+      url.searchParams.set('precipitation_unit', 'inch');
+      url.searchParams.set('forecast_days', '3');
+      url.searchParams.set('daily', 'temperature_2m_max,temperature_2m_min,sunrise,sunset,weathercode,precipitation_probability_max,precipitation_sum');
+      url.searchParams.set('hourly', 'pressure_msl');
+
+      let data;
+      try {
+        const res = await fetch(url.toString());
+        data = await res.json();
+      } catch {
+        showForecastError('Unable to load weather forecast.');
+        return;
+      }
+      if (!data?.daily?.time) { showForecastError('Weather forecast not available.'); return; }
+
+      section.style.display = 'block';
+      grid.innerHTML = '';
+      narrative.innerHTML = '';
+
+      const { time, temperature_2m_max: tMax, temperature_2m_min: tMin, sunrise, sunset, weathercode: wCode, precipitation_probability_max: pProb, precipitation_sum: pSum } = data.daily;
+      const pTimes = data?.hourly?.time || [];
+      const pVals = data?.hourly?.pressure_msl || [];
+      const dayAvgInHg = time.map(dayStr => {
+        let total=0, cnt=0;
+        for (let i=0;i<pTimes.length;i++) if (pTimes[i].startsWith(dayStr)) { total+=pVals[i]; cnt++; }
+        const hPa = cnt ? total/cnt : null;
+        return hPa ? (hPa/33.8639).toFixed(2) : '—';
+      });
+
+      const pieces = [];
+      for (let i=0;i<time.length;i++) {
+        const dateLabel = new Date(time[i]).toLocaleDateString([], { weekday:'short', month:'short', day:'numeric' });
+        const desc = weatherDescription(wCode[i]);
+        const prob = (pProb?.[i] ?? '—');
+        const precip = (pSum?.[i] ?? '—');
+        const pinhg = dayAvgInHg[i];
+
+        grid.innerHTML += `
+          <div class="forecast-card">
+            <h4>${dateLabel}</h4>
+            <div class="forecast-line">Sky: ${desc}</div>
+            <div class="forecast-line">High / Low: ${Math.round(tMax[i])}°F / ${Math.round(tMin[i])}°F</div>
+            <div class="forecast-line">Barometric Pressure: ${pinhg} inHg</div>
+            <div class="forecast-line">Sunrise: ${fmtTime(sunrise[i])} &nbsp;•&nbsp; Sunset: ${fmtTime(sunset[i])}</div>
+            <div class="forecast-line">Precip: ${precip} in &nbsp; (Max Prob: ${prob === '—' ? '—' : prob + '%'})</div>
+          </div>
+        `;
+        pieces.push(`${i===0?'Today':i===1?'Tomorrow':dateLabel}: ${desc.toLowerCase()} with a high near ${Math.round(tMax[i])}°F and a low around ${Math.round(tMin[i])}°F. Average barometric pressure ~${pinhg} inHg. Precipitation total ${precip} in (max probability ${prob==='—'?'N/A':prob+'%'}). Sunrise ${fmtTime(sunrise[i])}, sunset ${fmtTime(sunset[i])}.`);
+      }
+      const label = friendlyLoc ? ` near <strong>${friendlyLoc}</strong>` : '';
+      narrative.innerHTML = `<strong>Outlook${label}:</strong> ${pieces.join(' ')}`;
+    }
+
+    // After your original weather function runs, if it left the error message, run our fallback
+    async function __forecastFallbackIfNeeded() {
+      const narrative = document.getElementById('forecast-narrative');
+      const grid = document.getElementById('forecast-grid');
+      const siteId = document.getElementById('station-select')?.value;
+      if (!siteId) return;
+
+      // Only engage if your original script showed the specific error or left nothing rendered
+      const errorShown = !!narrative && /Unable to determine station location for weather\./i.test(narrative.innerText || '');
+      const emptyGrid = !!grid && grid.children.length === 0;
+
+      if (!errorShown && !emptyGrid) return;
+
+      try {
+        const meta = await __getUsgsMeta(siteId);
+        if (meta.lat == null || meta.lon == null) return;
+        const place = await __friendlyPlace(meta);
+        await __renderForecast(meta.lat, meta.lon, place);
+      } catch (e) {
+        console.warn('Forecast fallback failed:', e);
+      }
+    }
+
+    // Hook our fallback AFTER your existing click handlers run
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('search-btn');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        // Let your original handler run first, then check
+        setTimeout(__forecastFallbackIfNeeded, 600);
+      });
+    });
+  </script>
+  <!-- /ADDED -->
+
 </body>
 </html>
+
