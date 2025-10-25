@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>McCoy.fish — Account</title>
+  <style>
+    /* ====== THEME (matches index.html visuals) ====== */
+    body {
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 0;
+      background-image: url('mccoyfishwallpaper.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #d6d6d6;
+    }
+    header { text-align: center; padding-top: 40px; }
+    header img { max-width: 160px; height: auto; }
+
+    h1#page-title {
+      font-size: 3em;
+      margin: 10px 0;
+      color: #ccc;
+      text-align: center;
+    }
+
+    main { padding: 20px; display: flex; flex-direction: column; align-items: center; }
+    .card {
+      background-color: rgba(0, 20, 10, 0.75);
+      border-radius: 15px;
+      box-shadow: 0 0 20px #003300;
+      padding: 30px;
+      width: 90%;
+      max-width: 900px;
+      margin-top: 20px;
+    }
+    .card h2 { color: #b8ffb3; text-align: center; margin-top: 0; }
+
+    .row { display: grid; gap: 16px; }
+    .row.two { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 720px) { .row.two { grid-template-columns: 1fr; } }
+
+    .inputs { max-width: 600px; margin: 0 auto; }
+    .inputs input, .inputs button, .inputs textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1em;
+      background-color: #294a38;
+      color: #ddd;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .inputs textarea { min-height: 120px; resize: vertical; }
+    .inputs button {
+      background-color: #3f6d4e;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .inputs button:hover { background-color: #51996b; }
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-secondary {
+      background-color: #2d3f33 !important;
+    }
+
+    .notice {
+      text-align: center;
+      color: #e1ffe0;
+      font-size: 0.95em;
+      opacity: 0.95;
+      margin-top: -4px;
+      margin-bottom: 12px;
+    }
+
+    .favorites {
+      background: rgba(41,74,56,0.96);
+      border: 1px solid rgba(184,255,179,0.25);
+      border-radius: 12px;
+      padding: 14px;
+      max-height: 360px;
+      overflow: auto;
+    }
+    .fav-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      border-bottom: 1px solid rgba(184,255,179,0.12);
+      padding: 10px 4px;
+    }
+    .fav-item:last-child { border-bottom: none; }
+    .fav-title { font-weight: 600; color: #e6ffe4; }
+    .fav-meta { font-size: 0.92em; color: #cfe9cc; opacity: 0.95; }
+    .fav-actions { display: flex; gap: 8px; }
+    .fav-actions button { padding: 8px 10px; }
+
+    .linkbar {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 0.95em;
+    }
+    .linkbar a {
+      color: #b8ffb3;
+      text-decoration: none;
+    }
+    .linkbar a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="mccoyfishlogo.png" alt="McCoy Fish Logo" />
+  </header>
+
+  <h1 id="page-title">Your Account</h1>
+
+  <main>
+    <!-- Auth Card -->
+    <section id="auth-card" class="card">
+      <h2 id="auth-heading">Sign In or Create an Account</h2>
+      <div class="inputs" id="auth-forms">
+        <div class="row two" id="auth-rows">
+          <!-- Sign In -->
+          <div>
+            <h3 style="margin:0 0 8px 0; color:#e1ffe0; text-align:center;">Sign In</h3>
+            <input id="in-email" type="email" placeholder="Email" autocomplete="email"/>
+            <input id="in-pass" type="password" placeholder="Password" autocomplete="current-password"/>
+            <button id="btn-signin">Sign In</button>
+          </div>
+          <!-- Create Account -->
+          <div>
+            <h3 style="margin:0 0 8px 0; color:#e1ffe0; text-align:center;">Create Account</h3>
+            <input id="up-email" type="email" placeholder="Email" autocomplete="email"/>
+            <input id="up-pass" type="password" placeholder="Password" autocomplete="new-password"/>
+            <button id="btn-signup">Create Account</button>
+          </div>
+        </div>
+        <div class="notice" id="auth-note">
+          Your account is stored locally in your browser. We will add real sign in options later.
+        </div>
+      </div>
+      <div class="linkbar">
+        <a href="index.html">Back to River Search</a>
+      </div>
+    </section>
+
+    <!-- Account Dashboard -->
+    <section id="acct-card" class="card" style="display:none;">
+      <h2>Welcome, <span id="who"></span></h2>
+      <div class="btn-row" style="justify-content:center; margin-bottom:6px;">
+        <button id="btn-signout" title="Sign out of this device">Sign Out</button>
+        <button id="btn-delete-user" class="btn-secondary" title="Remove account from this browser">Delete This Local Account</button>
+      </div>
+      <div class="notice">
+        Favorites are saved to this browser under your email. Export before clearing storage or switching devices.
+      </div>
+
+      <div class="row two">
+        <!-- Add Favorite -->
+        <div>
+          <h3 style="margin:0 0 8px 0; color:#e1ffe0; text-align:center;">Add Favorite Location</h3>
+          <div class="inputs">
+            <input id="fav-label" type="text" placeholder="Label, for example Licking River at Newark"/>
+            <input id="fav-site" type="text" placeholder="USGS Site Number, 8 digits for example 03239500"/>
+            <input id="fav-state" type="text" placeholder="State code, for example OH (optional)"/>
+            <button id="btn-add-fav">Add to Favorites</button>
+          </div>
+          <div class="notice" style="text-align:left;">
+            Site numbers are USGS station IDs. We will pad to eight digits automatically.
+          </div>
+        </div>
+
+        <!-- Favorites List -->
+        <div>
+          <h3 style="margin:0 0 8px 0; color:#e1ffe0; text-align:center;">Your Favorites</h3>
+          <div id="fav-list" class="favorites"></div>
+          <div class="btn-row" style="margin-top:12px;">
+            <button id="btn-export">Export JSON</button>
+            <button id="btn-import" class="btn-secondary">Import JSON</button>
+          </div>
+          <div class="inputs" id="import-wrap" style="display:none;">
+            <textarea id="import-json" placeholder='Paste favorites JSON here, then click "Apply Import"'></textarea>
+            <div class="btn-row">
+              <button id="btn-apply-import">Apply Import</button>
+              <button id="btn-cancel-import" class="btn-secondary">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="linkbar">
+        <a href="index.html">Back to River Search</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    /* ====== Helpers and Storage ====== */
+    const LS_USERS_KEY = 'mccoyfish_users_v1';  // { [email]: { passHash, favorites: [ {label, siteId, state, addedAt} ] } }
+    const LS_SESSION_KEY = 'mccoyfish_session_v1'; // { email }
+
+    function getUsers() {
+      try { return JSON.parse(localStorage.getItem(LS_USERS_KEY)) || {}; }
+      catch { return {}; }
+    }
+    function setUsers(users) { localStorage.setItem(LS_USERS_KEY, JSON.stringify(users)); }
+
+    function getSession() {
+      try { return JSON.parse(localStorage.getItem(LS_SESSION_KEY)) || null; }
+      catch { return null; }
+    }
+    function setSession(obj) { localStorage.setItem(LS_SESSION_KEY, JSON.stringify(obj)); }
+    function clearSession() { localStorage.removeItem(LS_SESSION_KEY); }
+
+    // Normalize to 8 digits, keep only numbers
+    function normalizeSiteId(raw) {
+      let s = (raw == null ? '' : String(raw)).trim().replace(/\\D/g, '');
+      if (s.length < 8) s = s.padStart(8, '0');
+      return s;
+    }
+
+    // SHA-256 hash helper (hex)
+    async function sha256Hex(str) {
+      const enc = new TextEncoder().encode(str);
+      const buf = await crypto.subtle.digest('SHA-256', enc);
+      const bytes = Array.from(new Uint8Array(buf));
+      return bytes.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // UI Elements
+    const authCard = document.getElementById('auth-card');
+    const acctCard = document.getElementById('acct-card');
+    const whoEl = document.getElementById('who');
+
+    const inEmail = document.getElementById('in-email');
+    const inPass  = document.getElementById('in-pass');
+    const upEmail = document.getElementById('up-email');
+    const upPass  = document.getElementById('up-pass');
+    const btnSignin = document.getElementById('btn-signin');
+    const btnSignup = document.getElementById('btn-signup');
+
+    const btnSignout = document.getElementById('btn-signout');
+    const btnDeleteUser = document.getElementById('btn-delete-user');
+
+    const favLabel = document.getElementById('fav-label');
+    const favSite  = document.getElementById('fav-site');
+    const favState = document.getElementById('fav-state');
+    const btnAddFav = document.getElementById('btn-add-fav');
+    const favList = document.getElementById('fav-list');
+
+    const btnExport = document.getElementById('btn-export');
+    const btnImport = document.getElementById('btn-import');
+    const importWrap = document.getElementById('import-wrap');
+    const importJson = document.getElementById('import-json');
+    const btnApplyImport = document.getElementById('btn-apply-import');
+    const btnCancelImport = document.getElementById('btn-cancel-import');
+
+    /* ====== State Boot ====== */
+    init();
+
+    function init() {
+      const sess = getSession();
+      if (sess && sess.email && getUsers()[sess.email]) {
+        showAccount(sess.email);
+      } else {
+        showAuth();
+      }
+    }
+
+    function showAuth() {
+      authCard.style.display = 'block';
+      acctCard.style.display = 'none';
+      // small UX nicety
+      setTimeout(()=>inEmail.focus(), 50);
+    }
+
+    function showAccount(email) {
+      whoEl.textContent = email;
+      authCard.style.display = 'none';
+      acctCard.style.display = 'block';
+      renderFavorites(email);
+      setTimeout(()=>favLabel.focus(), 50);
+    }
+
+    /* ====== Auth Actions ====== */
+    btnSignup.addEventListener('click', async () => {
+      const email = (upEmail.value || '').trim().toLowerCase();
+      const pass  = upPass.value || '';
+      if (!email || !pass) { alert('Enter email and password.'); return; }
+
+      const users = getUsers();
+      if (users[email]) { alert('Account already exists. Please sign in.'); return; }
+
+      const passHash = await sha256Hex(pass);
+      users[email] = { passHash, favorites: [] };
+      setUsers(users);
+      setSession({ email });
+      upEmail.value = ''; upPass.value = '';
+      showAccount(email);
+    });
+
+    btnSignin.addEventListener('click', async () => {
+      const email = (inEmail.value || '').trim().toLowerCase();
+      const pass  = inPass.value || '';
+      if (!email || !pass) { alert('Enter email and password.'); return; }
+
+      const users = getUsers();
+      if (!users[email]) { alert('No account found for that email.'); return; }
+
+      const passHash = await sha256Hex(pass);
+      if (users[email].passHash !== passHash) { alert('Incorrect password.'); return; }
+
+      setSession({ email });
+      inEmail.value = ''; inPass.value = '';
+      showAccount(email);
+    });
+
+    btnSignout.addEventListener('click', () => {
+      clearSession();
+      showAuth();
+    });
+
+    btnDeleteUser.addEventListener('click', () => {
+      const sess = getSession();
+      if (!sess || !sess.email) return;
+      const email = sess.email;
+      if (!confirm('Delete this local account and its favorites from this browser?')) return;
+      const users = getUsers();
+      delete users[email];
+      setUsers(users);
+      clearSession();
+      showAuth();
+    });
+
+    /* ====== Favorites ====== */
+    btnAddFav.addEventListener('click', () => {
+      const sess = getSession();
+      if (!sess || !sess.email) return;
+      const email = sess.email;
+
+      const label = (favLabel.value || '').trim();
+      let siteId = normalizeSiteId(favSite.value);
+      const state = (favState.value || '').trim().toUpperCase();
+
+      if (!label) { alert('Enter a label.'); return; }
+      if (!siteId || !/^\\d{8}$/.test(siteId)) { alert('Enter a valid USGS site number.'); return; }
+
+      const users = getUsers();
+      const u = users[email];
+      if (!u) return;
+
+      // prevent duplicates by siteId
+      if (u.favorites.some(f => f.siteId === siteId)) {
+        alert('This site is already in your favorites.');
+        return;
+      }
+
+      u.favorites.push({ label, siteId, state, addedAt: new Date().toISOString() });
+      setUsers(users);
+      favLabel.value = ''; favSite.value = ''; favState.value = '';
+      renderFavorites(email);
+    });
+
+    function renderFavorites(email) {
+      const users = getUsers();
+      const u = users[email];
+      if (!u) return;
+      const list = u.favorites || [];
+      if (!list.length) {
+        favList.innerHTML = '<div style="opacity:0.9;">No favorites yet. Add one on the left.</div>';
+        return;
+      }
+
+      favList.innerHTML = list.map((f, idx) => {
+        const meta = [];
+        if (f.siteId) meta.push('USGS ' + f.siteId);
+        if (f.state) meta.push(f.state);
+        return `
+          <div class="fav-item" data-idx="${idx}">
+            <div>
+              <div class="fav-title">${escapeHTML(f.label)}</div>
+              <div class="fav-meta">${meta.join(' • ')}</div>
+            </div>
+            <div class="fav-actions">
+              <button data-act="copy" title="Copy site number">Copy ID</button>
+              <button data-act="up" class="btn-secondary" title="Move up">Up</button>
+              <button data-act="down" class="btn-secondary" title="Move down">Down</button>
+              <button data-act="remove" class="btn-secondary" title="Remove favorite">Remove</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Wire actions
+      favList.querySelectorAll('.fav-item').forEach(el => {
+        el.addEventListener('click', async (e) => {
+          const act = e.target.getAttribute('data-act');
+          if (!act) return;
+          const idx = parseInt(el.getAttribute('data-idx'), 10);
+          const users2 = getUsers();
+          const u2 = users2[email];
+          if (!u2) return;
+
+          if (act === 'remove') {
+            u2.favorites.splice(idx, 1);
+            setUsers(users2);
+            renderFavorites(email);
+          } else if (act === 'up' || act === 'down') {
+            const dir = act === 'up' ? -1 : 1;
+            const j = idx + dir;
+            if (j < 0 || j >= u2.favorites.length) return;
+            const tmp = u2.favorites[idx];
+            u2.favorites[idx] = u2.favorites[j];
+            u2.favorites[j] = tmp;
+            setUsers(users2);
+            renderFavorites(email);
+          } else if (act === 'copy') {
+            try {
+              await navigator.clipboard.writeText(u2.favorites[idx].siteId || '');
+              alert('Site ID copied.');
+            } catch {
+              alert('Copy failed.');
+            }
+          }
+        });
+      });
+    }
+
+    // Safe text
+    function escapeHTML(s) {
+      return String(s).replace(/[&<>"']/g, c => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[c]));
+    }
+
+    /* ====== Export / Import ====== */
+    btnExport.addEventListener('click', () => {
+      const sess = getSession();
+      if (!sess || !sess.email) return;
+      const users = getUsers();
+      const u = users[sess.email];
+      if (!u) return;
+
+      const payload = {
+        email: sess.email,
+        exportedAt: new Date().toISOString(),
+        favorites: u.favorites || []
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `mccoyfish-favorites-${sess.email.replace(/[^a-z0-9]+/gi,'_')}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    btnImport.addEventListener('click', () => {
+      importWrap.style.display = 'block';
+      importJson.value = '';
+      importJson.focus();
+    });
+
+    btnCancelImport.addEventListener('click', () => {
+      importWrap.style.display = 'none';
+      importJson.value = '';
+    });
+
+    btnApplyImport.addEventListener('click', () => {
+      const sess = getSession();
+      if (!sess || !sess.email) return;
+
+      let data = null;
+      try { data = JSON.parse(importJson.value); }
+      catch { alert('Invalid JSON.'); return; }
+      if (!data || !Array.isArray(data.favorites)) {
+        alert('JSON must include a favorites array.');
+        return;
+      }
+
+      // Normalize and merge, no duplicates by siteId
+      const incoming = data.favorites
+        .map(f => ({
+          label: String(f.label || '').trim(),
+          siteId: normalizeSiteId(f.siteId || ''),
+          state: String(f.state || '').trim().toUpperCase(),
+          addedAt: f.addedAt || new Date().toISOString()
+        }))
+        .filter(f => f.label && /^\\d{8}$/.test(f.siteId));
+
+      const users = getUsers();
+      const u = users[sess.email];
+      if (!u) return;
+
+      const existingIds = new Set((u.favorites || []).map(f => f.siteId));
+      for (const f of incoming) {
+        if (!existingIds.has(f.siteId)) {
+          u.favorites.push(f);
+          existingIds.add(f.siteId);
+        }
+      }
+      setUsers(users);
+      renderFavorites(sess.email);
+      importWrap.style.display = 'none';
+      importJson.value = '';
+      alert('Import complete.');
+    });
+
+    /* === Center the title between logo and first card, like index === */
+    function centerTitleBetweenLogoAndFirstCard() {
+      const GAP = 24;
+      const logo   = document.querySelector('header img');
+      const title  = document.getElementById('page-title');
+      const first  = document.querySelector('main .card');
+      if (!logo || !title || !first) return;
+
+      const logoBottom = logo.getBoundingClientRect().bottom + window.scrollY;
+      const firstTop   = first.getBoundingClientRect().top + window.scrollY;
+      const titleH     = title.getBoundingClientRect().height || 0;
+      const total      = Math.max(firstTop - logoBottom, GAP*2 + titleH);
+      const freeSpace  = total - titleH;
+      const half       = Math.max(GAP, freeSpace / 2);
+
+      title.style.marginTop = half + 'px';
+      title.style.marginBottom = half + 'px';
+    }
+
+    window.addEventListener('load', centerTitleBetweenLogoAndFirstCard);
+    window.addEventListener('resize', centerTitleBetweenLogoAndFirstCard);
+  </script>
+</body>
+</html>
