@@ -17,8 +17,26 @@
       background-repeat: no-repeat;
       color: #d6d6d6;
     }
-    header { text-align: center; padding-top: 40px; }
+    header { text-align: center; padding-top: 40px; position: relative; }
     header img { max-width: 160px; height: auto; }
+
+    /* Top-right Home button (matches your button styling) */
+    .top-right-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background-color: #3f6d4e;
+      color: #ddd;
+      padding: 10px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.95em;
+      display: inline-block;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .top-right-btn:hover { background-color: #51996b; }
 
     h1#page-title {
       font-size: 3em;
@@ -170,6 +188,8 @@
 <body>
   <header>
     <img src="mccoyfishlogo.png" alt="McCoy Fish Logo" />
+    <!-- Top-right Home button -->
+    <a href="index.html" class="top-right-btn" title="Back to Home">Home</a>
   </header>
 
   <h1 id="page-title">Your Account</h1>
@@ -221,7 +241,7 @@
         <div>
           <h3 style="margin:0 0 8px 0; color:#e1ffe0; text-align:center;">Add Favorite Location</h3>
           <div class="inputs">
-            <!-- NEW: search like index.html -->
+            <!-- Search like index.html -->
             <input id="fav-search" type="text" placeholder="Type a river, creek, or station name… (e.g., Licking River)" autocomplete="off" />
             <div id="fav-loader" class="loader" style="display:none;">
               Loading station index…
@@ -229,14 +249,12 @@
             </div>
             <div id="fav-results" class="results"></div>
 
-            <!-- existing manual fields (auto-filled when you pick a search result) -->
-            <input id="fav-label" type="text" placeholder="Label, for example Licking River at Newark"/>
+            <!-- Kept fields: only USGS site number -->
             <input id="fav-site" type="text" placeholder="USGS Site Number, 8 digits for example 03239500"/>
-            <input id="fav-state" type="text" placeholder="State code, for example OH (optional)"/>
             <button id="btn-add-fav">Add to Favorites</button>
           </div>
           <div class="notice" style="text-align:left;">
-            Tip: Use search above, pick a result, then click “Add to Favorites”.
+            Tip: Use search above, pick a result (auto-fills the ID), then click “Add to Favorites”.
           </div>
         </div>
 
@@ -289,14 +307,17 @@
     const STATIONS_JSON_URL = '/data/stations.min.json'; // your local JSON index
 
     /* ====== Local storage keys ====== */
-    const LS_USERS_KEY = 'mccoyfish_users_v1';    // { [email]: { passHash, favorites: [...] } }
-    const LS_SESSION_KEY = 'mccoyfish_session_v1'; // { email }
+    const LS_USERS_KEY = 'mccoyfish_users_v1';
+    const LS_SESSION_KEY = 'mccoyfish_session_v1';
 
     /* ====== State for stations ====== */
     let allStations = []; // {id, name, state, city?}
     let indexReady = false;
 
-    /* ====== Utilities (shared) ====== */
+    /* Track last picked station name from search for auto-label */
+    let lastPickedName = '';
+
+    /* ====== Utilities ====== */
     function getUsers() { try { return JSON.parse(localStorage.getItem(LS_USERS_KEY)) || {}; } catch { return {}; } }
     function setUsers(users) { localStorage.setItem(LS_USERS_KEY, JSON.stringify(users)); }
     function getSession() { try { return JSON.parse(localStorage.getItem(LS_SESSION_KEY)) || null; } catch { return null; } }
@@ -316,28 +337,8 @@
       if (s.length < 8) s = s.padStart(8, '0');
       return s;
     }
-    async function sha256Hex(str) {
-      try {
-        if (window.crypto && window.crypto.subtle) {
-          const enc = new TextEncoder().encode(str);
-          const buf = await crypto.subtle.digest('SHA-256', enc);
-          const bytes = Array.from(new Uint8Array(buf));
-          return bytes.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-      } catch (e) {}
-      // fallback (FNV-1a 32-bit)
-      let h = 0x811c9dc5;
-      for (let i = 0; i < str.length; i++) {
-        h ^= str.charCodeAt(i);
-        h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
-      }
-      return ('00000000' + h.toString(16)).slice(-8);
-    }
     function escapeHTML(s) {
       return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    }
-    function fmtTimeLocalHHMM(iso) {
-      return (iso && iso.includes('T')) ? iso.split('T')[1].slice(0,5) : '—';
     }
     function weatherDescription(code) {
       const map = {0:"Clear",1:"Mainly clear",2:"Partly cloudy",3:"Overcast",45:"Fog",48:"Rime fog",
@@ -383,9 +384,7 @@
     const favLoader = document.getElementById('fav-loader');
     const favResults = document.getElementById('fav-results');
 
-    const favLabel = document.getElementById('fav-label');
     const favSite  = document.getElementById('fav-site');
-    const favState = document.getElementById('fav-state');
     const btnAddFav = document.getElementById('btn-add-fav');
     const favList = document.getElementById('fav-list');
 
@@ -410,7 +409,6 @@
         allStations = await res.json();
         if (!Array.isArray(allStations)) throw new Error('Stations JSON malformed.');
 
-        // Normalize and enrich
         for (const s of allStations) {
           s.id = normalizeSiteId(s.id ?? s.site_no ?? s.code ?? s.number);
           s.state = (s.state || '').toUpperCase();
@@ -531,14 +529,9 @@
       const item = e.target.closest('.result-item[data-id]');
       if (!item) return;
       const id = item.getAttribute('data-id');
-      const st = item.getAttribute('data-state') || '';
       const nm = item.getAttribute('data-name') || '';
-
-      // Auto-fill the manual inputs
-      favLabel.value = nm;
+      lastPickedName = nm || '';
       favSite.value  = id;
-      favState.value = st;
-
       favResults.style.display = 'none';
       btnAddFav.focus();
     });
@@ -547,31 +540,50 @@
       if (!favResults.contains(e.target) && e.target !== favSearch) favResults.style.display='none';
     });
 
-    /* ====== Favorites list UI (unchanged visuals) ====== */
-    btnAddFav.addEventListener('click', () => {
+    /* ====== Favorites list UI ====== */
+    btnAddFav.addEventListener('click', async () => {
       const sess = getSession(); if (!sess || !sess.email) return;
       const email = sess.email;
-      const label = (favLabel.value || '').trim();
+
       let siteId = normalizeSiteId(favSite.value);
-      const state = (favState.value || '').trim().toUpperCase();
-      if (!label) { alert('Enter a label.'); return; }
       if (!siteId || !/^\d{8}$/.test(siteId)) { alert('Enter a valid USGS site number.'); return; }
+
+      // Derive label: prefer last picked search name; otherwise fetch from USGS; else fallback
+      let label = (lastPickedName || '').trim();
+      if (!label) {
+        label = await fetchSiteName(siteId);
+      }
+      if (!label) label = `USGS ${siteId}`;
+
       const users = getUsers(); const u = users[email]; if (!u) return;
       if (u.favorites.some(f => f.siteId === siteId)) { alert('This site is already in your favorites.'); return; }
-      u.favorites.push({ label, siteId, state, addedAt: new Date().toISOString() });
+      u.favorites.push({ label, siteId, state: '', addedAt: new Date().toISOString() });
       setUsers(users);
-      favLabel.value = ''; favSite.value = ''; favState.value = '';
+
+      // reset inputs
+      favSearch.value = '';
+      favSite.value = '';
+      lastPickedName = '';
+
       renderFavorites(email);
       renderFavoriteData(email, { fullReload: true });
-      favSearch.value = ''; // clear search box for next add
     });
+
+    async function fetchSiteName(siteId) {
+      try {
+        const sj = await (await fetch(`https://waterservices.usgs.gov/nwis/site/?format=json&sites=${siteId}`)).json();
+        const s = (sj?.value?.site?.[0]) || (sj?.value?.timeSeries?.[0]?.sourceInfo);
+        const siteName = s?.siteName || '';
+        return siteName || '';
+      } catch { return ''; }
+    }
 
     function renderFavorites(email) {
       const users = getUsers(); const u = users[email]; if (!u) return;
       const list = u.favorites || [];
       if (!list.length) { favList.innerHTML = '<div style="opacity:0.9;">No favorites yet. Add one on the left.</div>'; return; }
       favList.innerHTML = list.map((f, idx) => {
-        const meta = []; if (f.siteId) meta.push('USGS ' + f.siteId); if (f.state) meta.push(f.state);
+        const meta = []; if (f.siteId) meta.push('USGS ' + f.siteId);
         return `
           <div class="fav-item" data-idx="${idx}">
             <div>
@@ -663,7 +675,7 @@
           card.setAttribute('data-fav-key', id);
           card.innerHTML = `
             <h3>${escapeHTML(f.label)}</h3>
-            <div class="meta">USGS ${id}${f.state ? ' • ' + f.state : ''}</div>
+            <div class="meta">USGS ${id}</div>
             <div class="toolbar" style="margin:6px 0 10px 0;">
               <button data-action="open" title="Open on index search">Open in Search</button>
               <button data-action="refresh" class="btn-secondary" title="Reload this location">Refresh</button>
@@ -898,4 +910,3 @@
   </script>
 </body>
 </html>
-
