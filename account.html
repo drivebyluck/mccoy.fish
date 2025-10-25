@@ -677,7 +677,6 @@
             <h3>${escapeHTML(f.label)}</h3>
             <div class="meta">USGS ${id}</div>
             <div class="toolbar" style="margin:6px 0 10px 0;">
-              <button data-action="open" title="Open on index search">Open in Search</button>
               <button data-action="refresh" class="btn-secondary" title="Reload this location">Refresh</button>
             </div>
             <div class="img-row">
@@ -702,9 +701,7 @@
           card.querySelectorAll('button[data-action]').forEach(btn => {
             btn.addEventListener('click', () => {
               const act = btn.getAttribute('data-action');
-              if (act === 'open') {
-                location.href = `index.html#site=${id}`;
-              } else if (act === 'refresh') {
+              if (act === 'refresh') {
                 loadFavoriteCard(f, card, { force: true });
               }
             });
@@ -768,11 +765,16 @@
           const past = new Date(); past.setDate(today.getDate() - 7);
           const startDate = past.toISOString().split('T')[0];
 
-          const bust = opts.force ? `&t=${Date.now()}` : '';
-          g65.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${fav.siteId}&parm_cd=00065&period=7${bust}`;
-          g60.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${fav.siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}${bust}`;
+          // minute-based cache buster (prevents stale/blocked images across devices)
+          const ts = Math.floor(Date.now() / 60000);
+          const g65Url = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${fav.siteId}&parm_cd=00065&period=7&ts=${ts}`;
+          const g60Url = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${fav.siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}&ts=${ts}`;
 
-          await Promise.all([imgReady(g65), imgReady(g60)]);
+          g65.src = g65Url;
+          g60.src = g60Url;
+
+          // wait and retry once if the img is blank/errored
+          await Promise.all([ensureImgShows(g65, g65Url), ensureImgShows(g60, g60Url)]);
         } finally {
           loaders.forEach(L => L.style.display = 'none');
           g65.style.display = 'block';
@@ -845,9 +847,19 @@
       });
     }
 
+    // Wait for load/error; if blank, retry once with a fresh cache-buster
+    async function ensureImgShows(img, baseUrl) {
+      await imgReady(img);
+      if (!img.naturalWidth) {
+        await new Promise(r => setTimeout(r, 150));
+        img.src = `${baseUrl}&r=${Date.now()}`;
+        await imgReady(img);
+      }
+    }
+
     function imgReady(img) {
       return new Promise(res => {
-        if (img.complete && img.naturalWidth > 0) return res();
+        if (img.complete) return res(); // resolve even if blank; caller will verify
         const on = () => { cleanup(); res(); };
         const cleanup = () => { img.removeEventListener('load', on); img.removeEventListener('error', on); };
         img.addEventListener('load', on); img.addEventListener('error', on);
