@@ -408,3 +408,371 @@
             <div>
               <div class="fav-title">${escapeHTML(f.label)}</div>
               <div class="fav-meta">${meta.join(' • ')}</div>
+            </div>
+            <div class="fav-actions">
+              <button data-act="copy" title="Copy site number">Copy ID</button>
+              <button data-act="up" class="btn-secondary" title="Move up">Up</button>
+              <button data-act="down" class="btn-secondary" title="Move down">Down</button>
+              <button data-act="remove" class="btn-secondary" title="Remove favorite">Remove</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      favList.querySelectorAll('.fav-item').forEach(el => {
+        el.addEventListener('click', async (e) => {
+          const act = e.target.getAttribute('data-act'); if (!act) return;
+          const idx = parseInt(el.getAttribute('data-idx'), 10);
+          const users2 = getUsers(); const u2 = users2[email]; if (!u2) return;
+
+          if (act === 'remove') {
+            const removed = u2.favorites.splice(idx, 1)[0];
+            setUsers(users2);
+            renderFavorites(email);
+            removeFavoriteCard(removed);
+            updateFavCount();
+          } else if (act === 'up' || act === 'down') {
+            const dir = act === 'up' ? -1 : 1;
+            const j = idx + dir; if (j < 0 || j >= u2.favorites.length) return;
+            const tmp = u2.favorites[idx]; u2.favorites[idx] = u2.favorites[j]; u2.favorites[j] = tmp;
+            setUsers(users2);
+            renderFavorites(email);
+            renderFavoriteData(email, { fullReload: true });
+          } else if (act === 'copy') {
+            try { await navigator.clipboard.writeText(u2.favorites[idx].siteId || ''); alert('Site ID copied.'); }
+            catch { alert('Copy failed.'); }
+          }
+        });
+      });
+    }
+
+    /* ====== Favorite data rendering ====== */
+
+    // Limit concurrent fetches to 3
+    let activeLoads = 0;
+    const pending = [];
+
+    function queue(task) {
+      pending.push(task);
+      runNext();
+    }
+    function runNext() {
+      if (activeLoads >= 3) return;
+      const t = pending.shift();
+      if (!t) return;
+      activeLoads++;
+      t().finally(() => {
+        activeLoads--;
+        runNext();
+      });
+    }
+
+    function removeFavoriteCard(fav) {
+      const card = document.querySelector(`[data-fav-key="${fav.siteId}"]`);
+      if (card) card.remove();
+      if (!favGrid.children.length) favDataWrap.style.display = 'none';
+    }
+
+    function updateFavCount() {
+      const c = favGrid.children.length;
+      favCountEl.textContent = c ? `${c} location${c===1?'':'s'}` : '';
+      favDataWrap.style.display = c ? 'block' : 'none';
+    }
+
+    function renderFavoriteData(email, opts = {}) {
+      const users = getUsers(); const u = users[email]; if (!u) return;
+      const list = u.favorites || [];
+      if (opts.fullReload) favGrid.innerHTML = '';
+      if (!list.length) { favGrid.innerHTML = ''; updateFavCount(); return; }
+
+      // Add cards that are missing
+      for (const f of list) {
+        const id = f.siteId;
+        if (!document.querySelector(`[data-fav-key="${id}"]`)) {
+          const card = document.createElement('div');
+          card.className = 'favdata';
+          card.setAttribute('data-fav-key', id);
+          card.innerHTML = `
+            <h3>${escapeHTML(f.label)}</h3>
+            <div class="meta">USGS ${id}${f.state ? ' • ' + f.state : ''}</div>
+            <div class="toolbar" style="margin:6px 0 10px 0;">
+              <button data-action="open" title="Open on index search">Open in Search</button>
+              <button data-action="refresh" class="btn-secondary" title="Reload this location">Refresh</button>
+            </div>
+            <div class="img-row">
+              <div class="loader">
+                Loading charts...
+                <div class="bar-wrap"><div class="bar"></div></div>
+              </div>
+              <img data-role="g65" alt="USGS Gage Height Chart" referrerpolicy="no-referrer" style="display:none; margin-top:6px;">
+              <img data-role="g60" alt="USGS Discharge Chart" referrerpolicy="no-referrer" style="display:none; margin-top:10px;">
+            </div>
+            <div class="wx" data-role="wx">
+              <h4>3-Day Weather</h4>
+              <div class="loader">
+                Fetching weather...
+                <div class="bar-wrap"><div class="bar"></div></div>
+              </div>
+              <div data-role="wx-lines" style="display:none;"></div>
+              <div class="wx-note" data-role="wx-note" style="display:none;"></div>
+            </div>
+          `;
+          // Toolbar actions
+          card.querySelectorAll('button[data-action]').forEach(btn => {
+            btn.addEventListener('click', () => {
+              const act = btn.getAttribute('data-action');
+              if (act === 'open') {
+                // Redirect to index with a hash carrying the siteId, which we can wire up later on index.html
+                location.href = `index.html#site=${id}`;
+              } else if (act === 'refresh') {
+                loadFavoriteCard(f, card, { force: true });
+              }
+            });
+          });
+          favGrid.appendChild(card);
+        }
+      }
+
+      // Remove cards for deleted favorites
+      Array.from(favGrid.children).forEach(el => {
+        const key = el.getAttribute('data-fav-key');
+        if (!list.some(f => f.siteId === key)) el.remove();
+      });
+
+      updateFavCount();
+
+      // Lazy load cards as they enter viewport
+      const io = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const card = entry.target;
+            io.unobserve(card);
+            const key = card.getAttribute('data-fav-key');
+            const f = list.find(x => x.siteId === key);
+            if (f) loadFavoriteCard(f, card);
+          }
+        }
+      }, { rootMargin: '200px 0px' });
+
+      document.querySelectorAll('.favdata').forEach(card => {
+        // If fullReload we want to load only when visible
+        io.observe(card);
+      });
+
+      // Optional: if there are only a few, trigger load immediately
+      if (list.length <= 2) {
+        document.querySelectorAll('.favdata').forEach(card => {
+          const key = card.getAttribute('data-fav-key');
+          const f = list.find(x => x.siteId === key);
+          if (f) loadFavoriteCard(f, card);
+        });
+      }
+    }
+
+    function loadFavoriteCard(fav, card, opts = {}) {
+      const g65 = card.querySelector('[data-role="g65"]');
+      const g60 = card.querySelector('[data-role="g60"]');
+      const loaders = card.querySelectorAll('.img-row .loader');
+      const wxBox = card.querySelector('[data-role="wx"]');
+      const wxLines = card.querySelector('[data-role="wx-lines"]');
+      const wxNote = card.querySelector('[data-role="wx-note"]');
+      const wxLoader = wxBox.querySelector('.loader');
+
+      // Charts
+      queue(async () => {
+        try {
+          loaders.forEach(L => L.style.display = 'block');
+          g65.style.display = 'none';
+          g60.style.display = 'none';
+
+          const today = new Date();
+          const endDate = today.toISOString().split('T')[0];
+          const past = new Date(); past.setDate(today.getDate() - 7);
+          const startDate = past.toISOString().split('T')[0];
+
+          const bust = opts.force ? `&t=${Date.now()}` : '';
+          g65.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${fav.siteId}&parm_cd=00065&period=7${bust}`;
+          g60.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${fav.siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}${bust}`;
+
+          // Resolve when images have loaded or errored
+          await Promise.all([imgReady(g65), imgReady(g60)]);
+        } finally {
+          loaders.forEach(L => L.style.display = 'none');
+          g65.style.display = 'block';
+          g60.style.display = 'block';
+        }
+      });
+
+      // Weather
+      queue(async () => {
+        try {
+          wxLoader.style.display = 'block';
+          wxLines.style.display = 'none';
+          wxNote.style.display = 'none';
+
+          const meta = await getUSGSCoordsRobust(fav.siteId);
+          if (!meta) throw new Error('No coordinates');
+
+          const url = new URL('https://api.open-meteo.com/v1/forecast');
+          url.searchParams.set('latitude', meta.lat);
+          url.searchParams.set('longitude', meta.lon);
+          url.searchParams.set('timezone', 'auto');
+          url.searchParams.set('temperature_unit', 'fahrenheit');
+          url.searchParams.set('precipitation_unit', 'inch');
+          url.searchParams.set('pressure_unit', 'hPa');
+          url.searchParams.set('wind_speed_unit', 'mph');
+          url.searchParams.set('forecast_days', '3');
+          url.searchParams.set('daily', 'temperature_2m_max,temperature_2m_min,sunrise,sunset,weathercode,precipitation_probability_max,precipitation_sum,wind_speed_10m_max');
+          url.searchParams.set('hourly', 'pressure_msl');
+
+          const r = await fetch(url.toString());
+          const data = await r.json();
+          const pTimes = data?.hourly?.time || [];
+          const pVals  = data?.hourly?.pressure_msl || [];
+          const avgInHg = (data?.daily?.time || []).map(dayStr => {
+            let total=0, cnt=0;
+            for (let i=0;i<pTimes.length;i++) if (pTimes[i].startsWith(dayStr)) { total+=pVals[i]; cnt++; }
+            const hPa = cnt ? total/cnt : null;
+            return hPa ? (hPa/33.8639).toFixed(2) : '—';
+          });
+
+          const { time, temperature_2m_max: tMax, temperature_2m_min: tMin,
+                  sunrise, sunset, weathercode: wCode, precipitation_probability_max: pProb,
+                  precipitation_sum: pSum, wind_speed_10m_max: windMax } = data.daily;
+
+          const pieces = [];
+          const lines = [];
+          for (let i=0;i<time.length;i++) {
+            const dateLabel = new Date(time[i]).toLocaleDateString([], { weekday:'short', month:'short', day:'numeric' });
+            const desc = weatherDescription(wCode[i]);
+            const hi = Math.round(tMax[i]);
+            const lo = Math.round(tMin[i]);
+            const prob = (pProb?.[i] ?? '—');
+            const precip = (pSum?.[i] ?? '—');
+            const wind = (windMax?.[i] ?? '—');
+            lines.push(`
+              <div class="forecast-line"><strong>${dateLabel}</strong> • ${desc} • High ${hi}°F / Low ${lo}°F • Pressure ${avgInHg[i]} inHg • Wind ${wind==='—'?'—':wind+' mph'} • Precip ${precip} in (Max Prob ${prob==='—'?'—':prob+'%'})</div>
+            `);
+            pieces.push(`${i===0?'Today':i===1?'Tomorrow':dateLabel}: ${desc.toLowerCase()} high near ${hi}°F, low around ${lo}°F, avg pressure ~${avgInHg[i]} inHg, wind up to ${wind==='—'?'N/A':wind+' mph'}, precip ${precip} in (max prob ${prob==='—'?'N/A':prob+'%'}).`);
+          }
+
+          wxLines.innerHTML = lines.join('');
+          wxNote.innerHTML = `<strong>Outlook${meta.pretty ? ' near ' + meta.pretty : ''}:</strong> ${pieces.join(' ')}`;
+
+          wxLoader.style.display = 'none';
+          wxLines.style.display = 'block';
+          wxNote.style.display = 'block';
+        } catch (e) {
+          wxLoader.textContent = 'Weather forecast not available.';
+        }
+      });
+    }
+
+    function imgReady(img) {
+      return new Promise(res => {
+        if (img.complete && img.naturalWidth > 0) return res();
+        const on = () => { cleanup(); res(); };
+        const cleanup = () => { img.removeEventListener('load', on); img.removeEventListener('error', on); };
+        img.addEventListener('load', on); img.addEventListener('error', on);
+      });
+    }
+
+    async function getUSGSCoordsRobust(siteId) {
+      const ok = (lat, lon) => lat!=null && lon!=null && isFinite(lat) && isFinite(lon) &&
+                               lat >= 24 && lat <= 50 && lon <= -66 && lon >= -125;
+      try {
+        const iv = await (await fetch(`https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${siteId}`)).json();
+        const ts = iv?.value?.timeSeries?.[0]?.sourceInfo;
+        const g  = ts?.geoLocation?.geogLocation;
+        const lat = g?.latitude, lon = g?.longitude;
+        const siteName = ts?.siteName || '';
+        if (ok(lat, lon)) return { lat, lon, siteName, pretty: makePrettyFromSiteName(siteName) };
+      } catch {}
+      try {
+        const sj = await (await fetch(`https://waterservices.usgs.gov/nwis/site/?format=json&sites=${siteId}`)).json();
+        const s = (sj?.value?.site?.[0]) || (sj?.value?.timeSeries?.[0]?.sourceInfo);
+        const g = s?.geoLocation?.geogLocation;
+        const lat = g?.latitude, lon = g?.longitude;
+        const siteName = s?.siteName || '';
+        if (ok(lat, lon)) return { lat, lon, siteName, pretty: makePrettyFromSiteName(siteName) };
+      } catch {}
+      try {
+        const rdb = await (await fetch(`https://waterservices.usgs.gov/nwis/site/?format=rdb&sites=${siteId}&siteOutput=expanded`)).text();
+        const header = rdb.split("\\n").find(L => L.startsWith("agency_cd"));
+        const dataLine = rdb.split("\\n").find(L => L && !L.startsWith("#") && !L.startsWith("agency_cd"));
+        if (header && dataLine) {
+          const H = {}; header.split("\\t").forEach((h,i)=>H[h]=i);
+          const cols = dataLine.split("\\t");
+          const get = k => (H[k]!=null?cols[H[k]]:"");
+          const lat = parseFloat(get("dec_lat_va"));
+          const lon = parseFloat(get("dec_long_va"));
+          const siteName = get("station_nm") || '';
+          if (ok(lat, lon)) return { lat, lon, siteName, pretty: makePrettyFromSiteName(siteName) };
+        }
+      } catch {}
+      return null;
+    }
+    function makePrettyFromSiteName(siteName) {
+      const m = siteName && siteName.match(/\\b(?:AT|NEAR|NR|ABOVE|BELOW)\\s+([^,]+),\\s*([A-Z]{2})\\b/i);
+      if (m) return `${m[1].trim().replace(/\\s+/g,' ')}, ${m[2].toUpperCase()}`;
+      return siteName || '';
+    }
+
+    /* ====== Export / Import ====== */
+    btnExport.addEventListener('click', () => {
+      const sess = getSession(); if (!sess || !sess.email) return;
+      const users = getUsers(); const u = users[sess.email]; if (!u) return;
+      const payload = { email: sess.email, exportedAt: new Date().toISOString(), favorites: u.favorites || [] };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url;
+      a.download = `mccoyfish-favorites-${sess.email.replace(/[^a-z0-9]+/gi,'_')}.json`;
+      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+    btnImport.addEventListener('click', () => { importWrap.style.display = 'block'; importJson.value = ''; importJson.focus(); });
+    btnCancelImport.addEventListener('click', () => { importWrap.style.display = 'none'; importJson.value = ''; });
+    btnApplyImport.addEventListener('click', () => {
+      const sess = getSession(); if (!sess || !sess.email) return;
+      let data = null; try { data = JSON.parse(importJson.value); } catch { alert('Invalid JSON.'); return; }
+      if (!data || !Array.isArray(data.favorites)) { alert('JSON must include a favorites array.'); return; }
+      const incoming = data.favorites
+        .map(f => ({ label: String(f.label || '').trim(),
+                     siteId: normalizeSiteId(f.siteId || ''),
+                     state: String(f.state || '').trim().toUpperCase(),
+                     addedAt: f.addedAt || new Date().toISOString() }))
+        .filter(f => f.label && /^\\d{8}$/.test(f.siteId));
+      const users = getUsers(); const u = users[sess.email]; if (!u) return;
+      const existingIds = new Set((u.favorites || []).map(f => f.siteId));
+      for (const f of incoming) if (!existingIds.has(f.siteId)) { u.favorites.push(f); existingIds.add(f.siteId); }
+      setUsers(users);
+      renderFavorites(sess.email);
+      renderFavoriteData(sess.email, { fullReload: true });
+      importWrap.style.display = 'none'; importJson.value = ''; alert('Import complete.');
+    });
+
+    /* ====== Refresh All ====== */
+    btnRefreshAll.addEventListener('click', () => {
+      const sess = getSession(); if (!sess || !sess.email) return;
+      renderFavoriteData(sess.email, { fullReload: true });
+    });
+
+    /* ====== Title centering (match index) ====== */
+    function centerTitleBetweenLogoAndFirstCard() {
+      const GAP = 24;
+      const logo   = document.querySelector('header img');
+      const title  = document.getElementById('page-title');
+      const first  = document.querySelector('main .card');
+      if (!logo || !title || !first) return;
+      const logoBottom = logo.getBoundingClientRect().bottom + window.scrollY;
+      const firstTop   = first.getBoundingClientRect().top + window.scrollY;
+      const titleH     = title.getBoundingClientRect().height || 0;
+      const total      = Math.max(firstTop - logoBottom, GAP*2 + titleH);
+      const freeSpace  = total - titleH;
+      const half       = Math.max(GAP, freeSpace / 2);
+      title.style.marginTop = half + 'px';
+      title.style.marginBottom = half + 'px';
+    }
+    window.addEventListener('resize', centerTitleBetweenLogoAndFirstCard);
+  </script>
+</body>
+</html>
