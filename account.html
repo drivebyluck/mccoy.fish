@@ -200,14 +200,12 @@
       <h2 id="auth-heading">Sign In or Create an Account</h2>
       <div class="inputs" id="auth-forms">
         <div class="row two" id="auth-rows">
-          <!-- Sign In -->
           <div>
             <h3 style="margin:0 0 8px 0; color:#e1ffe0; text-align:center;">Sign In</h3>
             <input id="in-email" type="email" placeholder="Email" autocomplete="email"/>
             <input id="in-pass" type="password" placeholder="Password" autocomplete="current-password"/>
             <button id="btn-signin">Sign In</button>
           </div>
-          <!-- Create Account -->
           <div>
             <h3 style="margin:0 0 8px 0; color:#e1ffe0; text-align:center;">Create Account</h3>
             <input id="up-email" type="email" placeholder="Email" autocomplete="email"/>
@@ -241,7 +239,6 @@
         <div>
           <h3 style="margin:0 0 8px 0; color:#e1ffe0; text-align:center;">Add Favorite Location</h3>
           <div class="inputs">
-            <!-- Search like index.html -->
             <input id="fav-search" type="text" placeholder="Type a river, creek, or station name… (e.g., Licking River)" autocomplete="off" />
             <div id="fav-loader" class="loader" style="display:none;">
               Loading station index…
@@ -249,7 +246,6 @@
             </div>
             <div id="fav-results" class="results"></div>
 
-            <!-- Kept fields: only USGS site number -->
             <input id="fav-site" type="text" placeholder="USGS Site Number, 8 digits for example 03239500"/>
             <button id="btn-add-fav">Add to Favorites</button>
           </div>
@@ -434,6 +430,7 @@
       ensureLocalBucket(email);
       renderFavorites(email);
       renderFavoriteData(email);
+      importWrap.style.display = 'none';
       setTimeout(()=>favSearch.focus(), 50);
     }
 
@@ -548,11 +545,9 @@
       let siteId = normalizeSiteId(favSite.value);
       if (!siteId || !/^\d{8}$/.test(siteId)) { alert('Enter a valid USGS site number.'); return; }
 
-      // Derive label: prefer last picked search name; otherwise fetch from USGS; else fallback
+      // Derive label
       let label = (lastPickedName || '').trim();
-      if (!label) {
-        label = await fetchSiteName(siteId);
-      }
+      if (!label) label = await fetchSiteName(siteId);
       if (!label) label = `USGS ${siteId}`;
 
       const users = getUsers(); const u = users[email]; if (!u) return;
@@ -560,7 +555,6 @@
       u.favorites.push({ label, siteId, state: '', addedAt: new Date().toISOString() });
       setUsers(users);
 
-      // reset inputs
       favSearch.value = '';
       favSite.value = '';
       lastPickedName = '';
@@ -697,7 +691,6 @@
               <div class="wx-note" data-role="wx-note" style="display:none;"></div>
             </div>
           `;
-          // Toolbar actions
           card.querySelectorAll('button[data-action]').forEach(btn => {
             btn.addEventListener('click', () => {
               const act = btn.getAttribute('data-action');
@@ -753,7 +746,7 @@
       const wxNote = card.querySelector('[data-role="wx-note"]');
       const wxLoader = wxBox.querySelector('.loader');
 
-      // Charts
+      // Charts with cache-buster + one retry
       queue(async () => {
         try {
           loaders.forEach(L => L.style.display = 'block');
@@ -765,7 +758,6 @@
           const past = new Date(); past.setDate(today.getDate() - 7);
           const startDate = past.toISOString().split('T')[0];
 
-          // minute-based cache buster (prevents stale/blocked images across devices)
           const ts = Math.floor(Date.now() / 60000);
           const g65Url = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${fav.siteId}&parm_cd=00065&period=7&ts=${ts}`;
           const g60Url = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${fav.siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}&ts=${ts}`;
@@ -773,7 +765,6 @@
           g65.src = g65Url;
           g60.src = g60Url;
 
-          // wait and retry once if the img is blank/errored
           await Promise.all([ensureImgShows(g65, g65Url), ensureImgShows(g60, g60Url)]);
         } finally {
           loaders.forEach(L => L.style.display = 'none');
@@ -859,7 +850,7 @@
 
     function imgReady(img) {
       return new Promise(res => {
-        if (img.complete) return res(); // resolve even if blank; caller will verify
+        if (img.complete) return res();
         const on = () => { cleanup(); res(); };
         const cleanup = () => { img.removeEventListener('load', on); img.removeEventListener('error', on); };
         img.addEventListener('load', on); img.addEventListener('error', on);
@@ -902,6 +893,84 @@
       return null;
     }
 
+    /* ====== EXPORT / IMPORT (wired up) ====== */
+    btnExport.addEventListener('click', () => {
+      const sess = getSession();
+      if (!sess || !sess.email) { alert('Please sign in first.'); return; }
+      const users = getUsers(); const u = users[sess.email];
+      if (!u) { alert('No data for this account.'); return; }
+      const payload = {
+        email: sess.email,
+        exportedAt: new Date().toISOString(),
+        favorites: Array.isArray(u.favorites) ? u.favorites : []
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `mccoyfish-favorites-${sess.email.replace(/[^a-z0-9]+/gi,'_')}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    btnImport.addEventListener('click', () => {
+      importWrap.style.display = 'block';
+      importJson.value = '';
+      importJson.focus();
+    });
+
+    btnCancelImport.addEventListener('click', () => {
+      importWrap.style.display = 'none';
+      importJson.value = '';
+    });
+
+    btnApplyImport.addEventListener('click', async () => {
+      const sess = getSession();
+      if (!sess || !sess.email) { alert('Please sign in first.'); return; }
+      let data = null;
+      try {
+        data = JSON.parse(importJson.value);
+      } catch {
+        alert('Invalid JSON.');
+        return;
+      }
+      if (!data || !Array.isArray(data.favorites)) {
+        alert('JSON must include a "favorites" array.');
+        return;
+      }
+      const users = getUsers(); const u = users[sess.email]; if (!u) return;
+
+      const incoming = data.favorites
+        .map(f => ({
+          label: String(f.label || '').trim(),
+          siteId: normalizeSiteId(f.siteId || ''),
+          state: String(f.state || '').trim().toUpperCase(),
+          addedAt: f.addedAt || new Date().toISOString()
+        }))
+        .filter(f => f.siteId && /^\d{8}$/.test(f.siteId));
+
+      // If any labels missing, try to fetch them (best-effort)
+      for (const f of incoming) {
+        if (!f.label) {
+          const name = await fetchSiteName(f.siteId);
+          f.label = name || `USGS ${f.siteId}`;
+        }
+      }
+
+      const existing = new Set((u.favorites || []).map(x => x.siteId));
+      for (const f of incoming) if (!existing.has(f.siteId)) { u.favorites.push(f); existing.add(f.siteId); }
+
+      setUsers(users);
+      renderFavorites(sess.email);
+      renderFavoriteData(sess.email, { fullReload: true });
+
+      importWrap.style.display = 'none';
+      importJson.value = '';
+      alert('Import complete.');
+    });
+
     /* ====== Title centering (match index) ====== */
     function centerTitleBetweenLogoAndFirstCard() {
       const GAP = 24;
@@ -922,3 +991,4 @@
   </script>
 </body>
 </html>
+
