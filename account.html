@@ -34,14 +34,14 @@
       box-shadow: 0 0 20px #003300;
       padding: 30px;
       width: 90%;
-      max-width: 900px;
+      max-width: 1100px;
       margin-top: 20px;
     }
     .card h2 { color: #b8ffb3; text-align: center; margin-top: 0; }
 
     .row { display: grid; gap: 16px; }
     .row.two { grid-template-columns: 1fr 1fr; }
-    @media (max-width: 720px) { .row.two { grid-template-columns: 1fr; } }
+    @media (max-width: 960px) { .row.two { grid-template-columns: 1fr; } }
 
     .inputs { max-width: 600px; margin: 0 auto; }
     .inputs input, .inputs button, .inputs textarea {
@@ -65,9 +65,7 @@
     }
     .inputs button:hover { background-color: #51996b; }
     .btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
-    .btn-secondary {
-      background-color: #2d3f33 !important;
-    }
+    .btn-secondary { background-color: #2d3f33 !important; }
 
     .notice {
       text-align: center;
@@ -100,16 +98,54 @@
     .fav-actions { display: flex; gap: 8px; }
     .fav-actions button { padding: 8px 10px; }
 
-    .linkbar {
-      margin-top: 12px;
-      text-align: center;
-      font-size: 0.95em;
-    }
-    .linkbar a {
-      color: #b8ffb3;
-      text-decoration: none;
-    }
+    .linkbar { margin-top: 12px; text-align: center; font-size: 0.95em; }
+    .linkbar a { color: #b8ffb3; text-decoration: none; }
     .linkbar a:hover { text-decoration: underline; }
+
+    /* ====== Favorite Data Grid ====== */
+    .favdata-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .favdata {
+      background: rgba(41, 74, 56, 0.96);
+      border: 1px solid rgba(184,255,179,0.25);
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .favdata h3 {
+      margin: 0 0 8px 0;
+      color: #e1ffe0;
+      text-align: left;
+      font-size: 1.05em;
+    }
+    .favdata .meta { font-size: 0.92em; color: #cfe9cc; margin-bottom: 8px; }
+    .favdata .img-row img { width: 100%; height: auto; border-radius: 8px; background: rgba(0,0,0,0.15); }
+    .favdata .wx { margin-top: 10px; font-size: 0.95em; color: #dfe7df; }
+    .favdata .wx h4 { margin: 0 0 6px 0; color: #e1ffe0; font-size: 1.0em; }
+    .forecast-line { margin: 4px 0; font-size: 0.95em; color: #dfe7df; }
+    .forecast-split { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .wx-note { margin-top: 8px; border-top: 1px dashed rgba(184,255,179,0.25); padding-top: 8px; font-size: 0.95em; }
+
+    .toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
+    .toolbar button { padding: 8px 10px; }
+    .small { font-size: 0.9em; opacity: 0.9; }
+
+    .loader {
+      font-size: 0.95em;
+      color: #cfe9cc;
+      text-align: left;
+    }
+    .bar-wrap {
+      height: 6px; border-radius: 6px; background: rgba(184,255,179,0.18);
+      overflow: hidden; box-shadow: inset 0 0 6px rgba(0,0,0,0.25); margin-top: 6px;
+    }
+    .bar {
+      height: 100%; width: 40%; background: #b8ffb3; filter: drop-shadow(0 0 6px #003300);
+      animation: indet 1.2s linear infinite;
+    }
+    @keyframes indet { 0%{margin-left:-45%} 100%{margin-left:105%} }
   </style>
 </head>
 <body>
@@ -141,7 +177,7 @@
           </div>
         </div>
         <div class="notice" id="auth-note">
-          Your account is stored locally in your browser. We will add real sign in options later.
+          Accounts and favorites are stored locally in your browser for now.
         </div>
       </div>
       <div class="linkbar">
@@ -152,6 +188,7 @@
     <!-- Account Dashboard -->
     <section id="acct-card" class="card" style="display:none;">
       <h2>Welcome, <span id="who"></span></h2>
+
       <div class="btn-row" style="justify-content:center; margin-bottom:6px;">
         <button id="btn-signout" title="Sign out of this device">Sign Out</button>
         <button id="btn-delete-user" class="btn-secondary" title="Remove account from this browser">Delete This Local Account</button>
@@ -193,6 +230,16 @@
         </div>
       </div>
 
+      <!-- Favorite Locations Data -->
+      <div id="fav-data-card" class="card" style="margin-top:24px; display:none;">
+        <div class="toolbar">
+          <h2 style="margin:0; flex:1 1 auto; text-align:left;">Favorite Locations Data</h2>
+          <button id="btn-refresh-all">Refresh All</button>
+          <span class="small" id="fav-count"></span>
+        </div>
+        <div class="favdata-grid" id="favdata-grid"></div>
+      </div>
+
       <div class="linkbar">
         <a href="index.html">Back to River Search</a>
       </div>
@@ -200,39 +247,47 @@
   </main>
 
   <script>
-    /* ====== Helpers and Storage ====== */
-    const LS_USERS_KEY = 'mccoyfish_users_v1';  // { [email]: { passHash, favorites: [ {label, siteId, state, addedAt} ] } }
+    /* ====== Local storage keys ====== */
+    const LS_USERS_KEY = 'mccoyfish_users_v1';    // { [email]: { passHash, favorites: [ {label, siteId, state, addedAt} ] } }
     const LS_SESSION_KEY = 'mccoyfish_session_v1'; // { email }
 
-    function getUsers() {
-      try { return JSON.parse(localStorage.getItem(LS_USERS_KEY)) || {}; }
-      catch { return {}; }
-    }
+    /* ====== Utilities (shared with index) ====== */
+    function getUsers() { try { return JSON.parse(localStorage.getItem(LS_USERS_KEY)) || {}; } catch { return {}; } }
     function setUsers(users) { localStorage.setItem(LS_USERS_KEY, JSON.stringify(users)); }
-
-    function getSession() {
-      try { return JSON.parse(localStorage.getItem(LS_SESSION_KEY)) || null; }
-      catch { return null; }
-    }
+    function getSession() { try { return JSON.parse(localStorage.getItem(LS_SESSION_KEY)) || null; } catch { return null; } }
     function setSession(obj) { localStorage.setItem(LS_SESSION_KEY, JSON.stringify(obj)); }
     function clearSession() { localStorage.removeItem(LS_SESSION_KEY); }
 
-    // Normalize to 8 digits, keep only numbers
     function normalizeSiteId(raw) {
       let s = (raw == null ? '' : String(raw)).trim().replace(/\\D/g, '');
       if (s.length < 8) s = s.padStart(8, '0');
       return s;
     }
-
-    // SHA-256 hash helper (hex)
     async function sha256Hex(str) {
       const enc = new TextEncoder().encode(str);
       const buf = await crypto.subtle.digest('SHA-256', enc);
       const bytes = Array.from(new Uint8Array(buf));
       return bytes.map(b => b.toString(16).padStart(2, '0')).join('');
     }
+    function escapeHTML(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+    function fmtTimeLocalHHMM(iso) {
+      return (iso && iso.includes('T')) ? iso.split('T')[1].slice(0,5) : '—';
+    }
+    function weatherDescription(code) {
+      const map = {0:"Clear",1:"Mainly clear",2:"Partly cloudy",3:"Overcast",45:"Fog",48:"Rime fog",
+        51:"Drizzle: Light",53:"Drizzle: Moderate",55:"Drizzle: Dense",56:"Freezing drizzle: Light",57:"Freezing drizzle: Dense",
+        61:"Rain: Slight",63:"Rain: Moderate",65:"Rain: Heavy",66:"Freezing rain: Light",67:"Freezing rain: Heavy",
+        71:"Snow: Slight",73:"Snow: Moderate",75:"Snow: Heavy",77:"Snow grains",
+        80:"Rain showers: Slight",81:"Rain showers: Moderate",82:"Rain showers: Violent",
+        85:"Snow showers: Slight",86:"Snow showers: Heavy",
+        95:"Thunderstorm",96:"Thunderstorm with slight hail",99:"Thunderstorm with heavy hail"
+      };
+      return map[code] || "Unknown";
+    }
 
-    // UI Elements
+    /* ====== DOM refs ====== */
     const authCard = document.getElementById('auth-card');
     const acctCard = document.getElementById('acct-card');
     const whoEl = document.getElementById('who');
@@ -260,42 +315,40 @@
     const btnApplyImport = document.getElementById('btn-apply-import');
     const btnCancelImport = document.getElementById('btn-cancel-import');
 
-    /* ====== State Boot ====== */
-    init();
+    const favDataWrap = document.getElementById('fav-data-card');
+    const favCountEl = document.getElementById('fav-count');
+    const favGrid = document.getElementById('favdata-grid');
+    const btnRefreshAll = document.getElementById('btn-refresh-all');
 
+    /* ====== Boot ====== */
+    init();
     function init() {
       const sess = getSession();
-      if (sess && sess.email && getUsers()[sess.email]) {
-        showAccount(sess.email);
-      } else {
-        showAuth();
-      }
+      if (sess && sess.email && getUsers()[sess.email]) showAccount(sess.email); else showAuth();
+      centerTitleBetweenLogoAndFirstCard();
     }
 
     function showAuth() {
       authCard.style.display = 'block';
       acctCard.style.display = 'none';
-      // small UX nicety
       setTimeout(()=>inEmail.focus(), 50);
     }
-
     function showAccount(email) {
       whoEl.textContent = email;
       authCard.style.display = 'none';
       acctCard.style.display = 'block';
       renderFavorites(email);
+      renderFavoriteData(email);
       setTimeout(()=>favLabel.focus(), 50);
     }
 
-    /* ====== Auth Actions ====== */
+    /* ====== Auth actions ====== */
     btnSignup.addEventListener('click', async () => {
       const email = (upEmail.value || '').trim().toLowerCase();
       const pass  = upPass.value || '';
       if (!email || !pass) { alert('Enter email and password.'); return; }
-
       const users = getUsers();
       if (users[email]) { alert('Account already exists. Please sign in.'); return; }
-
       const passHash = await sha256Hex(pass);
       users[email] = { passHash, favorites: [] };
       setUsers(users);
@@ -308,232 +361,50 @@
       const email = (inEmail.value || '').trim().toLowerCase();
       const pass  = inPass.value || '';
       if (!email || !pass) { alert('Enter email and password.'); return; }
-
       const users = getUsers();
       if (!users[email]) { alert('No account found for that email.'); return; }
-
       const passHash = await sha256Hex(pass);
       if (users[email].passHash !== passHash) { alert('Incorrect password.'); return; }
-
       setSession({ email });
       inEmail.value = ''; inPass.value = '';
       showAccount(email);
     });
 
-    btnSignout.addEventListener('click', () => {
-      clearSession();
-      showAuth();
-    });
+    btnSignout.addEventListener('click', () => { clearSession(); showAuth(); });
 
     btnDeleteUser.addEventListener('click', () => {
-      const sess = getSession();
-      if (!sess || !sess.email) return;
+      const sess = getSession(); if (!sess || !sess.email) return;
       const email = sess.email;
       if (!confirm('Delete this local account and its favorites from this browser?')) return;
-      const users = getUsers();
-      delete users[email];
-      setUsers(users);
-      clearSession();
-      showAuth();
+      const users = getUsers(); delete users[email]; setUsers(users); clearSession(); showAuth();
     });
 
-    /* ====== Favorites ====== */
+    /* ====== Favorites list UI ====== */
     btnAddFav.addEventListener('click', () => {
-      const sess = getSession();
-      if (!sess || !sess.email) return;
+      const sess = getSession(); if (!sess || !sess.email) return;
       const email = sess.email;
-
       const label = (favLabel.value || '').trim();
       let siteId = normalizeSiteId(favSite.value);
       const state = (favState.value || '').trim().toUpperCase();
-
       if (!label) { alert('Enter a label.'); return; }
       if (!siteId || !/^\\d{8}$/.test(siteId)) { alert('Enter a valid USGS site number.'); return; }
-
-      const users = getUsers();
-      const u = users[email];
-      if (!u) return;
-
-      // prevent duplicates by siteId
-      if (u.favorites.some(f => f.siteId === siteId)) {
-        alert('This site is already in your favorites.');
-        return;
-      }
-
+      const users = getUsers(); const u = users[email]; if (!u) return;
+      if (u.favorites.some(f => f.siteId === siteId)) { alert('This site is already in your favorites.'); return; }
       u.favorites.push({ label, siteId, state, addedAt: new Date().toISOString() });
       setUsers(users);
       favLabel.value = ''; favSite.value = ''; favState.value = '';
       renderFavorites(email);
+      renderFavoriteData(email, { fullReload: true });
     });
 
     function renderFavorites(email) {
-      const users = getUsers();
-      const u = users[email];
-      if (!u) return;
+      const users = getUsers(); const u = users[email]; if (!u) return;
       const list = u.favorites || [];
-      if (!list.length) {
-        favList.innerHTML = '<div style="opacity:0.9;">No favorites yet. Add one on the left.</div>';
-        return;
-      }
-
+      if (!list.length) { favList.innerHTML = '<div style="opacity:0.9;">No favorites yet. Add one on the left.</div>'; return; }
       favList.innerHTML = list.map((f, idx) => {
-        const meta = [];
-        if (f.siteId) meta.push('USGS ' + f.siteId);
-        if (f.state) meta.push(f.state);
+        const meta = []; if (f.siteId) meta.push('USGS ' + f.siteId); if (f.state) meta.push(f.state);
         return `
           <div class="fav-item" data-idx="${idx}">
             <div>
               <div class="fav-title">${escapeHTML(f.label)}</div>
               <div class="fav-meta">${meta.join(' • ')}</div>
-            </div>
-            <div class="fav-actions">
-              <button data-act="copy" title="Copy site number">Copy ID</button>
-              <button data-act="up" class="btn-secondary" title="Move up">Up</button>
-              <button data-act="down" class="btn-secondary" title="Move down">Down</button>
-              <button data-act="remove" class="btn-secondary" title="Remove favorite">Remove</button>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      // Wire actions
-      favList.querySelectorAll('.fav-item').forEach(el => {
-        el.addEventListener('click', async (e) => {
-          const act = e.target.getAttribute('data-act');
-          if (!act) return;
-          const idx = parseInt(el.getAttribute('data-idx'), 10);
-          const users2 = getUsers();
-          const u2 = users2[email];
-          if (!u2) return;
-
-          if (act === 'remove') {
-            u2.favorites.splice(idx, 1);
-            setUsers(users2);
-            renderFavorites(email);
-          } else if (act === 'up' || act === 'down') {
-            const dir = act === 'up' ? -1 : 1;
-            const j = idx + dir;
-            if (j < 0 || j >= u2.favorites.length) return;
-            const tmp = u2.favorites[idx];
-            u2.favorites[idx] = u2.favorites[j];
-            u2.favorites[j] = tmp;
-            setUsers(users2);
-            renderFavorites(email);
-          } else if (act === 'copy') {
-            try {
-              await navigator.clipboard.writeText(u2.favorites[idx].siteId || '');
-              alert('Site ID copied.');
-            } catch {
-              alert('Copy failed.');
-            }
-          }
-        });
-      });
-    }
-
-    // Safe text
-    function escapeHTML(s) {
-      return String(s).replace(/[&<>"']/g, c => ({
-        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-      }[c]));
-    }
-
-    /* ====== Export / Import ====== */
-    btnExport.addEventListener('click', () => {
-      const sess = getSession();
-      if (!sess || !sess.email) return;
-      const users = getUsers();
-      const u = users[sess.email];
-      if (!u) return;
-
-      const payload = {
-        email: sess.email,
-        exportedAt: new Date().toISOString(),
-        favorites: u.favorites || []
-      };
-      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `mccoyfish-favorites-${sess.email.replace(/[^a-z0-9]+/gi,'_')}.json`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    });
-
-    btnImport.addEventListener('click', () => {
-      importWrap.style.display = 'block';
-      importJson.value = '';
-      importJson.focus();
-    });
-
-    btnCancelImport.addEventListener('click', () => {
-      importWrap.style.display = 'none';
-      importJson.value = '';
-    });
-
-    btnApplyImport.addEventListener('click', () => {
-      const sess = getSession();
-      if (!sess || !sess.email) return;
-
-      let data = null;
-      try { data = JSON.parse(importJson.value); }
-      catch { alert('Invalid JSON.'); return; }
-      if (!data || !Array.isArray(data.favorites)) {
-        alert('JSON must include a favorites array.');
-        return;
-      }
-
-      // Normalize and merge, no duplicates by siteId
-      const incoming = data.favorites
-        .map(f => ({
-          label: String(f.label || '').trim(),
-          siteId: normalizeSiteId(f.siteId || ''),
-          state: String(f.state || '').trim().toUpperCase(),
-          addedAt: f.addedAt || new Date().toISOString()
-        }))
-        .filter(f => f.label && /^\\d{8}$/.test(f.siteId));
-
-      const users = getUsers();
-      const u = users[sess.email];
-      if (!u) return;
-
-      const existingIds = new Set((u.favorites || []).map(f => f.siteId));
-      for (const f of incoming) {
-        if (!existingIds.has(f.siteId)) {
-          u.favorites.push(f);
-          existingIds.add(f.siteId);
-        }
-      }
-      setUsers(users);
-      renderFavorites(sess.email);
-      importWrap.style.display = 'none';
-      importJson.value = '';
-      alert('Import complete.');
-    });
-
-    /* === Center the title between logo and first card, like index === */
-    function centerTitleBetweenLogoAndFirstCard() {
-      const GAP = 24;
-      const logo   = document.querySelector('header img');
-      const title  = document.getElementById('page-title');
-      const first  = document.querySelector('main .card');
-      if (!logo || !title || !first) return;
-
-      const logoBottom = logo.getBoundingClientRect().bottom + window.scrollY;
-      const firstTop   = first.getBoundingClientRect().top + window.scrollY;
-      const titleH     = title.getBoundingClientRect().height || 0;
-      const total      = Math.max(firstTop - logoBottom, GAP*2 + titleH);
-      const freeSpace  = total - titleH;
-      const half       = Math.max(GAP, freeSpace / 2);
-
-      title.style.marginTop = half + 'px';
-      title.style.marginBottom = half + 'px';
-    }
-
-    window.addEventListener('load', centerTitleBetweenLogoAndFirstCard);
-    window.addEventListener('resize', centerTitleBetweenLogoAndFirstCard);
-  </script>
-</body>
-</html>
