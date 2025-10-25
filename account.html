@@ -246,9 +246,19 @@
     </section>
   </main>
 
+  <!-- === Supabase config (your keys) === -->
+  <script>
+    window.SUPABASE_URL = "https://wzhvhhghjqzvarilcady.supabase.co";
+    window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6aHZoaGdoanF6dmFyaWxjYWR5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzNjI5ODcsImV4cCI6MjA3NjkzODk4N30.ed_U30NgYsSYxLJo-wd2Wryl8jlMRJxdWfiZfZU0zAg";
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const sb = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+  </script>
+
   <script>
     /* ====== Local storage keys ====== */
-    const LS_USERS_KEY = 'mccoyfish_users_v1';    // { [email]: { passHash, favorites: [ {label, siteId, state, addedAt} ] } }
+    const LS_USERS_KEY = 'mccoyfish_users_v1';    // { [email]: { passHash, favorites: [...] } }
     const LS_SESSION_KEY = 'mccoyfish_session_v1'; // { email }
 
     /* ====== Utilities (shared with index) ====== */
@@ -258,16 +268,36 @@
     function setSession(obj) { localStorage.setItem(LS_SESSION_KEY, JSON.stringify(obj)); }
     function clearSession() { localStorage.removeItem(LS_SESSION_KEY); }
 
+    function ensureLocalBucket(email) {
+      const users = getUsers();
+      if (!users[email]) {
+        users[email] = { passHash: null, favorites: [] }; // create a local favorites bucket
+        setUsers(users);
+      }
+    }
+
     function normalizeSiteId(raw) {
-      let s = (raw == null ? '' : String(raw)).trim().replace(/\\D/g, '');
+      let s = (raw == null ? '' : String(raw)).trim().replace(/\D/g, '');
       if (s.length < 8) s = s.padStart(8, '0');
       return s;
     }
+    // We keep this around for backwards compatibility but Supabase handles real auth.
     async function sha256Hex(str) {
-      const enc = new TextEncoder().encode(str);
-      const buf = await crypto.subtle.digest('SHA-256', enc);
-      const bytes = Array.from(new Uint8Array(buf));
-      return bytes.map(b => b.toString(16).padStart(2, '0')).join('');
+      try {
+        if (window.crypto && window.crypto.subtle) {
+          const enc = new TextEncoder().encode(str);
+          const buf = await crypto.subtle.digest('SHA-256', enc);
+          const bytes = Array.from(new Uint8Array(buf));
+          return bytes.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+      } catch (e) {}
+      // Fallback (FNV-1a 32-bit). Not secure, but fine for local display if needed.
+      let h = 0x811c9dc5;
+      for (let i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+      }
+      return ('00000000' + h.toString(16)).slice(-8);
     }
     function escapeHTML(s) {
       return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -321,13 +351,6 @@
     const btnRefreshAll = document.getElementById('btn-refresh-all');
 
     /* ====== Boot ====== */
-    init();
-    function init() {
-      const sess = getSession();
-      if (sess && sess.email && getUsers()[sess.email]) showAccount(sess.email); else showAuth();
-      centerTitleBetweenLogoAndFirstCard();
-    }
-
     function showAuth() {
       authCard.style.display = 'block';
       acctCard.style.display = 'none';
@@ -337,40 +360,57 @@
       whoEl.textContent = email;
       authCard.style.display = 'none';
       acctCard.style.display = 'block';
+      // ensure local favorites bucket exists for this email (for Step 2 compatibility)
+      ensureLocalBucket(email);
       renderFavorites(email);
       renderFavoriteData(email);
       setTimeout(()=>favLabel.focus(), 50);
     }
 
-    /* ====== Auth actions ====== */
+    // === Supabase-backed auth handlers (keep visuals identical) ===
     btnSignup.addEventListener('click', async () => {
-      const email = (upEmail.value || '').trim().toLowerCase();
-      const pass  = upPass.value || '';
-      if (!email || !pass) { alert('Enter email and password.'); return; }
-      const users = getUsers();
-      if (users[email]) { alert('Account already exists. Please sign in.'); return; }
-      const passHash = await sha256Hex(pass);
-      users[email] = { passHash, favorites: [] };
-      setUsers(users);
-      setSession({ email });
-      upEmail.value = ''; upPass.value = '';
-      showAccount(email);
+      try {
+        const email = (upEmail.value || '').trim().toLowerCase();
+        const password  = upPass.value || '';
+        if (!email || !password) { alert('Enter email and password.'); return; }
+
+        const { error } = await sb.auth.signUp({ email, password });
+        if (error) { alert('Sign up failed: ' + error.message); return; }
+
+        setSession({ email });       // keep old session mirror
+        ensureLocalBucket(email);    // create local favorites bucket if missing
+        upEmail.value = ''; upPass.value = '';
+        showAccount(email);
+      } catch (err) {
+        console.error(err);
+        alert('Unable to create account. See console for details.');
+      }
     });
 
     btnSignin.addEventListener('click', async () => {
-      const email = (inEmail.value || '').trim().toLowerCase();
-      const pass  = inPass.value || '';
-      if (!email || !pass) { alert('Enter email and password.'); return; }
-      const users = getUsers();
-      if (!users[email]) { alert('No account found for that email.'); return; }
-      const passHash = await sha256Hex(pass);
-      if (users[email].passHash !== passHash) { alert('Incorrect password.'); return; }
-      setSession({ email });
-      inEmail.value = ''; inPass.value = '';
-      showAccount(email);
+      try {
+        const email = (inEmail.value || '').trim().toLowerCase();
+        const password  = inPass.value || '';
+        if (!email || !password) { alert('Enter email and password.'); return; }
+
+        const { error } = await sb.auth.signInWithPassword({ email, password });
+        if (error) { alert('Sign in failed: ' + error.message); return; }
+
+        setSession({ email });       // mirror to old storage so UI works
+        ensureLocalBucket(email);
+        inEmail.value = ''; inPass.value = '';
+        showAccount(email);
+      } catch (err) {
+        console.error(err);
+        alert('Unable to sign in. See console for details.');
+      }
     });
 
-    btnSignout.addEventListener('click', () => { clearSession(); showAuth(); });
+    btnSignout.addEventListener('click', async () => {
+      await sb.auth.signOut();
+      clearSession();
+      showAuth();
+    });
 
     btnDeleteUser.addEventListener('click', () => {
       const sess = getSession(); if (!sess || !sess.email) return;
@@ -379,7 +419,37 @@
       const users = getUsers(); delete users[email]; setUsers(users); clearSession(); showAuth();
     });
 
-    /* ====== Favorites list UI ====== */
+    // Keep UI in sync with Supabase session changes (other tabs, etc.)
+    sb.auth.onAuthStateChange((_event, session) => {
+      const email = session?.user?.email || null;
+      if (email) {
+        setSession({ email });
+        ensureLocalBucket(email);
+        showAccount(email);
+      } else {
+        clearSession();
+        showAuth();
+      }
+    });
+
+    // On first load, check Supabase session and show the right card
+    window.addEventListener('load', async () => {
+      centerTitleBetweenLogoAndFirstCard();
+      const { data: { session } } = await sb.auth.getSession();
+      const email = session?.user?.email || null;
+      if (email) {
+        setSession({ email });
+        ensureLocalBucket(email);
+        showAccount(email);
+      } else {
+        // fallback to old local session (if someone is still using pre-Supabase local auth)
+        const sess = getSession();
+        if (sess?.email && getUsers()[sess.email]) showAccount(sess.email);
+        else showAuth();
+      }
+    });
+
+    /* ====== Favorites list UI (unchanged visuals) ====== */
     btnAddFav.addEventListener('click', () => {
       const sess = getSession(); if (!sess || !sess.email) return;
       const email = sess.email;
@@ -387,7 +457,7 @@
       let siteId = normalizeSiteId(favSite.value);
       const state = (favState.value || '').trim().toUpperCase();
       if (!label) { alert('Enter a label.'); return; }
-      if (!siteId || !/^\\d{8}$/.test(siteId)) { alert('Enter a valid USGS site number.'); return; }
+      if (!siteId || !/^\d{8}$/.test(siteId)) { alert('Enter a valid USGS site number.'); return; }
       const users = getUsers(); const u = users[email]; if (!u) return;
       if (u.favorites.some(f => f.siteId === siteId)) { alert('This site is already in your favorites.'); return; }
       u.favorites.push({ label, siteId, state, addedAt: new Date().toISOString() });
@@ -522,7 +592,7 @@
             btn.addEventListener('click', () => {
               const act = btn.getAttribute('data-action');
               if (act === 'open') {
-                // Redirect to index with a hash carrying the siteId, which we can wire up later on index.html
+                // Redirect to index with a hash carrying the siteId (we'll wire index.html in the next step)
                 location.href = `index.html#site=${id}`;
               } else if (act === 'refresh') {
                 loadFavoriteCard(f, card, { force: true });
@@ -555,11 +625,10 @@
       }, { rootMargin: '200px 0px' });
 
       document.querySelectorAll('.favdata').forEach(card => {
-        // If fullReload we want to load only when visible
         io.observe(card);
       });
 
-      // Optional: if there are only a few, trigger load immediately
+      // If there are only a few, trigger load immediately
       if (list.length <= 2) {
         document.querySelectorAll('.favdata').forEach(card => {
           const key = card.getAttribute('data-fav-key');
@@ -594,7 +663,6 @@
           g65.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${fav.siteId}&parm_cd=00065&period=7${bust}`;
           g60.src = `https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=${fav.siteId}&parm_cd=00060&begin_date=${startDate}&end_date=${endDate}${bust}`;
 
-          // Resolve when images have loaded or errored
           await Promise.all([imgReady(g65), imgReady(g60)]);
         } finally {
           loaders.forEach(L => L.style.display = 'none');
@@ -698,11 +766,11 @@
       } catch {}
       try {
         const rdb = await (await fetch(`https://waterservices.usgs.gov/nwis/site/?format=rdb&sites=${siteId}&siteOutput=expanded`)).text();
-        const header = rdb.split("\\n").find(L => L.startsWith("agency_cd"));
-        const dataLine = rdb.split("\\n").find(L => L && !L.startsWith("#") && !L.startsWith("agency_cd"));
+        const header = rdb.split("\n").find(L => L.startsWith("agency_cd"));
+        const dataLine = rdb.split("\n").find(L => L && !L.startsWith("#") && !L.startsWith("agency_cd"));
         if (header && dataLine) {
-          const H = {}; header.split("\\t").forEach((h,i)=>H[h]=i);
-          const cols = dataLine.split("\\t");
+          const H = {}; header.split("\t").forEach((h,i)=>H[h]=i);
+          const cols = dataLine.split("\t");
           const get = k => (H[k]!=null?cols[H[k]]:"");
           const lat = parseFloat(get("dec_lat_va"));
           const lon = parseFloat(get("dec_long_va"));
@@ -713,12 +781,12 @@
       return null;
     }
     function makePrettyFromSiteName(siteName) {
-      const m = siteName && siteName.match(/\\b(?:AT|NEAR|NR|ABOVE|BELOW)\\s+([^,]+),\\s*([A-Z]{2})\\b/i);
-      if (m) return `${m[1].trim().replace(/\\s+/g,' ')}, ${m[2].toUpperCase()}`;
+      const m = siteName && siteName.match(/\b(?:AT|NEAR|NR|ABOVE|BELOW)\s+([^,]+),\s*([A-Z]{2})\b/i);
+      if (m) return `${m[1].trim().replace(/\s+/g,' ')}, ${m[2].toUpperCase()}`;
       return siteName || '';
     }
 
-    /* ====== Export / Import ====== */
+    /* ====== Export / Import (local JSON) ====== */
     btnExport.addEventListener('click', () => {
       const sess = getSession(); if (!sess || !sess.email) return;
       const users = getUsers(); const u = users[sess.email]; if (!u) return;
@@ -740,7 +808,7 @@
                      siteId: normalizeSiteId(f.siteId || ''),
                      state: String(f.state || '').trim().toUpperCase(),
                      addedAt: f.addedAt || new Date().toISOString() }))
-        .filter(f => f.label && /^\\d{8}$/.test(f.siteId));
+        .filter(f => f.label && /^\d{8}$/.test(f.siteId));
       const users = getUsers(); const u = users[sess.email]; if (!u) return;
       const existingIds = new Set((u.favorites || []).map(f => f.siteId));
       for (const f of incoming) if (!existingIds.has(f.siteId)) { u.favorites.push(f); existingIds.add(f.siteId); }
