@@ -16092,6 +16092,15 @@
     "lon": -121.6924278
   },
   {
+    "site_no": "11516870",
+    "name": "SHASTA R A E LOUIE RD BR NR LK SHASTINA CA",
+    "state": "CA",
+    "city": "Lk Shastina",
+    "county_name": "",
+    "lat": 41.590611,
+    "lon": -122.438083
+  },
+  {
     "site_no": "11517000",
     "name": "SHASTA R NR  MONTAGUE CA",
     "state": "CA",
@@ -17708,8 +17717,8 @@
     "state": "CO",
     "city": "Lamar",
     "county_name": "",
-    "lat": 38.10579167,
-    "lon": -102.6182056
+    "lat": 38.105792,
+    "lon": -102.618206
   },
   {
     "site_no": "07124000",
@@ -17717,8 +17726,8 @@
     "state": "CO",
     "city": "Las Animas",
     "county_name": "",
-    "lat": 38.0808399,
-    "lon": -103.2196523
+    "lat": 38.080833,
+    "lon": -103.219167
   },
   {
     "site_no": "07099970",
@@ -17726,8 +17735,8 @@
     "state": "CO",
     "city": "Moffat Street At Pueblo",
     "county_name": "",
-    "lat": 38.25361396,
-    "lon": -104.6060854
+    "lat": 38.253611,
+    "lon": -104.605556
   },
   {
     "site_no": "07094500",
@@ -17789,8 +17798,8 @@
     "state": "CO",
     "city": "John Martin",
     "county_name": "",
-    "lat": 38.06639635,
-    "lon": -102.9324228
+    "lat": 38.066389,
+    "lon": -102.931944
   },
   {
     "site_no": "07099971",
@@ -17807,8 +17816,8 @@
     "state": "CO",
     "city": "Avondale",
     "county_name": "",
-    "lat": 38.24805799,
-    "lon": -104.3991356
+    "lat": 38.248056,
+    "lon": -104.398611
   },
   {
     "site_no": "07134180",
@@ -17879,8 +17888,8 @@
     "state": "CO",
     "city": "Hwy 227 At Pueblo",
     "county_name": "",
-    "lat": 38.25388889,
-    "lon": -104.5958333
+    "lat": 38.253889,
+    "lon": -104.595833
   },
   {
     "site_no": "07105780",
@@ -17888,8 +17897,8 @@
     "state": "CO",
     "city": "Security",
     "county_name": "",
-    "lat": 38.752495,
-    "lon": -104.7624723
+    "lat": 38.7525,
+    "lon": -104.761944
   },
   {
     "site_no": "07093775",
@@ -18059,8 +18068,8 @@
     "state": "CO",
     "city": "Mouth Near Timpas",
     "county_name": "",
-    "lat": 37.58918109,
-    "lon": -103.6482815
+    "lat": 37.589167,
+    "lon": -103.647778
   },
   {
     "site_no": "07120620",
@@ -18077,8 +18086,8 @@
     "state": "CO",
     "city": "Mouth Near Fort Lupton",
     "county_name": "",
-    "lat": 40.0688333,
-    "lon": -104.8319861
+    "lat": 40.068833,
+    "lon": -104.831986
   },
   {
     "site_no": "06720820",
@@ -18095,8 +18104,8 @@
     "state": "CO",
     "city": "C-470 At Highlands Ranch",
     "county_name": "",
-    "lat": 39.5633216,
-    "lon": -104.927758
+    "lat": 39.563333,
+    "lon": -104.927222
   },
   {
     "site_no": "09153270",
@@ -18257,8 +18266,8 @@
     "state": "CO",
     "city": "Loveland",
     "county_name": "",
-    "lat": 40.37873889,
-    "lon": -105.0608167
+    "lat": 40.378739,
+    "lon": -105.060817
   },
   {
     "site_no": "06744000",
@@ -18338,8 +18347,8 @@
     "state": "CO",
     "city": "",
     "county_name": "",
-    "lat": 39.45582067,
-    "lon": -106.0316849
+    "lat": 39.455833,
+    "lon": -106.031111
   },
   {
     "site_no": "09057700",
@@ -18419,8 +18428,8 @@
     "state": "CO",
     "city": "North 75th St. Near Boulder",
     "county_name": "",
-    "lat": 40.05165184,
-    "lon": -105.1788754
+    "lat": 40.051667,
+    "lon": -105.178333
   },
   {
     "site_no": "400217105123701",
@@ -18554,8 +18563,8 @@
     "state": "CO",
     "city": "Timnath",
     "county_name": "",
-    "lat": 40.5519269,
-    "lon": -105.011365
+    "lat": 40.551944,
+    "lon": -105.010833
   },
   {
     "site_no": "06752000",
@@ -18572,8 +18581,8 @@
     "state": "CO",
     "city": "Fort Collins",
     "county_name": "",
-    "lat": 40.5880833,
-    "lon": -105.0692222
+    "lat": 40.588083,
+    "lon": -105.069222
   },
   {
     "site_no": "06752270",
@@ -18673,6 +18682,15 @@
     "county_name": "",
     "lat": 37.667,
     "lon": -107.82225
+  },
+  {
+    "site_no": "09075050",
+    "name": "CASTLE CREEK ABOVE QUEENS GULCH NEAR ASPEN, CO",
+    "state": "CO",
+    "city": "Queens Gulch Near Aspen",
+    "county_name": "",
+    "lat": 39.150253,
+    "lon": -106.848611
   },
   {
     "site_no": "09055300",
@@ -18788,8 +18806,8 @@
     "state": "CO",
     "city": "",
     "county_name": "",
-    "lat": 39.65359899,
-    "lon": -104.8630326
+    "lat": 39.653611,
+    "lon": -104.8625
   },
   {
     "site_no": "06712000",
@@ -18815,8 +18833,8 @@
     "state": "CO",
     "city": "Parker",
     "county_name": "",
-    "lat": 39.5191557,
-    "lon": -104.7796975
+    "lat": 39.519167,
+    "lon": -104.779167
   },
   {
     "site_no": "06712855",
@@ -18842,8 +18860,8 @@
     "state": "CO",
     "city": "Evans Ave At Colorado Springs",
     "county_name": "",
-    "lat": 38.79054685,
-    "lon": -104.8641404
+    "lat": 38.790556,
+    "lon": -104.863611
   },
   {
     "site_no": "06717400",
@@ -18905,8 +18923,8 @@
     "state": "CO",
     "city": "Empire",
     "county_name": "",
-    "lat": 39.7519319,
-    "lon": -105.661947
+    "lat": 39.751944,
+    "lon": -105.661389
   },
   {
     "site_no": "06719505",
@@ -18914,8 +18932,8 @@
     "state": "CO",
     "city": "Golden",
     "county_name": "",
-    "lat": 39.75304299,
-    "lon": -105.2352667
+    "lat": 39.753056,
+    "lon": -105.234722
   },
   {
     "site_no": "06720000",
@@ -18941,8 +18959,8 @@
     "state": "CO",
     "city": "Lawson",
     "county_name": "",
-    "lat": 39.7658209,
-    "lon": -105.6261123
+    "lat": 39.765833,
+    "lon": -105.625556
   },
   {
     "site_no": "373947105421101",
@@ -19112,8 +19130,8 @@
     "state": "CO",
     "city": "Rulison",
     "county_name": "",
-    "lat": 39.49414529,
-    "lon": -107.9389593
+    "lat": 39.494167,
+    "lon": -107.938333
   },
   {
     "site_no": "09034250",
@@ -19148,8 +19166,8 @@
     "state": "CO",
     "city": "",
     "county_name": "",
-    "lat": 40.1441524,
-    "lon": -105.8672348
+    "lat": 40.144167,
+    "lon": -105.866667
   },
   {
     "site_no": "09015000",
@@ -19220,8 +19238,8 @@
     "state": "CO",
     "city": "Kremmling",
     "county_name": "",
-    "lat": 40.03665248,
-    "lon": -106.4400324
+    "lat": 40.036667,
+    "lon": -106.439444
   },
   {
     "site_no": "09058030",
@@ -19274,7 +19292,7 @@
     "state": "CO",
     "city": "Union Blvd",
     "county_name": "",
-    "lat": 38.9303611,
+    "lat": 38.930361,
     "lon": -104.77615
   },
   {
@@ -19328,8 +19346,8 @@
     "state": "CO",
     "city": "Mouth At Pikeview",
     "county_name": "",
-    "lat": 38.9272222,
-    "lon": -104.8141667
+    "lat": 38.927222,
+    "lon": -104.814167
   },
   {
     "site_no": "07103980",
@@ -19337,8 +19355,8 @@
     "state": "CO",
     "city": "Woodmen Rd Nr Colo Springs",
     "county_name": "",
-    "lat": 38.93943809,
-    "lon": -104.7410863
+    "lat": 38.939444,
+    "lon": -104.740556
   },
   {
     "site_no": "07122500",
@@ -19634,8 +19652,8 @@
     "state": "CO",
     "city": "",
     "county_name": "",
-    "lat": 38.56930556,
-    "lon": -107.4895833
+    "lat": 38.569306,
+    "lon": -107.489583
   },
   {
     "site_no": "09132985",
@@ -20004,7 +20022,7 @@
     "city": "",
     "county_name": "",
     "lat": 39.873725,
-    "lon": -106.3305972
+    "lon": -106.330597
   },
   {
     "site_no": "391013106190201",
@@ -20192,8 +20210,8 @@
     "state": "CO",
     "city": "Colorado Springs",
     "county_name": "",
-    "lat": 38.81638158,
-    "lon": -104.8227519
+    "lat": 38.816389,
+    "lon": -104.822222
   },
   {
     "site_no": "07099990",
@@ -20228,8 +20246,8 @@
     "state": "CO",
     "city": "Security",
     "county_name": "",
-    "lat": 38.7294404,
-    "lon": -104.7338611
+    "lat": 38.729444,
+    "lon": -104.733333
   },
   {
     "site_no": "385537105001401",
@@ -20255,8 +20273,8 @@
     "state": "CO",
     "city": "Colorado Springs",
     "county_name": "",
-    "lat": 38.85471357,
-    "lon": -104.8780314
+    "lat": 38.854722,
+    "lon": -104.8775
   },
   {
     "site_no": "07106000",
@@ -20291,8 +20309,8 @@
     "state": "CO",
     "city": "Logan Mill Road Near Crisman",
     "county_name": "",
-    "lat": 40.04202778,
-    "lon": -105.3649167
+    "lat": 40.042028,
+    "lon": -105.364917
   },
   {
     "site_no": "06727500",
@@ -20678,8 +20696,8 @@
     "state": "CO",
     "city": "Colorado Blvd. At Denver",
     "county_name": "",
-    "lat": 39.66920278,
-    "lon": -104.9425083
+    "lat": 39.669203,
+    "lon": -104.942508
   },
   {
     "site_no": "06711575",
@@ -20957,8 +20975,8 @@
     "state": "CO",
     "city": "Fountain",
     "county_name": "",
-    "lat": 38.6844413,
-    "lon": -104.688583
+    "lat": 38.684444,
+    "lon": -104.688056
   },
   {
     "site_no": "06746095",
@@ -21218,8 +21236,8 @@
     "state": "CO",
     "city": "Hover Road Near Longmont",
     "county_name": "",
-    "lat": 40.13427778,
-    "lon": -105.1308194
+    "lat": 40.134278,
+    "lon": -105.130819
   },
   {
     "site_no": "07103791",
@@ -21335,8 +21353,8 @@
     "state": "CO",
     "city": "Westminster",
     "county_name": "",
-    "lat": 39.82655278,
-    "lon": -105.0400639
+    "lat": 39.826553,
+    "lon": -105.040064
   },
   {
     "site_no": "06711515",
@@ -21353,8 +21371,8 @@
     "state": "CO",
     "city": "Westminster",
     "county_name": "",
-    "lat": 39.81936667,
-    "lon": -105.0214472
+    "lat": 39.819367,
+    "lon": -105.021447
   },
   {
     "site_no": "07105932",
@@ -21857,8 +21875,8 @@
     "state": "CO",
     "city": "Bijou St. At Colo. Springs",
     "county_name": "",
-    "lat": 38.83721474,
-    "lon": -104.8294192
+    "lat": 38.837222,
+    "lon": -104.828889
   },
   {
     "site_no": "07103747",
@@ -21974,8 +21992,8 @@
     "state": "CO",
     "city": "Va Dale",
     "county_name": "",
-    "lat": 40.87831637,
-    "lon": -105.3380411
+    "lat": 40.878333,
+    "lon": -105.3375
   },
   {
     "site_no": "401226105340100",
@@ -22064,8 +22082,8 @@
     "state": "CO",
     "city": "Mouth Nr Black Hawk",
     "county_name": "",
-    "lat": 39.74887674,
-    "lon": -105.3997159
+    "lat": 39.748889,
+    "lon": -105.399167
   },
   {
     "site_no": "08227510",
@@ -22109,8 +22127,8 @@
     "state": "CO",
     "city": "Livermore",
     "county_name": "",
-    "lat": 40.7874815,
-    "lon": -105.2522047
+    "lat": 40.7875,
+    "lon": -105.251667
   },
   {
     "site_no": "385553107243301",
@@ -22559,8 +22577,8 @@
     "state": "CO",
     "city": "Thatcher",
     "county_name": "",
-    "lat": 37.3564059,
-    "lon": -103.9002383
+    "lat": 37.356389,
+    "lon": -103.899722
   },
   {
     "site_no": "06712860",
@@ -22811,8 +22829,8 @@
     "state": "CO",
     "city": "Ft. Carson",
     "county_name": "",
-    "lat": 38.67971594,
-    "lon": -104.8513632
+    "lat": 38.679722,
+    "lon": -104.850833
   },
   {
     "site_no": "401940104143100",
@@ -23081,8 +23099,8 @@
     "state": "CO",
     "city": "Mouth At Colorado Springs",
     "county_name": "",
-    "lat": 38.78832768,
-    "lon": -104.773862
+    "lat": 38.788333,
+    "lon": -104.773333
   },
   {
     "site_no": "06659580",
@@ -23369,8 +23387,8 @@
     "state": "CO",
     "city": "Montezuma",
     "county_name": "",
-    "lat": 39.6053611,
-    "lon": -105.9431306
+    "lat": 39.605361,
+    "lon": -105.943131
   },
   {
     "site_no": "383137107183600",
@@ -23495,8 +23513,8 @@
     "state": "CO",
     "city": "64th Ave. Commerce City",
     "county_name": "",
-    "lat": 39.81220846,
-    "lon": -104.9583129
+    "lat": 39.812222,
+    "lon": -104.957778
   },
   {
     "site_no": "06700000",
@@ -23558,8 +23576,8 @@
     "state": "CO",
     "city": "Fort Lupton",
     "county_name": "",
-    "lat": 40.11609435,
-    "lon": -104.8185831
+    "lat": 40.116111,
+    "lon": -104.818056
   },
   {
     "site_no": "06759500",
@@ -23819,8 +23837,8 @@
     "state": "CO",
     "city": "Hwy 119 Nr Longmont",
     "county_name": "",
-    "lat": 40.16046667,
-    "lon": -105.0079361
+    "lat": 40.160467,
+    "lon": -105.007936
   },
   {
     "site_no": "07108900",
@@ -24350,8 +24368,8 @@
     "state": "CO",
     "city": "Troublesome",
     "county_name": "",
-    "lat": 40.05866389,
-    "lon": -106.3051778
+    "lat": 40.058664,
+    "lon": -106.305178
   },
   {
     "site_no": "06701620",
@@ -24539,8 +24557,8 @@
     "state": "CO",
     "city": "Model",
     "county_name": "",
-    "lat": 37.34557255,
-    "lon": -103.9580186
+    "lat": 37.345556,
+    "lon": -103.9575
   },
   {
     "site_no": "07126130",
@@ -24791,8 +24809,8 @@
     "state": "CO",
     "city": "U.S. Air Force Academy",
     "county_name": "",
-    "lat": 38.97054766,
-    "lon": -104.902758
+    "lat": 38.970556,
+    "lon": -104.902222
   },
   {
     "site_no": "07103797",
@@ -24800,8 +24818,8 @@
     "state": "CO",
     "city": "Rampart",
     "county_name": "",
-    "lat": 38.97499176,
-    "lon": -104.9555374
+    "lat": 38.975,
+    "lon": -104.955
   },
   {
     "site_no": "06708690",
@@ -63781,6 +63799,15 @@
     "county_name": "",
     "lat": 47.5403333,
     "lon": -116.1508889
+  },
+  {
+    "site_no": "13236000",
+    "name": "DEADWOOD RES NR LOWMAN ID",
+    "state": "ID",
+    "city": "Lowman",
+    "county_name": "",
+    "lat": 44.29361111,
+    "lon": -115.64638889
   },
   {
     "site_no": "13236500",
@@ -120672,6 +120699,15 @@
     "lon": -98.7086111
   },
   {
+    "site_no": "06467600",
+    "name": "JAMES RIVER NEAR MANFRED, ND",
+    "state": "ND",
+    "city": "Manfred",
+    "county_name": "",
+    "lat": 47.646056,
+    "lon": -99.829528
+  },
+  {
     "site_no": "474300099153700",
     "name": "JAMES RIVER NEAR NEW ROCKFORD, ND",
     "state": "ND",
@@ -120697,15 +120733,6 @@
     "county_name": "",
     "lat": 47.5580525,
     "lon": -98.862885
-  },
-  {
-    "site_no": "06467600",
-    "name": "JAMES RIVER NR MANFRED, ND",
-    "state": "ND",
-    "city": "Manfred",
-    "county_name": "",
-    "lat": 47.646056,
-    "lon": -99.829528
   },
   {
     "site_no": "06469015",
@@ -121033,12 +121060,12 @@
   },
   {
     "site_no": "06337000",
-    "name": "LITTLE MISSOURI RIVER NR WATFORD CITY, ND",
+    "name": "LITTLE MISSOURI RIVER NEAR WATFORD CITY, ND",
     "state": "ND",
     "city": "Watford City",
     "county_name": "",
-    "lat": 47.59140556,
-    "lon": -103.2526667
+    "lat": 47.591406,
+    "lon": -103.252667
   },
   {
     "site_no": "06331000",
@@ -137786,7 +137813,7 @@
     "state": "NY",
     "city": "Rochester",
     "county_name": "",
-    "lat": 43.12802778,
+    "lat": 43.128028,
     "lon": -77.527
   },
   {
@@ -138380,8 +138407,8 @@
     "state": "NY",
     "city": "Hwy28 At Allaben",
     "county_name": "",
-    "lat": 42.11255556,
-    "lon": -74.3586944
+    "lat": 42.112556,
+    "lon": -74.358694
   },
   {
     "site_no": "01302000",
@@ -143762,8 +143789,8 @@
     "state": "NY",
     "city": "Rondout",
     "county_name": "",
-    "lat": 41.91813889,
-    "lon": -73.9817222
+    "lat": 41.918139,
+    "lon": -73.981722
   },
   {
     "site_no": "01367500",
@@ -146363,8 +146390,8 @@
     "state": "OH",
     "city": "Melco",
     "county_name": "",
-    "lat": 40.6978361,
-    "lon": -82.36016289
+    "lat": 40.697778,
+    "lon": -82.360278
   },
   {
     "site_no": "03130000",
@@ -154094,7 +154121,7 @@
     "state": "OR",
     "city": "Scio",
     "county_name": "",
-    "lat": 44.67313889,
+    "lat": 44.673139,
     "lon": -122.91925
   },
   {
@@ -159397,6 +159424,15 @@
     "county_name": "",
     "lat": 41.2748611,
     "lon": -76.3778611
+  },
+  {
+    "site_no": "01548079",
+    "name": "Fishing Creek at Main St. at Mill Hall, PA",
+    "state": "PA",
+    "city": "Main St. At Mill Hall",
+    "county_name": "",
+    "lat": 41.10175,
+    "lon": -77.4846111
   },
   {
     "site_no": "01539000",
@@ -165956,8 +165992,8 @@
     "state": "SC",
     "city": "",
     "county_name": "",
-    "lat": 34.98002778,
-    "lon": -82.1932778
+    "lat": 34.980028,
+    "lon": -82.193278
   },
   {
     "site_no": "02157470",
@@ -165983,8 +166019,8 @@
     "state": "SC",
     "city": "Startex",
     "county_name": "",
-    "lat": 34.92716667,
-    "lon": -82.09963889
+    "lat": 34.927167,
+    "lon": -82.099639
   },
   {
     "site_no": "021973007",
@@ -166010,8 +166046,8 @@
     "state": "SC",
     "city": "Slater",
     "county_name": "",
-    "lat": 35.1323333,
-    "lon": -82.4200833
+    "lat": 35.132333,
+    "lon": -82.420083
   },
   {
     "site_no": "02156999",
@@ -166568,8 +166604,8 @@
     "state": "SC",
     "city": "Hunts Bridge Rd Nr Dacusville",
     "county_name": "",
-    "lat": 34.9390833,
-    "lon": -82.5251111
+    "lat": 34.939083,
+    "lon": -82.525111
   },
   {
     "site_no": "02168900",
@@ -178556,8 +178592,8 @@
     "state": "TX",
     "city": "Hico",
     "county_name": "",
-    "lat": 31.9765366,
-    "lon": -98.032812
+    "lat": 31.977222,
+    "lon": -98.035139
   },
   {
     "site_no": "08095200",
