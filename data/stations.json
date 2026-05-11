@@ -6143,7 +6143,7 @@
     "state": "AZ",
     "city": "Arivaca",
     "county_name": "",
-    "lat": 31.58355556,
+    "lat": 31.583556,
     "lon": -111.34975
   },
   {
@@ -7016,8 +7016,8 @@
     "state": "AZ",
     "city": "Thatcher",
     "county_name": "",
-    "lat": 32.74395706,
-    "lon": -109.8381364
+    "lat": 32.743889,
+    "lon": -109.8375
   },
   {
     "site_no": "334236111391501",
@@ -8348,8 +8348,8 @@
     "state": "AZ",
     "city": "Pisinimo",
     "county_name": "",
-    "lat": 32.044237,
-    "lon": -112.3709706
+    "lat": 32.044167,
+    "lon": -112.370278
   },
   {
     "site_no": "09482000",
@@ -8375,8 +8375,8 @@
     "state": "AZ",
     "city": "Mission Lane Gcs At Tucson",
     "county_name": "",
-    "lat": 32.2142222,
-    "lon": -110.9833056
+    "lat": 32.214222,
+    "lon": -110.983306
   },
   {
     "site_no": "313343110024701",
@@ -8402,8 +8402,8 @@
     "state": "AZ",
     "city": "Starr Pass Gcs At Tucson",
     "county_name": "",
-    "lat": 32.20705278,
-    "lon": -110.9885333
+    "lat": 32.207053,
+    "lon": -110.988533
   },
   {
     "site_no": "09486520",
@@ -9446,8 +9446,8 @@
     "state": "CA",
     "city": "Markleeville",
     "county_name": "",
-    "lat": 38.71711812,
-    "lon": -119.65931792
+    "lat": 38.717222,
+    "lon": -119.658333
   },
   {
     "site_no": "103087891",
@@ -11966,8 +11966,8 @@
     "state": "CA",
     "city": "Lompoc",
     "county_name": "",
-    "lat": 34.51366494,
-    "lon": -120.48584796
+    "lat": 34.513686,
+    "lon": -120.484894
   },
   {
     "site_no": "11121010",
@@ -14873,8 +14873,8 @@
     "state": "CA",
     "city": "Santa Margarita",
     "county_name": "",
-    "lat": 35.40875278,
-    "lon": -120.56700833
+    "lat": 35.408753,
+    "lon": -120.567008
   },
   {
     "site_no": "11152500",
@@ -15026,8 +15026,8 @@
     "state": "CA",
     "city": "",
     "county_name": "",
-    "lat": 36.61412778,
-    "lon": -121.21136111
+    "lat": 36.614128,
+    "lon": -121.211361
   },
   {
     "site_no": "11023000",
@@ -17708,8 +17708,8 @@
     "state": "CO",
     "city": "La Junta",
     "county_name": "",
-    "lat": 37.99055556,
-    "lon": -103.5319444
+    "lat": 37.990556,
+    "lon": -103.531944
   },
   {
     "site_no": "07133000",
@@ -29075,8 +29075,8 @@
     "state": "FL",
     "city": "Harold",
     "county_name": "",
-    "lat": 30.7047222,
-    "lon": -86.8817222
+    "lat": 30.704722,
+    "lon": -86.881722
   },
   {
     "site_no": "02370100",
@@ -53145,15 +53145,6 @@
     "lon": -83.2087652
   },
   {
-    "site_no": "311524081360702",
-    "name": "LITTLE BUFFALO CREEK AT HWY 32 AT ANGUILLA, GA",
-    "state": "GA",
-    "city": "Hwy 32 At Anguilla",
-    "county_name": "",
-    "lat": 31.25680556,
-    "lon": -81.60213889
-  },
-  {
     "site_no": "03566688",
     "name": "LITTLE CHICKAMAUGA CR AT CR 259, NR RINGGOLD, GA",
     "state": "GA",
@@ -64908,6 +64899,15 @@
     "lon": -116.1072222
   },
   {
+    "site_no": "13306000",
+    "name": "NF SALMON RIVER AT NORTH FORK ID",
+    "state": "ID",
+    "city": "",
+    "county_name": "",
+    "lat": 45.4075,
+    "lon": -113.993056
+  },
+  {
     "site_no": "13055250",
     "name": "NF TETON RIVER NR SUGAR CITY ID",
     "state": "ID",
@@ -68371,6 +68371,15 @@
     "county_name": "",
     "lat": 40.45466667,
     "lon": -89.6061667
+  },
+  {
+    "site_no": "05565600",
+    "name": "MACKINAW RIVER NEAR HUDSON, IL",
+    "state": "IL",
+    "city": "Hudson",
+    "county_name": "",
+    "lat": 40.658333,
+    "lon": -89.050278
   },
   {
     "site_no": "05564300",
@@ -89186,8 +89195,8 @@
     "state": "MD",
     "city": "Frederick",
     "county_name": "",
-    "lat": 39.43602778,
-    "lon": -77.4405833
+    "lat": 39.436028,
+    "lon": -77.440583
   },
   {
     "site_no": "03077955",
@@ -90842,7 +90851,7 @@
     "state": "MD",
     "city": "Laurel",
     "county_name": "",
-    "lat": 39.11572222,
+    "lat": 39.115722,
     "lon": -76.87375
   },
   {
@@ -95756,8 +95765,8 @@
     "state": "MI",
     "city": "Coy St At Alden",
     "county_name": "",
-    "lat": 44.88088611,
-    "lon": -85.27701389
+    "lat": 44.880886,
+    "lon": -85.277014
   },
   {
     "site_no": "04044766",
@@ -96377,8 +96386,8 @@
     "state": "MI",
     "city": "Oscoda",
     "county_name": "",
-    "lat": 44.4488864,
-    "lon": -83.3395889
+    "lat": 44.448889,
+    "lon": -83.339722
   },
   {
     "site_no": "442746083212201",
@@ -96386,8 +96395,8 @@
     "state": "MI",
     "city": "Oscoda",
     "county_name": "",
-    "lat": 44.4627333,
-    "lon": -83.3562444
+    "lat": 44.462733,
+    "lon": -83.356244
   },
   {
     "site_no": "451540084560301",
@@ -118544,8 +118553,8 @@
     "state": "NC",
     "city": "Apex",
     "county_name": "",
-    "lat": 35.71888889,
-    "lon": -78.7522222
+    "lat": 35.718889,
+    "lon": -78.752222
   },
   {
     "site_no": "0208758850",
@@ -124587,6 +124596,15 @@
     "lon": -98.22286111
   },
   {
+    "site_no": "06601085",
+    "name": "North Blackbird Creek at Hwy 75 at Macy, Nebr.",
+    "state": "NE",
+    "city": "Hwy 75 At Macy",
+    "county_name": "",
+    "lat": 42.110278,
+    "lon": -96.344667
+  },
+  {
     "site_no": "06814500",
     "name": "North Fork Big Nemaha River at Humboldt, Nebr.",
     "state": "NE",
@@ -124727,8 +124745,8 @@
     "state": "NE",
     "city": "Homer",
     "county_name": "",
-    "lat": 42.32140833,
-    "lon": -96.48793056
+    "lat": 42.321408,
+    "lon": -96.487931
   },
   {
     "site_no": "410642095532401",
@@ -125406,6 +125424,15 @@
     "lon": -97.71403056
   },
   {
+    "site_no": "06601095",
+    "name": "South Blackbird Creek at Hwy 75 near Macy, Nebr.",
+    "state": "NE",
+    "city": "Hwy 75 Near Macy",
+    "county_name": "",
+    "lat": 42.104917,
+    "lon": -96.337806
+  },
+  {
     "site_no": "06827500",
     "name": "South Fork Republican River near Benkelman, Nebr.",
     "state": "NE",
@@ -125474,8 +125501,8 @@
     "state": "NE",
     "city": "Walthill",
     "county_name": "",
-    "lat": 42.14819167,
-    "lon": -96.48358056
+    "lat": 42.148192,
+    "lon": -96.483581
   },
   {
     "site_no": "06610788",
@@ -126437,8 +126464,8 @@
     "state": "NH",
     "city": "Nh 28",
     "county_name": "",
-    "lat": 43.15980438,
-    "lon": -71.4059011
+    "lat": 43.159722,
+    "lon": -71.406389
   },
   {
     "site_no": "01089500",
@@ -139338,15 +139365,6 @@
     "lon": -75.7512222
   },
   {
-    "site_no": "04260990",
-    "name": "CRANBERRY LAKE AT CRANBERRY LAKE NY",
-    "state": "NY",
-    "city": "",
-    "county_name": "",
-    "lat": 44.2206171,
-    "lon": -74.84824348
-  },
-  {
     "site_no": "04235281",
     "name": "CRANE BROOK AT MONTEZUMA NY",
     "state": "NY",
@@ -141719,8 +141737,8 @@
     "state": "NY",
     "city": "West Conesville Near Gilboa",
     "county_name": "",
-    "lat": 42.376639,
-    "lon": -74.414083
+    "lat": 42.376806,
+    "lon": -74.413722
   },
   {
     "site_no": "04220390",
@@ -158391,6 +158409,15 @@
     "lon": -76.90636279
   },
   {
+    "site_no": "03085590",
+    "name": "Chartiers Cr at Linden St at McKees Rocks PA",
+    "state": "PA",
+    "city": "Linden St At Mckees Rocks",
+    "county_name": "",
+    "lat": 40.46377778,
+    "lon": -80.05711111
+  },
+  {
     "site_no": "03085250",
     "name": "Chartiers Creek at Canonsburg, PA",
     "state": "PA",
@@ -158940,6 +158967,15 @@
     "lon": -77.148305
   },
   {
+    "site_no": "01476020",
+    "name": "Crum Creek at Eddystone, PA",
+    "state": "PA",
+    "city": "Eddystone",
+    "county_name": "",
+    "lat": 39.86695924,
+    "lon": -75.3407283
+  },
+  {
     "site_no": "01475850",
     "name": "Crum Creek near Newtown Square, PA",
     "state": "PA",
@@ -159377,8 +159413,8 @@
     "state": "PA",
     "city": "Centerville",
     "county_name": "",
-    "lat": 39.7898076,
-    "lon": -78.64640638
+    "lat": 39.789722,
+    "lon": -78.646667
   },
   {
     "site_no": "01544000",
@@ -160218,6 +160254,15 @@
     "lon": -79.93810799
   },
   {
+    "site_no": "03049635",
+    "name": "Little Pucketa Cr at 7th St at New Kensington PA",
+    "state": "PA",
+    "city": "7th St At New Kensington",
+    "county_name": "",
+    "lat": 40.56363889,
+    "lon": -79.75641667
+  },
+  {
     "site_no": "01469700",
     "name": "Little Schuylkill River at South Tamaqua, PA",
     "state": "PA",
@@ -160495,6 +160540,15 @@
     "county_name": "",
     "lat": 40.09779108,
     "lon": -75.7415732
+  },
+  {
+    "site_no": "01464570",
+    "name": "Martins Creek at Tullytown, PA",
+    "state": "PA",
+    "city": "Tullytown",
+    "county_name": "",
+    "lat": 40.1421111,
+    "lon": -74.8120556
   },
   {
     "site_no": "01478230",
@@ -160810,6 +160864,15 @@
     "county_name": "",
     "lat": 40.0309245,
     "lon": -77.3085949
+  },
+  {
+    "site_no": "014755595",
+    "name": "Muckinipattis Cr at Chester Pike at Glenolden PA",
+    "state": "PA",
+    "city": "Chester Pike At Glenolden",
+    "county_name": "",
+    "lat": 39.89344444,
+    "lon": -75.2954167
   },
   {
     "site_no": "01577500",
@@ -161341,6 +161404,15 @@
     "county_name": "",
     "lat": 40.50313889,
     "lon": -79.9484444
+  },
+  {
+    "site_no": "01548214",
+    "name": "Pine Creek at West St at Galeton, PA",
+    "state": "PA",
+    "city": "West St At Galeton",
+    "county_name": "",
+    "lat": 41.73572222,
+    "lon": -77.64797222
   },
   {
     "site_no": "01549700",
@@ -162232,6 +162304,15 @@
     "county_name": "",
     "lat": 41.76055556,
     "lon": -76.675
+  },
+  {
+    "site_no": "01516020",
+    "name": "Susquehanna R at Athens, PA",
+    "state": "PA",
+    "city": "Athens",
+    "county_name": "",
+    "lat": 41.9572192,
+    "lon": -76.51492159
   },
   {
     "site_no": "01553990",
@@ -184120,6 +184201,15 @@
     "county_name": "",
     "lat": 40.68803889,
     "lon": -111.5337194
+  },
+  {
+    "site_no": "09226500",
+    "name": "MIDDLE FORK BEAVER CREEK NEAR LONETREE, WYO.",
+    "state": "UT",
+    "city": "Lonetree",
+    "county_name": "",
+    "lat": 40.9443932,
+    "lon": -110.1793209
   },
   {
     "site_no": "10170250",
@@ -206460,6 +206550,15 @@
     "lon": -110.2059583
   },
   {
+    "site_no": "09218850",
+    "name": "Blacks Fork bl Blacks Fork Canal, nr Robertson, WY",
+    "state": "WY",
+    "city": "Robertson",
+    "county_name": "",
+    "lat": 41.195825,
+    "lon": -110.463244
+  },
+  {
     "site_no": "06189000",
     "name": "Blacktail Deer Creek nr Mammoth YNP",
     "state": "WY",
@@ -207988,6 +208087,15 @@
     "county_name": "",
     "lat": 44.86898889,
     "lon": -110.164775
+  },
+  {
+    "site_no": "09221505",
+    "name": "South Creek at Mountain View, WY",
+    "state": "WY",
+    "city": "Mountain View",
+    "county_name": "",
+    "lat": 41.267219,
+    "lon": -110.339719
   },
   {
     "site_no": "13012475",
