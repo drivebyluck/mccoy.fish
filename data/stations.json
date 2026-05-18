@@ -26493,7 +26493,7 @@
     "city": "Wilmington",
     "county_name": "",
     "lat": 39.7695,
-    "lon": -75.5766944
+    "lon": -75.576694
   },
   {
     "site_no": "01484272",
@@ -61381,12 +61381,12 @@
   },
   {
     "site_no": "05464490",
-    "name": "McCloud Run at Cedar Rapids, IA",
+    "name": "McLoud Run at Cedar Rapids, IA",
     "state": "IA",
     "city": "Cedar Rapids",
     "county_name": "",
-    "lat": 41.9997218,
-    "lon": -91.6665692
+    "lat": 41.999722,
+    "lon": -91.666389
   },
   {
     "site_no": "05472390",
@@ -90230,8 +90230,8 @@
     "state": "MD",
     "city": "Radecke Ave At Baltimore",
     "county_name": "",
-    "lat": 39.3300833,
-    "lon": -76.53488889
+    "lat": 39.330083,
+    "lon": -76.534889
   },
   {
     "site_no": "01585225",
@@ -124322,8 +124322,8 @@
     "state": "NE",
     "city": "La Platte",
     "county_name": "",
-    "lat": 41.05935278,
-    "lon": -95.8836694
+    "lat": 41.059353,
+    "lon": -95.883669
   },
   {
     "site_no": "06478526",
@@ -126205,6 +126205,15 @@
     "county_name": "",
     "lat": 42.9481405,
     "lon": -71.4634002
+  },
+  {
+    "site_no": "01088400",
+    "name": "MERRIMACK RIVER AT CONCORD, NH",
+    "state": "NH",
+    "city": "Concord",
+    "county_name": "",
+    "lat": 43.20885757,
+    "lon": -71.53030297
   },
   {
     "site_no": "01081500",
@@ -143303,8 +143312,8 @@
     "state": "NY",
     "city": "Aurora Street At Moravia",
     "county_name": "",
-    "lat": 42.7115833,
-    "lon": -76.434
+    "lat": 42.712917,
+    "lon": -76.43575
   },
   {
     "site_no": "04235440",
@@ -143528,8 +143537,8 @@
     "state": "NY",
     "city": "Dunraven",
     "county_name": "",
-    "lat": 42.13305556,
-    "lon": -74.6955556
+    "lat": 42.132528,
+    "lon": -74.695361
   },
   {
     "site_no": "01350120",
@@ -154427,8 +154436,8 @@
     "state": "OR",
     "city": "Elkton",
     "county_name": "",
-    "lat": 43.6352222,
-    "lon": -123.5646389
+    "lat": 43.635222,
+    "lon": -123.564639
   },
   {
     "site_no": "14338000",
@@ -186381,6 +186390,15 @@
     "lon": -79.364211
   },
   {
+    "site_no": "0207635085",
+    "name": "CHERRYSTONE CK BELOW NR CO RD 1444 NR CHATHAM, VA",
+    "state": "VA",
+    "city": "Nr Co Rd 1444 Nr Chatham",
+    "county_name": "",
+    "lat": 36.808411,
+    "lon": -79.362739
+  },
+  {
     "site_no": "03165000",
     "name": "CHESTNUT CREEK AT GALAX, VA",
     "state": "VA",
@@ -188611,24 +188629,6 @@
     "county_name": "",
     "lat": 38.20519444,
     "lon": -78.7611667
-  },
-  {
-    "site_no": "0162732518",
-    "name": "PAINE RUN AT ELEVATION 1750 NEAR HARRISTON, VA",
-    "state": "VA",
-    "city": "Elevation 1750 Near Harriston",
-    "county_name": "",
-    "lat": 38.20730556,
-    "lon": -78.7569722
-  },
-  {
-    "site_no": "0162732260",
-    "name": "PAINE RUN AT ELEVATION 1830 NEAR HARRISTON, VA",
-    "state": "VA",
-    "city": "Elevation 1830 Near Harriston",
-    "county_name": "",
-    "lat": 38.2092222,
-    "lon": -78.7527222
   },
   {
     "site_no": "01670180",
@@ -206559,6 +206559,15 @@
     "lon": -110.463244
   },
   {
+    "site_no": "09218895",
+    "name": "Blacks Fork bl Little Blacks Fk at Fort Bridger WY",
+    "state": "WY",
+    "city": "Fort Bridger",
+    "county_name": "",
+    "lat": 41.329486,
+    "lon": -110.389231
+  },
+  {
     "site_no": "06189000",
     "name": "Blacktail Deer Creek nr Mammoth YNP",
     "state": "WY",
@@ -206802,15 +206811,6 @@
     "lon": -109.951
   },
   {
-    "site_no": "09220000",
-    "name": "EAST FORK OF SMITHS FORK NEAR ROBERTSON, WY",
-    "state": "WY",
-    "city": "Robertson",
-    "county_name": "",
-    "lat": 41.0538611,
-    "lon": -110.3986389
-  },
-  {
     "site_no": "09255400",
     "name": "EAST FORK SAVERY CREEK NEAR ENCAMPMENT, WY",
     "state": "WY",
@@ -206845,6 +206845,24 @@
     "county_name": "",
     "lat": 41.30328495,
     "lon": -106.7153597
+  },
+  {
+    "site_no": "09203500",
+    "name": "East Fork River ab East Fork Canal, nr Boulder, WY",
+    "state": "WY",
+    "city": "Boulder",
+    "county_name": "",
+    "lat": 42.673889,
+    "lon": -109.569722
+  },
+  {
+    "site_no": "09220000",
+    "name": "East Fork Smiths Fork near Robertson, WY",
+    "state": "WY",
+    "city": "Robertson",
+    "county_name": "",
+    "lat": 41.053861,
+    "lon": -110.398639
   },
   {
     "site_no": "09204500",
@@ -207158,8 +207176,8 @@
     "state": "WY",
     "city": "Baggs",
     "county_name": "",
-    "lat": 41.02921389,
-    "lon": -107.6837806
+    "lat": 41.029214,
+    "lon": -107.683781
   },
   {
     "site_no": "06305700",
