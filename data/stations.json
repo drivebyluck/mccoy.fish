@@ -8726,8 +8726,8 @@
     "state": "AZ",
     "city": "Littlefield",
     "county_name": "",
-    "lat": 36.92138889,
-    "lon": -113.8313889
+    "lat": 36.921389,
+    "lon": -113.831389
   },
   {
     "site_no": "09415000",
@@ -8791,6 +8791,15 @@
     "county_name": "",
     "lat": 34.98775,
     "lon": -111.7461944
+  },
+  {
+    "site_no": "09536500",
+    "name": "WEST TURKEY CREEK NEAR SUNIZONA, AZ",
+    "state": "AZ",
+    "city": "Sunizona",
+    "county_name": "",
+    "lat": 31.866667,
+    "lon": -109.416667
   },
   {
     "site_no": "09505200",
@@ -25520,8 +25529,8 @@
     "state": "CT",
     "city": "Well Field Near Cheshire",
     "county_name": "",
-    "lat": 41.54248749,
-    "lon": -72.87730487
+    "lat": 41.5425,
+    "lon": -72.877778
   },
   {
     "site_no": "01208420",
@@ -71127,6 +71136,15 @@
     "lon": -84.9032222
   },
   {
+    "site_no": "405327084555401",
+    "name": "DRAIN TILE NORTH OF CR 1000 N NR DECATUR, IN",
+    "state": "IN",
+    "city": "Decatur",
+    "county_name": "",
+    "lat": 40.89083333,
+    "lon": -84.93166667
+  },
+  {
     "site_no": "411228084541702",
     "name": "DRAIN TILE WEST OF BULL RAPIDS RD NR HARLAN, IN",
     "state": "IN",
@@ -73431,6 +73449,15 @@
     "lon": -84.9031667
   },
   {
+    "site_no": "405327084555402",
+    "name": "OVERLAND FLOW NORTH OF CR 1000 N NR DECATUR, IN",
+    "state": "IN",
+    "city": "Decatur",
+    "county_name": "",
+    "lat": 40.89083333,
+    "lon": -84.93208333
+  },
+  {
     "site_no": "411228084541701",
     "name": "OVERLAND FLOW WEST OF BULL RAPIDS RD NR HARLAN, IN",
     "state": "IN",
@@ -75609,6 +75636,15 @@
     "lon": -86.1219444
   },
   {
+    "site_no": "03353640",
+    "name": "WHITE RIVER AT SOUTHPORT RD, INDIANAPOLIS, IN",
+    "state": "IN",
+    "city": "Southport Rd",
+    "county_name": "",
+    "lat": 39.663056,
+    "lon": -86.236667
+  },
+  {
     "site_no": "03357000",
     "name": "WHITE RIVER AT SPENCER, IN",
     "state": "IN",
@@ -76379,8 +76415,8 @@
     "state": "KS",
     "city": "Hoyt",
     "county_name": "",
-    "lat": 39.28888539,
-    "lon": -95.7485946
+    "lat": 39.288889,
+    "lon": -95.748333
   },
   {
     "site_no": "07170700",
@@ -80566,6 +80602,15 @@
     "county_name": "",
     "lat": 37.92784138,
     "lon": -85.6535688
+  },
+  {
+    "site_no": "03123498",
+    "name": "LOUISVILLE TEST SITE",
+    "state": "KY",
+    "city": "",
+    "county_name": "",
+    "lat": 38.2147928,
+    "lon": -85.7482953
   },
   {
     "site_no": "03404900",
@@ -93447,6 +93492,15 @@
     "lon": -85.99579295
   },
   {
+    "site_no": "04043140",
+    "name": "GOMANCHE CREEK AT INDIAN ROAD NEAR L'ANSE, MI",
+    "state": "MI",
+    "city": "Indian Road Near L'Anse",
+    "county_name": "",
+    "lat": 46.751111,
+    "lon": -88.361667
+  },
+  {
     "site_no": "04058355",
     "name": "GOOSE LAKE NEAR NEGAUNEE, MI",
     "state": "MI",
@@ -95261,8 +95315,8 @@
     "state": "MI",
     "city": "Allen Park",
     "county_name": "",
-    "lat": 42.3008419,
-    "lon": -83.199311
+    "lat": 42.300833,
+    "lon": -83.199444
   },
   {
     "site_no": "04166000",
@@ -110057,7 +110111,7 @@
     "state": "MT",
     "city": "",
     "county_name": "",
-    "lat": 45.8508222,
+    "lat": 45.850822,
     "lon": -113.068361
   },
   {
@@ -111650,8 +111704,8 @@
     "state": "MT",
     "city": "Mcallister",
     "county_name": "",
-    "lat": 45.4865944,
-    "lon": -111.6338583
+    "lat": 45.486594,
+    "lon": -111.633858
   },
   {
     "site_no": "06040050",
@@ -111686,8 +111740,8 @@
     "state": "MT",
     "city": "Mcallister",
     "county_name": "",
-    "lat": 45.49023056,
-    "lon": -111.6345056
+    "lat": 45.490231,
+    "lon": -111.634506
   },
   {
     "site_no": "06038500",
@@ -111704,8 +111758,8 @@
     "state": "MT",
     "city": "Cameron",
     "county_name": "",
-    "lat": 45.2331333,
-    "lon": -111.7516333
+    "lat": 45.233133,
+    "lon": -111.751633
   },
   {
     "site_no": "06041500",
@@ -117765,6 +117819,15 @@
     "lon": -76.4663298
   },
   {
+    "site_no": "0208721060",
+    "name": "PERRY CREEK AT CYNROWBLVDAT RALEIGH, NC",
+    "state": "NC",
+    "city": "Cynrowblvdat Raleigh",
+    "county_name": "",
+    "lat": 35.877692,
+    "lon": -78.591097
+  },
+  {
     "site_no": "0208721455",
     "name": "PERRY CREEK AT PERRY CREEK ROAD NEAR RALEIGH, NC",
     "state": "NC",
@@ -121874,8 +121937,8 @@
     "state": "ND",
     "city": "Fargo",
     "county_name": "",
-    "lat": 46.861075,
-    "lon": -96.7836924
+    "lat": 46.861111,
+    "lon": -96.783333
   },
   {
     "site_no": "05082500",
@@ -123235,6 +123298,15 @@
     "county_name": "",
     "lat": 41.2053861,
     "lon": -96.0183472
+  },
+  {
+    "site_no": "06601100",
+    "name": "Blackbird Creek near Macy, Nebr.",
+    "state": "NE",
+    "city": "Macy",
+    "county_name": "",
+    "lat": 42.109278,
+    "lon": -96.317056
   },
   {
     "site_no": "423323099520101",
@@ -133799,8 +133871,8 @@
     "state": "NM",
     "city": "San Acacia",
     "county_name": "",
-    "lat": 34.2484002,
-    "lon": -106.9016949
+    "lat": 34.248333,
+    "lon": -106.901111
   },
   {
     "site_no": "08358300",
@@ -133817,8 +133889,8 @@
     "state": "NM",
     "city": "San Antonio",
     "county_name": "",
-    "lat": 33.87004444,
-    "lon": -106.85098333
+    "lat": 33.870044,
+    "lon": -106.850983
   },
   {
     "site_no": "08275500",
@@ -134870,8 +134942,8 @@
     "state": "NV",
     "city": "Hiko",
     "county_name": "",
-    "lat": 37.5319043,
-    "lon": -115.2325215
+    "lat": 37.531944,
+    "lon": -115.231667
   },
   {
     "site_no": "362910114280401",
@@ -134978,8 +135050,8 @@
     "state": "NV",
     "city": "Ash Spgs",
     "county_name": "",
-    "lat": 37.46023845,
-    "lon": -115.1944636
+    "lat": 37.460278,
+    "lon": -115.193611
   },
   {
     "site_no": "09415639",
@@ -134996,8 +135068,8 @@
     "state": "NV",
     "city": "Ash Spgs",
     "county_name": "",
-    "lat": 37.4597222,
-    "lon": -115.1941667
+    "lat": 37.459722,
+    "lon": -115.194167
   },
   {
     "site_no": "362605114163001",
@@ -135374,8 +135446,8 @@
     "state": "NV",
     "city": "Hiko",
     "county_name": "",
-    "lat": 37.53182099,
-    "lon": -115.2342993
+    "lat": 37.531861,
+    "lon": -115.233444
   },
   {
     "site_no": "10312267",
@@ -136373,8 +136445,8 @@
     "state": "NV",
     "city": "Eagle Cyn Nr Ursine",
     "county_name": "",
-    "lat": 38.0041285,
-    "lon": -114.206927
+    "lat": 38.004167,
+    "lon": -114.206111
   },
   {
     "site_no": "09418750",
@@ -157883,8 +157955,8 @@
     "state": "PA",
     "city": "Tyrone",
     "county_name": "",
-    "lat": 40.6836733,
-    "lon": -78.23362439
+    "lat": 40.683611,
+    "lon": -78.233889
   },
   {
     "site_no": "01547200",
@@ -158459,8 +158531,8 @@
     "state": "PA",
     "city": "Chester",
     "county_name": "",
-    "lat": 39.8690009,
-    "lon": -75.4082494
+    "lat": 39.868889,
+    "lon": -75.408611
   },
   {
     "site_no": "01553700",
@@ -158837,8 +158909,8 @@
     "state": "PA",
     "city": "Hogestown",
     "county_name": "",
-    "lat": 40.2522222,
-    "lon": -77.0211111
+    "lat": 40.252222,
+    "lon": -77.021111
   },
   {
     "site_no": "01516500",
@@ -159791,8 +159863,8 @@
     "state": "PA",
     "city": "Lewistown",
     "county_name": "",
-    "lat": 40.59451734,
-    "lon": -77.5824931
+    "lat": 40.594444,
+    "lon": -77.582778
   },
   {
     "site_no": "01563500",
@@ -159809,8 +159881,8 @@
     "state": "PA",
     "city": "Newport",
     "county_name": "",
-    "lat": 40.47841677,
-    "lon": -77.1291484
+    "lat": 40.478333,
+    "lon": -77.129444
   },
   {
     "site_no": "01544500",
@@ -161240,8 +161312,8 @@
     "state": "PA",
     "city": "Glenwood",
     "county_name": "",
-    "lat": 40.3061111,
-    "lon": -76.8555556
+    "lat": 40.306111,
+    "lon": -76.855556
   },
   {
     "site_no": "01570980",
@@ -163193,8 +163265,8 @@
     "state": "PA",
     "city": "",
     "county_name": "",
-    "lat": 40.07287916,
-    "lon": -75.8607744
+    "lat": 40.072778,
+    "lon": -75.861111
   },
   {
     "site_no": "03028000",
@@ -184541,8 +184613,8 @@
     "state": "UT",
     "city": "Wellington",
     "county_name": "",
-    "lat": 39.44967343,
-    "lon": -110.62795996
+    "lat": 39.449722,
+    "lon": -110.627222
   },
   {
     "site_no": "09311500",
@@ -189970,6 +190042,15 @@
     "county_name": "",
     "lat": 37.71541868,
     "lon": -78.981691
+  },
+  {
+    "site_no": "02037724",
+    "name": "UNNAMED TRIB AT OAKLEYS LN NR RICHMOND, VA",
+    "state": "VA",
+    "city": "Oakleys Ln Nr Richmond",
+    "county_name": "",
+    "lat": 37.52565,
+    "lon": -77.343511
   },
   {
     "site_no": "02042410",
@@ -207275,8 +207356,8 @@
     "state": "WY",
     "city": "Diamondville",
     "county_name": "",
-    "lat": 41.77974444,
-    "lon": -110.53560278
+    "lat": 41.779744,
+    "lon": -110.535603
   },
   {
     "site_no": "09228000",
@@ -207383,8 +207464,8 @@
     "state": "WY",
     "city": "Weston",
     "county_name": "",
-    "lat": 44.9268794,
-    "lon": -105.3534087
+    "lat": 44.926944,
+    "lon": -105.352778
   },
   {
     "site_no": "06324950",
@@ -207464,8 +207545,8 @@
     "state": "WY",
     "city": "Savery",
     "county_name": "",
-    "lat": 41.01674167,
-    "lon": -107.4402583
+    "lat": 41.016742,
+    "lon": -107.440258
   },
   {
     "site_no": "09259700",
@@ -207689,8 +207770,8 @@
     "state": "WY",
     "city": "Wyoming-Nebraska State Line",
     "county_name": "",
-    "lat": 41.98857008,
-    "lon": -104.0533373
+    "lat": 41.988611,
+    "lon": -104.052778
   },
   {
     "site_no": "06641000",
@@ -208166,8 +208247,8 @@
     "state": "WY",
     "city": "",
     "county_name": "",
-    "lat": 44.99025118,
-    "lon": -106.8917355
+    "lat": 44.990278,
+    "lon": -106.891111
   },
   {
     "site_no": "06289600",
