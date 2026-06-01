@@ -1607,8 +1607,8 @@
     "state": "AL",
     "city": "Buddy Williamson Rd Nr Plevna",
     "county_name": "",
-    "lat": 34.96092128,
-    "lon": -86.4636024
+    "lat": 34.960833,
+    "lon": -86.463611
   },
   {
     "site_no": "02415000",
@@ -2561,8 +2561,8 @@
     "state": "AL",
     "city": "Rainsville",
     "county_name": "",
-    "lat": 34.4986981,
-    "lon": -85.9296966
+    "lat": 34.498611,
+    "lon": -85.929722
   },
   {
     "site_no": "0242372950",
@@ -5469,7 +5469,7 @@
     "city": "",
     "county_name": "",
     "lat": 35.5445,
-    "lon": -92.7218611
+    "lon": -92.721861
   },
   {
     "site_no": "07069295",
@@ -27680,8 +27680,8 @@
     "state": "FL",
     "city": "Keysville",
     "county_name": "",
-    "lat": 27.86636389,
-    "lon": -82.14398611
+    "lat": 27.866364,
+    "lon": -82.143986
   },
   {
     "site_no": "02301706",
@@ -27986,8 +27986,8 @@
     "state": "FL",
     "city": "Holiday",
     "county_name": "",
-    "lat": 28.17447222,
-    "lon": -82.71930556
+    "lat": 28.174472,
+    "lon": -82.719306
   },
   {
     "site_no": "02309740",
@@ -28454,8 +28454,8 @@
     "state": "FL",
     "city": "Baylake",
     "county_name": "",
-    "lat": 28.4566757,
-    "lon": -81.92040683
+    "lat": 28.456389,
+    "lon": -81.920556
   },
   {
     "site_no": "02310360",
@@ -29363,8 +29363,8 @@
     "state": "FL",
     "city": "Lakewood Ranch Nr Lorraine",
     "county_name": "",
-    "lat": 27.42055556,
-    "lon": -82.42611111
+    "lat": 27.420556,
+    "lon": -82.426111
   },
   {
     "site_no": "02300064",
@@ -36073,12 +36073,12 @@
   },
   {
     "site_no": "263813081552801",
-    "name": "L  -2640",
+    "name": "L  -2640 Lee County, FL",
     "state": "FL",
-    "city": "",
+    "city": "L -2640 Lee County",
     "county_name": "",
-    "lat": 26.63729167,
-    "lon": -81.92426667
+    "lat": 26.637292,
+    "lon": -81.924267
   },
   {
     "site_no": "262706082080201",
@@ -40703,8 +40703,8 @@
     "state": "FL",
     "city": "Gardner",
     "county_name": "",
-    "lat": 27.41186111,
-    "lon": -81.69568056
+    "lat": 27.411861,
+    "lon": -81.695681
   },
   {
     "site_no": "02295850",
@@ -41954,8 +41954,8 @@
     "state": "FL",
     "city": "Mulberry",
     "county_name": "",
-    "lat": 27.92336389,
-    "lon": -82.03031389
+    "lat": 27.923364,
+    "lon": -82.030314
   },
   {
     "site_no": "02282000",
@@ -46499,8 +46499,8 @@
     "state": "FL",
     "city": "Durant",
     "county_name": "",
-    "lat": 27.89717778,
-    "lon": -82.18921944
+    "lat": 27.897178,
+    "lon": -82.189219
   },
   {
     "site_no": "02301400",
@@ -62474,8 +62474,8 @@
     "state": "IA",
     "city": "Kendallville",
     "county_name": "",
-    "lat": 43.44130556,
-    "lon": -92.0359444
+    "lat": 43.441306,
+    "lon": -92.035944
   },
   {
     "site_no": "05387320",
@@ -62483,8 +62483,8 @@
     "state": "IA",
     "city": "Lime Springs",
     "county_name": "",
-    "lat": 43.46677778,
-    "lon": -92.2975278
+    "lat": 43.466778,
+    "lon": -92.297528
   },
   {
     "site_no": "05388250",
@@ -80809,6 +80809,15 @@
     "county_name": "",
     "lat": 38.27645917,
     "lon": -85.693573
+  },
+  {
+    "site_no": "03234599",
+    "name": "MURRAY TEST SITE",
+    "state": "KY",
+    "city": "",
+    "county_name": "",
+    "lat": 37.0864448,
+    "lon": -88.6000478
   },
   {
     "site_no": "03287600",
@@ -112519,12 +112528,12 @@
   },
   {
     "site_no": "06179200",
-    "name": "Poplar River ab West Fork nr Bredette MT",
+    "name": "Poplar R ab W Fk Poplar R, nr Bredette, MT",
     "state": "MT",
     "city": "Bredette",
     "county_name": "",
-    "lat": 48.5514118,
-    "lon": -105.3658232
+    "lat": 48.57775,
+    "lon": -105.374306
   },
   {
     "site_no": "06178000",
@@ -135617,8 +135626,8 @@
     "state": "NV",
     "city": "Stateline",
     "county_name": "",
-    "lat": 38.966019,
-    "lon": -119.937125
+    "lat": 38.96601904,
+    "lon": -119.9371251
   },
   {
     "site_no": "10336750",
@@ -135951,7 +135960,7 @@
     "city": "Hamilton",
     "county_name": "",
     "lat": 39.31776389,
-    "lon": -115.3950583
+    "lon": -115.39505833
   },
   {
     "site_no": "103366993",
@@ -137768,8 +137777,8 @@
     "state": "NV",
     "city": "Preston",
     "county_name": "",
-    "lat": 38.9877204,
-    "lon": -114.9583496
+    "lat": 38.98772041,
+    "lon": -114.95834959
   },
   {
     "site_no": "09415460",
@@ -143834,8 +143843,8 @@
     "state": "NY",
     "city": "Lighthouse Ave At Richmond",
     "county_name": "",
-    "lat": 40.57372222,
-    "lon": -74.14130556
+    "lat": 40.573722,
+    "lon": -74.141306
   },
   {
     "site_no": "04272570",
@@ -171014,8 +171023,8 @@
     "state": "TN",
     "city": "Rogersville",
     "county_name": "",
-    "lat": 36.42620656,
-    "lon": -82.9518304
+    "lat": 36.426111,
+    "lon": -82.951944
   },
   {
     "site_no": "03466208",
@@ -171356,8 +171365,8 @@
     "state": "TN",
     "city": "Rogersville",
     "county_name": "",
-    "lat": 36.37981674,
-    "lon": -83.0465542
+    "lat": 36.379722,
+    "lon": -83.046667
   },
   {
     "site_no": "07024200",
@@ -172940,8 +172949,8 @@
     "state": "TN",
     "city": "Dayton",
     "county_name": "",
-    "lat": 35.49051667,
-    "lon": -85.0160111
+    "lat": 35.490517,
+    "lon": -85.016011
   },
   {
     "site_no": "03312259",
@@ -173363,8 +173372,8 @@
     "state": "TN",
     "city": "Elizabethton",
     "county_name": "",
-    "lat": 36.3559188,
-    "lon": -82.2235467
+    "lat": 36.355811,
+    "lon": -82.223692
   },
   {
     "site_no": "03415000",
@@ -189412,6 +189421,15 @@
     "county_name": "",
     "lat": 36.689231,
     "lon": -79.486639
+  },
+  {
+    "site_no": "02074557",
+    "name": "SANDY CREEK BELOW NEAR MOUNT HERMAN, VA",
+    "state": "VA",
+    "city": "Near Mount Herman",
+    "county_name": "",
+    "lat": 36.688561,
+    "lon": -79.485944
   },
   {
     "site_no": "02074500",
