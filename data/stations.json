@@ -29543,8 +29543,8 @@
     "state": "FL",
     "city": "Tarpon Woods Blvd Nr Oldsmar",
     "county_name": "",
-    "lat": 28.08681904,
-    "lon": -82.69387371
+    "lat": 28.086519,
+    "lon": -82.694
   },
   {
     "site_no": "02307200",
@@ -30074,7 +30074,7 @@
     "state": "FL",
     "city": "NW 7th Ave Nr Miami",
     "county_name": "",
-    "lat": 25.85416667,
+    "lat": 25.854167,
     "lon": -80.2095
   },
   {
@@ -30083,8 +30083,8 @@
     "state": "FL",
     "city": "NW 87 Ave Nr Hialeah",
     "county_name": "",
-    "lat": 25.86969444,
-    "lon": -80.3382222
+    "lat": 25.869694,
+    "lon": -80.338222
   },
   {
     "site_no": "02286328",
@@ -43511,7 +43511,7 @@
     "state": "FL",
     "city": "Andytown",
     "county_name": "",
-    "lat": 26.17421944,
+    "lat": 26.174219,
     "lon": -80.75075
   },
   {
@@ -43520,7 +43520,7 @@
     "state": "FL",
     "city": "Andytown",
     "county_name": "",
-    "lat": 26.18847222,
+    "lat": 26.188472,
     "lon": -80.531
   },
   {
@@ -43529,8 +43529,8 @@
     "state": "FL",
     "city": "Coopertown",
     "county_name": "",
-    "lat": 25.97513889,
-    "lon": -80.66961111
+    "lat": 25.975139,
+    "lon": -80.669611
   },
   {
     "site_no": "254848080432001",
@@ -45707,8 +45707,8 @@
     "state": "FL",
     "city": "Mouth Near Homestead",
     "county_name": "",
-    "lat": 25.19059444,
-    "lon": -80.6390528
+    "lat": 25.190594,
+    "lon": -80.639053
   },
   {
     "site_no": "252948080352700",
@@ -64377,6 +64377,15 @@
     "lon": -116.3475
   },
   {
+    "site_no": "13081000",
+    "name": "LAKE WALCOTT NR MINIDOKA ID",
+    "state": "ID",
+    "city": "Minidoka",
+    "county_name": "",
+    "lat": 42.670833,
+    "lon": -113.483333
+  },
+  {
     "site_no": "13342450",
     "name": "LAPWAI CREEK NR LAPWAI, ID",
     "state": "ID",
@@ -67739,7 +67748,7 @@
     "state": "IL",
     "city": "Fairbury",
     "county_name": "",
-    "lat": 40.72277778,
+    "lat": 40.722778,
     "lon": -88.53
   },
   {
@@ -77081,8 +77090,8 @@
     "state": "KS",
     "city": "Winkler",
     "county_name": "",
-    "lat": 39.47222064,
-    "lon": -96.8322357
+    "lat": 39.472222,
+    "lon": -96.831944
   },
   {
     "site_no": "373903094481300",
@@ -77649,7 +77658,7 @@
     "city": "Ft Scott",
     "county_name": "",
     "lat": 37.86325,
-    "lon": -94.6784722
+    "lon": -94.678472
   },
   {
     "site_no": "06917500",
@@ -77738,8 +77747,8 @@
     "state": "KS",
     "city": "Riley",
     "county_name": "",
-    "lat": 39.3096111,
-    "lon": -96.7415556
+    "lat": 39.309611,
+    "lon": -96.741556
   },
   {
     "site_no": "390026094485800",
@@ -78431,8 +78440,8 @@
     "state": "KS",
     "city": "Louisville",
     "county_name": "",
-    "lat": 39.24916286,
-    "lon": -96.3149982
+    "lat": 39.249167,
+    "lon": -96.314722
   },
   {
     "site_no": "06868850",
@@ -89573,8 +89582,8 @@
     "state": "MD",
     "city": "Franklin",
     "county_name": "",
-    "lat": 39.50091389,
-    "lon": -79.04881944
+    "lat": 39.500914,
+    "lon": -79.048819
   },
   {
     "site_no": "01581870",
@@ -96351,7 +96360,7 @@
     "city": "",
     "county_name": "",
     "lat": 44.8504,
-    "lon": -85.3275222
+    "lon": -85.327522
   },
   {
     "site_no": "04096264",
@@ -101133,6 +101142,15 @@
     "lon": -94.5868886
   },
   {
+    "site_no": "07188925",
+    "name": "Elk Rv at MO-59, Noel, MO",
+    "state": "MO",
+    "city": "Mo-59",
+    "county_name": "",
+    "lat": 36.549703,
+    "lon": -94.493144
+  },
+  {
     "site_no": "07010035",
     "name": "Engelholm Creek near Wellston, MO",
     "state": "MO",
@@ -103847,8 +103865,8 @@
     "state": "MO",
     "city": "Kentucky Road In Independence",
     "county_name": "",
-    "lat": 39.11194444,
-    "lon": -94.4722222
+    "lat": 39.111944,
+    "lon": -94.472222
   },
   {
     "site_no": "06928300",
@@ -111488,8 +111506,8 @@
     "state": "MT",
     "city": "Crow Agency",
     "county_name": "",
-    "lat": 45.56833889,
-    "lon": -107.45276944
+    "lat": 45.568339,
+    "lon": -107.452769
   },
   {
     "site_no": "12375830",
@@ -124596,6 +124614,15 @@
     "lon": -103.5186111
   },
   {
+    "site_no": "06460800",
+    "name": "Niobrara R at Borman Bridge nr Valentine, Nebr.",
+    "state": "NE",
+    "city": "Borman Bridge Nr Valentine",
+    "county_name": "",
+    "lat": 42.8522222,
+    "lon": -100.5211111
+  },
+  {
     "site_no": "06461080",
     "name": "Niobrara R at Cornell Bridge nr Valentine, Nebr.",
     "state": "NE",
@@ -135820,12 +135847,12 @@
   },
   {
     "site_no": "10322535",
-    "name": "HENDERSON CK BLW VINNINI CK NR EUREKA, NV",
+    "name": "HENDERSON CK BLW VININI CK NR EUREKA, NV",
     "state": "NV",
     "city": "Eureka",
     "county_name": "",
     "lat": 39.869,
-    "lon": -116.1669444
+    "lon": -116.166944
   },
   {
     "site_no": "361936114415501",
@@ -139397,8 +139424,8 @@
     "state": "NY",
     "city": "Oakdale",
     "county_name": "",
-    "lat": 40.7500982,
-    "lon": -73.1476133
+    "lat": 40.747583,
+    "lon": -73.150389
   },
   {
     "site_no": "01306499",
@@ -155142,15 +155169,6 @@
     "lon": -122.8648109
   },
   {
-    "site_no": "14313600",
-    "name": "LEMOLO No.2 CANAL NEAR TOKETEE FALLS, OR",
-    "state": "OR",
-    "city": "Toketee Falls",
-    "county_name": "",
-    "lat": 43.2962332,
-    "lon": -122.4019862
-  },
-  {
     "site_no": "11507500",
     "name": "LINK RIVER AT KLAMATH FALLS, OR",
     "state": "OR",
@@ -155706,7 +155724,7 @@
     "city": "SE 162nd Ave",
     "county_name": "",
     "lat": 45.46,
-    "lon": -122.4969444
+    "lon": -122.496944
   },
   {
     "site_no": "14165000",
@@ -180320,8 +180338,8 @@
     "state": "TX",
     "city": "Rio Grande Village",
     "county_name": "",
-    "lat": 29.1835386,
-    "lon": -102.9754409
+    "lat": 29.185833,
+    "lon": -102.975
   },
   {
     "site_no": "08450900",
@@ -183803,8 +183821,8 @@
     "state": "UT",
     "city": "",
     "county_name": "",
-    "lat": 39.77440566,
-    "lon": -111.191006
+    "lat": 39.775306,
+    "lon": -111.186056
   },
   {
     "site_no": "09316100",
