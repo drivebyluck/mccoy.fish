@@ -2160,6 +2160,15 @@
     "lon": -85.830525
   },
   {
+    "site_no": "06133000",
+    "name": "Milk River at western crossing of int'l boundary",
+    "state": "AL",
+    "city": "Western Crossing Of Int'L Boundary",
+    "county_name": "",
+    "lat": 49.007517,
+    "lon": -112.545258
+  },
+  {
     "site_no": "02464500",
     "name": "NORTH RIVER (SITE B) NR TUSCALOOSA",
     "state": "AL",
@@ -2185,6 +2194,15 @@
     "county_name": "",
     "lat": 32.9326287,
     "lon": -88.2978103
+  },
+  {
+    "site_no": "06134000",
+    "name": "North Milk River near international boundary",
+    "state": "AL",
+    "city": "International Boundary",
+    "county_name": "",
+    "lat": 49.026336,
+    "lon": -112.969697
   },
   {
     "site_no": "02424940",
@@ -2644,6 +2662,15 @@
     "county_name": "",
     "lat": 34.688424,
     "lon": -86.9536181
+  },
+  {
+    "site_no": "05020500",
+    "name": "St. Mary River at International Boundary",
+    "state": "AL",
+    "city": "International Boundary",
+    "county_name": "",
+    "lat": 49.011408,
+    "lon": -113.299547
   },
   {
     "site_no": "02406500",
@@ -4113,6 +4140,15 @@
     "lon": -94.0860278
   },
   {
+    "site_no": "07191165",
+    "name": "Columbia Hollow Ck nr Decatur, AR",
+    "state": "AR",
+    "city": "Decatur",
+    "county_name": "",
+    "lat": 36.34195,
+    "lon": -94.501669
+  },
+  {
     "site_no": "07340500",
     "name": "Cossatot River near DeQueen, AR",
     "state": "AR",
@@ -5090,8 +5126,8 @@
     "state": "AR",
     "city": "Remmel Dam Above Jones Mill",
     "county_name": "",
-    "lat": 34.4261111,
-    "lon": -92.8908333
+    "lat": 34.426111,
+    "lon": -92.890833
   },
   {
     "site_no": "330255092064301",
@@ -16286,8 +16322,8 @@
     "state": "CA",
     "city": "Rainbow Wells In Mohave National Preserve",
     "county_name": "",
-    "lat": 35.2050833,
-    "lon": -115.6495833
+    "lat": 35.20508333,
+    "lon": -115.64958333
   },
   {
     "site_no": "11303000",
@@ -26532,6 +26568,15 @@
     "lon": -75.63488889
   },
   {
+    "site_no": "06149500",
+    "name": "Battle Creek at international boundary",
+    "state": "DE",
+    "city": "International Boundary",
+    "county_name": "",
+    "lat": 49.00155,
+    "lon": -109.422494
+  },
+  {
     "site_no": "01481555",
     "name": "Brandywine Creek at Baynard Blvd nr Wilmington, DE",
     "state": "DE",
@@ -26631,6 +26676,24 @@
     "lon": -75.6877222
   },
   {
+    "site_no": "06178500",
+    "name": "East Poplar River at international boundary",
+    "state": "DE",
+    "city": "International Boundary",
+    "county_name": "",
+    "lat": 49.0,
+    "lon": -105.409586
+  },
+  {
+    "site_no": "06164000",
+    "name": "Frenchman River at international boundary",
+    "state": "DE",
+    "city": "International Boundary",
+    "county_name": "",
+    "lat": 49.000019,
+    "lon": -107.302864
+  },
+  {
     "site_no": "01484540",
     "name": "INDIAN RIVER AT ROSEDALE BEACH, DE",
     "state": "DE",
@@ -26683,6 +26746,15 @@
     "county_name": "",
     "lat": 39.73483518,
     "lon": -75.5868694
+  },
+  {
+    "site_no": "06145500",
+    "name": "Lodge Creek below McRae Creek, at int'l boundary",
+    "state": "DE",
+    "city": "",
+    "county_name": "",
+    "lat": 49.005667,
+    "lon": -109.717756
   },
   {
     "site_no": "01488500",
@@ -27734,8 +27806,8 @@
     "state": "FL",
     "city": "Pleasant Ridge",
     "county_name": "",
-    "lat": 30.66908,
-    "lon": -86.1866092
+    "lat": 30.668889,
+    "lon": -86.186667
   },
   {
     "site_no": "02367006",
@@ -29615,8 +29687,8 @@
     "state": "FL",
     "city": "Brandon",
     "county_name": "",
-    "lat": 27.94888889,
-    "lon": -82.28888889
+    "lat": 27.948889,
+    "lon": -82.288889
   },
   {
     "site_no": "02306700",
@@ -32693,8 +32765,8 @@
     "state": "FL",
     "city": "Mulberry",
     "county_name": "",
-    "lat": 27.92694167,
-    "lon": -82.06524722
+    "lat": 27.926942,
+    "lon": -82.065247
   },
   {
     "site_no": "02281425",
@@ -33044,8 +33116,8 @@
     "state": "FL",
     "city": "",
     "county_name": "",
-    "lat": 25.70513889,
-    "lon": -80.2878056
+    "lat": 25.705139,
+    "lon": -80.287806
   },
   {
     "site_no": "02240920",
@@ -33701,8 +33773,8 @@
     "state": "FL",
     "city": "",
     "county_name": "",
-    "lat": 25.73933333,
-    "lon": -80.43363889
+    "lat": 25.739333,
+    "lon": -80.433639
   },
   {
     "site_no": "254248080263801",
@@ -35546,8 +35618,8 @@
     "state": "FL",
     "city": "Ranch Road Nr Apalachicola",
     "county_name": "",
-    "lat": 29.7695111,
-    "lon": -85.0842806
+    "lat": 29.769511,
+    "lon": -85.084281
   },
   {
     "site_no": "02231600",
@@ -38597,8 +38669,8 @@
     "state": "FL",
     "city": "Arran Fla",
     "county_name": "",
-    "lat": 30.18825753,
-    "lon": -84.40823469
+    "lat": 30.188056,
+    "lon": -84.408333
   },
   {
     "site_no": "02327038",
@@ -41810,8 +41882,8 @@
     "state": "FL",
     "city": "Bryan Dairy Rd At Pinellas Park",
     "county_name": "",
-    "lat": 27.87225113,
-    "lon": -82.73709741
+    "lat": 27.871944,
+    "lon": -82.737222
   },
   {
     "site_no": "271425082303000",
@@ -42494,8 +42566,8 @@
     "state": "FL",
     "city": "Wetumpka",
     "county_name": "",
-    "lat": 30.4849186,
-    "lon": -84.5929664
+    "lat": 30.484722,
+    "lon": -84.593056
   },
   {
     "site_no": "02306774",
@@ -44915,8 +44987,8 @@
     "state": "FL",
     "city": "Dowling Park",
     "county_name": "",
-    "lat": 30.2449425,
-    "lon": -83.24958439
+    "lat": 30.244722,
+    "lon": -83.249722
   },
   {
     "site_no": "02319500",
@@ -45491,8 +45563,8 @@
     "state": "FL",
     "city": "Miami",
     "county_name": "",
-    "lat": 25.76138889,
-    "lon": -80.5366667
+    "lat": 25.761389,
+    "lon": -80.536667
   },
   {
     "site_no": "02289054",
@@ -45527,8 +45599,8 @@
     "state": "FL",
     "city": "Bridge 39",
     "county_name": "",
-    "lat": 25.98983333,
-    "lon": -81.58688889
+    "lat": 25.989833,
+    "lon": -81.586889
   },
   {
     "site_no": "255843081333000",
@@ -45536,7 +45608,7 @@
     "state": "FL",
     "city": "Bridge 45",
     "county_name": "",
-    "lat": 25.97853333,
+    "lat": 25.978533,
     "lon": -81.5591
   },
   {
@@ -45545,8 +45617,8 @@
     "state": "FL",
     "city": "Bridge 51",
     "county_name": "",
-    "lat": 25.96502778,
-    "lon": -81.5277833
+    "lat": 25.965028,
+    "lon": -81.527783
   },
   {
     "site_no": "02301764",
@@ -46616,8 +46688,8 @@
     "state": "FL",
     "city": "Bridge 55",
     "county_name": "",
-    "lat": 25.96055556,
-    "lon": -81.5002778
+    "lat": 25.960556,
+    "lon": -81.500278
   },
   {
     "site_no": "255601081265300",
@@ -46625,8 +46697,8 @@
     "state": "FL",
     "city": "Bridge 66",
     "county_name": "",
-    "lat": 25.9336111,
-    "lon": -81.4480556
+    "lat": 25.933611,
+    "lon": -81.448056
   },
   {
     "site_no": "255449081221800",
@@ -46634,8 +46706,8 @@
     "state": "FL",
     "city": "Bridge 75",
     "county_name": "",
-    "lat": 25.9136111,
-    "lon": -81.3716667
+    "lat": 25.913611,
+    "lon": -81.371667
   },
   {
     "site_no": "255656081285000",
@@ -46643,8 +46715,8 @@
     "state": "FL",
     "city": "Bridges 60",
     "county_name": "",
-    "lat": 25.94888889,
-    "lon": -81.4805556
+    "lat": 25.948889,
+    "lon": -81.480556
   },
   {
     "site_no": "02289034",
@@ -55715,8 +55787,8 @@
     "state": "GA",
     "city": "Atlantic Rr Line Nr Mcintosh",
     "county_name": "",
-    "lat": 31.82055556,
-    "lon": -81.5395556
+    "lat": 31.820556,
+    "lon": -81.539556
   },
   {
     "site_no": "02203561",
@@ -59882,8 +59954,8 @@
     "state": "IA",
     "city": "Sioux City",
     "county_name": "",
-    "lat": 42.52442814,
-    "lon": -96.48050958
+    "lat": 42.524444,
+    "lon": -96.480194
   },
   {
     "site_no": "423735096305400",
@@ -64962,6 +65034,24 @@
     "lon": -116.0592903
   },
   {
+    "site_no": "12392200",
+    "name": "PACK RIVER BLW CARIBOU CREEK NR COLBURN ID",
+    "state": "ID",
+    "city": "Colburn",
+    "county_name": "",
+    "lat": 48.475556,
+    "lon": -116.553056
+  },
+  {
+    "site_no": "12392310",
+    "name": "PACK RIVER BLW SAND CREEK NR COLBURN , ID",
+    "state": "ID",
+    "city": "Colburn",
+    "county_name": "",
+    "lat": 48.407575,
+    "lon": -116.477978
+  },
+  {
     "site_no": "12392300",
     "name": "PACK RIVER NR COLBURN ID",
     "state": "ID",
@@ -65309,8 +65399,8 @@
     "state": "ID",
     "city": "Clayton",
     "county_name": "",
-    "lat": 44.26664167,
-    "lon": -114.3267583
+    "lat": 44.266642,
+    "lon": -114.326758
   },
   {
     "site_no": "13302500",
@@ -93398,8 +93488,8 @@
     "state": "MI",
     "city": "Wells",
     "county_name": "",
-    "lat": 45.80607766,
-    "lon": -87.0976366
+    "lat": 45.806111,
+    "lon": -87.0975
   },
   {
     "site_no": "04166200",
@@ -95423,8 +95513,8 @@
     "state": "MI",
     "city": "Grover Rd Nr Hanover",
     "county_name": "",
-    "lat": 42.0764005,
-    "lon": -84.59269182
+    "lat": 42.076389,
+    "lon": -84.592778
   },
   {
     "site_no": "04044786",
@@ -97511,8 +97601,8 @@
     "state": "MN",
     "city": "Co. Hwy 133 Near Elmer",
     "county_name": "",
-    "lat": 47.06953056,
-    "lon": -92.9015556
+    "lat": 47.069531,
+    "lon": -92.901556
   },
   {
     "site_no": "05078470",
@@ -97880,8 +97970,8 @@
     "state": "MN",
     "city": "Shelly",
     "county_name": "",
-    "lat": 47.41198838,
-    "lon": -96.7633703
+    "lat": 47.4125,
+    "lon": -96.763889
   },
   {
     "site_no": "05278020",
@@ -97907,8 +97997,8 @@
     "state": "MN",
     "city": "Argyle",
     "county_name": "",
-    "lat": 48.34007687,
-    "lon": -96.8165174
+    "lat": 48.340278,
+    "lon": -96.816111
   },
   {
     "site_no": "05086900",
@@ -97945,6 +98035,15 @@
     "county_name": "",
     "lat": 44.9533333,
     "lon": -93.4872222
+  },
+  {
+    "site_no": "05330890",
+    "name": "MINNESOTA RIVER (PORT CARGILL HARBOR) IN SAVAGE,MN",
+    "state": "MN",
+    "city": "",
+    "county_name": "",
+    "lat": 44.78775795,
+    "lon": -93.32966205
   },
   {
     "site_no": "05330920",
@@ -98339,8 +98438,8 @@
     "state": "MN",
     "city": "Odessa",
     "county_name": "",
-    "lat": 45.18913155,
-    "lon": -96.415332
+    "lat": 45.189167,
+    "lon": -96.415
   },
   {
     "site_no": "440107096193101",
@@ -98420,8 +98519,8 @@
     "state": "MN",
     "city": "Breckenridge",
     "county_name": "",
-    "lat": 46.27724167,
-    "lon": -96.5821111
+    "lat": 46.277242,
+    "lon": -96.582111
   },
   {
     "site_no": "05030500",
@@ -98582,8 +98681,8 @@
     "state": "MN",
     "city": "Crookston",
     "county_name": "",
-    "lat": 47.7753946,
-    "lon": -96.6100767
+    "lat": 47.775556,
+    "lon": -96.609167
   },
   {
     "site_no": "05080000",
@@ -98591,8 +98690,8 @@
     "state": "MN",
     "city": "Fisher",
     "county_name": "",
-    "lat": 47.8006388,
-    "lon": -96.8095627
+    "lat": 47.800278,
+    "lon": -96.808611
   },
   {
     "site_no": "05075000",
@@ -98681,17 +98780,8 @@
     "state": "MN",
     "city": "Oslo",
     "county_name": "",
-    "lat": 48.19387265,
-    "lon": -97.140628
-  },
-  {
-    "site_no": "05062130",
-    "name": "RED RIVER OF THE NORTH NEAR GEORGETOWN, MN",
-    "state": "MN",
-    "city": "Georgetown",
-    "county_name": "",
-    "lat": 47.0926944,
-    "lon": -96.8170556
+    "lat": 48.193889,
+    "lon": -97.140278
   },
   {
     "site_no": "05244409",
@@ -98969,8 +99059,8 @@
     "state": "MN",
     "city": "Climax",
     "county_name": "",
-    "lat": 47.61191807,
-    "lon": -96.8147998
+    "lat": 47.611944,
+    "lon": -96.814444
   },
   {
     "site_no": "05128400",
@@ -99176,8 +99266,8 @@
     "state": "MN",
     "city": "",
     "county_name": "",
-    "lat": 48.7318196,
-    "lon": -96.6669493
+    "lat": 48.7325,
+    "lon": -96.667222
   },
   {
     "site_no": "05063380",
@@ -99824,8 +99914,8 @@
     "state": "MN",
     "city": "Hendrum",
     "county_name": "",
-    "lat": 47.2669444,
-    "lon": -96.7961111
+    "lat": 47.266944,
+    "lon": -96.796111
   },
   {
     "site_no": "05062500",
@@ -99833,7 +99923,7 @@
     "state": "MN",
     "city": "Twin Valley",
     "county_name": "",
-    "lat": 47.26555556,
+    "lat": 47.265556,
     "lon": -96.2475
   },
   {
@@ -111718,21 +111808,21 @@
   },
   {
     "site_no": "06185600",
-    "name": "MISSOURI R NO. 4 NR NOHLY, MT",
+    "name": "MISSOURI RIVER NO. 4 NEAR NOHLY, MT",
     "state": "MT",
     "city": "Nohly",
     "county_name": "",
-    "lat": 48.036131,
-    "lon": -104.161606
+    "lat": 48.036111,
+    "lon": -104.161111
   },
   {
     "site_no": "06185650",
-    "name": "MISSOURI R NO. 5 AT NOHLY, MT",
+    "name": "MISSOURI RIVER NO. 5 AT NOHLY, MT",
     "state": "MT",
     "city": "Nohly",
     "county_name": "",
-    "lat": 48.00279777,
-    "lon": -104.0921583
+    "lat": 48.002778,
+    "lon": -104.091667
   },
   {
     "site_no": "06037600",
@@ -119322,6 +119412,15 @@
     "lon": -80.6925688
   },
   {
+    "site_no": "0208735390",
+    "name": "WILDCAT BRANCH AT HAMMOND ROAD AT RALEIGH, NC",
+    "state": "NC",
+    "city": "Hammond Road At Raleigh",
+    "county_name": "",
+    "lat": 35.744214,
+    "lon": -78.639658
+  },
+  {
     "site_no": "0208458800",
     "name": "WILLIAMS DITCH NR ROSE BAY, NC",
     "state": "NC",
@@ -119534,8 +119633,17 @@
     "state": "ND",
     "city": "Dwight",
     "county_name": "",
-    "lat": 46.31134769,
-    "lon": -96.7345217
+    "lat": 46.311389,
+    "lon": -96.734167
+  },
+  {
+    "site_no": "06347000",
+    "name": "ANTELOPE CREEK NEAR CARSON, ND",
+    "state": "ND",
+    "city": "Carson",
+    "county_name": "",
+    "lat": 46.545278,
+    "lon": -101.645
   },
   {
     "site_no": "461657096483900",
@@ -119545,15 +119653,6 @@
     "county_name": "",
     "lat": 46.2825,
     "lon": -96.8108333
-  },
-  {
-    "site_no": "06347000",
-    "name": "ANTELOPE CREEK NR CARSON, ND",
-    "state": "ND",
-    "city": "Carson",
-    "county_name": "",
-    "lat": 46.5452839,
-    "lon": -101.6454228
   },
   {
     "site_no": "461656096430500",
@@ -119575,21 +119674,21 @@
   },
   {
     "site_no": "06349500",
-    "name": "APPLE CREEK NR MENOKEN, ND",
+    "name": "APPLE CREEK NEAR MENOKEN, ND",
     "state": "ND",
     "city": "Menoken",
     "county_name": "",
-    "lat": 46.79443787,
-    "lon": -100.6573459
+    "lat": 46.794444,
+    "lon": -100.656944
   },
   {
     "site_no": "05057200",
-    "name": "BALDHILL CREEK NR DAZEY, ND",
+    "name": "BALDHILL CREEK NEAR DAZEY, ND",
     "state": "ND",
     "city": "Dazey",
     "county_name": "",
-    "lat": 47.2291562,
-    "lon": -98.1248189
+    "lat": 47.229167,
+    "lon": -98.124444
   },
   {
     "site_no": "06470800",
@@ -119597,8 +119696,8 @@
     "state": "ND",
     "city": "Oakes",
     "county_name": "",
-    "lat": 46.22524359,
-    "lon": -98.0717809
+    "lat": 46.225278,
+    "lon": -98.071389
   },
   {
     "site_no": "06332515",
@@ -119606,8 +119705,8 @@
     "state": "ND",
     "city": "Mandaree",
     "county_name": "",
-    "lat": 47.78717057,
-    "lon": -102.7686286
+    "lat": 47.787222,
+    "lon": -102.768056
   },
   {
     "site_no": "06354580",
@@ -119615,8 +119714,8 @@
     "state": "ND",
     "city": "Linton",
     "county_name": "",
-    "lat": 46.2685687,
-    "lon": -100.2526914
+    "lat": 46.268611,
+    "lon": -100.252222
   },
   {
     "site_no": "464208098372000",
@@ -119633,8 +119732,17 @@
     "state": "ND",
     "city": "Strasburg",
     "county_name": "",
-    "lat": 46.22805556,
-    "lon": -99.9827778
+    "lat": 46.228056,
+    "lon": -99.982778
+  },
+  {
+    "site_no": "06336600",
+    "name": "BEAVER CREEK NEAR TROTTERS, ND",
+    "state": "ND",
+    "city": "Trotters",
+    "county_name": "",
+    "lat": 47.163056,
+    "lon": -103.992222
   },
   {
     "site_no": "05064900",
@@ -119644,15 +119752,6 @@
     "county_name": "",
     "lat": 47.5947222,
     "lon": -97.7091667
-  },
-  {
-    "site_no": "06336600",
-    "name": "BEAVER CREEK NR TROTTERS, ND",
-    "state": "ND",
-    "city": "Trotters",
-    "county_name": "",
-    "lat": 47.16307028,
-    "lon": -103.9927057
   },
   {
     "site_no": "481208101531700",
@@ -119759,8 +119858,8 @@
     "state": "ND",
     "city": "Hwy 2 Near Churchs Ferry",
     "county_name": "",
-    "lat": 48.26166538,
-    "lon": -99.1876342
+    "lat": 48.261667,
+    "lon": -99.187222
   },
   {
     "site_no": "05056270",
@@ -119786,8 +119885,8 @@
     "state": "ND",
     "city": "Almont",
     "county_name": "",
-    "lat": 46.69444606,
-    "lon": -101.4673665
+    "lat": 46.694444,
+    "lon": -101.466944
   },
   {
     "site_no": "05056563",
@@ -119912,8 +120011,8 @@
     "state": "ND",
     "city": "Bismarck",
     "county_name": "",
-    "lat": 46.91495565,
-    "lon": -100.813828
+    "lat": 46.915,
+    "lon": -100.813333
   },
   {
     "site_no": "06354000",
@@ -119921,17 +120020,17 @@
     "state": "ND",
     "city": "Breien",
     "county_name": "",
-    "lat": 46.3761111,
-    "lon": -100.9344444
+    "lat": 46.376111,
+    "lon": -100.934444
   },
   {
     "site_no": "06354080",
-    "name": "CANNONBALL RIVER AT HWY 1806 NR CANNON BALL, ND",
+    "name": "CANNONBALL RIVER AT HWY 1806 NEAR CANNON BALL, ND",
     "state": "ND",
-    "city": "Hwy 1806 Nr Cannon Ball",
+    "city": "Hwy 1806 Near Cannon Ball",
     "county_name": "",
-    "lat": 46.41541667,
-    "lon": -100.6352778
+    "lat": 46.415417,
+    "lon": -100.635278
   },
   {
     "site_no": "06350000",
@@ -119939,8 +120038,8 @@
     "state": "ND",
     "city": "Regent",
     "county_name": "",
-    "lat": 46.42667116,
-    "lon": -102.5518303
+    "lat": 46.426667,
+    "lon": -102.551389
   },
   {
     "site_no": "06354050",
@@ -119948,8 +120047,8 @@
     "state": "ND",
     "city": "Solen",
     "county_name": "",
-    "lat": 46.39055556,
-    "lon": -100.7998333
+    "lat": 46.390556,
+    "lon": -100.799833
   },
   {
     "site_no": "06351200",
@@ -119957,26 +120056,26 @@
     "state": "ND",
     "city": "Raleigh",
     "county_name": "",
-    "lat": 46.12689745,
-    "lon": -101.3332835
+    "lat": 46.126944,
+    "lon": -101.332778
   },
   {
     "site_no": "06352000",
-    "name": "CEDAR CREEK NR HAYNES, ND",
+    "name": "CEDAR CREEK NEAR HAYNES, ND",
     "state": "ND",
     "city": "Haynes",
     "county_name": "",
-    "lat": 46.15528136,
-    "lon": -102.4757133
+    "lat": 46.155278,
+    "lon": -102.475278
   },
   {
     "site_no": "06353000",
-    "name": "CEDAR CREEK NR RALEIGH, ND",
+    "name": "CEDAR CREEK NEAR RALEIGH, ND",
     "state": "ND",
     "city": "Raleigh",
     "county_name": "",
-    "lat": 46.09166988,
-    "lon": -101.333742
+    "lat": 46.091667,
+    "lon": -101.333333
   },
   {
     "site_no": "06329597",
@@ -119993,8 +120092,8 @@
     "state": "ND",
     "city": "Schafer",
     "county_name": "",
-    "lat": 47.8051944,
-    "lon": -103.1759944
+    "lat": 47.805194,
+    "lon": -103.175994
   },
   {
     "site_no": "464059098020700",
@@ -120074,8 +120173,8 @@
     "state": "ND",
     "city": "Emerson",
     "county_name": "",
-    "lat": 47.1825833,
-    "lon": -102.6044444
+    "lat": 47.182583,
+    "lon": -102.604444
   },
   {
     "site_no": "06348882",
@@ -120128,8 +120227,8 @@
     "state": "ND",
     "city": "Amidon",
     "county_name": "",
-    "lat": 46.57638889,
-    "lon": -103.5580556
+    "lat": 46.576389,
+    "lon": -103.558056
   },
   {
     "site_no": "05123510",
@@ -120137,17 +120236,17 @@
     "state": "ND",
     "city": "Upham",
     "county_name": "",
-    "lat": 48.58412696,
-    "lon": -100.8627348
+    "lat": 48.584167,
+    "lon": -100.862222
   },
   {
     "site_no": "06332770",
-    "name": "DEEPWATER CREEK AT MOUTH NR RAUB, ND",
+    "name": "DEEPWATER CREEK AT MOUTH NEAR RAUB, ND",
     "state": "ND",
-    "city": "Mouth Nr Raub",
+    "city": "Mouth Near Raub",
     "county_name": "",
-    "lat": 47.73778499,
-    "lon": -102.1076687
+    "lat": 47.737778,
+    "lon": -102.107222
   },
   {
     "site_no": "481658101254700",
@@ -120164,8 +120263,8 @@
     "state": "ND",
     "city": "Foxholm",
     "county_name": "",
-    "lat": 48.37056947,
-    "lon": -101.5701633
+    "lat": 48.370556,
+    "lon": -101.569722
   },
   {
     "site_no": "483517101595000",
@@ -120182,17 +120281,17 @@
     "state": "ND",
     "city": "Kenmare",
     "county_name": "",
-    "lat": 48.58967728,
-    "lon": -101.9974985
+    "lat": 48.589722,
+    "lon": -101.996944
   },
   {
     "site_no": "05056500",
-    "name": "DEVILS LAKE NR DEVILS LAKE, ND",
+    "name": "DEVILS LAKE NEAR DEVILS LAKE, ND",
     "state": "ND",
     "city": "",
     "county_name": "",
-    "lat": 48.09944515,
-    "lon": -98.9031773
+    "lat": 48.099444,
+    "lon": -98.902778
   },
   {
     "site_no": "05056636",
@@ -120335,8 +120434,8 @@
     "state": "ND",
     "city": "Bismarck",
     "county_name": "",
-    "lat": 46.78416667,
-    "lon": -100.7794444
+    "lat": 46.784167,
+    "lon": -100.779444
   },
   {
     "site_no": "05056241",
@@ -120344,8 +120443,8 @@
     "state": "ND",
     "city": "Penn",
     "county_name": "",
-    "lat": 48.23111277,
-    "lon": -98.983463
+    "lat": 48.231111,
+    "lon": -98.983056
   },
   {
     "site_no": "465207102494500",
@@ -120380,17 +120479,8 @@
     "state": "ND",
     "city": "Columbus",
     "county_name": "",
-    "lat": 48.99050865,
-    "lon": -102.7858652
-  },
-  {
-    "site_no": "06332523",
-    "name": "E. FORK SHELL CREEK NR PARSHALL, ND",
-    "state": "ND",
-    "city": "Parshall",
-    "county_name": "",
-    "lat": 47.94862396,
-    "lon": -102.214893
+    "lat": 48.990556,
+    "lon": -102.785278
   },
   {
     "site_no": "05056535",
@@ -120420,22 +120510,31 @@
     "lon": -98.609829
   },
   {
+    "site_no": "06332523",
+    "name": "EAST FORK SHELL CREEK NEAR PARSHALL, ND",
+    "state": "ND",
+    "city": "Parshall",
+    "county_name": "",
+    "lat": 47.948611,
+    "lon": -102.214444
+  },
+  {
     "site_no": "05056665",
-    "name": "EASTERN STUMP LAKE NR LAKOTA, ND",
+    "name": "EASTERN STUMP LAKE NEAR LAKOTA, ND",
     "state": "ND",
     "city": "Lakota",
     "county_name": "",
-    "lat": 47.8686089,
-    "lon": -98.3578795
+    "lat": 47.868611,
+    "lon": -98.3575
   },
   {
     "site_no": "05056200",
-    "name": "EDMORE COULEE NR EDMORE, ND",
+    "name": "EDMORE COULEE NEAR EDMORE, ND",
     "state": "ND",
     "city": "Edmore",
     "county_name": "",
-    "lat": 48.33667157,
-    "lon": -98.6603958
+    "lat": 48.336667,
+    "lon": -98.66
   },
   {
     "site_no": "05056215",
@@ -120443,8 +120542,8 @@
     "state": "ND",
     "city": "Webster",
     "county_name": "",
-    "lat": 48.2663928,
-    "lon": -98.6809499
+    "lat": 48.266389,
+    "lon": -98.680556
   },
   {
     "site_no": "471446097001701",
@@ -120470,17 +120569,17 @@
     "state": "ND",
     "city": "Minto",
     "county_name": "",
-    "lat": 48.286099,
-    "lon": -97.3700763
+    "lat": 48.286111,
+    "lon": -97.369722
   },
   {
     "site_no": "05084000",
-    "name": "FOREST RIVER NR FORDVILLE, ND",
+    "name": "FOREST RIVER NEAR FORDVILLE, ND",
     "state": "ND",
     "city": "Fordville",
     "county_name": "",
-    "lat": 48.1972148,
-    "lon": -97.7306431
+    "lat": 48.197222,
+    "lon": -97.730278
   },
   {
     "site_no": "460927100584800",
@@ -120551,8 +120650,8 @@
     "state": "ND",
     "city": "Hillsboro",
     "county_name": "",
-    "lat": 47.40942385,
-    "lon": -97.0611974
+    "lat": 47.409444,
+    "lon": -97.060833
   },
   {
     "site_no": "05065500",
@@ -120560,8 +120659,8 @@
     "state": "ND",
     "city": "Portland",
     "county_name": "",
-    "lat": 47.5377646,
-    "lon": -97.453424
+    "lat": 47.537778,
+    "lon": -97.453056
   },
   {
     "site_no": "06344600",
@@ -120569,8 +120668,8 @@
     "state": "ND",
     "city": "New Hradec",
     "county_name": "",
-    "lat": 47.0277231,
-    "lon": -103.0533527
+    "lat": 47.027778,
+    "lon": -103.052778
   },
   {
     "site_no": "464306101292400",
@@ -120650,17 +120749,17 @@
     "state": "ND",
     "city": "Main Avenue At Bismarck",
     "county_name": "",
-    "lat": 46.80717809,
-    "lon": -100.734102
+    "lat": 46.807222,
+    "lon": -100.733611
   },
   {
     "site_no": "06345780",
-    "name": "HEART R AB LAKE TSCHIDA NR GLEN ULLIN, ND",
+    "name": "HEART RIVER AB LAKE TSCHIDA NEAR GLEN ULLIN, ND",
     "state": "ND",
     "city": "Glen Ullin",
     "county_name": "",
-    "lat": 46.6569506,
-    "lon": -102.0793279
+    "lat": 46.656944,
+    "lon": -102.078889
   },
   {
     "site_no": "06349002",
@@ -120677,44 +120776,44 @@
     "state": "ND",
     "city": "Stark Bridge Near Judson",
     "county_name": "",
-    "lat": 46.7033333,
-    "lon": -101.2136111
+    "lat": 46.703333,
+    "lon": -101.213611
   },
   {
     "site_no": "06349000",
-    "name": "HEART RIVER NR MANDAN, ND",
+    "name": "HEART RIVER NEAR MANDAN, ND",
     "state": "ND",
     "city": "Mandan",
     "county_name": "",
-    "lat": 46.8338827,
-    "lon": -100.9745789
+    "lat": 46.833889,
+    "lon": -100.974167
   },
   {
     "site_no": "06345500",
-    "name": "HEART RIVER NR RICHARDTON, ND",
+    "name": "HEART RIVER NEAR RICHARDTON, ND",
     "state": "ND",
     "city": "Richardton",
     "county_name": "",
-    "lat": 46.74555556,
-    "lon": -102.3083333
+    "lat": 46.745556,
+    "lon": -102.308333
   },
   {
     "site_no": "06343000",
-    "name": "HEART RIVER NR SOUTH HEART, ND",
+    "name": "HEART RIVER NEAR SOUTH HEART, ND",
     "state": "ND",
     "city": "South Heart",
     "county_name": "",
-    "lat": 46.86556675,
-    "lon": -102.9485116
+    "lat": 46.865556,
+    "lon": -102.948056
   },
   {
     "site_no": "05088500",
-    "name": "HOMME RESERVOIR NR PARK RIVER, ND",
+    "name": "HOMME RESERVOIR NEAR PARK RIVER, ND",
     "state": "ND",
     "city": "",
     "county_name": "",
-    "lat": 48.4061111,
-    "lon": -97.7894444
+    "lat": 48.406111,
+    "lon": -97.789444
   },
   {
     "site_no": "06470880",
@@ -120740,8 +120839,8 @@
     "state": "ND",
     "city": "",
     "county_name": "",
-    "lat": 47.3997189,
-    "lon": -98.7976057
+    "lat": 47.399722,
+    "lon": -98.797222
   },
   {
     "site_no": "06470475",
@@ -120758,8 +120857,8 @@
     "state": "ND",
     "city": "Jamestown",
     "county_name": "",
-    "lat": 46.8897222,
-    "lon": -98.6816667
+    "lat": 46.889722,
+    "lon": -98.681667
   },
   {
     "site_no": "06470500",
@@ -120767,8 +120866,8 @@
     "state": "ND",
     "city": "Lamoure",
     "county_name": "",
-    "lat": 46.35552489,
-    "lon": -98.3045433
+    "lat": 46.355556,
+    "lon": -98.304167
   },
   {
     "site_no": "06467750",
@@ -120785,8 +120884,8 @@
     "state": "ND",
     "city": "Nd-Sd State Line",
     "county_name": "",
-    "lat": 45.9363579,
-    "lon": -98.1742692
+    "lat": 45.936389,
+    "lon": -98.173889
   },
   {
     "site_no": "06468000",
@@ -120848,8 +120947,8 @@
     "state": "ND",
     "city": "Grace City",
     "county_name": "",
-    "lat": 47.5580525,
-    "lon": -98.862885
+    "lat": 47.558056,
+    "lon": -98.8625
   },
   {
     "site_no": "06469015",
@@ -120866,8 +120965,8 @@
     "state": "ND",
     "city": "Adrian",
     "county_name": "",
-    "lat": 46.6291309,
-    "lon": -98.5723572
+    "lat": 46.629167,
+    "lon": -98.571944
   },
   {
     "site_no": "06469000",
@@ -120893,8 +120992,8 @@
     "state": "ND",
     "city": "Hazen",
     "county_name": "",
-    "lat": 47.2852816,
-    "lon": -101.6221093
+    "lat": 47.285278,
+    "lon": -101.621667
   },
   {
     "site_no": "06339100",
@@ -120902,8 +121001,8 @@
     "state": "ND",
     "city": "Manning",
     "county_name": "",
-    "lat": 47.2361259,
-    "lon": -102.7699074
+    "lat": 47.236111,
+    "lon": -102.769444
   },
   {
     "site_no": "06340010",
@@ -120911,8 +121010,8 @@
     "state": "ND",
     "city": "Beulah",
     "county_name": "",
-    "lat": 47.25388889,
-    "lon": -101.7855556
+    "lat": 47.253889,
+    "lon": -101.785556
   },
   {
     "site_no": "06339500",
@@ -120920,8 +121019,8 @@
     "state": "ND",
     "city": "Golden Valley",
     "county_name": "",
-    "lat": 47.1543948,
-    "lon": -102.0599856
+    "lat": 47.154444,
+    "lon": -102.059444
   },
   {
     "site_no": "06340590",
@@ -120956,8 +121055,8 @@
     "state": "ND",
     "city": "Baldhill",
     "county_name": "",
-    "lat": 47.03618889,
-    "lon": -98.0815361
+    "lat": 47.036189,
+    "lon": -98.081536
   },
   {
     "site_no": "485436098164600",
@@ -120983,8 +121082,8 @@
     "state": "ND",
     "city": "Foxholm",
     "county_name": "",
-    "lat": 48.45807237,
-    "lon": -101.5837731
+    "lat": 48.458056,
+    "lon": -101.583333
   },
   {
     "site_no": "460251096555600",
@@ -121131,6 +121230,15 @@
     "lon": -99.8418019
   },
   {
+    "site_no": "05056340",
+    "name": "LITTLE COULEE NEAR LEEDS, ND",
+    "state": "ND",
+    "city": "Leeds",
+    "county_name": "",
+    "lat": 48.243333,
+    "lon": -99.3725
+  },
+  {
     "site_no": "05056390",
     "name": "LITTLE COULEE NR BRINSMADE, ND",
     "state": "ND",
@@ -121138,15 +121246,6 @@
     "county_name": "",
     "lat": 48.1874981,
     "lon": -99.2431904
-  },
-  {
-    "site_no": "05056340",
-    "name": "LITTLE COULEE NR LEEDS, ND",
-    "state": "ND",
-    "city": "Leeds",
-    "county_name": "",
-    "lat": 48.2433322,
-    "lon": -99.3729125
   },
   {
     "site_no": "06337300",
@@ -121163,7 +121262,7 @@
     "state": "ND",
     "city": "Marmarth",
     "county_name": "",
-    "lat": 46.29777778,
+    "lat": 46.297778,
     "lon": -103.9175
   },
   {
@@ -121172,8 +121271,8 @@
     "state": "ND",
     "city": "Medora",
     "county_name": "",
-    "lat": 46.91684167,
-    "lon": -103.53228333
+    "lat": 46.916842,
+    "lon": -103.532283
   },
   {
     "site_no": "06337000",
@@ -121190,17 +121289,17 @@
     "state": "ND",
     "city": "Williston",
     "county_name": "",
-    "lat": 48.2844683,
-    "lon": -103.5729718
+    "lat": 48.284444,
+    "lon": -103.5725
   },
   {
     "site_no": "05099400",
-    "name": "LITTLE SOUTH PEMBINA RIVER NR WALHALLA, ND",
+    "name": "LITTLE SOUTH PEMBINA RIVER NEAR WALHALLA, ND",
     "state": "ND",
     "city": "Walhalla",
     "county_name": "",
-    "lat": 48.86527259,
-    "lon": -98.0059317
+    "lat": 48.865278,
+    "lon": -98.005556
   },
   {
     "site_no": "05113600",
@@ -121208,8 +121307,8 @@
     "state": "ND",
     "city": "Noonan",
     "county_name": "",
-    "lat": 48.98106266,
-    "lon": -103.076709
+    "lat": 48.981111,
+    "lon": -103.076111
   },
   {
     "site_no": "06349275",
@@ -121271,8 +121370,8 @@
     "state": "ND",
     "city": "",
     "county_name": "",
-    "lat": 46.6848611,
-    "lon": -97.4584167
+    "lat": 46.684861,
+    "lon": -97.458417
   },
   {
     "site_no": "465511097363300",
@@ -121298,8 +121397,8 @@
     "state": "ND",
     "city": "Nd-Sd State Line",
     "county_name": "",
-    "lat": 45.93886156,
-    "lon": -98.4526004
+    "lat": 45.938889,
+    "lon": -98.452222
   },
   {
     "site_no": "465234097045600",
@@ -121312,39 +121411,39 @@
   },
   {
     "site_no": "05060100",
-    "name": "MAPLE RIVER BL MAPLETON, ND",
-    "state": "ND",
-    "city": "",
-    "county_name": "",
-    "lat": 46.9052487,
-    "lon": -97.052587
-  },
-  {
-    "site_no": "05059700",
-    "name": "MAPLE RIVER NR ENDERLIN, ND",
-    "state": "ND",
-    "city": "Enderlin",
-    "county_name": "",
-    "lat": 46.6216388,
-    "lon": -97.5739851
-  },
-  {
-    "site_no": "05059600",
-    "name": "MAPLE RIVER NR HOPE, ND",
-    "state": "ND",
-    "city": "Hope",
-    "county_name": "",
-    "lat": 47.32498855,
-    "lon": -97.7906537
-  },
-  {
-    "site_no": "05060000",
-    "name": "MAPLE RIVER NR MAPLETON, ND",
+    "name": "MAPLE RIVER BELOW MAPLETON, ND",
     "state": "ND",
     "city": "Mapleton",
     "county_name": "",
-    "lat": 46.8660826,
-    "lon": -97.106477
+    "lat": 46.905278,
+    "lon": -97.052222
+  },
+  {
+    "site_no": "05059700",
+    "name": "MAPLE RIVER NEAR ENDERLIN, ND",
+    "state": "ND",
+    "city": "Enderlin",
+    "county_name": "",
+    "lat": 46.621667,
+    "lon": -97.573611
+  },
+  {
+    "site_no": "05059600",
+    "name": "MAPLE RIVER NEAR HOPE, ND",
+    "state": "ND",
+    "city": "Hope",
+    "county_name": "",
+    "lat": 47.325,
+    "lon": -97.790278
+  },
+  {
+    "site_no": "05060000",
+    "name": "MAPLE RIVER NEAR MAPLETON, ND",
+    "state": "ND",
+    "city": "Mapleton",
+    "county_name": "",
+    "lat": 46.866111,
+    "lon": -97.106111
   },
   {
     "site_no": "481334097553300",
@@ -121361,8 +121460,8 @@
     "state": "ND",
     "city": "Cando",
     "county_name": "",
-    "lat": 48.48639722,
-    "lon": -99.11191389
+    "lat": 48.486397,
+    "lon": -99.111914
   },
   {
     "site_no": "05056060",
@@ -121370,8 +121469,8 @@
     "state": "ND",
     "city": "Cando",
     "county_name": "",
-    "lat": 48.45746658,
-    "lon": -99.22434024
+    "lat": 48.4575,
+    "lon": -99.223889
   },
   {
     "site_no": "481300097592400",
@@ -121446,24 +121545,6 @@
     "lon": -103.5235285
   },
   {
-    "site_no": "06329640",
-    "name": "MISSOURI R NO. 5A AT BUFORD, ND",
-    "state": "ND",
-    "city": "Buford",
-    "county_name": "",
-    "lat": 47.98555556,
-    "lon": -103.9852778
-  },
-  {
-    "site_no": "06329650",
-    "name": "MISSOURI R NO. 6 NEAR BUFORD,ND",
-    "state": "ND",
-    "city": "Buford",
-    "county_name": "",
-    "lat": 47.9558333,
-    "lon": -103.9086111
-  },
-  {
     "site_no": "06329660",
     "name": "MISSOURI R NO. 7 NR TRENTON, ND",
     "state": "ND",
@@ -121487,8 +121568,8 @@
     "state": "ND",
     "city": "Mandan",
     "county_name": "",
-    "lat": 46.8609722,
-    "lon": -100.8763611
+    "lat": 46.860972,
+    "lon": -100.876361
   },
   {
     "site_no": "06339010",
@@ -121496,8 +121577,8 @@
     "state": "ND",
     "city": "Stanton",
     "county_name": "",
-    "lat": 47.36094167,
-    "lon": -101.35731944
+    "lat": 47.360942,
+    "lon": -101.357319
   },
   {
     "site_no": "06342500",
@@ -121505,8 +121586,8 @@
     "state": "ND",
     "city": "Bismarck",
     "county_name": "",
-    "lat": 46.81416667,
-    "lon": -100.8213889
+    "lat": 46.814167,
+    "lon": -100.821389
   },
   {
     "site_no": "465522100534300",
@@ -121523,8 +121604,8 @@
     "state": "ND",
     "city": "Price",
     "county_name": "",
-    "lat": 47.07971406,
-    "lon": -100.9323594
+    "lat": 47.079722,
+    "lon": -100.931944
   },
   {
     "site_no": "06341000",
@@ -121532,8 +121613,8 @@
     "state": "ND",
     "city": "Washburn",
     "county_name": "",
-    "lat": 47.2888822,
-    "lon": -101.0379239
+    "lat": 47.288889,
+    "lon": -101.0375
   },
   {
     "site_no": "06349070",
@@ -121542,7 +121623,7 @@
     "city": "Mandan",
     "county_name": "",
     "lat": 46.75,
-    "lon": -100.8386111
+    "lon": -100.838611
   },
   {
     "site_no": "06340900",
@@ -121550,8 +121631,8 @@
     "state": "ND",
     "city": "Hensler",
     "county_name": "",
-    "lat": 47.28027778,
-    "lon": -101.1852778
+    "lat": 47.280278,
+    "lon": -101.185278
   },
   {
     "site_no": "06349700",
@@ -121559,8 +121640,8 @@
     "state": "ND",
     "city": "Schmidt",
     "county_name": "",
-    "lat": 46.65638889,
-    "lon": -100.7391667
+    "lat": 46.656389,
+    "lon": -100.739167
   },
   {
     "site_no": "06340700",
@@ -121568,26 +121649,44 @@
     "state": "ND",
     "city": "Stanton",
     "county_name": "",
-    "lat": 47.28740278,
-    "lon": -101.33754444
+    "lat": 47.287403,
+    "lon": -101.337544
   },
   {
     "site_no": "06330000",
-    "name": "MISSOURI RIVER NR WILLISTON, ND",
+    "name": "MISSOURI RIVER NEAR WILLISTON, ND",
     "state": "ND",
     "city": "Williston",
     "county_name": "",
-    "lat": 48.1080792,
-    "lon": -103.7146446
+    "lat": 48.108056,
+    "lon": -103.714167
+  },
+  {
+    "site_no": "06329640",
+    "name": "MISSOURI RIVER NO. 5A AT BUFORD, ND",
+    "state": "ND",
+    "city": "Buford",
+    "county_name": "",
+    "lat": 47.985556,
+    "lon": -103.985278
+  },
+  {
+    "site_no": "06329650",
+    "name": "MISSOURI RIVER NO. 6 NEAR BUFORD, ND",
+    "state": "ND",
+    "city": "Buford",
+    "county_name": "",
+    "lat": 47.955833,
+    "lon": -103.908611
   },
   {
     "site_no": "06330110",
-    "name": "MISSOURI RIVER No. 9 AT WILLISTON, ND",
+    "name": "MISSOURI RIVER NO. 9 AT WILLISTON, ND",
     "state": "ND",
     "city": "Williston",
     "county_name": "",
-    "lat": 48.13688959,
-    "lon": -103.6050514
+    "lat": 48.136944,
+    "lon": -103.604444
   },
   {
     "site_no": "464557100485800",
@@ -121622,8 +121721,8 @@
     "state": "ND",
     "city": "Webster",
     "county_name": "",
-    "lat": 48.25972559,
-    "lon": -98.8470683
+    "lat": 48.259722,
+    "lon": -98.846667
   },
   {
     "site_no": "483511102555800",
@@ -121721,8 +121820,8 @@
     "state": "ND",
     "city": "",
     "county_name": "",
-    "lat": 45.9524438,
-    "lon": -103.3069613
+    "lat": 45.9525,
+    "lon": -103.306389
   },
   {
     "site_no": "06355000",
@@ -121784,8 +121883,8 @@
     "state": "ND",
     "city": "Grafton",
     "county_name": "",
-    "lat": 48.4247108,
-    "lon": -97.412023
+    "lat": 48.424722,
+    "lon": -97.411667
   },
   {
     "site_no": "05089995",
@@ -121793,8 +121892,8 @@
     "state": "ND",
     "city": "Grafton",
     "county_name": "",
-    "lat": 48.43519444,
-    "lon": -97.41522222
+    "lat": 48.435194,
+    "lon": -97.415222
   },
   {
     "site_no": "05092200",
@@ -121811,8 +121910,8 @@
     "state": "ND",
     "city": "Neche",
     "county_name": "",
-    "lat": 48.9897138,
-    "lon": -97.5570221
+    "lat": 48.989722,
+    "lon": -97.556667
   },
   {
     "site_no": "05099600",
@@ -121820,8 +121919,8 @@
     "state": "ND",
     "city": "Walhalla",
     "county_name": "",
-    "lat": 48.9133284,
-    "lon": -97.9170369
+    "lat": 48.913333,
+    "lon": -97.916667
   },
   {
     "site_no": "06469500",
@@ -121829,8 +121928,8 @@
     "state": "ND",
     "city": "Buchanan",
     "county_name": "",
-    "lat": 47.0663814,
-    "lon": -98.918998
+    "lat": 47.066389,
+    "lon": -98.918611
   },
   {
     "site_no": "06469400",
@@ -121838,8 +121937,8 @@
     "state": "ND",
     "city": "Pingree",
     "county_name": "",
-    "lat": 47.1674635,
-    "lon": -98.9690423
+    "lat": 47.1675,
+    "lon": -98.968611
   },
   {
     "site_no": "06469830",
@@ -121865,8 +121964,8 @@
     "state": "ND",
     "city": "Fort Yates",
     "county_name": "",
-    "lat": 46.19328885,
-    "lon": -100.751875
+    "lat": 46.193333,
+    "lon": -100.751389
   },
   {
     "site_no": "482446097081600",
@@ -121964,8 +122063,8 @@
     "state": "ND",
     "city": "Drayton",
     "county_name": "",
-    "lat": 48.5722064,
-    "lon": -97.1475697
+    "lat": 48.572222,
+    "lon": -97.147222
   },
   {
     "site_no": "0505152130",
@@ -121973,8 +122072,8 @@
     "state": "ND",
     "city": "Enloe",
     "county_name": "",
-    "lat": 46.49888889,
-    "lon": -96.7388889
+    "lat": 46.498889,
+    "lon": -96.738889
   },
   {
     "site_no": "05054000",
@@ -121991,8 +122090,8 @@
     "state": "ND",
     "city": "Grand Forks",
     "county_name": "",
-    "lat": 47.9269234,
-    "lon": -97.0292435
+    "lat": 47.926944,
+    "lon": -97.028889
   },
   {
     "site_no": "05064500",
@@ -122000,8 +122099,8 @@
     "state": "ND",
     "city": "Halstad",
     "county_name": "",
-    "lat": 47.351918,
-    "lon": -96.843691
+    "lat": 47.351944,
+    "lon": -96.843333
   },
   {
     "site_no": "05051522",
@@ -122009,8 +122108,8 @@
     "state": "ND",
     "city": "Hickson",
     "county_name": "",
-    "lat": 46.65968548,
-    "lon": -96.7959154
+    "lat": 46.659722,
+    "lon": -96.795556
   },
   {
     "site_no": "05102490",
@@ -122018,8 +122117,8 @@
     "state": "ND",
     "city": "Pembina",
     "county_name": "",
-    "lat": 48.9735988,
-    "lon": -97.2417314
+    "lat": 48.973611,
+    "lon": -97.241389
   },
   {
     "site_no": "05051500",
@@ -122027,8 +122126,8 @@
     "state": "ND",
     "city": "Wahpeton",
     "county_name": "",
-    "lat": 46.26607,
-    "lon": -96.5986848
+    "lat": 46.266111,
+    "lon": -96.598333
   },
   {
     "site_no": "05054020",
@@ -122040,13 +122139,22 @@
     "lon": -96.7850803
   },
   {
+    "site_no": "05062130",
+    "name": "RED RIVER OF THE NORTH NEAR GEORGETOWN, MN",
+    "state": "ND",
+    "city": "Georgetown",
+    "county_name": "",
+    "lat": 47.092756,
+    "lon": -96.818
+  },
+  {
     "site_no": "05070000",
     "name": "RED RIVER OF THE NORTH NEAR THOMPSON, ND",
     "state": "ND",
     "city": "Thompson",
     "county_name": "",
-    "lat": 47.7588646,
-    "lon": -96.9439684
+    "lat": 47.758889,
+    "lon": -96.943611
   },
   {
     "site_no": "463421096451000",
@@ -122099,8 +122207,8 @@
     "state": "ND",
     "city": "Amenia",
     "county_name": "",
-    "lat": 47.0166413,
-    "lon": -97.214254
+    "lat": 47.016667,
+    "lon": -97.213889
   },
   {
     "site_no": "05060550",
@@ -122180,8 +122288,8 @@
     "state": "ND",
     "city": "Flora",
     "county_name": "",
-    "lat": 47.90777778,
-    "lon": -99.4155556
+    "lat": 47.907778,
+    "lon": -99.415556
   },
   {
     "site_no": "05059300",
@@ -122189,8 +122297,8 @@
     "state": "ND",
     "city": "Horace",
     "county_name": "",
-    "lat": 46.74638889,
-    "lon": -96.9269444
+    "lat": 46.746389,
+    "lon": -96.926944
   },
   {
     "site_no": "05055400",
@@ -122198,8 +122306,8 @@
     "state": "ND",
     "city": "Bremen",
     "county_name": "",
-    "lat": 47.82138889,
-    "lon": -99.2761111
+    "lat": 47.821389,
+    "lon": -99.276111
   },
   {
     "site_no": "05054500",
@@ -122207,8 +122315,8 @@
     "state": "ND",
     "city": "Harvey",
     "county_name": "",
-    "lat": 47.7027775,
-    "lon": -99.9490145
+    "lat": 47.702778,
+    "lon": -99.948611
   },
   {
     "site_no": "05056770",
@@ -122216,8 +122324,8 @@
     "state": "ND",
     "city": "Co Rd 20 Near Kloten",
     "county_name": "",
-    "lat": 47.68682222,
-    "lon": -98.13041944
+    "lat": 47.686822,
+    "lon": -98.130419
   },
   {
     "site_no": "05058650",
@@ -122226,7 +122334,7 @@
     "city": "Fort Ransom State Park",
     "county_name": "",
     "lat": 46.545575,
-    "lon": -97.9299111
+    "lon": -97.929911
   },
   {
     "site_no": "05060400",
@@ -122234,8 +122342,8 @@
     "state": "ND",
     "city": "Harwood",
     "county_name": "",
-    "lat": 46.97746739,
-    "lon": -96.8917491
+    "lat": 46.9775,
+    "lon": -96.891389
   },
   {
     "site_no": "05058700",
@@ -122243,8 +122351,8 @@
     "state": "ND",
     "city": "Lisbon",
     "county_name": "",
-    "lat": 46.4469123,
-    "lon": -97.6792652
+    "lat": 46.446944,
+    "lon": -97.678889
   },
   {
     "site_no": "05055260",
@@ -122261,8 +122369,8 @@
     "state": "ND",
     "city": "Valley City",
     "county_name": "",
-    "lat": 46.91555556,
-    "lon": -98.0105556
+    "lat": 46.915556,
+    "lon": -98.010556
   },
   {
     "site_no": "05059500",
@@ -122270,8 +122378,8 @@
     "state": "ND",
     "city": "West Fargo",
     "county_name": "",
-    "lat": 46.8910784,
-    "lon": -96.9070286
+    "lat": 46.891111,
+    "lon": -96.906667
   },
   {
     "site_no": "05058000",
@@ -122279,8 +122387,8 @@
     "state": "ND",
     "city": "Baldhill",
     "county_name": "",
-    "lat": 47.0338718,
-    "lon": -98.0837077
+    "lat": 47.033889,
+    "lon": -98.083333
   },
   {
     "site_no": "464503096552700",
@@ -122297,8 +122405,8 @@
     "state": "ND",
     "city": "W Fargo",
     "county_name": "",
-    "lat": 46.84395556,
-    "lon": -96.9075583
+    "lat": 46.843956,
+    "lon": -96.907558
   },
   {
     "site_no": "05059480",
@@ -122306,8 +122414,8 @@
     "state": "ND",
     "city": "West Fargo",
     "county_name": "",
-    "lat": 46.8910787,
-    "lon": -96.916751
+    "lat": 46.891111,
+    "lon": -96.916389
   },
   {
     "site_no": "05059310",
@@ -122315,8 +122423,17 @@
     "state": "ND",
     "city": "Horace",
     "county_name": "",
-    "lat": 46.7516335,
-    "lon": -96.9261978
+    "lat": 46.751667,
+    "lon": -96.925833
+  },
+  {
+    "site_no": "05057000",
+    "name": "SHEYENNE RIVER NEAR COOPERSTOWN, ND",
+    "state": "ND",
+    "city": "Cooperstown",
+    "county_name": "",
+    "lat": 47.432778,
+    "lon": -98.027222
   },
   {
     "site_no": "05055000",
@@ -122333,8 +122450,8 @@
     "state": "ND",
     "city": "Kindred",
     "county_name": "",
-    "lat": 46.63163288,
-    "lon": -97.000643
+    "lat": 46.631667,
+    "lon": -97.000278
   },
   {
     "site_no": "473842098071001",
@@ -122351,17 +122468,8 @@
     "state": "ND",
     "city": "Warwick",
     "county_name": "",
-    "lat": 47.80552162,
-    "lon": -98.71626056
-  },
-  {
-    "site_no": "05057000",
-    "name": "SHEYENNE RIVER NR COOPERSTOWN, ND",
-    "state": "ND",
-    "city": "Cooperstown",
-    "county_name": "",
-    "lat": 47.43277097,
-    "lon": -98.0275954
+    "lat": 47.805556,
+    "lon": -98.715833
   },
   {
     "site_no": "05059460",
@@ -122369,8 +122477,8 @@
     "state": "ND",
     "city": "West Fargo",
     "county_name": "",
-    "lat": 46.83378056,
-    "lon": -96.9045194
+    "lat": 46.833781,
+    "lon": -96.904519
   },
   {
     "site_no": "05058980",
@@ -122378,8 +122486,8 @@
     "state": "ND",
     "city": "Kindred",
     "county_name": "",
-    "lat": 46.60305556,
-    "lon": -97.0322222
+    "lat": 46.603056,
+    "lon": -97.032222
   },
   {
     "site_no": "05056995",
@@ -122387,8 +122495,8 @@
     "state": "ND",
     "city": "Cooperstown",
     "county_name": "",
-    "lat": 47.43916667,
-    "lon": -98.0191667
+    "lat": 47.439167,
+    "lon": -98.019167
   },
   {
     "site_no": "05117500",
@@ -122396,8 +122504,8 @@
     "state": "ND",
     "city": "Minot",
     "county_name": "",
-    "lat": 48.2457899,
-    "lon": -101.371361
+    "lat": 48.245833,
+    "lon": -101.370833
   },
   {
     "site_no": "482033100260501",
@@ -122414,8 +122522,8 @@
     "state": "ND",
     "city": "Broadway Bridge At Minot",
     "county_name": "",
-    "lat": 48.23805556,
-    "lon": -101.2958333
+    "lat": 48.238056,
+    "lon": -101.295833
   },
   {
     "site_no": "480911101090200",
@@ -122436,49 +122544,49 @@
     "lon": -100.4880556
   },
   {
+    "site_no": "05122000",
+    "name": "SOURIS RIVER NEAR BANTRY, ND",
+    "state": "ND",
+    "city": "Bantry",
+    "county_name": "",
+    "lat": 48.505556,
+    "lon": -100.434444
+  },
+  {
+    "site_no": "05116000",
+    "name": "SOURIS RIVER NEAR FOXHOLM, ND",
+    "state": "ND",
+    "city": "Foxholm",
+    "county_name": "",
+    "lat": 48.372222,
+    "lon": -101.505
+  },
+  {
     "site_no": "05114000",
     "name": "SOURIS RIVER NEAR SHERWOOD, ND",
     "state": "ND",
     "city": "Sherwood",
     "county_name": "",
-    "lat": 48.98995719,
-    "lon": -101.9583348
-  },
-  {
-    "site_no": "05122000",
-    "name": "SOURIS RIVER NR BANTRY, ND",
-    "state": "ND",
-    "city": "Bantry",
-    "county_name": "",
-    "lat": 48.50555109,
-    "lon": -100.4348534
-  },
-  {
-    "site_no": "05116000",
-    "name": "SOURIS RIVER NR FOXHOLM, ND",
-    "state": "ND",
-    "city": "Foxholm",
-    "county_name": "",
-    "lat": 48.3722357,
-    "lon": -101.5054414
+    "lat": 48.99,
+    "lon": -101.957778
   },
   {
     "site_no": "05120000",
-    "name": "SOURIS RIVER NR VERENDRYE, ND",
+    "name": "SOURIS RIVER NEAR VERENDRYE, ND",
     "state": "ND",
     "city": "Verendrye",
     "county_name": "",
-    "lat": 48.15972928,
-    "lon": -100.7295863
+    "lat": 48.159722,
+    "lon": -100.729167
   },
   {
     "site_no": "05124000",
-    "name": "SOURIS RIVER NR WESTHOPE, ND",
+    "name": "SOURIS RIVER NEAR WESTHOPE, ND",
     "state": "ND",
     "city": "Westhope",
     "county_name": "",
-    "lat": 48.9964079,
-    "lon": -100.9584889
+    "lat": 48.996389,
+    "lon": -100.958056
   },
   {
     "site_no": "484548101463200",
@@ -122522,8 +122630,8 @@
     "state": "ND",
     "city": "Zeeland",
     "county_name": "",
-    "lat": 46.11388889,
-    "lon": -99.8369444
+    "lat": 46.113889,
+    "lon": -99.836944
   },
   {
     "site_no": "06470582",
@@ -122567,8 +122675,8 @@
     "state": "ND",
     "city": "Zap",
     "county_name": "",
-    "lat": 47.2861188,
-    "lon": -101.925726
+    "lat": 47.286111,
+    "lon": -101.925278
   },
   {
     "site_no": "06354980",
@@ -122576,8 +122684,8 @@
     "state": "ND",
     "city": "Haley",
     "county_name": "",
-    "lat": 46.0177216,
-    "lon": -103.2919615
+    "lat": 46.017778,
+    "lon": -103.291389
   },
   {
     "site_no": "06342260",
@@ -122585,17 +122693,17 @@
     "state": "ND",
     "city": "Center",
     "county_name": "",
-    "lat": 47.05749409,
-    "lon": -101.1957001
+    "lat": 47.0575,
+    "lon": -101.195278
   },
   {
     "site_no": "05056239",
-    "name": "STARKWEATHER COULEE NR WEBSTER, ND",
+    "name": "STARKWEATHER COULEE NEAR WEBSTER, ND",
     "state": "ND",
     "city": "Webster",
     "county_name": "",
-    "lat": 48.3205591,
-    "lon": -98.9406851
+    "lat": 48.320556,
+    "lon": -98.940278
   },
   {
     "site_no": "05123500",
@@ -122630,8 +122738,8 @@
     "state": "ND",
     "city": "Judson",
     "county_name": "",
-    "lat": 46.85106476,
-    "lon": -101.2532875
+    "lat": 46.851111,
+    "lon": -101.252778
   },
   {
     "site_no": "06348488",
@@ -122684,8 +122792,8 @@
     "state": "ND",
     "city": "Watford City",
     "county_name": "",
-    "lat": 47.99244695,
-    "lon": -103.1664229
+    "lat": 47.9925,
+    "lon": -103.165833
   },
   {
     "site_no": "05056678",
@@ -122693,8 +122801,8 @@
     "state": "ND",
     "city": "Tolna",
     "county_name": "",
-    "lat": 47.8608333,
-    "lon": -98.4944444
+    "lat": 47.860833,
+    "lon": -98.494444
   },
   {
     "site_no": "05100800",
@@ -122711,8 +122819,8 @@
     "state": "ND",
     "city": "Akra",
     "county_name": "",
-    "lat": 48.77832786,
-    "lon": -97.746759
+    "lat": 48.778333,
+    "lon": -97.746389
   },
   {
     "site_no": "05100480",
@@ -122792,8 +122900,8 @@
     "state": "ND",
     "city": "Turtle R State Park Nr Arvilla",
     "county_name": "",
-    "lat": 47.9319336,
-    "lon": -97.5145305
+    "lat": 47.931944,
+    "lon": -97.514167
   },
   {
     "site_no": "462841097295101",
@@ -122864,8 +122972,8 @@
     "state": "ND",
     "city": "White Earth",
     "county_name": "",
-    "lat": 48.45288889,
-    "lon": -102.7439722
+    "lat": 48.452889,
+    "lon": -102.743972
   },
   {
     "site_no": "06332190",
@@ -122873,8 +122981,8 @@
     "state": "ND",
     "city": "Mouth Near Manitou",
     "county_name": "",
-    "lat": 48.21188056,
-    "lon": -102.7797361
+    "lat": 48.211881,
+    "lon": -102.779736
   },
   {
     "site_no": "06332000",
@@ -122882,8 +122990,8 @@
     "state": "ND",
     "city": "White Earth",
     "county_name": "",
-    "lat": 48.37555556,
-    "lon": -102.7672222
+    "lat": 48.375556,
+    "lon": -102.767222
   },
   {
     "site_no": "481058098031500",
@@ -122927,8 +123035,8 @@
     "state": "ND",
     "city": "Abercrombie",
     "county_name": "",
-    "lat": 46.47052563,
-    "lon": -96.78229235
+    "lat": 46.470556,
+    "lon": -96.781944
   },
   {
     "site_no": "463237096494500",
@@ -122945,8 +123053,8 @@
     "state": "ND",
     "city": "Mantador",
     "county_name": "",
-    "lat": 46.17245926,
-    "lon": -97.0106403
+    "lat": 46.1725,
+    "lon": -97.010278
   },
   {
     "site_no": "05051600",
@@ -122954,8 +123062,8 @@
     "state": "ND",
     "city": "Rutland",
     "county_name": "",
-    "lat": 46.02218992,
-    "lon": -97.51148196
+    "lat": 46.022222,
+    "lon": -97.511111
   },
   {
     "site_no": "05053500",
@@ -122963,8 +123071,8 @@
     "state": "ND",
     "city": "St Benedict",
     "county_name": "",
-    "lat": 46.71694444,
-    "lon": -96.82055556
+    "lat": 46.716944,
+    "lon": -96.820556
   },
   {
     "site_no": "05123400",
@@ -122972,8 +123080,8 @@
     "state": "ND",
     "city": "Willow City",
     "county_name": "",
-    "lat": 48.5877399,
-    "lon": -100.4416083
+    "lat": 48.587778,
+    "lon": -100.441111
   },
   {
     "site_no": "05120500",
@@ -122981,8 +123089,8 @@
     "state": "ND",
     "city": "Karlsruhe",
     "county_name": "",
-    "lat": 48.1382932,
-    "lon": -100.5399409
+    "lat": 48.138333,
+    "lon": -100.539444
   },
   {
     "site_no": "475303098465700",
@@ -122995,30 +123103,30 @@
   },
   {
     "site_no": "06329590",
-    "name": "YELLOWSTONE R NO. 1 NR FAIRVIEW, MT",
+    "name": "YELLOWSTONE RIVER NO. 1 NEAR FAIRVIEW, MT",
     "state": "ND",
     "city": "Fairview",
     "county_name": "",
-    "lat": 47.80805556,
-    "lon": -104.0422222
+    "lat": 47.808056,
+    "lon": -104.042222
   },
   {
     "site_no": "06329610",
-    "name": "YELLOWSTONE R NO. 2 NR CARTWRIGHT, ND",
+    "name": "YELLOWSTONE RIVER NO. 2 NEAR CARTWRIGHT, ND",
     "state": "ND",
     "city": "Cartwright",
     "county_name": "",
-    "lat": 47.86196356,
-    "lon": -103.9668743
+    "lat": 47.861944,
+    "lon": -103.966389
   },
   {
     "site_no": "06329620",
-    "name": "YELLOWSTONE R NO. 3 NR BUFORD, ND",
+    "name": "YELLOWSTONE RIVER NO. 3 NEAR BUFORD, ND",
     "state": "ND",
     "city": "Buford",
     "county_name": "",
-    "lat": 47.92057545,
-    "lon": -103.9660413
+    "lat": 47.920556,
+    "lon": -103.965556
   },
   {
     "site_no": "401016100391802",
@@ -123350,8 +123458,8 @@
     "state": "NE",
     "city": "Macy",
     "county_name": "",
-    "lat": 42.109278,
-    "lon": -96.317056
+    "lat": 42.109192,
+    "lon": -96.317044
   },
   {
     "site_no": "423323099520101",
@@ -123377,8 +123485,8 @@
     "state": "NE",
     "city": "S 168th St Nr Springfield",
     "county_name": "",
-    "lat": 41.063056,
-    "lon": -96.176667
+    "lat": 41.063208,
+    "lon": -96.176883
   },
   {
     "site_no": "06823500",
@@ -123406,15 +123514,6 @@
     "county_name": "",
     "lat": 41.947,
     "lon": -99.3860278
-  },
-  {
-    "site_no": "06792000",
-    "name": "CEDAR RIVER NEAR FULLERTON, NEBR.",
-    "state": "NE",
-    "city": "Fullerton",
-    "county_name": "",
-    "lat": 41.39444444,
-    "lon": -98.0038889
   },
   {
     "site_no": "06791500",
@@ -123451,6 +123550,15 @@
     "county_name": "",
     "lat": 42.59777778,
     "lon": -100.1486111
+  },
+  {
+    "site_no": "06792000",
+    "name": "Cedar River near Fullerton, Nebr.",
+    "state": "NE",
+    "city": "Fullerton",
+    "county_name": "",
+    "lat": 41.394444,
+    "lon": -98.003889
   },
   {
     "site_no": "06794650",
@@ -124205,8 +124313,8 @@
     "state": "NE",
     "city": "St. James",
     "county_name": "",
-    "lat": 42.7611088,
-    "lon": -97.0822699
+    "lat": 42.761111,
+    "lon": -97.081944
   },
   {
     "site_no": "06783500",
@@ -124700,8 +124808,8 @@
     "state": "NE",
     "city": "Niobrara",
     "county_name": "",
-    "lat": 42.698247,
-    "lon": -98.120286
+    "lat": 42.697581,
+    "lon": -98.119744
   },
   {
     "site_no": "06461500",
@@ -124723,12 +124831,12 @@
   },
   {
     "site_no": "06601085",
-    "name": "North Blackbird Creek at Hwy 75 at Macy, Nebr.",
+    "name": "North Blackbird Creek at Main St at Macy, Nebr.",
     "state": "NE",
-    "city": "Hwy 75 At Macy",
+    "city": "Main St At Macy",
     "county_name": "",
-    "lat": 42.110278,
-    "lon": -96.344667
+    "lat": 42.110128,
+    "lon": -96.344425
   },
   {
     "site_no": "06814500",
@@ -125065,12 +125173,12 @@
   },
   {
     "site_no": "06805570",
-    "name": "Platte River at La Platte, Nebr.",
+    "name": "Platte River at La Platte, Nebr",
     "state": "NE",
     "city": "La Platte",
     "county_name": "",
-    "lat": 41.05786111,
-    "lon": -95.928
+    "lat": 41.057858,
+    "lon": -95.928044
   },
   {
     "site_no": "06805500",
@@ -125555,8 +125663,8 @@
     "state": "NE",
     "city": "Hwy 75 Near Macy",
     "county_name": "",
-    "lat": 42.104917,
-    "lon": -96.337806
+    "lat": 42.104731,
+    "lon": -96.337603
   },
   {
     "site_no": "06827500",
@@ -125672,8 +125780,8 @@
     "state": "NE",
     "city": "Springfield",
     "county_name": "",
-    "lat": 41.086111,
-    "lon": -96.136389
+    "lat": 41.086272,
+    "lon": -96.136578
   },
   {
     "site_no": "06803520",
@@ -134586,6 +134694,15 @@
     "lon": -105.4603361
   },
   {
+    "site_no": "08381650",
+    "name": "STORRIE CANAL DIVERSION ABOVE BENTLEY LAKE, NM",
+    "state": "NM",
+    "city": "",
+    "county_name": "",
+    "lat": 35.558611,
+    "lon": -105.158119
+  },
+  {
     "site_no": "350147106402810",
     "name": "T09N.R03E.07.111X RBWDSW-T2",
     "state": "NM",
@@ -134988,7 +135105,7 @@
     "city": "Source",
     "county_name": "",
     "lat": 38.90913889,
-    "lon": -114.1126667
+    "lon": -114.11266667
   },
   {
     "site_no": "09415590",
@@ -135132,7 +135249,7 @@
     "city": "",
     "county_name": "",
     "lat": 36.43478056,
-    "lon": -114.275111
+    "lon": -114.27511111
   },
   {
     "site_no": "10317480",
@@ -135384,7 +135501,7 @@
     "city": "Silver Spgs",
     "county_name": "",
     "lat": 39.2929734,
-    "lon": -119.2523802
+    "lon": -119.25238022
   },
   {
     "site_no": "393601118255401",
@@ -135392,8 +135509,8 @@
     "state": "NV",
     "city": "Outlet Nr Stillwater",
     "county_name": "",
-    "lat": 39.6001958,
-    "lon": -118.4326398
+    "lat": 39.60019581,
+    "lon": -118.43263981
   },
   {
     "site_no": "10249900",
@@ -135411,7 +135528,7 @@
     "city": "Spooner Summit",
     "county_name": "",
     "lat": 39.12046395,
-    "lon": -119.8774052
+    "lon": -119.87740522
   },
   {
     "site_no": "10310487",
@@ -135420,7 +135537,7 @@
     "city": "Clear Ck Bike Trail Nr Carson City",
     "county_name": "",
     "lat": 39.11088889,
-    "lon": -119.8643889
+    "lon": -119.86438889
   },
   {
     "site_no": "10310490",
@@ -135438,7 +135555,7 @@
     "city": "Fuji Pk At Carson City",
     "county_name": "",
     "lat": 39.1143534,
-    "lon": -119.7765694
+    "lon": -119.77656936
   },
   {
     "site_no": "10310500",
@@ -136041,7 +136158,7 @@
     "city": "Gardnerville",
     "county_name": "",
     "lat": 38.87901944,
-    "lon": -119.702711
+    "lon": -119.70271111
   },
   {
     "site_no": "402025116403501",
@@ -136103,8 +136220,8 @@
     "state": "NV",
     "city": "Austin",
     "county_name": "",
-    "lat": 39.2124291,
-    "lon": -117.1134216
+    "lat": 39.21242911,
+    "lon": -117.11342161
   },
   {
     "site_no": "1031218750",
@@ -136769,8 +136886,8 @@
     "state": "NV",
     "city": "Gardnerville",
     "county_name": "",
-    "lat": 38.85894444,
-    "lon": -119.5685833
+    "lat": 38.858944,
+    "lon": -119.568583
   },
   {
     "site_no": "384520119224401",
@@ -137111,8 +137228,8 @@
     "state": "NV",
     "city": "Charleston Blvd Nr Las Vegas",
     "county_name": "",
-    "lat": 36.1597028,
-    "lon": -115.04527302
+    "lat": 36.159722,
+    "lon": -115.044444
   },
   {
     "site_no": "09419659",
@@ -137121,7 +137238,7 @@
     "city": "Las Vegas Blvd Nr N Lv",
     "county_name": "",
     "lat": 36.22864167,
-    "lon": -115.0742806
+    "lon": -115.07428056
   },
   {
     "site_no": "10245980",
@@ -137129,8 +137246,8 @@
     "state": "NV",
     "city": "Devils Gate Nr Eureka",
     "county_name": "",
-    "lat": 39.57330556,
-    "lon": -116.0767222
+    "lat": 39.573306,
+    "lon": -116.076722
   },
   {
     "site_no": "10245979",
@@ -137139,7 +137256,7 @@
     "city": "",
     "county_name": "",
     "lat": 39.58041667,
-    "lon": -116.095111
+    "lon": -116.09511111
   },
   {
     "site_no": "10349980",
@@ -137399,7 +137516,7 @@
     "state": "NV",
     "city": "Clark",
     "county_name": "",
-    "lat": 39.56545278,
+    "lat": 39.565453,
     "lon": -119.486186
   },
   {
@@ -137724,7 +137841,7 @@
     "city": "Miller Ln Nr Yerington",
     "county_name": "",
     "lat": 39.04827778,
-    "lon": -119.1330556
+    "lon": -119.13305556
   },
   {
     "site_no": "10302005",
@@ -137741,8 +137858,8 @@
     "state": "NV",
     "city": "Pt Site Blw Weber Res Nr Schurz",
     "county_name": "",
-    "lat": 39.0338091,
-    "lon": -118.8623696
+    "lat": 39.033889,
+    "lon": -118.861389
   },
   {
     "site_no": "10300600",
@@ -137858,8 +137975,8 @@
     "state": "NV",
     "city": "Steamboat",
     "county_name": "",
-    "lat": 39.38527778,
-    "lon": -119.83444444
+    "lat": 39.385278,
+    "lon": -119.834444
   },
   {
     "site_no": "103225055",
@@ -137985,7 +138102,7 @@
     "city": "Oakland Gardens",
     "county_name": "",
     "lat": 40.75641667,
-    "lon": -73.7464167
+    "lon": -73.74641667
   },
   {
     "site_no": "01513820",
@@ -138119,8 +138236,8 @@
     "state": "NY",
     "city": "",
     "county_name": "",
-    "lat": 40.6339922,
-    "lon": -73.6645746
+    "lat": 40.63399223,
+    "lon": -73.66457463
   },
   {
     "site_no": "01364969",
@@ -138263,7 +138380,7 @@
     "state": "NY",
     "city": "Bellmore",
     "county_name": "",
-    "lat": 40.6801111,
+    "lat": 40.68011111,
     "lon": -73.513
   },
   {
@@ -138893,8 +139010,8 @@
     "state": "NY",
     "city": "Babylon",
     "county_name": "",
-    "lat": 40.7089722,
-    "lon": -73.3288056
+    "lat": 40.70897222,
+    "lon": -73.32880556
   },
   {
     "site_no": "01305000",
@@ -138920,7 +139037,7 @@
     "state": "NY",
     "city": "Brightwaters",
     "county_name": "",
-    "lat": 40.71121,
+    "lat": 40.71121002,
     "lon": -73.2601175
   },
   {
@@ -139065,7 +139182,7 @@
     "city": "Islip",
     "county_name": "",
     "lat": 40.73694444,
-    "lon": -73.2016667
+    "lon": -73.20166667
   },
   {
     "site_no": "01498500",
@@ -139389,7 +139506,7 @@
     "city": "Cold Spring Harbor",
     "county_name": "",
     "lat": 40.85716667,
-    "lon": -73.4635556
+    "lon": -73.46355556
   },
   {
     "site_no": "01369695",
@@ -139434,7 +139551,7 @@
     "city": "Central Islip",
     "county_name": "",
     "lat": 40.77227778,
-    "lon": -73.1586667
+    "lon": -73.15866667
   },
   {
     "site_no": "01306495",
@@ -139460,7 +139577,7 @@
     "state": "NY",
     "city": "Oakdale",
     "county_name": "",
-    "lat": 40.7475833,
+    "lat": 40.74758333,
     "lon": -73.15038889
   },
   {
@@ -139469,8 +139586,8 @@
     "state": "NY",
     "city": "Rosedale",
     "county_name": "",
-    "lat": 40.6620833,
-    "lon": -73.7433333
+    "lat": 40.66208333,
+    "lon": -73.74333333
   },
   {
     "site_no": "01422389",
@@ -140100,7 +140217,7 @@
     "city": "Freeport",
     "county_name": "",
     "lat": 40.66563889,
-    "lon": -73.5700833
+    "lon": -73.57008333
   },
   {
     "site_no": "04214240",
@@ -140234,8 +140351,8 @@
     "state": "NY",
     "city": "Rochester",
     "county_name": "",
-    "lat": 43.1256111,
-    "lon": -77.6501111
+    "lat": 43.125611,
+    "lon": -77.650111
   },
   {
     "site_no": "0136219203",
@@ -140568,7 +140685,7 @@
     "city": "Little Neck",
     "county_name": "",
     "lat": 40.77316667,
-    "lon": -73.7443333
+    "lon": -73.74433333
   },
   {
     "site_no": "04234250",
@@ -140612,8 +140729,8 @@
     "state": "NY",
     "city": "Ballantyne Bridge Near Mortimer",
     "county_name": "",
-    "lat": 43.09294444,
-    "lon": -77.6808333
+    "lat": 43.092944,
+    "lon": -77.680833
   },
   {
     "site_no": "04228500",
@@ -140720,8 +140837,8 @@
     "state": "NY",
     "city": "Glen Cove",
     "county_name": "",
-    "lat": 40.8633333,
-    "lon": -73.6341667
+    "lat": 40.86333333,
+    "lon": -73.63416667
   },
   {
     "site_no": "04232395",
@@ -141333,7 +141450,7 @@
     "city": "",
     "county_name": "",
     "lat": 40.82016389,
-    "lon": -73.0236583
+    "lon": -73.02365833
   },
   {
     "site_no": "04256000",
@@ -142017,7 +142134,7 @@
     "city": "Mill Neck",
     "county_name": "",
     "lat": 40.88741667,
-    "lon": -73.5631944
+    "lon": -73.56319444
   },
   {
     "site_no": "01350140",
@@ -142196,8 +142313,8 @@
     "state": "NY",
     "city": "",
     "county_name": "",
-    "lat": 41.0453798,
-    "lon": -71.9284023
+    "lat": 41.04537982,
+    "lon": -71.92840231
   },
   {
     "site_no": "01413085",
@@ -142349,8 +142466,8 @@
     "state": "NY",
     "city": "State Hwy 214 At Edgewood",
     "county_name": "",
-    "lat": 42.1336111,
-    "lon": -74.23152778
+    "lat": 42.133611,
+    "lon": -74.231528
   },
   {
     "site_no": "01387450",
@@ -142367,8 +142484,8 @@
     "state": "NY",
     "city": "",
     "county_name": "",
-    "lat": 40.6573244,
-    "lon": -73.5867947
+    "lat": 40.65732442,
+    "lon": -73.58679474
   },
   {
     "site_no": "404347073260701",
@@ -142376,8 +142493,8 @@
     "state": "NY",
     "city": "",
     "county_name": "",
-    "lat": 40.7298219,
-    "lon": -73.4348451
+    "lat": 40.72982191,
+    "lon": -73.43484512
   },
   {
     "site_no": "404003073405601",
@@ -142385,8 +142502,8 @@
     "state": "NY",
     "city": "",
     "county_name": "",
-    "lat": 40.6676029,
-    "lon": -73.6815194
+    "lat": 40.66760293,
+    "lon": -73.68151937
   },
   {
     "site_no": "405101073343401",
@@ -142395,7 +142512,7 @@
     "city": "",
     "county_name": "",
     "lat": 40.85027778,
-    "lon": -73.5757222
+    "lon": -73.57572222
   },
   {
     "site_no": "404310073305702",
@@ -142403,8 +142520,8 @@
     "state": "NY",
     "city": "",
     "county_name": "",
-    "lat": 40.7189893,
-    "lon": -73.5154033
+    "lat": 40.71898932,
+    "lon": -73.51540332
   },
   {
     "site_no": "404307073305801",
@@ -142413,7 +142530,7 @@
     "city": "",
     "county_name": "",
     "lat": 40.71871155,
-    "lon": -73.5156811
+    "lon": -73.51568111
   },
   {
     "site_no": "404443073404401",
@@ -142422,7 +142539,7 @@
     "city": "",
     "county_name": "",
     "lat": 40.74537937,
-    "lon": -73.6784634
+    "lon": -73.67846344
   },
   {
     "site_no": "404113073361502",
@@ -142448,8 +142565,8 @@
     "state": "NY",
     "city": "",
     "county_name": "",
-    "lat": 40.7189893,
-    "lon": -73.5154033
+    "lat": 40.71898932,
+    "lon": -73.51540332
   },
   {
     "site_no": "404059073254002",
@@ -142458,7 +142575,7 @@
     "city": "",
     "county_name": "",
     "lat": 40.68311389,
-    "lon": -73.4274583
+    "lon": -73.42745833
   },
   {
     "site_no": "0142749205",
@@ -142773,7 +142890,7 @@
     "city": "Smithtown",
     "county_name": "",
     "lat": 40.84991667,
-    "lon": -73.2242222
+    "lon": -73.22422222
   },
   {
     "site_no": "01359528",
@@ -143583,7 +143700,7 @@
     "city": "Riverhead",
     "county_name": "",
     "lat": 40.91369444,
-    "lon": -72.6869444
+    "lon": -72.68694444
   },
   {
     "site_no": "01374300",
@@ -143601,7 +143718,7 @@
     "city": "Bay Shore",
     "county_name": "",
     "lat": 40.72694444,
-    "lon": -73.2441667
+    "lon": -73.24416667
   },
   {
     "site_no": "01365080",
@@ -143646,7 +143763,7 @@
     "city": "Malverne",
     "county_name": "",
     "lat": 40.66638889,
-    "lon": -73.6591667
+    "lon": -73.65916667
   },
   {
     "site_no": "01514880",
@@ -144015,7 +144132,7 @@
     "city": "",
     "county_name": "",
     "lat": 40.731766,
-    "lon": -73.3826212
+    "lon": -73.38262122
   },
   {
     "site_no": "404354073225902",
@@ -144024,7 +144141,7 @@
     "city": "",
     "county_name": "",
     "lat": 40.731766,
-    "lon": -73.3826212
+    "lon": -73.38262122
   },
   {
     "site_no": "404353073225903",
@@ -144032,8 +144149,8 @@
     "state": "NY",
     "city": "",
     "county_name": "",
-    "lat": 40.7314882,
-    "lon": -73.3826212
+    "lat": 40.73148822,
+    "lon": -73.38262122
   },
   {
     "site_no": "404633073044401",
@@ -144042,7 +144159,7 @@
     "city": "",
     "county_name": "",
     "lat": 40.7759316,
-    "lon": -73.0784437
+    "lon": -73.07844373
   },
   {
     "site_no": "404053073250101",
@@ -144051,7 +144168,7 @@
     "city": "",
     "county_name": "",
     "lat": 40.68148929,
-    "lon": -73.4165117
+    "lon": -73.41651173
   },
   {
     "site_no": "404351073230801",
@@ -144068,7 +144185,7 @@
     "state": "NY",
     "city": "",
     "county_name": "",
-    "lat": 40.6803781,
+    "lat": 40.68037811,
     "lon": -73.40290019
   },
   {
@@ -144078,7 +144195,7 @@
     "city": "",
     "county_name": "",
     "lat": 40.7467653,
-    "lon": -73.3078965
+    "lon": -73.30789647
   },
   {
     "site_no": "404322073165501",
@@ -144086,8 +144203,8 @@
     "state": "NY",
     "city": "",
     "county_name": "",
-    "lat": 40.7228766,
-    "lon": -73.281507
+    "lat": 40.72287663,
+    "lon": -73.28150697
   },
   {
     "site_no": "404146073225701",
@@ -144095,8 +144212,8 @@
     "state": "NY",
     "city": "",
     "county_name": "",
-    "lat": 40.696211,
-    "lon": -73.382066
+    "lat": 40.69621104,
+    "lon": -73.38206601
   },
   {
     "site_no": "404453073211201",
@@ -144104,7 +144221,7 @@
     "state": "NY",
     "city": "",
     "county_name": "",
-    "lat": 40.7481544,
+    "lat": 40.74815443,
     "lon": -73.35289788
   },
   {
@@ -144114,7 +144231,7 @@
     "city": "",
     "county_name": "",
     "lat": 40.72648806,
-    "lon": -73.3417866
+    "lon": -73.34178664
   },
   {
     "site_no": "404411073255001",
@@ -144122,7 +144239,7 @@
     "state": "NY",
     "city": "",
     "county_name": "",
-    "lat": 40.7364884,
+    "lat": 40.73648843,
     "lon": -73.43012268
   },
   {
@@ -144140,8 +144257,8 @@
     "state": "NY",
     "city": "",
     "county_name": "",
-    "lat": 40.8730833,
-    "lon": -73.0365556
+    "lat": 40.87308333,
+    "lon": -73.03655556
   },
   {
     "site_no": "404610073053701",
@@ -145086,7 +145203,7 @@
     "city": "East Patchogue",
     "county_name": "",
     "lat": 40.76725,
-    "lon": -72.9938333
+    "lon": -72.99383333
   },
   {
     "site_no": "01350950",
@@ -145571,8 +145688,8 @@
     "state": "NY",
     "city": "Winnisook L Nr Frost Valley",
     "county_name": "",
-    "lat": 42.0111111,
-    "lon": -74.4144444
+    "lat": 42.011111,
+    "lon": -74.414444
   },
   {
     "site_no": "01434220",
@@ -149981,8 +150098,8 @@
     "state": "OH",
     "city": "Barberton",
     "county_name": "",
-    "lat": 41.04894417,
-    "lon": -81.5998438
+    "lat": 41.048889,
+    "lon": -81.6
   },
   {
     "site_no": "04197277",
@@ -155187,6 +155304,15 @@
     "lon": -122.8648109
   },
   {
+    "site_no": "14313600",
+    "name": "LEMOLO No.2 CANAL NEAR TOKETEE FALLS, OR",
+    "state": "OR",
+    "city": "Toketee Falls",
+    "county_name": "",
+    "lat": 43.2962332,
+    "lon": -122.4019862
+  },
+  {
     "site_no": "11507500",
     "name": "LINK RIVER AT KLAMATH FALLS, OR",
     "state": "OR",
@@ -158469,7 +158595,7 @@
     "city": "Mouth At Milanville",
     "county_name": "",
     "lat": 41.67258855,
-    "lon": -75.0598906
+    "lon": -75.05989062
   },
   {
     "site_no": "03071600",
@@ -159099,7 +159225,7 @@
     "city": "Eddystone",
     "county_name": "",
     "lat": 39.86695924,
-    "lon": -75.3407283
+    "lon": -75.34072833
   },
   {
     "site_no": "01475850",
@@ -159125,7 +159251,7 @@
     "state": "PA",
     "city": "Barryville Ny",
     "county_name": "",
-    "lat": 41.4748333,
+    "lat": 41.47483333,
     "lon": -74.91325
   },
   {
@@ -159135,7 +159261,7 @@
     "city": "Callicoon Ny",
     "county_name": "",
     "lat": 41.75675,
-    "lon": -75.0574167
+    "lon": -75.05741667
   },
   {
     "site_no": "01427207",
@@ -159170,7 +159296,7 @@
     "state": "PA",
     "city": "Lackawaxen",
     "county_name": "",
-    "lat": 41.4825896,
+    "lat": 41.48258963,
     "lon": -74.9846127
   },
   {
@@ -159396,7 +159522,7 @@
     "city": "Kennett Square",
     "county_name": "",
     "lat": 39.842,
-    "lon": -75.7071111
+    "lon": -75.70711111
   },
   {
     "site_no": "03027500",
@@ -159594,7 +159720,7 @@
     "city": "Main St. At Mill Hall",
     "county_name": "",
     "lat": 41.10175,
-    "lon": -77.4846111
+    "lon": -77.484611
   },
   {
     "site_no": "01539000",
@@ -160673,8 +160799,8 @@
     "state": "PA",
     "city": "Tullytown",
     "county_name": "",
-    "lat": 40.1421111,
-    "lon": -74.8120556
+    "lat": 40.14211111,
+    "lon": -74.81205556
   },
   {
     "site_no": "01478230",
@@ -160998,7 +161124,7 @@
     "city": "Chester Pike At Glenolden",
     "county_name": "",
     "lat": 39.89344444,
-    "lon": -75.2954167
+    "lon": -75.29541667
   },
   {
     "site_no": "01577500",
@@ -161322,7 +161448,7 @@
     "city": "Herr St At Harrisburg",
     "county_name": "",
     "lat": 40.27188889,
-    "lon": -76.8786111
+    "lon": -76.87861111
   },
   {
     "site_no": "01570984",
@@ -162439,6 +162565,15 @@
     "county_name": "",
     "lat": 41.9572192,
     "lon": -76.51492159
+  },
+  {
+    "site_no": "01576998",
+    "name": "Susquehanna Riv, Deepwater Island at Holtwood, PA",
+    "state": "PA",
+    "city": "Holtwood",
+    "county_name": "",
+    "lat": 39.813667,
+    "lon": -76.312778
   },
   {
     "site_no": "01553990",
@@ -167009,8 +167144,8 @@
     "state": "SC",
     "city": "Hardeeville",
     "county_name": "",
-    "lat": 32.34963773,
-    "lon": -81.1248324
+    "lat": 32.349444,
+    "lon": -81.125
   },
   {
     "site_no": "0219897993",
@@ -167945,8 +168080,8 @@
     "state": "SD",
     "city": "Olsonville",
     "county_name": "",
-    "lat": 43.18774282,
-    "lon": -100.70323772
+    "lat": 43.187778,
+    "lon": -100.702778
   },
   {
     "site_no": "433105102391401",
@@ -168044,12 +168179,12 @@
     "state": "SD",
     "city": "Lead",
     "county_name": "",
-    "lat": 44.32749778,
-    "lon": -103.894532
+    "lat": 44.327514,
+    "lon": -103.89405
   },
   {
     "site_no": "06463900",
-    "name": "ANTELOPE CR NEAR MISSION SD",
+    "name": "ANTELOPE CR NEAR MISSION, SD",
     "state": "SD",
     "city": "Mission",
     "county_name": "",
@@ -168062,8 +168197,8 @@
     "state": "SD",
     "city": "Langford",
     "county_name": "",
-    "lat": 45.57255029,
-    "lon": -97.83624035
+    "lat": 45.572583,
+    "lon": -97.835861
   },
   {
     "site_no": "06441500",
@@ -168071,17 +168206,17 @@
     "state": "SD",
     "city": "Fort Pierre",
     "county_name": "",
-    "lat": 44.32662738,
-    "lon": -100.3843468
+    "lat": 44.326667,
+    "lon": -100.383889
   },
   {
     "site_no": "06441000",
-    "name": "BAD RIVER NEAR MIDLAND,SD",
+    "name": "BAD RIVER NEAR MIDLAND, SD",
     "state": "SD",
     "city": "Midland",
     "county_name": "",
-    "lat": 44.0672095,
-    "lon": -101.1608623
+    "lat": 44.067222,
+    "lon": -101.160444
   },
   {
     "site_no": "435013103162600",
@@ -168094,25 +168229,25 @@
   },
   {
     "site_no": "06403810",
-    "name": "BATTLE CREEK ABOVE KEYSTONE,SD",
+    "name": "BATTLE CREEK ABOVE KEYSTONE, SD",
     "state": "SD",
     "city": "Keystone",
     "county_name": "",
-    "lat": 43.905032,
-    "lon": -103.4638602
+    "lat": 43.905044,
+    "lon": -103.463392
   },
   {
     "site_no": "06406000",
-    "name": "BATTLE CREEK AT HERMOSA,SD",
+    "name": "BATTLE CREEK AT HERMOSA, SD",
     "state": "SD",
     "city": "Hermosa",
     "county_name": "",
-    "lat": 43.82804586,
-    "lon": -103.1960211
+    "lat": 43.828056,
+    "lon": -103.195556
   },
   {
     "site_no": "06406500",
-    "name": "BATTLE CREEK BELOW HERMOSA,SD",
+    "name": "BATTLE CREEK BELOW HERMOSA, SD",
     "state": "SD",
     "city": "Hermosa",
     "county_name": "",
@@ -168121,12 +168256,12 @@
   },
   {
     "site_no": "06404000",
-    "name": "BATTLE CREEK NEAR KEYSTONE,SD",
+    "name": "BATTLE CREEK NEAR KEYSTONE, SD",
     "state": "SD",
     "city": "Keystone",
     "county_name": "",
-    "lat": 43.87164727,
-    "lon": -103.3363029
+    "lat": 43.871658,
+    "lon": -103.335836
   },
   {
     "site_no": "442811103205000",
@@ -168170,17 +168305,17 @@
     "state": "SD",
     "city": "Deadwood",
     "county_name": "",
-    "lat": 44.3355403,
-    "lon": -103.6354716
+    "lat": 44.335556,
+    "lon": -103.635
   },
   {
     "site_no": "06437200",
-    "name": "BEAR BUTTE CREEK NEAR GALENA,SD",
+    "name": "BEAR BUTTE CREEK NEAR GALENA, SD",
     "state": "SD",
     "city": "Galena",
     "county_name": "",
-    "lat": 44.3963735,
-    "lon": -103.5826922
+    "lat": 44.396389,
+    "lon": -103.582222
   },
   {
     "site_no": "06405797",
@@ -168202,21 +168337,12 @@
   },
   {
     "site_no": "06446700",
-    "name": "BEAR IN THE LODGE CREEK NEAR WANBLEE,SD",
+    "name": "BEAR IN THE LODGE CREEK NEAR WANBLEE, SD",
     "state": "SD",
     "city": "Wanblee",
     "county_name": "",
-    "lat": 43.53666558,
-    "lon": -101.7985923
-  },
-  {
-    "site_no": "06482848",
-    "name": "BEAVER CR AT CANTON SD",
-    "state": "SD",
-    "city": "Canton",
-    "county_name": "",
-    "lat": 43.28664838,
-    "lon": -96.5964308
+    "lat": 43.536667,
+    "lon": -101.798167
   },
   {
     "site_no": "06402470",
@@ -168228,13 +168354,22 @@
     "lon": -103.356863
   },
   {
+    "site_no": "06482848",
+    "name": "BEAVER CREEK AT CANTON, SD",
+    "state": "SD",
+    "city": "Canton",
+    "county_name": "",
+    "lat": 43.286667,
+    "lon": -96.596111
+  },
+  {
     "site_no": "06402500",
-    "name": "BEAVER CREEK NEAR BUFFALO GAP,SD",
+    "name": "BEAVER CREEK NEAR BUFFALO GAP, SD",
     "state": "SD",
     "city": "Buffalo Gap",
     "county_name": "",
-    "lat": 43.4666495,
-    "lon": -103.3060308
+    "lat": 43.466667,
+    "lon": -103.305556
   },
   {
     "site_no": "06402430",
@@ -168242,8 +168377,8 @@
     "state": "SD",
     "city": "Pringle",
     "county_name": "",
-    "lat": 43.58133935,
-    "lon": -103.4766662
+    "lat": 43.581389,
+    "lon": -103.476111
   },
   {
     "site_no": "06429000",
@@ -168278,35 +168413,35 @@
     "state": "SD",
     "city": "Wy-Sd State Line",
     "county_name": "",
-    "lat": 44.74883136,
-    "lon": -104.0516966
+    "lat": 44.748889,
+    "lon": -104.051111
   },
   {
     "site_no": "06438000",
-    "name": "BELLE FOURCHE RIVER NEAR ELM SPRINGS,SD",
+    "name": "BELLE FOURCHE RIVER NEAR ELM SPRINGS, SD",
     "state": "SD",
     "city": "Elm Springs",
     "county_name": "",
-    "lat": 44.369989,
-    "lon": -102.5665256
+    "lat": 44.370003,
+    "lon": -102.566081
   },
   {
     "site_no": "06436000",
-    "name": "BELLE FOURCHE RIVER NEAR FRUITDALE,SD",
+    "name": "BELLE FOURCHE RIVER NEAR FRUITDALE, SD",
     "state": "SD",
     "city": "Fruitdale",
     "county_name": "",
-    "lat": 44.6908178,
-    "lon": -103.7376985
+    "lat": 44.690833,
+    "lon": -103.737222
   },
   {
     "site_no": "06437000",
-    "name": "BELLE FOURCHE RIVER NEAR STURGIS,SD",
+    "name": "BELLE FOURCHE RIVER NEAR STURGIS, SD",
     "state": "SD",
     "city": "Sturgis",
     "county_name": "",
-    "lat": 44.5130418,
-    "lon": -103.1368464
+    "lat": 44.513056,
+    "lon": -103.136389
   },
   {
     "site_no": "443753103152300",
@@ -168319,12 +168454,12 @@
   },
   {
     "site_no": "05289985",
-    "name": "BIG COULEE CR NEAR PEEVER,SD",
+    "name": "BIG COULEE CREEK NEAR PEEVER, SD",
     "state": "SD",
     "city": "Peever",
     "county_name": "",
-    "lat": 45.4874332,
-    "lon": -96.9584379
+    "lat": 45.487472,
+    "lon": -96.958083
   },
   {
     "site_no": "441421096491200",
@@ -168337,12 +168472,12 @@
   },
   {
     "site_no": "06482020",
-    "name": "BIG SIOUX R AT NORTH CLIFF AVE AT SIOUX FALLS,SD",
+    "name": "BIG SIOUX R AT NORTH CLIFF AVE AT SIOUX FALLS, SD",
     "state": "SD",
     "city": "North Cliff Ave At Sioux Falls",
     "county_name": "",
-    "lat": 43.56700265,
-    "lon": -96.7113274
+    "lat": 43.567028,
+    "lon": -96.711
   },
   {
     "site_no": "441316096483300",
@@ -168413,8 +168548,8 @@
     "state": "SD",
     "city": "Broadway At Watertown",
     "county_name": "",
-    "lat": 44.88940887,
-    "lon": -97.118962
+    "lat": 44.889444,
+    "lon": -97.118611
   },
   {
     "site_no": "06480702",
@@ -168422,8 +168557,8 @@
     "state": "SD",
     "city": "Egan",
     "county_name": "",
-    "lat": 43.99830499,
-    "lon": -96.6389363
+    "lat": 43.998333,
+    "lon": -96.638611
   },
   {
     "site_no": "431324096292300",
@@ -168467,8 +168602,8 @@
     "state": "SD",
     "city": "",
     "county_name": "",
-    "lat": 44.94885319,
-    "lon": -97.1609083
+    "lat": 44.948889,
+    "lon": -97.160556
   },
   {
     "site_no": "423128096284700",
@@ -168481,21 +168616,21 @@
   },
   {
     "site_no": "06482000",
-    "name": "BIG SIOUX RIVER AT SIOUX FALLS SD",
+    "name": "BIG SIOUX RIVER AT SIOUX FALLS, SD",
     "state": "SD",
     "city": "Sioux Falls",
     "county_name": "",
-    "lat": 43.5010864,
-    "lon": -96.748384
+    "lat": 43.501111,
+    "lon": -96.748056
   },
   {
     "site_no": "06479500",
-    "name": "BIG SIOUX RIVER AT WATERTOWN,SD",
+    "name": "BIG SIOUX RIVER AT WATERTOWN, SD",
     "state": "SD",
     "city": "Watertown",
     "county_name": "",
-    "lat": 44.94246436,
-    "lon": -97.1461856
+    "lat": 44.9425,
+    "lon": -97.145833
   },
   {
     "site_no": "06481400",
@@ -168503,8 +168638,8 @@
     "state": "SD",
     "city": "Diversion At Sioux Falls",
     "county_name": "",
-    "lat": 43.5730307,
-    "lon": -96.7642179
+    "lat": 43.573056,
+    "lon": -96.763889
   },
   {
     "site_no": "06479520",
@@ -168512,8 +168647,8 @@
     "state": "SD",
     "city": "Watertown",
     "county_name": "",
-    "lat": 44.8477423,
-    "lon": -97.049515
+    "lat": 44.847778,
+    "lon": -97.049167
   },
   {
     "site_no": "441841096521400",
@@ -168535,12 +168670,12 @@
   },
   {
     "site_no": "06480000",
-    "name": "BIG SIOUX RIVER NEAR BROOKINGS,SD",
+    "name": "BIG SIOUX RIVER NEAR BROOKINGS, SD",
     "state": "SD",
     "city": "Brookings",
     "county_name": "",
-    "lat": 44.1802473,
-    "lon": -96.749496
+    "lat": 44.180278,
+    "lon": -96.749167
   },
   {
     "site_no": "06479770",
@@ -168548,8 +168683,8 @@
     "state": "SD",
     "city": "Bruce",
     "county_name": "",
-    "lat": 44.4675224,
-    "lon": -96.8874204
+    "lat": 44.467556,
+    "lon": -96.887083
   },
   {
     "site_no": "431824096313700",
@@ -168562,12 +168697,12 @@
   },
   {
     "site_no": "06479525",
-    "name": "BIG SIOUX RIVER NEAR CASTLEWOOD,SD",
+    "name": "BIG SIOUX RIVER NEAR CASTLEWOOD, SD",
     "state": "SD",
     "city": "Castlewood",
     "county_name": "",
-    "lat": 44.7315478,
-    "lon": -97.0446518
+    "lat": 44.731583,
+    "lon": -97.044306
   },
   {
     "site_no": "06481000",
@@ -168580,12 +168715,12 @@
   },
   {
     "site_no": "06479215",
-    "name": "BIG SIOUX RIVER NEAR FLORENCE,SD",
+    "name": "BIG SIOUX RIVER NEAR FLORENCE, SD",
     "state": "SD",
     "city": "Florence",
     "county_name": "",
-    "lat": 45.18079549,
-    "lon": -97.1861904
+    "lat": 45.180833,
+    "lon": -97.185833
   },
   {
     "site_no": "06483950",
@@ -168602,8 +168737,8 @@
     "state": "SD",
     "city": "Jefferson",
     "county_name": "",
-    "lat": 42.62637177,
-    "lon": -96.5155946
+    "lat": 42.626389,
+    "lon": -96.515278
   },
   {
     "site_no": "433843096450500",
@@ -168634,21 +168769,12 @@
   },
   {
     "site_no": "06479438",
-    "name": "BIG SIOUX RIVER NEAR WATERTOWN,SD",
+    "name": "BIG SIOUX RIVER NEAR WATERTOWN, SD",
     "state": "SD",
     "city": "Watertown",
     "county_name": "",
-    "lat": 45.0060753,
-    "lon": -97.1650756
-  },
-  {
-    "site_no": "06447200",
-    "name": "BLACK PIPE CR TRIB NEAR NORRIS SD",
-    "state": "SD",
-    "city": "Norris",
-    "county_name": "",
-    "lat": 43.4616675,
-    "lon": -101.135146
+    "lat": 45.006111,
+    "lon": -97.164722
   },
   {
     "site_no": "06447230",
@@ -168656,8 +168782,17 @@
     "state": "SD",
     "city": "Belvidere",
     "county_name": "",
-    "lat": 43.75527266,
-    "lon": -101.2279205
+    "lat": 43.755278,
+    "lon": -101.2275
+  },
+  {
+    "site_no": "06447200",
+    "name": "BLACK PIPE CREEK TRIB NEAR NORRIS, SD",
+    "state": "SD",
+    "city": "Norris",
+    "county_name": "",
+    "lat": 43.461667,
+    "lon": -101.134722
   },
   {
     "site_no": "06479159",
@@ -168679,30 +168814,39 @@
   },
   {
     "site_no": "06423060",
-    "name": "BOXELDER CR TRIB1 AT COUNTRY RD AT BOX ELDER, SD",
+    "name": "BOXELDER CR TRIB 1 AT COUNTRY RD AT BOX ELDER, SD",
     "state": "SD",
     "city": "Country Rd At Box Elder",
     "county_name": "",
-    "lat": 44.12553284,
-    "lon": -103.11560368
+    "lat": 44.125583,
+    "lon": -103.115056
   },
   {
     "site_no": "06423070",
-    "name": "BOXELDER CR TRIB2 AT COUNTRY RD AT BOX ELDER, SD",
+    "name": "BOXELDER CR TRIB 2 AT COUNTRY RD AT BOX ELDER, SD",
     "state": "SD",
     "city": "Country Rd At Box Elder",
     "county_name": "",
-    "lat": 44.1254042,
-    "lon": -103.097511
+    "lat": 44.125417,
+    "lon": -103.097056
   },
   {
     "site_no": "06423080",
-    "name": "BOXELDER CR TRIB3 AT COUNTRY RD AT BOX ELDER, SD",
+    "name": "BOXELDER CR TRIB 3 AT COUNTRY RD AT BOX ELDER, SD",
     "state": "SD",
     "city": "Country Rd At Box Elder",
     "county_name": "",
-    "lat": 44.11836637,
-    "lon": -103.0818247
+    "lat": 44.118417,
+    "lon": -103.081278
+  },
+  {
+    "site_no": "06423120",
+    "name": "BOXELDER CR TRIB 6 AT HWY 1416 NR BOX ELDER, SD",
+    "state": "SD",
+    "city": "Hwy 1416 Nr Box Elder",
+    "county_name": "",
+    "lat": 44.111,
+    "lon": -103.026111
   },
   {
     "site_no": "06423090",
@@ -168710,8 +168854,8 @@
     "state": "SD",
     "city": "Liberty Blvd At Box Elder",
     "county_name": "",
-    "lat": 44.11275543,
-    "lon": -103.05096251
+    "lat": 44.112806,
+    "lon": -103.050417
   },
   {
     "site_no": "440639103014701",
@@ -168719,17 +168863,8 @@
     "state": "SD",
     "city": "Hwy 1416 Nr Box Elder",
     "county_name": "",
-    "lat": 44.11094998,
-    "lon": -103.03076738
-  },
-  {
-    "site_no": "06423120",
-    "name": "BOXELDER CR TRIB6 AT HWY 1416 NR BOX ELDER, SD",
-    "state": "SD",
-    "city": "Hwy 1416 Nr Box Elder",
-    "county_name": "",
-    "lat": 44.11095,
-    "lon": -103.02665613
+    "lat": 44.111,
+    "lon": -103.030222
   },
   {
     "site_no": "06423100",
@@ -168737,8 +168872,8 @@
     "state": "SD",
     "city": "151st Ave Nr Box Elder",
     "county_name": "",
-    "lat": 44.10733888,
-    "lon": -103.03037844
+    "lat": 44.107389,
+    "lon": -103.029833
   },
   {
     "site_no": "06423050",
@@ -168746,26 +168881,26 @@
     "state": "SD",
     "city": "I-90 Service Rd Nr Box Elder",
     "county_name": "",
-    "lat": 44.11150508,
-    "lon": -103.12496497
+    "lat": 44.111556,
+    "lon": -103.124417
   },
   {
     "site_no": "06422500",
-    "name": "BOXELDER CREEK NEAR NEMO,SD",
+    "name": "BOXELDER CREEK NEAR NEMO, SD",
     "state": "SD",
     "city": "Nemo",
     "county_name": "",
-    "lat": 44.1443339,
-    "lon": -103.4545385
+    "lat": 44.144347,
+    "lon": -103.454072
   },
   {
     "site_no": "06423010",
-    "name": "BOXELDER CREEK NEAR RAPID CITY,SD",
+    "name": "BOXELDER CREEK NEAR RAPID CITY, SD",
     "state": "SD",
     "city": "Rapid City",
     "county_name": "",
-    "lat": 44.131654,
-    "lon": -103.2987949
+    "lat": 44.131667,
+    "lon": -103.298333
   },
   {
     "site_no": "06485696",
@@ -168778,12 +168913,12 @@
   },
   {
     "site_no": "06442718",
-    "name": "CAMPBELL C NR LEE'S CORNER",
+    "name": "CAMPBELL C NEAR LEE'S CORNER",
     "state": "SD",
     "city": "Lee'S Corner",
     "county_name": "",
-    "lat": 44.077407,
-    "lon": -99.3814387
+    "lat": 44.077417,
+    "lon": -99.381056
   },
   {
     "site_no": "432012103331100",
@@ -168805,21 +168940,21 @@
   },
   {
     "site_no": "06409000",
-    "name": "CASTLE CREEK ABOVE DEERFIELD RES NEAR HILL CITY,SD",
+    "name": "CASTLE CR ABOVE DEERFIELD RES NEAR HILL CITY, SD",
     "state": "SD",
     "city": "Deerfield Res Near Hill City",
     "county_name": "",
-    "lat": 44.01359238,
-    "lon": -103.8304784
+    "lat": 44.013611,
+    "lon": -103.83
   },
   {
     "site_no": "06410000",
-    "name": "CASTLE CREEK BELOW DEERFIELD DAM SD",
+    "name": "CASTLE CREEK BELOW DEERFIELD DAM, SD",
     "state": "SD",
     "city": "Deerfield",
     "county_name": "",
-    "lat": 44.02914848,
-    "lon": -103.7818652
+    "lat": 44.029167,
+    "lon": -103.781389
   },
   {
     "site_no": "06442150",
@@ -168827,8 +168962,8 @@
     "state": "SD",
     "city": "Kennebec",
     "county_name": "",
-    "lat": 44.1408193,
-    "lon": -99.9440087
+    "lat": 44.140833,
+    "lon": -99.943611
   },
   {
     "site_no": "06442130",
@@ -168836,8 +168971,8 @@
     "state": "SD",
     "city": "Presho",
     "county_name": "",
-    "lat": 44.14026325,
-    "lon": -100.0848464
+    "lat": 44.140278,
+    "lon": -100.084444
   },
   {
     "site_no": "06439295",
@@ -168850,21 +168985,21 @@
   },
   {
     "site_no": "06439000",
-    "name": "CHERRY CREEK NEAR PLAINVIEW,SD",
+    "name": "CHERRY CREEK NEAR PLAINVIEW, SD",
     "state": "SD",
     "city": "Plainview",
     "county_name": "",
-    "lat": 44.74304495,
-    "lon": -102.0534948
+    "lat": 44.743056,
+    "lon": -102.053056
   },
   {
     "site_no": "06395000",
-    "name": "CHEYENNE RIVER AT EDGEMONT,SD",
+    "name": "CHEYENNE RIVER AT EDGEMONT, SD",
     "state": "SD",
     "city": "Edgemont",
     "county_name": "",
-    "lat": 43.3055286,
-    "lon": -103.8210312
+    "lat": 43.305556,
+    "lon": -103.820556
   },
   {
     "site_no": "06403700",
@@ -168872,44 +169007,44 @@
     "state": "SD",
     "city": "Red Shirt",
     "county_name": "",
-    "lat": 43.6724058,
-    "lon": -102.8921298
+    "lat": 43.672417,
+    "lon": -102.891667
   },
   {
     "site_no": "06401500",
-    "name": "CHEYENNE RIVER BELOW ANGOSTURA DAM,SD",
+    "name": "CHEYENNE RIVER BELOW ANGOSTURA DAM, SD",
     "state": "SD",
     "city": "Angostura",
     "county_name": "",
-    "lat": 43.34497757,
-    "lon": -103.4371412
+    "lat": 43.345,
+    "lon": -103.436667
   },
   {
     "site_no": "06402600",
-    "name": "CHEYENNE RIVER NEAR BUFFALO GAP SD",
+    "name": "CHEYENNE RIVER NEAR BUFFALO GAP, SD",
     "state": "SD",
     "city": "Buffalo Gap",
     "county_name": "",
-    "lat": 43.5019636,
-    "lon": -103.0744103
+    "lat": 43.501978,
+    "lon": -103.073936
   },
   {
     "site_no": "06439500",
-    "name": "CHEYENNE RIVER NEAR EAGLE BUTTE SD",
+    "name": "CHEYENNE RIVER NEAR EAGLE BUTTE, SD",
     "state": "SD",
     "city": "Eagle Butte",
     "county_name": "",
-    "lat": 44.69637199,
-    "lon": -101.2173711
+    "lat": 44.696389,
+    "lon": -101.216944
   },
   {
     "site_no": "06438500",
-    "name": "CHEYENNE RIVER NEAR PLAINVIEW,SD",
+    "name": "CHEYENNE RIVER NEAR PLAINVIEW, SD",
     "state": "SD",
     "city": "Plainview",
     "county_name": "",
-    "lat": 44.5294304,
-    "lon": -101.9301531
+    "lat": 44.529444,
+    "lon": -101.929722
   },
   {
     "site_no": "06408650",
@@ -168917,8 +169052,8 @@
     "state": "SD",
     "city": "Scenic",
     "county_name": "",
-    "lat": 43.8980449,
-    "lon": -102.6440611
+    "lat": 43.898056,
+    "lon": -102.643611
   },
   {
     "site_no": "06423500",
@@ -168926,17 +169061,17 @@
     "state": "SD",
     "city": "Wasta",
     "county_name": "",
-    "lat": 44.08109849,
-    "lon": -102.4012746
+    "lat": 44.081111,
+    "lon": -102.400833
   },
   {
     "site_no": "06453255",
-    "name": "CHOTEAU CR NR AVON SD",
+    "name": "CHOTEAU CR NR AVON, SD",
     "state": "SD",
     "city": "Avon",
     "county_name": "",
-    "lat": 42.9235524,
-    "lon": -98.1063243
+    "lat": 42.923556,
+    "lon": -98.105972
   },
   {
     "site_no": "06453200",
@@ -168980,8 +169115,8 @@
     "state": "SD",
     "city": "Rapid City",
     "county_name": "",
-    "lat": 44.05887667,
-    "lon": -103.2974058
+    "lat": 44.058889,
+    "lon": -103.296944
   },
   {
     "site_no": "06430898",
@@ -168998,8 +169133,8 @@
     "state": "SD",
     "city": "Lower Brule",
     "county_name": "",
-    "lat": 44.02618425,
-    "lon": -99.5168029
+    "lat": 44.026194,
+    "lon": -99.516417
   },
   {
     "site_no": "06430532",
@@ -169075,30 +169210,30 @@
   },
   {
     "site_no": "06425500",
-    "name": "ELK CREEK NEAR ELM SPRINGS,SD",
+    "name": "ELK CREEK NEAR ELM SPRINGS, SD",
     "state": "SD",
     "city": "Elm Springs",
     "county_name": "",
-    "lat": 44.24831768,
-    "lon": -102.5032217
+    "lat": 44.248333,
+    "lon": -102.502778
   },
   {
     "site_no": "06425100",
-    "name": "ELK CREEK NR RAPID CITY,SD",
+    "name": "ELK CREEK NEAR RAPID CITY, SD",
     "state": "SD",
     "city": "Rapid City",
     "county_name": "",
-    "lat": 44.2402646,
-    "lon": -103.1512907
+    "lat": 44.240278,
+    "lon": -103.150833
   },
   {
     "site_no": "06442900",
-    "name": "ELM CREEK NEAR GANN VALLEY SD",
+    "name": "ELM CREEK NEAR GANN VALLEY, SD",
     "state": "SD",
     "city": "Gann Valley",
     "county_name": "",
-    "lat": 44.07746086,
-    "lon": -99.15109761
+    "lat": 44.077494,
+    "lon": -99.150683
   },
   {
     "site_no": "06438800",
@@ -169111,39 +169246,39 @@
   },
   {
     "site_no": "06471500",
-    "name": "ELM RIVER AT WESTPORT,SD",
+    "name": "ELM RIVER AT WESTPORT, SD",
     "state": "SD",
     "city": "Westport",
     "county_name": "",
-    "lat": 45.6560866,
-    "lon": -98.4970402
+    "lat": 45.656111,
+    "lon": -98.496667
   },
   {
     "site_no": "06471065",
-    "name": "ELM RIVER NEAR FREDERICK,SD",
+    "name": "ELM RIVER NEAR FREDERICK, SD",
     "state": "SD",
     "city": "Frederick",
     "county_name": "",
-    "lat": 45.8374753,
-    "lon": -98.7020456
+    "lat": 45.8375,
+    "lon": -98.701667
   },
   {
     "site_no": "06471510",
-    "name": "ELM RIVER NEAR ORDWAY,SD",
+    "name": "ELM RIVER NEAR ORDWAY, SD",
     "state": "SD",
     "city": "Ordway",
     "county_name": "",
-    "lat": 45.5622505,
-    "lon": -98.412818
+    "lat": 45.562278,
+    "lon": -98.412444
   },
   {
     "site_no": "06478052",
-    "name": "ENEMY CR NEAR MITCHELL SD",
+    "name": "ENEMY CREEK NEAR MITCHELL, SD",
     "state": "SD",
     "city": "Mitchell",
     "county_name": "",
-    "lat": 43.6423171,
-    "lon": -97.9863526
+    "lat": 43.642333,
+    "lon": -97.986
   },
   {
     "site_no": "434405096365501",
@@ -169156,12 +169291,12 @@
   },
   {
     "site_no": "06402000",
-    "name": "FALL RIVER AT HOT SPRINGS,SD",
+    "name": "FALL RIVER AT HOT SPRINGS, SD",
     "state": "SD",
     "city": "Hot Springs",
     "county_name": "",
-    "lat": 43.43053476,
-    "lon": -103.4763069
+    "lat": 43.430556,
+    "lon": -103.475833
   },
   {
     "site_no": "06432172",
@@ -169174,21 +169309,21 @@
   },
   {
     "site_no": "06477500",
-    "name": "FIRESTEEL CREEK NEAR MOUNT VERNON,SD",
+    "name": "FIRESTEEL CREEK NEAR MOUNT VERNON, SD",
     "state": "SD",
     "city": "Mount Vernon",
     "county_name": "",
-    "lat": 43.77640219,
-    "lon": -98.2456658
+    "lat": 43.776417,
+    "lon": -98.245306
   },
   {
     "site_no": "06480650",
-    "name": "FLANDREAU CREEK ABOVE FLANDREAU SD",
+    "name": "FLANDREAU CREEK ABOVE FLANDREAU, SD",
     "state": "SD",
     "city": "Flandreau",
     "county_name": "",
-    "lat": 44.06269731,
-    "lon": -96.48562891
+    "lat": 44.062722,
+    "lon": -96.485306
   },
   {
     "site_no": "06471800",
@@ -169196,8 +169331,8 @@
     "state": "SD",
     "city": "Aberdeen",
     "county_name": "",
-    "lat": 45.51919906,
-    "lon": -98.577541
+    "lat": 45.519222,
+    "lon": -98.577167
   },
   {
     "site_no": "06475850",
@@ -169210,12 +169345,12 @@
   },
   {
     "site_no": "06403300",
-    "name": "FRENCH CREEK ABOVE FAIRBURN SD",
+    "name": "FRENCH CREEK ABOVE FAIRBURN, SD",
     "state": "SD",
     "city": "Fairburn",
     "county_name": "",
-    "lat": 43.7172105,
-    "lon": -103.3679713
+    "lat": 43.717222,
+    "lon": -103.3675
   },
   {
     "site_no": "06402995",
@@ -169255,12 +169390,12 @@
   },
   {
     "site_no": "06404998",
-    "name": "GRACE COOLIDGE CREEK NR GAME LODGE NR CUSTER,SD",
+    "name": "GRACE COOLIDGE CREEK NR GAME LODGE NR CUSTER, SD",
     "state": "SD",
     "city": "Game Lodge Nr Custer",
     "county_name": "",
-    "lat": 43.76110028,
-    "lon": -103.3640816
+    "lat": 43.761111,
+    "lon": -103.363611
   },
   {
     "site_no": "06357500",
@@ -169282,12 +169417,12 @@
   },
   {
     "site_no": "06357800",
-    "name": "GRAND RIVER AT LITTLE EAGLE,SD",
+    "name": "GRAND RIVER AT LITTLE EAGLE, SD",
     "state": "SD",
     "city": "Little Eagle",
     "county_name": "",
-    "lat": 45.65777405,
-    "lon": -100.8181933
+    "lat": 45.657778,
+    "lon": -100.817778
   },
   {
     "site_no": "06357600",
@@ -169295,35 +169430,35 @@
     "state": "SD",
     "city": "Thunder Hawk",
     "county_name": "",
-    "lat": 45.7120972,
-    "lon": -101.9207083
+    "lat": 45.712097,
+    "lon": -101.920708
   },
   {
     "site_no": "06403850",
-    "name": "GRIZZLY BEAR CREEK NEAR KEYSTONE,SD",
+    "name": "GRIZZLY BEAR CREEK NEAR KEYSTONE, SD",
     "state": "SD",
     "city": "Keystone",
     "county_name": "",
-    "lat": 43.8780433,
-    "lon": -103.4376907
+    "lat": 43.878056,
+    "lon": -103.437222
   },
   {
     "site_no": "06400000",
-    "name": "HAT CREEK NEAR EDGEMONT,SD",
+    "name": "HAT CREEK NEAR EDGEMONT, SD",
     "state": "SD",
     "city": "Edgemont",
     "county_name": "",
-    "lat": 43.2399736,
-    "lon": -103.5882519
+    "lat": 43.24,
+    "lon": -103.587778
   },
   {
     "site_no": "06479640",
-    "name": "HIDEWOOD CR NEAR ESTELLINE SD",
+    "name": "HIDEWOOD CR NEAR ESTELLINE, SD",
     "state": "SD",
     "city": "Estelline",
     "county_name": "",
-    "lat": 44.63052099,
-    "lon": -96.8908954
+    "lat": 44.630556,
+    "lon": -96.890556
   },
   {
     "site_no": "443012103544700",
@@ -169381,12 +169516,12 @@
   },
   {
     "site_no": "06400875",
-    "name": "HORSEHEAD CREEK AT OELRICHS,SD",
+    "name": "HORSEHEAD CREEK AT OELRICHS, SD",
     "state": "SD",
     "city": "Oelrichs",
     "county_name": "",
-    "lat": 43.18803166,
-    "lon": -103.2265866
+    "lat": 43.188056,
+    "lon": -103.226111
   },
   {
     "site_no": "06473020",
@@ -169394,8 +169529,8 @@
     "state": "SD",
     "city": "Leola",
     "county_name": "",
-    "lat": 45.63017037,
-    "lon": -98.931524
+    "lat": 45.630194,
+    "lon": -98.931139
   },
   {
     "site_no": "433515096432400",
@@ -169408,12 +169543,12 @@
   },
   {
     "site_no": "06434505",
-    "name": "INLET CANAL ABOVE BELLE FOURCHE RESERVOIR,SD",
+    "name": "INLET CANAL ABOVE BELLE FOURCHE RESERVOIR, SD",
     "state": "SD",
     "city": "Belle Fourche",
     "county_name": "",
-    "lat": 44.70092898,
-    "lon": -103.7327817
+    "lat": 44.700944,
+    "lon": -103.732306
   },
   {
     "site_no": "06434500",
@@ -169426,75 +169561,75 @@
   },
   {
     "site_no": "06473000",
-    "name": "JAMES RIVER AT ASHTON,SD",
+    "name": "JAMES RIVER AT ASHTON, SD",
     "state": "SD",
     "city": "Ashton",
     "county_name": "",
-    "lat": 44.99830768,
-    "lon": -98.480927
+    "lat": 44.998333,
+    "lon": -98.480556
   },
   {
     "site_no": "06471000",
-    "name": "JAMES RIVER AT COLUMBIA,SD",
+    "name": "JAMES RIVER AT COLUMBIA, SD",
     "state": "SD",
     "city": "Columbia",
     "county_name": "",
-    "lat": 45.6035795,
-    "lon": -98.3103756
+    "lat": 45.603611,
+    "lon": -98.31
   },
   {
     "site_no": "06476000",
-    "name": "JAMES RIVER AT HURON,SD",
+    "name": "JAMES RIVER AT HURON, SD",
     "state": "SD",
     "city": "Huron",
     "county_name": "",
-    "lat": 44.36359475,
-    "lon": -98.199257
+    "lat": 44.363611,
+    "lon": -98.198889
   },
   {
     "site_no": "06477000",
-    "name": "JAMES RIVER NEAR FORESTBURG,SD",
+    "name": "JAMES RIVER NEAR FORESTBURG, SD",
     "state": "SD",
     "city": "Forestburg",
     "county_name": "",
-    "lat": 43.9738721,
-    "lon": -98.070916
+    "lat": 43.973889,
+    "lon": -98.070556
   },
   {
     "site_no": "06478000",
-    "name": "JAMES RIVER NEAR MITCHELL,SD",
+    "name": "JAMES RIVER NEAR MITCHELL, SD",
     "state": "SD",
     "city": "Mitchell",
     "county_name": "",
-    "lat": 43.65887165,
-    "lon": -97.9192403
+    "lat": 43.658889,
+    "lon": -97.918889
   },
   {
     "site_no": "06475000",
-    "name": "JAMES RIVER NEAR REDFIELD,SD",
+    "name": "JAMES RIVER NEAR REDFIELD, SD",
     "state": "SD",
     "city": "Redfield",
     "county_name": "",
-    "lat": 44.91053097,
-    "lon": -98.4720386
+    "lat": 44.910556,
+    "lon": -98.471667
   },
   {
     "site_no": "06478500",
-    "name": "JAMES RIVER NEAR SCOTLAND,SD",
+    "name": "JAMES RIVER NEAR SCOTLAND, SD",
     "state": "SD",
     "city": "Scotland",
     "county_name": "",
-    "lat": 43.1858255,
-    "lon": -97.635622
+    "lat": 43.185833,
+    "lon": -97.635278
   },
   {
     "site_no": "06472000",
-    "name": "JAMES RIVER NEAR STRATFORD,SD",
+    "name": "JAMES RIVER NEAR STRATFORD, SD",
     "state": "SD",
     "city": "Stratford",
     "county_name": "",
-    "lat": 45.24163936,
-    "lon": -98.3914819
+    "lat": 45.241667,
+    "lon": -98.391111
   },
   {
     "site_no": "06478513",
@@ -169502,35 +169637,35 @@
     "state": "SD",
     "city": "Yankton",
     "county_name": "",
-    "lat": 42.9958297,
-    "lon": -97.3697806
+    "lat": 42.995833,
+    "lon": -97.369444
   },
   {
     "site_no": "06464500",
-    "name": "KEYA PAHA RIVER AT WEWELA,SD",
+    "name": "KEYA PAHA RIVER AT WEWELA, SD",
     "state": "SD",
     "city": "Wewela",
     "county_name": "",
-    "lat": 43.0270872,
-    "lon": -99.780921
+    "lat": 43.027083,
+    "lon": -99.780528
   },
   {
     "site_no": "06464100",
-    "name": "KEYA PAHA RIVER NEAR KEYAPAHA,SD",
+    "name": "KEYA PAHA RIVER NEAR KEYAPAHA, SD",
     "state": "SD",
     "city": "Keyapaha",
     "county_name": "",
-    "lat": 43.12917164,
-    "lon": -100.1070671
+    "lat": 43.129167,
+    "lon": -100.106667
   },
   {
     "site_no": "05051650",
-    "name": "LA BELLE CR NEAR VEBLEN SD",
+    "name": "LA BELLE CREEK NEAR VEBLEN, SD",
     "state": "SD",
     "city": "Veblen",
     "county_name": "",
-    "lat": 45.89252379,
-    "lon": -97.36192027
+    "lat": 45.892556,
+    "lon": -97.361556
   },
   {
     "site_no": "05292810",
@@ -169642,12 +169777,12 @@
   },
   {
     "site_no": "06449000",
-    "name": "LAKE CREEK BELOW REFUGE NEAR TUTHILL,SD",
+    "name": "LAKE CREEK BELOW REFUGE NEAR TUTHILL, SD",
     "state": "SD",
     "city": "Refuge Near Tuthill",
     "county_name": "",
-    "lat": 43.1459166,
-    "lon": -101.5128713
+    "lat": 43.145917,
+    "lon": -101.512444
   },
   {
     "site_no": "06442996",
@@ -169655,8 +169790,8 @@
     "state": "SD",
     "city": "Chamberlain",
     "county_name": "",
-    "lat": 43.81607805,
-    "lon": -99.3273629
+    "lat": 43.816111,
+    "lon": -99.326944
   },
   {
     "site_no": "06452278",
@@ -169673,8 +169808,8 @@
     "state": "SD",
     "city": "Water Plant At Watertown",
     "county_name": "",
-    "lat": 44.91724198,
-    "lon": -97.1874365
+    "lat": 44.917278,
+    "lon": -97.187083
   },
   {
     "site_no": "06479450",
@@ -169714,12 +169849,12 @@
   },
   {
     "site_no": "06466700",
-    "name": "LEWIS AND CLARK LAKE AT SPRINGFIELD,SD",
+    "name": "LEWIS AND CLARK LAKE AT SPRINGFIELD, SD",
     "state": "SD",
     "city": "Springfield",
     "county_name": "",
-    "lat": 42.85583236,
-    "lon": -97.885346
+    "lat": 42.855833,
+    "lon": -97.885
   },
   {
     "site_no": "06421800",
@@ -169741,12 +169876,12 @@
   },
   {
     "site_no": "06334500",
-    "name": "LITTLE MISSOURI RIVER AT CAMP CROOK,SD",
+    "name": "LITTLE MISSOURI RIVER AT CAMP CROOK, SD",
     "state": "SD",
     "city": "Camp Crook",
     "county_name": "",
-    "lat": 45.5481343,
-    "lon": -103.9712386
+    "lat": 45.548139,
+    "lon": -103.97075
   },
   {
     "site_no": "06430850",
@@ -169754,8 +169889,8 @@
     "state": "SD",
     "city": "Lead",
     "county_name": "",
-    "lat": 44.3496865,
-    "lon": -103.9359118
+    "lat": 44.349703,
+    "lon": -103.935428
   },
   {
     "site_no": "06478540",
@@ -169777,39 +169912,39 @@
   },
   {
     "site_no": "06450500",
-    "name": "LITTLE WHITE RIVER BELOW WHITE RIVER,SD",
+    "name": "LITTLE WHITE RIVER BELOW WHITE RIVER, SD",
     "state": "SD",
     "city": "",
     "county_name": "",
-    "lat": 43.60138549,
-    "lon": -100.7498608
+    "lat": 43.601389,
+    "lon": -100.749444
   },
   {
     "site_no": "06447500",
-    "name": "LITTLE WHITE RIVER NEAR MARTIN,SD",
+    "name": "LITTLE WHITE RIVER NEAR MARTIN, SD",
     "state": "SD",
     "city": "Martin",
     "county_name": "",
-    "lat": 43.1669155,
-    "lon": -101.6327322
+    "lat": 43.166917,
+    "lon": -101.632306
   },
   {
     "site_no": "06449500",
-    "name": "LITTLE WHITE RIVER NEAR ROSEBUD SD",
+    "name": "LITTLE WHITE RIVER NEAR ROSEBUD, SD",
     "state": "SD",
     "city": "Rosebud",
     "county_name": "",
-    "lat": 43.3255586,
-    "lon": -100.8837556
+    "lat": 43.325556,
+    "lon": -100.883333
   },
   {
     "site_no": "06449100",
-    "name": "LITTLE WHITE RIVER NEAR VETAL,SD",
+    "name": "LITTLE WHITE RIVER NEAR VETAL, SD",
     "state": "SD",
     "city": "Vetal",
     "county_name": "",
-    "lat": 43.10069918,
-    "lon": -101.232234
+    "lat": 43.100694,
+    "lon": -101.231806
   },
   {
     "site_no": "06479980",
@@ -169821,15 +169956,6 @@
     "lon": -96.7673024
   },
   {
-    "site_no": "06442500",
-    "name": "MEDICINE CR AT KENNEBEC SD",
-    "state": "SD",
-    "city": "Kennebec",
-    "county_name": "",
-    "lat": 43.9052407,
-    "lon": -99.8761727
-  },
-  {
     "site_no": "06474300",
     "name": "MEDICINE CR NEAR ZELL SD",
     "state": "SD",
@@ -169839,13 +169965,22 @@
     "lon": -98.7039874
   },
   {
+    "site_no": "06442500",
+    "name": "MEDICINE CREEK AT KENNEBEC, SD",
+    "state": "SD",
+    "city": "Kennebec",
+    "county_name": "",
+    "lat": 43.90525,
+    "lon": -99.875778
+  },
+  {
     "site_no": "06442600",
     "name": "MEDICINE CREEK NEAR LOWER BRULE, SD",
     "state": "SD",
     "city": "Lower Brule",
     "county_name": "",
-    "lat": 44.01637796,
-    "lon": -99.745113
+    "lat": 44.016389,
+    "lon": -99.744722
   },
   {
     "site_no": "06440850",
@@ -169853,17 +169988,17 @@
     "state": "SD",
     "city": "Philip",
     "county_name": "",
-    "lat": 44.0547661,
-    "lon": -101.4872815
+    "lat": 44.054778,
+    "lon": -101.486861
   },
   {
     "site_no": "06441592",
-    "name": "MISSOURI R BL LA FRAMBOISE ISLAND, AT PIERRE,SD",
+    "name": "MISSOURI R BL LA FRAMBOISE ISLAND, AT PIERRE, SD",
     "state": "SD",
     "city": "Pierre",
     "county_name": "",
-    "lat": 44.3460937,
-    "lon": -100.32041
+    "lat": 44.346111,
+    "lon": -100.32
   },
   {
     "site_no": "06478515",
@@ -169903,12 +170038,12 @@
   },
   {
     "site_no": "06441595",
-    "name": "MISSOURI RIVER AT FARM ISLAND NR PIERRE, SD",
+    "name": "MISSOURI RIVER AT FARM ISLAND NEAR PIERRE, SD",
     "state": "SD",
-    "city": "Farm Island Nr Pierre",
+    "city": "Farm Island Near Pierre",
     "county_name": "",
-    "lat": 44.3341497,
-    "lon": -100.2654085
+    "lat": 44.334167,
+    "lon": -100.265
   },
   {
     "site_no": "06453000",
@@ -169934,17 +170069,17 @@
     "state": "SD",
     "city": "Laframboise Island At Pierre",
     "county_name": "",
-    "lat": 44.35192678,
-    "lon": -100.359022
+    "lat": 44.351944,
+    "lon": -100.358611
   },
   {
     "site_no": "06440000",
-    "name": "MISSOURI RIVER AT PIERRE,SD",
+    "name": "MISSOURI RIVER AT PIERRE, SD",
     "state": "SD",
     "city": "Pierre",
     "county_name": "",
-    "lat": 44.3730377,
-    "lon": -100.3679114
+    "lat": 44.373056,
+    "lon": -100.3675
   },
   {
     "site_no": "06467500",
@@ -169952,8 +170087,8 @@
     "state": "SD",
     "city": "Yankton",
     "county_name": "",
-    "lat": 42.86608985,
-    "lon": -97.3939586
+    "lat": 42.866111,
+    "lon": -97.393611
   },
   {
     "site_no": "06453305",
@@ -169970,8 +170105,8 @@
     "state": "SD",
     "city": "Greenwood",
     "county_name": "",
-    "lat": 42.90527446,
-    "lon": -98.3498023
+    "lat": 42.905278,
+    "lon": -98.349444
   },
   {
     "site_no": "06471770",
@@ -169979,8 +170114,8 @@
     "state": "SD",
     "city": "Aberdeen",
     "county_name": "",
-    "lat": 45.4705582,
-    "lon": -98.4539833
+    "lat": 45.470583,
+    "lon": -98.453611
   },
   {
     "site_no": "06471875",
@@ -169993,21 +170128,21 @@
   },
   {
     "site_no": "06361000",
-    "name": "MOREAU RIVER AT PROMISE SD",
+    "name": "MOREAU RIVER AT PROMISE, SD",
     "state": "SD",
     "city": "Promise",
     "county_name": "",
-    "lat": 45.3431222,
-    "lon": -100.6133889
+    "lat": 45.343122,
+    "lon": -100.613389
   },
   {
     "site_no": "06359500",
-    "name": "MOREAU RIVER NEAR FAITH,SD",
+    "name": "MOREAU RIVER NEAR FAITH, SD",
     "state": "SD",
     "city": "Faith",
     "county_name": "",
-    "lat": 45.19775826,
-    "lon": -102.1565472
+    "lat": 45.197778,
+    "lon": -102.156111
   },
   {
     "site_no": "451057101121500",
@@ -170020,12 +170155,12 @@
   },
   {
     "site_no": "06360500",
-    "name": "MOREAU RIVER NEAR WHITEHORSE,SD",
+    "name": "MOREAU RIVER NEAR WHITEHORSE, SD",
     "state": "SD",
     "city": "Whitehorse",
     "county_name": "",
-    "lat": 45.2558171,
-    "lon": -100.8429214
+    "lat": 45.255833,
+    "lon": -100.8425
   },
   {
     "site_no": "06479490",
@@ -170033,8 +170168,8 @@
     "state": "SD",
     "city": "Rauville",
     "county_name": "",
-    "lat": 45.0081867,
-    "lon": -97.1062133
+    "lat": 45.008222,
+    "lon": -97.105861
   },
   {
     "site_no": "05049995",
@@ -170047,12 +170182,12 @@
   },
   {
     "site_no": "06429997",
-    "name": "MURRAY DITCH ABV HEADGATE AT WY-SD STATE LINE",
+    "name": "MURRAY DITCH ABOVE HEADGATE AT WY-SD STATE LINE",
     "state": "SD",
-    "city": "Wy-Sd State Line",
+    "city": "Headgate At Wy-Sd State Line",
     "county_name": "",
-    "lat": 44.5763739,
-    "lon": -104.0560453
+    "lat": 44.576389,
+    "lon": -104.055556
   },
   {
     "site_no": "06430525",
@@ -170074,12 +170209,12 @@
   },
   {
     "site_no": "06355500",
-    "name": "NORTH FORK GRAND RIVER NEAR WHITE BUTTE,SD",
+    "name": "NORTH FORK GRAND RIVER NEAR WHITE BUTTE, SD",
     "state": "SD",
     "city": "White Butte",
     "county_name": "",
-    "lat": 45.80222,
-    "lon": -102.3623795
+    "lat": 45.802222,
+    "lon": -102.361944
   },
   {
     "site_no": "06354882",
@@ -170092,11 +170227,11 @@
   },
   {
     "site_no": "06354881",
-    "name": "OAK CREEK NR RATTLESNAKE BUTTE NR WAKPALA, SD",
+    "name": "OAK CREEK NEAR RATTLESNAKE BUTTE NEAR WAKPALA, SD",
     "state": "SD",
-    "city": "Rattlesnake Butte Nr Wakpala",
+    "city": "Rattlesnake Butte Near Wakpala",
     "county_name": "",
-    "lat": 45.72842778,
+    "lat": 45.728428,
     "lon": -100.596275
   },
   {
@@ -170132,8 +170267,8 @@
     "state": "SD",
     "city": "Platte",
     "county_name": "",
-    "lat": 43.3272192,
-    "lon": -98.9706446
+    "lat": 43.327222,
+    "lon": -98.970278
   },
   {
     "site_no": "06441110",
@@ -170141,8 +170276,8 @@
     "state": "SD",
     "city": "Hayes",
     "county_name": "",
-    "lat": 44.21053769,
-    "lon": -100.7265279
+    "lat": 44.210556,
+    "lon": -100.726111
   },
   {
     "site_no": "06441100",
@@ -170150,8 +170285,8 @@
     "state": "SD",
     "city": "Hayes",
     "county_name": "",
-    "lat": 44.3446798,
-    "lon": -101.128261
+    "lat": 44.344722,
+    "lon": -101.127778
   },
   {
     "site_no": "06453400",
@@ -170164,12 +170299,12 @@
   },
   {
     "site_no": "06473300",
-    "name": "PREACHERS RUN TRIB AT IPSWICH SD",
+    "name": "PREACHERS RUN TRIB AT IPSWICH, SD",
     "state": "SD",
     "city": "Ipswich",
     "county_name": "",
-    "lat": 45.4523638,
-    "lon": -99.0292228
+    "lat": 45.452389,
+    "lon": -99.028833
   },
   {
     "site_no": "440126103054701",
@@ -170190,15 +170325,6 @@
     "lon": -102.7004506
   },
   {
-    "site_no": "06414000",
-    "name": "RAPID CR AT RAPID CITY,SD",
-    "state": "SD",
-    "city": "Rapid City",
-    "county_name": "",
-    "lat": 44.08551554,
-    "lon": -103.241843
-  },
-  {
     "site_no": "06418900",
     "name": "RAPID CR BL SEWAGE TREATMENT PL NR RAPID CITY, SD",
     "state": "SD",
@@ -170209,48 +170335,48 @@
   },
   {
     "site_no": "06421500",
-    "name": "RAPID CR NEAR FARMINGDALE,SD",
+    "name": "RAPID CR NEAR FARMINGDALE, SD",
     "state": "SD",
     "city": "Farmingdale",
     "county_name": "",
-    "lat": 43.94210239,
-    "lon": -102.8539247
-  },
-  {
-    "site_no": "06410500",
-    "name": "RAPID CREEK ABOVE PACTOLA RES AT SILVER CITY,  SD",
-    "state": "SD",
-    "city": "Pactola Res At Silver City",
-    "county_name": "",
-    "lat": 44.08470785,
-    "lon": -103.5804702
-  },
-  {
-    "site_no": "06418800",
-    "name": "RAPID CREEK ABOVE WRF NR RAPID CITY, SD",
-    "state": "SD",
-    "city": "Wrf Nr Rapid City",
-    "county_name": "",
-    "lat": 44.02680556,
-    "lon": -103.1011111
+    "lat": 43.942114,
+    "lon": -102.853472
   },
   {
     "site_no": "06412500",
-    "name": "RAPID CREEK ABV CANYON LAKE NEAR RAPID CITY,SD",
-    "state": "SD",
-    "city": "Rapid City",
-    "county_name": "",
-    "lat": 44.05276555,
-    "lon": -103.3118507
-  },
-  {
-    "site_no": "06411900",
-    "name": "RAPID CREEK ABV JOHNSON SIDING BLW PACTOLA DAM,SD",
+    "name": "RAPID CREEK ABOVE CANYON LAKE NEAR RAPID CITY, SD",
     "state": "SD",
     "city": "",
     "county_name": "",
-    "lat": 44.08198719,
-    "lon": -103.4429383
+    "lat": 44.052778,
+    "lon": -103.311389
+  },
+  {
+    "site_no": "06410500",
+    "name": "RAPID CREEK ABOVE PACTOLA RES AT SILVER CITY, SD",
+    "state": "SD",
+    "city": "Pactola Res At Silver City",
+    "county_name": "",
+    "lat": 44.084722,
+    "lon": -103.58
+  },
+  {
+    "site_no": "06418800",
+    "name": "RAPID CREEK ABOVE WRF NEAR RAPID CITY,  SD",
+    "state": "SD",
+    "city": "Wrf Near Rapid City",
+    "county_name": "",
+    "lat": 44.026806,
+    "lon": -103.101111
+  },
+  {
+    "site_no": "06411900",
+    "name": "RAPID CREEK ABV JOHNSON SIDING BLW PACTOLA DAM, SD",
+    "state": "SD",
+    "city": "",
+    "county_name": "",
+    "lat": 44.082,
+    "lon": -103.442472
   },
   {
     "site_no": "06412200",
@@ -170258,17 +170384,26 @@
     "state": "SD",
     "city": "Rapid City",
     "county_name": "",
-    "lat": 44.0465988,
-    "lon": -103.3515742
+    "lat": 44.046611,
+    "lon": -103.351111
   },
   {
     "site_no": "06412000",
-    "name": "RAPID CREEK AT BIG BEND NR RAPID CITY,SD",
+    "name": "RAPID CREEK AT BIG BEND NR RAPID CITY, SD",
     "state": "SD",
     "city": "Big Bend Nr Rapid City",
     "county_name": "",
-    "lat": 44.05498747,
-    "lon": -103.417132
+    "lat": 44.055,
+    "lon": -103.416667
+  },
+  {
+    "site_no": "06414000",
+    "name": "RAPID CREEK AT RAPID CITY, SD",
+    "state": "SD",
+    "city": "Rapid City",
+    "county_name": "",
+    "lat": 44.085528,
+    "lon": -103.241383
   },
   {
     "site_no": "06413720",
@@ -170281,12 +170416,12 @@
   },
   {
     "site_no": "06411500",
-    "name": "RAPID CREEK BELOW PACTOLA DAM,SD",
+    "name": "RAPID CREEK BELOW PACTOLA DAM, SD",
     "state": "SD",
     "city": "Pactola",
     "county_name": "",
-    "lat": 44.07665378,
-    "lon": -103.482134
+    "lat": 44.076667,
+    "lon": -103.481667
   },
   {
     "site_no": "06413200",
@@ -170308,12 +170443,12 @@
   },
   {
     "site_no": "06416000",
-    "name": "RAPID CREEK BLW HAWTHORN DITCH AT RAPID CITY,SD",
+    "name": "RAPID CREEK BLW HAWTHORN DITCH AT RAPID CITY, SD",
     "state": "SD",
     "city": "Rapid City",
     "county_name": "",
-    "lat": 44.06726568,
-    "lon": -103.18093
+    "lat": 44.067278,
+    "lon": -103.180472
   },
   {
     "site_no": "06408860",
@@ -170330,44 +170465,44 @@
     "state": "SD",
     "city": "Wy-Sd State Line",
     "county_name": "",
-    "lat": 44.5718625,
-    "lon": -104.0536449
+    "lat": 44.571919,
+    "lon": -104.053061
   },
   {
     "site_no": "06433000",
-    "name": "REDWATER RIVER ABOVE BELLE FOURCHE,SD",
+    "name": "REDWATER RIVER ABOVE BELLE FOURCHE, SD",
     "state": "SD",
     "city": "Belle Fourche",
     "county_name": "",
-    "lat": 44.66720665,
-    "lon": -103.8393696
+    "lat": 44.667222,
+    "lon": -103.838889
   },
   {
     "site_no": "06406760",
-    "name": "RENO GULCH NEAR HILL CITY,SD",
+    "name": "RENO GULCH NEAR HILL CITY, SD",
     "state": "SD",
     "city": "Hill City",
     "county_name": "",
-    "lat": 43.9097067,
-    "lon": -103.6124162
+    "lat": 43.909722,
+    "lon": -103.611944
   },
   {
     "site_no": "06408700",
-    "name": "RHOADS FORK NEAR ROCHFORD,SD",
+    "name": "RHOADS FORK NEAR ROCHFORD, SD",
     "state": "SD",
     "city": "Rochford",
     "county_name": "",
-    "lat": 44.13387149,
-    "lon": -103.8615912
+    "lat": 44.133889,
+    "lon": -103.861111
   },
   {
     "site_no": "06477150",
-    "name": "ROCK CR NEAR FULTON SD",
+    "name": "ROCK CREEK NEAR FULTON, SD",
     "state": "SD",
     "city": "Fulton",
     "county_name": "",
-    "lat": 43.7583153,
-    "lon": -97.909242
+    "lat": 43.758333,
+    "lon": -97.908889
   },
   {
     "site_no": "06463990",
@@ -170393,8 +170528,8 @@
     "state": "SD",
     "city": "Olsonville",
     "county_name": "",
-    "lat": 43.017495,
-    "lon": -100.4134213
+    "lat": 43.017528,
+    "lon": -100.412972
   },
   {
     "site_no": "06470992",
@@ -170429,26 +170564,26 @@
     "state": "SD",
     "city": "Sioux Falls",
     "county_name": "",
-    "lat": 43.602197,
-    "lon": -96.731717
+    "lat": 43.602222,
+    "lon": -96.731389
   },
   {
     "site_no": "06481500",
-    "name": "SKUNK CREEK AT SIOUX FALLS,SD",
+    "name": "SKUNK CREEK AT SIOUX FALLS, SD",
     "state": "SD",
     "city": "Sioux Falls",
     "county_name": "",
-    "lat": 43.53358676,
-    "lon": -96.7908849
+    "lat": 43.533611,
+    "lon": -96.790556
   },
   {
     "site_no": "06481480",
-    "name": "SKUNK CREEK NEAR CHESTER,SD",
+    "name": "SKUNK CREEK NEAR CHESTER, SD",
     "state": "SD",
     "city": "Chester",
     "county_name": "",
-    "lat": 43.8481959,
-    "lon": -96.8368313
+    "lat": 43.848222,
+    "lon": -96.8365
   },
   {
     "site_no": "06481493",
@@ -170456,8 +170591,8 @@
     "state": "SD",
     "city": "Hartford",
     "county_name": "",
-    "lat": 43.6361151,
-    "lon": -96.9004154
+    "lat": 43.636139,
+    "lon": -96.900083
   },
   {
     "site_no": "06473700",
@@ -170474,35 +170609,35 @@
     "state": "SD",
     "city": "Rauville",
     "county_name": "",
-    "lat": 44.95302009,
-    "lon": -97.1067403
+    "lat": 44.953056,
+    "lon": -97.106389
   },
   {
     "site_no": "06413620",
-    "name": "SOUTH CANYON NEAR RAPID CITY,SD",
+    "name": "SOUTH CANYON NEAR RAPID CITY, SD",
     "state": "SD",
     "city": "Rapid City",
     "county_name": "",
-    "lat": 44.09276526,
-    "lon": -103.3274068
+    "lat": 44.092778,
+    "lon": -103.326944
   },
   {
     "site_no": "06440200",
-    "name": "SOUTH FORK BAD RIVER NEAR COTTONWOOD,SD",
+    "name": "SOUTH FORK BAD RIVER NEAR COTTONWOOD, SD",
     "state": "SD",
     "city": "Cottonwood",
     "county_name": "",
-    "lat": 43.9690175,
-    "lon": -101.767229
+    "lat": 43.969028,
+    "lon": -101.766806
   },
   {
     "site_no": "06356500",
-    "name": "SOUTH FORK GRAND RIVER NEAR CASH,SD",
+    "name": "SOUTH FORK GRAND RIVER NEAR CASH, SD",
     "state": "SD",
     "city": "Cash",
     "county_name": "",
-    "lat": 45.6486883,
-    "lon": -102.6433259
+    "lat": 45.648694,
+    "lon": -102.642889
   },
   {
     "site_no": "06430900",
@@ -170515,12 +170650,12 @@
   },
   {
     "site_no": "06431500",
-    "name": "SPEARFISH CREEK AT SPEARFISH,SD",
+    "name": "SPEARFISH CREEK AT SPEARFISH, SD",
     "state": "SD",
     "city": "Spearfish",
     "county_name": "",
-    "lat": 44.48248388,
-    "lon": -103.861592
+    "lat": 44.4825,
+    "lon": -103.861111
   },
   {
     "site_no": "06432020",
@@ -170533,12 +170668,12 @@
   },
   {
     "site_no": "06430770",
-    "name": "SPEARFISH CREEK NR LEAD, SD",
+    "name": "SPEARFISH CREEK NEAR LEAD, SD",
     "state": "SD",
     "city": "Lead",
     "county_name": "",
-    "lat": 44.29921736,
-    "lon": -103.8681641
+    "lat": 44.299233,
+    "lon": -103.867683
   },
   {
     "site_no": "06482610",
@@ -170546,8 +170681,8 @@
     "state": "SD",
     "city": "Corson",
     "county_name": "",
-    "lat": 43.61636576,
-    "lon": -96.56532366
+    "lat": 43.616389,
+    "lon": -96.565
   },
   {
     "site_no": "06408500",
@@ -170569,30 +170704,30 @@
   },
   {
     "site_no": "06406700",
-    "name": "SPRING CREEK AT OREVILLE, NEAR HILL CITY,SD",
+    "name": "SPRING CREEK AT OREVILLE, NEAR HILL CITY, SD",
     "state": "SD",
     "city": "Oreville",
     "county_name": "",
-    "lat": 43.8662367,
-    "lon": -103.6240667
+    "lat": 43.866253,
+    "lon": -103.623594
   },
   {
     "site_no": "06480400",
-    "name": "SPRING CREEK NEAR FLANDREAU SD",
+    "name": "SPRING CREEK NEAR FLANDREAU, SD",
     "state": "SD",
     "city": "Flandreau",
     "county_name": "",
-    "lat": 44.1216644,
-    "lon": -96.5891297
+    "lat": 44.121694,
+    "lon": -96.588806
   },
   {
     "site_no": "06407500",
-    "name": "SPRING CREEK NEAR KEYSTONE,SD",
+    "name": "SPRING CREEK NEAR KEYSTONE, SD",
     "state": "SD",
     "city": "Keystone",
     "county_name": "",
-    "lat": 43.97871038,
-    "lon": -103.3460469
+    "lat": 43.978722,
+    "lon": -103.345583
   },
   {
     "site_no": "06425050",
@@ -170605,12 +170740,12 @@
   },
   {
     "site_no": "06406740",
-    "name": "SUNDAY GULCH BELOW JOHNSON CANYON NR HILL CITY,SD",
+    "name": "SUNDAY GULCH BELOW JOHNSON CANYON NR HILL CITY, SD",
     "state": "SD",
     "city": "Johnson Canyon Nr Hill City",
     "county_name": "",
-    "lat": 43.86942944,
-    "lon": -103.58241585
+    "lat": 43.869444,
+    "lon": -103.581944
   },
   {
     "site_no": "06359800",
@@ -170676,15 +170811,6 @@
     "lon": -103.507175
   },
   {
-    "site_no": "06479000",
-    "name": "VERMILLION R NEAR WAKONDA SD",
-    "state": "SD",
-    "city": "Wakonda",
-    "county_name": "",
-    "lat": 42.9902983,
-    "lon": -96.9636576
-  },
-  {
     "site_no": "06479010",
     "name": "VERMILLION RIVER NEAR VERMILLION,SD",
     "state": "SD",
@@ -170694,22 +170820,31 @@
     "lon": -96.9242106
   },
   {
+    "site_no": "06479000",
+    "name": "VERMILLION RIVER NEAR WAKONDA, SD",
+    "state": "SD",
+    "city": "Wakonda",
+    "county_name": "",
+    "lat": 42.990306,
+    "lon": -96.963333
+  },
+  {
     "site_no": "06412220",
-    "name": "VICTORIA CREEK ABV VICTORIA DAM NR RAPID CITY,SD",
+    "name": "VICTORIA CREEK ABV VICTORIA DAM NR RAPID CITY, SD",
     "state": "SD",
     "city": "Rapid City",
     "county_name": "",
-    "lat": 44.02990427,
-    "lon": -103.4354937
+    "lat": 44.029917,
+    "lon": -103.435028
   },
   {
     "site_no": "06412250",
-    "name": "VICTORIA CREEK BLW VICTORIA DAM NR RAPID CITY,SD",
+    "name": "VICTORIA CREEK BLW VICTORIA DAM NR RAPID CITY, SD",
     "state": "SD",
     "city": "Rapid City",
     "county_name": "",
-    "lat": 44.01804337,
-    "lon": -103.385742
+    "lat": 44.018056,
+    "lon": -103.385278
   },
   {
     "site_no": "435300103270800",
@@ -170731,12 +170866,12 @@
   },
   {
     "site_no": "06481485",
-    "name": "WEST BRANCH SKUNK CREEK NR HUMBOLDT, SD",
+    "name": "WEST BRANCH SKUNK CREEK NEAR HUMBOLDT, SD",
     "state": "SD",
     "city": "Humboldt",
     "county_name": "",
-    "lat": 43.70664318,
-    "lon": -96.9903345
+    "lat": 43.706667,
+    "lon": -96.99
   },
   {
     "site_no": "435302103265700",
@@ -170749,7 +170884,7 @@
   },
   {
     "site_no": "06478690",
-    "name": "WEST FORK VERMILLION RIVER NEAR PARKER,SD",
+    "name": "WEST FORK VERMILLION RIVER NEAR PARKER, SD",
     "state": "SD",
     "city": "Parker",
     "county_name": "",
@@ -170785,21 +170920,21 @@
   },
   {
     "site_no": "06446500",
-    "name": "WHITE RIVER NEAR INTERIOR,SD",
+    "name": "WHITE RIVER NEAR INTERIOR, SD",
     "state": "SD",
     "city": "Interior",
     "county_name": "",
-    "lat": 43.69388346,
-    "lon": -101.9326516
+    "lat": 43.693889,
+    "lon": -101.932222
   },
   {
     "site_no": "06447000",
-    "name": "WHITE RIVER NEAR KADOKA,SD",
+    "name": "WHITE RIVER NEAR KADOKA, SD",
     "state": "SD",
     "city": "Kadoka",
     "county_name": "",
-    "lat": 43.7524949,
-    "lon": -101.5248665
+    "lat": 43.7525,
+    "lon": -101.524444
   },
   {
     "site_no": "06445685",
@@ -170807,26 +170942,26 @@
     "state": "SD",
     "city": "NE-Sd State Line",
     "county_name": "",
-    "lat": 43.013036,
-    "lon": -102.8357327
+    "lat": 43.013056,
+    "lon": -102.835278
   },
   {
     "site_no": "06452000",
-    "name": "WHITE RIVER NEAR OACOMA,SD",
+    "name": "WHITE RIVER NEAR OACOMA, SD",
     "state": "SD",
     "city": "Oacoma",
     "county_name": "",
-    "lat": 43.74832745,
-    "lon": -99.5564948
+    "lat": 43.748333,
+    "lon": -99.556111
   },
   {
     "site_no": "06446000",
-    "name": "WHITE RIVER NEAR OGLALA SD",
+    "name": "WHITE RIVER NEAR OGLALA, SD",
     "state": "SD",
     "city": "Oglala",
     "county_name": "",
-    "lat": 43.25484357,
-    "lon": -102.8273511
+    "lat": 43.254861,
+    "lon": -102.826889
   },
   {
     "site_no": "06447450",
@@ -170834,8 +170969,8 @@
     "state": "SD",
     "city": "",
     "county_name": "",
-    "lat": 43.71304839,
-    "lon": -100.6850534
+    "lat": 43.713056,
+    "lon": -100.684639
   },
   {
     "site_no": "06436156",
@@ -170848,21 +170983,21 @@
   },
   {
     "site_no": "06436198",
-    "name": "WHITEWOOD CREEK ABOVE VALE,SD",
+    "name": "WHITEWOOD CREEK ABOVE VALE, SD",
     "state": "SD",
     "city": "Vale",
     "county_name": "",
-    "lat": 44.617485,
-    "lon": -103.4807452
+    "lat": 44.6175,
+    "lon": -103.480278
   },
   {
     "site_no": "06436180",
-    "name": "WHITEWOOD CREEK ABOVE WHITEWOOD,SD",
+    "name": "WHITEWOOD CREEK ABOVE WHITEWOOD, SD",
     "state": "SD",
     "city": "Whitewood",
     "county_name": "",
-    "lat": 44.4422065,
-    "lon": -103.6293606
+    "lat": 44.442222,
+    "lon": -103.628889
   },
   {
     "site_no": "06436170",
@@ -170875,21 +171010,21 @@
   },
   {
     "site_no": "06436190",
-    "name": "WHITEWOOD CREEK NEAR WHITEWOOD,SD",
+    "name": "WHITEWOOD CREEK NEAR WHITEWOOD, SD",
     "state": "SD",
     "city": "Whitewood",
     "county_name": "",
-    "lat": 44.54175655,
-    "lon": -103.5719867
+    "lat": 44.541772,
+    "lon": -103.571517
   },
   {
     "site_no": "06412580",
-    "name": "WILD IRISHMAN GULCH NEAR RAPID CITY,SD",
+    "name": "WILD IRISHMAN GULCH NEAR RAPID CITY, SD",
     "state": "SD",
     "city": "Rapid City",
     "county_name": "",
-    "lat": 44.08109855,
-    "lon": -103.3654636
+    "lat": 44.081111,
+    "lon": -103.365
   },
   {
     "site_no": "06451650",
@@ -170897,8 +171032,8 @@
     "state": "SD",
     "city": "Vivian",
     "county_name": "",
-    "lat": 43.72582386,
-    "lon": -100.2976334
+    "lat": 43.725833,
+    "lon": -100.297222
   },
   {
     "site_no": "06441390",
@@ -170906,8 +171041,8 @@
     "state": "SD",
     "city": "Fort Pierre",
     "county_name": "",
-    "lat": 44.37998106,
-    "lon": -100.5168042
+    "lat": 44.38,
+    "lon": -100.516389
   },
   {
     "site_no": "06481497",
@@ -170915,17 +171050,17 @@
     "state": "SD",
     "city": "Crooks",
     "county_name": "",
-    "lat": 43.63080885,
-    "lon": -96.8272749
+    "lat": 43.630833,
+    "lon": -96.826944
   },
   {
     "site_no": "06479515",
-    "name": "WILLOW CREEK NEAR WATERTOWN,SD",
+    "name": "WILLOW CREEK NEAR WATERTOWN, SD",
     "state": "SD",
     "city": "Watertown",
     "county_name": "",
-    "lat": 44.9188536,
-    "lon": -97.0456271
+    "lat": 44.918889,
+    "lon": -97.045278
   },
   {
     "site_no": "06473750",
@@ -176191,15 +176326,6 @@
     "county_name": "",
     "lat": 31.86017169,
     "lon": -94.8232697
-  },
-  {
-    "site_no": "07227460",
-    "name": "E Fk Cheyenne Ck Trib nr Channing, TX",
-    "state": "TX",
-    "city": "Channing",
-    "county_name": "",
-    "lat": 35.67509722,
-    "lon": -102.28072222
   },
   {
     "site_no": "08068020",
@@ -182257,6 +182383,15 @@
     "county_name": "",
     "lat": 29.67555556,
     "lon": -94.6661139
+  },
+  {
+    "site_no": "07227460",
+    "name": "W Fk E Cheyenne Ck Trib nr Channing, TX",
+    "state": "TX",
+    "city": "Channing",
+    "county_name": "",
+    "lat": 35.675097,
+    "lon": -102.280722
   },
   {
     "site_no": "08068090",
@@ -190258,6 +190393,15 @@
     "county_name": "",
     "lat": 36.55538889,
     "lon": -76.4466667
+  },
+  {
+    "site_no": "02076296",
+    "name": "WHITE OAK CREEK BELOW NEAR CHATHAM, VA",
+    "state": "VA",
+    "city": "Near Chatham",
+    "county_name": "",
+    "lat": 36.772303,
+    "lon": -79.400389
   },
   {
     "site_no": "01628060",
@@ -201650,8 +201794,8 @@
     "state": "WI",
     "city": "Racine",
     "county_name": "",
-    "lat": 42.75138889,
-    "lon": -87.8236111
+    "lat": 42.751389,
+    "lon": -87.823611
   },
   {
     "site_no": "04087233",
@@ -201713,7 +201857,7 @@
     "state": "WI",
     "city": "W. Eight Mile Rd Near Caledonia",
     "county_name": "",
-    "lat": 42.84366667,
+    "lat": 42.843667,
     "lon": -87.97575
   },
   {
@@ -206780,8 +206924,8 @@
     "state": "WY",
     "city": "Spencer",
     "county_name": "",
-    "lat": 43.42105925,
-    "lon": -104.13168626
+    "lat": 43.421111,
+    "lon": -104.131111
   },
   {
     "site_no": "06205450",
