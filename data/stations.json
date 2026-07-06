@@ -28517,8 +28517,8 @@
     "state": "FL",
     "city": "Pensacola",
     "county_name": "",
-    "lat": 30.44825279,
-    "lon": -87.2905288
+    "lat": 30.448056,
+    "lon": -87.290556
   },
   {
     "site_no": "02312140",
@@ -29741,8 +29741,8 @@
     "state": "FL",
     "city": "Bratt",
     "county_name": "",
-    "lat": 30.97851588,
-    "lon": -87.5280384
+    "lat": 30.978333,
+    "lon": -87.528056
   },
   {
     "site_no": "02306950",
@@ -33170,8 +33170,8 @@
     "state": "FL",
     "city": "Falmouth",
     "county_name": "",
-    "lat": 30.36132999,
-    "lon": -83.1351374
+    "lat": 30.361111,
+    "lon": -83.135278
   },
   {
     "site_no": "02323502",
@@ -45824,8 +45824,8 @@
     "state": "FL",
     "city": "E146 Nr Homestead",
     "county_name": "",
-    "lat": 25.25254167,
-    "lon": -80.6828667
+    "lat": 25.252542,
+    "lon": -80.682867
   },
   {
     "site_no": "022929176",
@@ -64013,7 +64013,7 @@
     "state": "ID",
     "city": "Stibnite",
     "county_name": "",
-    "lat": 44.9057222,
+    "lat": 44.905722,
     "lon": -115.3295
   },
   {
@@ -64032,7 +64032,7 @@
     "city": "Stibnite",
     "county_name": "",
     "lat": 44.90225,
-    "lon": -115.3256667
+    "lon": -115.325667
   },
   {
     "site_no": "13311250",
@@ -64040,8 +64040,8 @@
     "state": "ID",
     "city": "Stibnite",
     "county_name": "",
-    "lat": 44.93477778,
-    "lon": -115.3366944
+    "lat": 44.934778,
+    "lon": -115.336694
   },
   {
     "site_no": "13209490",
@@ -64769,8 +64769,8 @@
     "state": "ID",
     "city": "Stibnite",
     "county_name": "",
-    "lat": 44.88952778,
-    "lon": -115.3602222
+    "lat": 44.889528,
+    "lon": -115.360222
   },
   {
     "site_no": "13116500",
@@ -65975,8 +65975,8 @@
     "state": "ID",
     "city": "Stibnite",
     "county_name": "",
-    "lat": 44.9363611,
-    "lon": -115.3372222
+    "lat": 44.936361,
+    "lon": -115.337222
   },
   {
     "site_no": "13342340",
@@ -79983,15 +79983,6 @@
     "lon": -82.6045694
   },
   {
-    "site_no": "371016082381001",
-    "name": "ELKHORN CREEK AT FREEDOM LANE AT JENKINS, KY",
-    "state": "KY",
-    "city": "Freedom Lane At Jenkins",
-    "county_name": "",
-    "lat": 37.17107222,
-    "lon": -82.63613056
-  },
-  {
     "site_no": "03289500",
     "name": "ELKHORN CREEK NEAR FRANKFORT, KY",
     "state": "KY",
@@ -92093,8 +92084,8 @@
     "state": "ME",
     "city": "Turner Center",
     "county_name": "",
-    "lat": 44.26944444,
-    "lon": -70.22972222
+    "lat": 44.269444,
+    "lon": -70.229722
   },
   {
     "site_no": "01027200",
@@ -110391,7 +110382,7 @@
     "city": "",
     "county_name": "",
     "lat": 48.25175,
-    "lon": -112.6254444
+    "lon": -112.625444
   },
   {
     "site_no": "06094900",
@@ -134420,8 +134411,8 @@
     "state": "NM",
     "city": "Luna",
     "county_name": "",
-    "lat": 33.82946944,
-    "lon": -109.0330194
+    "lat": 33.829469,
+    "lon": -109.033019
   },
   {
     "site_no": "09442681",
@@ -161272,12 +161263,12 @@
   },
   {
     "site_no": "030850498",
-    "name": "Ninemile Run above McFarren St nr Swissviale, PA",
+    "name": "Ninemile Run above McFarren St nr Swissvale, PA",
     "state": "PA",
-    "city": "Mcfarren St Nr Swissviale",
+    "city": "Mcfarren St Nr Swissvale",
     "county_name": "",
-    "lat": 40.41730556,
-    "lon": -79.91563889
+    "lat": 40.417306,
+    "lon": -79.915639
   },
   {
     "site_no": "03075035",
