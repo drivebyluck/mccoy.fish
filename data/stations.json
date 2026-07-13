@@ -40874,8 +40874,8 @@
     "state": "FL",
     "city": "",
     "county_name": "",
-    "lat": 30.17658934,
-    "lon": -84.6679637
+    "lat": 30.176589,
+    "lon": -84.667964
   },
   {
     "site_no": "02329877",
@@ -64701,6 +64701,15 @@
     "lon": -112.19243889
   },
   {
+    "site_no": "13074800",
+    "name": "MARSH CREEK AT E RICHARDS RD NR VIRGINIA, ID",
+    "state": "ID",
+    "city": "E Richards Rd Nr Virginia",
+    "county_name": "",
+    "lat": 42.4888,
+    "lon": -112.21285
+  },
+  {
     "site_no": "13082300",
     "name": "MARSH CREEK NR ALBION ID",
     "state": "ID",
@@ -65095,6 +65104,15 @@
     "county_name": "",
     "lat": 46.7319444,
     "lon": -117.0241667
+  },
+  {
+    "site_no": "13346765",
+    "name": "PARADISE CREEK AT HWY8 NEAR MOSCOW, ID",
+    "state": "ID",
+    "city": "Hwy8 Near Moscow",
+    "county_name": "",
+    "lat": 46.732169,
+    "lon": -117.033289
   },
   {
     "site_no": "13238500",
@@ -79983,6 +80001,15 @@
     "lon": -82.6045694
   },
   {
+    "site_no": "371016082381001",
+    "name": "ELKHORN CREEK AT FREEDOM LANE AT JENKINS, KY",
+    "state": "KY",
+    "city": "Freedom Lane At Jenkins",
+    "county_name": "",
+    "lat": 37.17107222,
+    "lon": -82.63613056
+  },
+  {
     "site_no": "03289500",
     "name": "ELKHORN CREEK NEAR FRANKFORT, KY",
     "state": "KY",
@@ -80980,6 +81007,15 @@
     "county_name": "",
     "lat": 38.2195187,
     "lon": -84.562998
+  },
+  {
+    "site_no": "03281010",
+    "name": "NORTH FORK KENTUCKY RIVER AT BEATTYVILLE, KY",
+    "state": "KY",
+    "city": "Beattyville",
+    "county_name": "",
+    "lat": 37.56952918,
+    "lon": -83.7066137
   },
   {
     "site_no": "03277500",
@@ -88142,8 +88178,8 @@
     "state": "MA",
     "city": "Canton",
     "county_name": "",
-    "lat": 42.19027778,
-    "lon": -71.1144444
+    "lat": 42.190278,
+    "lon": -71.114444
   },
   {
     "site_no": "413601070275800",
@@ -139546,7 +139582,7 @@
   },
   {
     "site_no": "01306495",
-    "name": "CONNETQUOT RIVER DISTRIBUTORY NEAR OAKDALE NY",
+    "name": "CONNETQUOT RIVER DISTRIBUTARY NEAR OAKDALE NY",
     "state": "NY",
     "city": "Oakdale",
     "county_name": "",
@@ -158667,7 +158703,7 @@
     "city": "Canonsburg",
     "county_name": "",
     "lat": 40.2575,
-    "lon": -80.1866667
+    "lon": -80.186667
   },
   {
     "site_no": "03085500",
@@ -165047,7 +165083,7 @@
     "state": "SC",
     "city": "Bluffton",
     "county_name": "",
-    "lat": 32.2878722,
+    "lat": 32.287872,
     "lon": -80.813975
   },
   {
@@ -167288,8 +167324,8 @@
     "state": "SC",
     "city": "Mcclellenville",
     "county_name": "",
-    "lat": 33.07444444,
-    "lon": -79.4191667
+    "lat": 33.074444,
+    "lon": -79.419167
   },
   {
     "site_no": "02176582",
@@ -206791,6 +206827,15 @@
     "county_name": "",
     "lat": 44.14730556,
     "lon": -106.1426944
+  },
+  {
+    "site_no": "09253470",
+    "name": "Battle Cr bl West Fork Battle Cr, near Slater, CO",
+    "state": "WY",
+    "city": "Slater",
+    "county_name": "",
+    "lat": 41.08395,
+    "lon": -107.173111
   },
   {
     "site_no": "09216050",
