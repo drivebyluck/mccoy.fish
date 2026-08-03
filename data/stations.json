@@ -18603,6 +18603,15 @@
     "lon": -105.095812
   },
   {
+    "site_no": "06752450",
+    "name": "CACHE LA POUDRE R ABV N 11TH AVE AT GREELEY, CO",
+    "state": "CO",
+    "city": "Greeley",
+    "county_name": "",
+    "lat": 40.442003,
+    "lon": -104.701289
+  },
+  {
     "site_no": "06752280",
     "name": "CACHE LA POUDRE RIV AB BOXELDER CRK NR TIMNATH, CO",
     "state": "CO",
@@ -33247,7 +33256,7 @@
   },
   {
     "site_no": "02312664",
-    "name": "FENNEY SPRINGS NR COLEMAN",
+    "name": "FENNEY SPRINGS NR COLEMAN, FL",
     "state": "FL",
     "city": "Coleman",
     "county_name": "",
@@ -38813,8 +38822,8 @@
     "state": "FL",
     "city": "State Hwy434 Nr Oviedo",
     "county_name": "",
-    "lat": 28.6199987,
-    "lon": -81.20784299
+    "lat": 28.62,
+    "lon": -81.207842
   },
   {
     "site_no": "02233473",
@@ -55256,7 +55265,7 @@
     "state": "GA",
     "city": "Ga 24",
     "county_name": "",
-    "lat": 32.49480556,
+    "lat": 32.494806,
     "lon": -81.5555
   },
   {
@@ -55436,7 +55445,7 @@
     "state": "GA",
     "city": "Reidsville",
     "county_name": "",
-    "lat": 32.07713889,
+    "lat": 32.077139,
     "lon": -82.1765
   },
   {
@@ -92660,8 +92669,8 @@
     "state": "MI",
     "city": "Us23 At Oscoda",
     "county_name": "",
-    "lat": 44.4170611,
-    "lon": -83.3307472
+    "lat": 44.417061,
+    "lon": -83.330747
   },
   {
     "site_no": "04044724",
@@ -126072,6 +126081,15 @@
     "lon": -96.53835
   },
   {
+    "site_no": "06803960",
+    "name": "Wahoo Creek at S Chestnut St at Wahoo, Nebr.",
+    "state": "NE",
+    "city": "S Chestnut St At Wahoo",
+    "county_name": "",
+    "lat": 41.201611,
+    "lon": -96.622611
+  },
+  {
     "site_no": "06772775",
     "name": "Warm Slough near Central City, Nebr.",
     "state": "NE",
@@ -149578,6 +149596,15 @@
     "county_name": "",
     "lat": 41.676944,
     "lon": -83.756389
+  },
+  {
+    "site_no": "34323430",
+    "name": "Test Site at New Philly (2)",
+    "state": "OH",
+    "city": "New Philly (2)",
+    "county_name": "",
+    "lat": 40.50839786,
+    "lon": -81.4581712
   },
   {
     "site_no": "04188399",
@@ -173795,8 +173822,8 @@
     "state": "TX",
     "city": "Tx 105",
     "county_name": "",
-    "lat": 30.31373056,
-    "lon": -95.4691861
+    "lat": 30.313731,
+    "lon": -95.469186
   },
   {
     "site_no": "07344100",
@@ -175100,8 +175127,8 @@
     "state": "TX",
     "city": "",
     "county_name": "",
-    "lat": 29.04916111,
-    "lon": -95.47752222
+    "lat": 29.049161,
+    "lon": -95.477522
   },
   {
     "site_no": "08154700",
@@ -176299,6 +176326,15 @@
     "county_name": "",
     "lat": 29.45662094,
     "lon": -95.0479838
+  },
+  {
+    "site_no": "08158823",
+    "name": "Div of Little Bear Ck at Wenzel nr Manchaca, TX",
+    "state": "TX",
+    "city": "Wenzel Nr Manchaca",
+    "county_name": "",
+    "lat": 30.1251,
+    "lon": -97.905711
   },
   {
     "site_no": "08052745",
@@ -177967,9 +178003,9 @@
   },
   {
     "site_no": "08158824",
-    "name": "Little Bear Ck at Stoneledge Quarry nr Manchaca,TX",
+    "name": "Little Bear Ck at Wenzel nr Manchaca, TX",
     "state": "TX",
-    "city": "Stoneledge Quarry Nr Manchaca",
+    "city": "Wenzel Nr Manchaca",
     "county_name": "",
     "lat": 30.125833,
     "lon": -97.903889
@@ -178169,8 +178205,8 @@
     "state": "TX",
     "city": "Estates Dr",
     "county_name": "",
-    "lat": 30.32529444,
-    "lon": -95.4914639
+    "lat": 30.325294,
+    "lon": -95.491464
   },
   {
     "site_no": "303935095055401",
@@ -180864,6 +180900,15 @@
     "lon": -98.6056067
   },
   {
+    "site_no": "08197910",
+    "name": "Sabinal Rv at FM 187 nr Vanderpool, TX",
+    "state": "TX",
+    "city": "Fm 187 Nr Vanderpool",
+    "county_name": "",
+    "lat": 29.791856,
+    "lon": -99.574303
+  },
+  {
     "site_no": "08198500",
     "name": "Sabinal Rv at Sabinal, TX",
     "state": "TX",
@@ -181825,15 +181870,6 @@
     "county_name": "",
     "lat": 33.23342759,
     "lon": -100.2134389
-  },
-  {
-    "site_no": "08158823",
-    "name": "Stoneledge Div of Little Bear Ck nr Manchaca, TX",
-    "state": "TX",
-    "city": "Manchaca",
-    "county_name": "",
-    "lat": 30.1251,
-    "lon": -97.90571111
   },
   {
     "site_no": "07343450",
