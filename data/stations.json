@@ -7831,12 +7831,12 @@
   },
   {
     "site_no": "09491500",
-    "name": "NORTH FORK WHITE RIVER AT LOWER LOG.RD NR HODAH,AZ",
+    "name": "NORTH FORK WHITE RIVER AT LOWER LOG RD NR HODAH,AZ",
     "state": "AZ",
-    "city": "Lower Log.Rd Nr Hodah",
+    "city": "Lower Log Rd Nr Hodah",
     "county_name": "",
-    "lat": 33.9972222,
-    "lon": -109.8834167
+    "lat": 33.997222,
+    "lon": -109.883417
   },
   {
     "site_no": "09522600",
@@ -20907,6 +20907,15 @@
     "lon": -106.8189167
   },
   {
+    "site_no": "09073721",
+    "name": "HUNTER CREEK CONDUIT BYPASS NEAR ASPEN, CO",
+    "state": "CO",
+    "city": "Aspen",
+    "county_name": "",
+    "lat": 39.20756944,
+    "lon": -106.6803917
+  },
+  {
     "site_no": "09073720",
     "name": "HUNTER CREEK FEEDER CONDUIT NEAR ASPEN, CO",
     "state": "CO",
@@ -25457,8 +25466,8 @@
     "state": "CT",
     "city": "Rainbow",
     "county_name": "",
-    "lat": 41.91137228,
-    "lon": -72.68729595
+    "lat": 41.9008,
+    "lon": -72.679217
   },
   {
     "site_no": "01188085",
@@ -45905,8 +45914,8 @@
     "state": "FL",
     "city": "Bristol",
     "county_name": "",
-    "lat": 30.426585,
-    "lon": -84.92769349
+    "lat": 30.426586,
+    "lon": -84.927692
   },
   {
     "site_no": "02330050",
@@ -93965,8 +93974,8 @@
     "state": "MI",
     "city": "",
     "county_name": "",
-    "lat": 44.40444349,
-    "lon": -84.79102877
+    "lat": 44.404442,
+    "lon": -84.791028
   },
   {
     "site_no": "46193608507501",
@@ -126509,8 +126518,8 @@
     "state": "NH",
     "city": "Concord",
     "county_name": "",
-    "lat": 43.20885757,
-    "lon": -71.53030297
+    "lat": 43.208858,
+    "lon": -71.530303
   },
   {
     "site_no": "01081500",
@@ -171752,8 +171761,8 @@
     "state": "TN",
     "city": "Woodland St At Nashville",
     "county_name": "",
-    "lat": 36.16727879,
-    "lon": -86.7763875
+    "lat": 36.167278,
+    "lon": -86.776389
   },
   {
     "site_no": "03435000",
@@ -183335,8 +183344,8 @@
     "state": "UT",
     "city": "Vernal",
     "county_name": "",
-    "lat": 40.5774426,
-    "lon": -109.6221085
+    "lat": 40.577442,
+    "lon": -109.622108
   },
   {
     "site_no": "09271425",
@@ -183389,8 +183398,8 @@
     "state": "UT",
     "city": "",
     "county_name": "",
-    "lat": 41.4701722,
-    "lon": -112.2203833
+    "lat": 41.470172,
+    "lon": -112.220383
   },
   {
     "site_no": "10118000",
@@ -184910,8 +184919,8 @@
     "state": "UT",
     "city": "Scofield",
     "county_name": "",
-    "lat": 39.78690558,
-    "lon": -111.1201697
+    "lat": 39.785542,
+    "lon": -111.118014
   },
   {
     "site_no": "10155200",
@@ -185810,8 +185819,8 @@
     "state": "UT",
     "city": "Whiterocks",
     "county_name": "",
-    "lat": 40.5935653,
-    "lon": -109.9323739
+    "lat": 40.593564,
+    "lon": -109.932375
   },
   {
     "site_no": "09307500",
