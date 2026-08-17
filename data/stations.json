@@ -4622,8 +4622,8 @@
     "state": "AR",
     "city": "Jones Mill",
     "county_name": "",
-    "lat": 34.42950278,
-    "lon": -92.8929778
+    "lat": 34.429503,
+    "lon": -92.892978
   },
   {
     "site_no": "07263265",
@@ -4750,6 +4750,15 @@
     "county_name": "",
     "lat": 36.29716667,
     "lon": -90.6990833
+  },
+  {
+    "site_no": "072632996",
+    "name": "Lk Maumelle Raw Water Intake nr Natural Steps,AR",
+    "state": "AR",
+    "city": "Natural Steps",
+    "county_name": "",
+    "lat": 34.85194444,
+    "lon": -92.4891667
   },
   {
     "site_no": "072632968",
@@ -75772,12 +75781,12 @@
   },
   {
     "site_no": "03353640",
-    "name": "WHITE RIVER AT SOUTHPORT RD, INDIANAPOLIS, IN",
+    "name": "WHITE RIVER AT SOUTHPORT RD AT INDIANAPOLIS, IN",
     "state": "IN",
-    "city": "Southport Rd",
+    "city": "Southport Rd At Indianapolis",
     "county_name": "",
     "lat": 39.663056,
-    "lon": -86.236667
+    "lon": -86.236111
   },
   {
     "site_no": "03357000",
@@ -85761,15 +85770,6 @@
     "lon": -89.7405556
   },
   {
-    "site_no": "323026092403201",
-    "name": "Ruston Office, Lower Mississippi-Gulf WSC",
-    "state": "LA",
-    "city": "",
-    "county_name": "",
-    "lat": 32.5072222,
-    "lon": -92.6755556
-  },
-  {
     "site_no": "07386700",
     "name": "Ruth Canal near Ruth, LA",
     "state": "LA",
@@ -89334,6 +89334,15 @@
     "lon": -76.6249678
   },
   {
+    "site_no": "01484716",
+    "name": "BOTTLE BRANCH AT BERLIN, MD",
+    "state": "MD",
+    "city": "Berlin",
+    "county_name": "",
+    "lat": 38.317061,
+    "lon": -75.216022
+  },
+  {
     "site_no": "01585400",
     "name": "BRIEN RUN AT STEMMERS RUN, MD",
     "state": "MD",
@@ -92878,6 +92887,15 @@
     "county_name": "",
     "lat": 41.9636236,
     "lon": -84.59658099
+  },
+  {
+    "site_no": "04166450",
+    "name": "BELL BRANCH AT BEECH-DALY ROAD AT REDFORD, MI",
+    "state": "MI",
+    "city": "Beech-Daly Road At Redford",
+    "county_name": "",
+    "lat": 42.392222,
+    "lon": -83.295833
   },
   {
     "site_no": "04160625",
@@ -108973,12 +108991,12 @@
   },
   {
     "site_no": "02433496",
-    "name": "TENN-TOM WATERWAY BL AMORY L&D AT AMORY, MS",
+    "name": "TENN-TOM WATERWAY BL COCHRAN L&D AT AMORY, MS",
     "state": "MS",
     "city": "Amory",
     "county_name": "",
-    "lat": 34.00944444,
-    "lon": -88.49138889
+    "lat": 34.009444,
+    "lon": -88.491389
   },
   {
     "site_no": "02431011",
@@ -111794,8 +111812,8 @@
     "state": "MT",
     "city": "Wyola",
     "county_name": "",
-    "lat": 45.12775,
-    "lon": -107.601917
+    "lat": 45.119861,
+    "lon": -107.606778
   },
   {
     "site_no": "06154430",
@@ -117097,6 +117115,15 @@
     "county_name": "",
     "lat": 35.332778,
     "lon": -80.715833
+  },
+  {
+    "site_no": "0208732860",
+    "name": "MARSH CREEK AT INGRAM DRIVE AT RALEIGH, NC",
+    "state": "NC",
+    "city": "Ingram Drive At Raleigh",
+    "county_name": "",
+    "lat": 35.830892,
+    "lon": -78.598697
   },
   {
     "site_no": "0208732810",
@@ -136716,7 +136743,7 @@
     "city": "Rox",
     "county_name": "",
     "lat": 36.8382,
-    "lon": -114.6580556
+    "lon": -114.658056
   },
   {
     "site_no": "385256119085001",
@@ -163800,6 +163827,15 @@
     "lon": -80.1081133
   },
   {
+    "site_no": "01532940",
+    "name": "Wyalusing Creek at Camptown, PA",
+    "state": "PA",
+    "city": "Camptown",
+    "county_name": "",
+    "lat": 41.728875,
+    "lon": -76.235353
+  },
+  {
     "site_no": "01532950",
     "name": "Wyalusing Creek near Wyalusing, PA",
     "state": "PA",
@@ -176216,8 +176252,8 @@
     "state": "TX",
     "city": "Aspermont",
     "county_name": "",
-    "lat": 33.0081577,
-    "lon": -100.1806589
+    "lat": 33.008158,
+    "lon": -100.180658
   },
   {
     "site_no": "08080505",
@@ -198702,6 +198738,15 @@
     "lon": -89.8105556
   },
   {
+    "site_no": "425957088005201",
+    "name": "Honey Creek nr McCarty Pk at West Allis, WI",
+    "state": "WI",
+    "city": "Mccarty Pk At West Allis",
+    "county_name": "",
+    "lat": 42.9992,
+    "lon": -88.014619
+  },
+  {
     "site_no": "04073410",
     "name": "IROGAMI LAKE OUTLET NEAR WAUTOMA, WI",
     "state": "WI",
@@ -203362,15 +203407,6 @@
     "county_name": "",
     "lat": 45.9860621,
     "lon": -89.6770933
-  },
-  {
-    "site_no": "425957088005201",
-    "name": "W Arthur Storm Sewer nr McCarty Pk at Milwaukee,WI",
-    "state": "WI",
-    "city": "Mccarty Pk At Milwaukee",
-    "county_name": "",
-    "lat": 42.9992,
-    "lon": -88.014619
   },
   {
     "site_no": "05404140",
