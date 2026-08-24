@@ -8699,8 +8699,8 @@
     "state": "AZ",
     "city": "Bartlett",
     "county_name": "",
-    "lat": 33.80837509,
-    "lon": -111.6634729
+    "lat": 33.808289,
+    "lon": -111.661911
   },
   {
     "site_no": "09508000",
@@ -32297,8 +32297,8 @@
     "state": "FL",
     "city": "Homestead",
     "county_name": "",
-    "lat": 25.1982111,
-    "lon": -80.6190944
+    "lat": 25.198211,
+    "lon": -80.619094
   },
   {
     "site_no": "02299975",
@@ -32387,8 +32387,8 @@
     "state": "FL",
     "city": "",
     "county_name": "",
-    "lat": 25.13696944,
-    "lon": -81.0643806
+    "lat": 25.136969,
+    "lon": -81.064381
   },
   {
     "site_no": "02249007",
@@ -32586,7 +32586,7 @@
     "city": "",
     "county_name": "",
     "lat": 25.512125,
-    "lon": -80.9331528
+    "lon": -80.933153
   },
   {
     "site_no": "260536080302501",
@@ -33134,7 +33134,7 @@
     "state": "FL",
     "city": "",
     "county_name": "",
-    "lat": 25.7456472,
+    "lat": 25.745647,
     "lon": -80.2464
   },
   {
@@ -33625,12 +33625,12 @@
   },
   {
     "site_no": "260515080202101",
-    "name": "G  - 617",
+    "name": "G  - 617 Broward County, FL",
     "state": "FL",
-    "city": "",
+    "city": "G - 617 Broward County",
     "county_name": "",
-    "lat": 26.08777778,
-    "lon": -80.3385556
+    "lat": 26.087778,
+    "lon": -80.338556
   },
   {
     "site_no": "254500080360001",
@@ -33845,8 +33845,8 @@
     "state": "FL",
     "city": "",
     "county_name": "",
-    "lat": 25.74241667,
-    "lon": -80.4009167
+    "lat": 25.742417,
+    "lon": -80.400917
   },
   {
     "site_no": "253027080234701",
@@ -35700,7 +35700,7 @@
     "city": "Key Largo",
     "county_name": "",
     "lat": 25.232625,
-    "lon": -80.5248667
+    "lon": -80.524867
   },
   {
     "site_no": "251438080333500",
@@ -39020,8 +39020,8 @@
     "state": "FL",
     "city": "Homestead",
     "county_name": "",
-    "lat": 25.2642111,
-    "lon": -80.4201833
+    "lat": 25.264211,
+    "lon": -80.420183
   },
   {
     "site_no": "02300009",
@@ -39893,8 +39893,8 @@
     "state": "FL",
     "city": "Mouth Nr Homestead",
     "county_name": "",
-    "lat": 25.20330278,
-    "lon": -80.5841111
+    "lat": 25.203303,
+    "lon": -80.584111
   },
   {
     "site_no": "02299420",
@@ -43322,8 +43322,8 @@
     "state": "FL",
     "city": "Flamingo",
     "county_name": "",
-    "lat": 25.17464167,
-    "lon": -80.7231111
+    "lat": 25.174642,
+    "lon": -80.723111
   },
   {
     "site_no": "02365800",
@@ -44889,7 +44889,7 @@
     "city": "Homestead",
     "county_name": "",
     "lat": 25.2283,
-    "lon": -80.4859472
+    "lon": -80.485947
   },
   {
     "site_no": "272313080182701",
@@ -44898,7 +44898,7 @@
     "city": "",
     "county_name": "",
     "lat": 27.38825,
-    "lon": -80.3094444
+    "lon": -80.309444
   },
   {
     "site_no": "271755080153001",
@@ -45518,8 +45518,8 @@
     "state": "FL",
     "city": "Miami",
     "county_name": "",
-    "lat": 25.76138889,
-    "lon": -80.6086111
+    "lat": 25.761389,
+    "lon": -80.608611
   },
   {
     "site_no": "02289250",
@@ -45563,8 +45563,8 @@
     "state": "FL",
     "city": "Miami",
     "county_name": "",
-    "lat": 25.76114167,
-    "lon": -80.5617056
+    "lat": 25.761142,
+    "lon": -80.561706
   },
   {
     "site_no": "02288900",
@@ -45599,8 +45599,8 @@
     "state": "FL",
     "city": "Miami",
     "county_name": "",
-    "lat": 25.76138889,
-    "lon": -80.6547222
+    "lat": 25.761389,
+    "lon": -80.654722
   },
   {
     "site_no": "02289090",
@@ -46913,8 +46913,8 @@
     "state": "FL",
     "city": "Homestead",
     "county_name": "",
-    "lat": 25.2102972,
-    "lon": -80.6476667
+    "lat": 25.210297,
+    "lon": -80.647667
   },
   {
     "site_no": "02281435",
@@ -47318,8 +47318,8 @@
     "state": "FL",
     "city": "Homestead",
     "county_name": "",
-    "lat": 25.24210833,
-    "lon": -80.4475722
+    "lat": 25.242108,
+    "lon": -80.447572
   },
   {
     "site_no": "251203080480600",
@@ -66758,8 +66758,8 @@
     "state": "IL",
     "city": "Blue Island",
     "county_name": "",
-    "lat": 41.65281186,
-    "lon": -87.670326
+    "lat": 41.652811,
+    "lon": -87.670325
   },
   {
     "site_no": "05536700",
@@ -81252,6 +81252,15 @@
     "lon": -85.9012306
   },
   {
+    "site_no": "03216778",
+    "name": "OLIVE HILL RESERVOIR NR OLIVE HILL, KY",
+    "state": "KY",
+    "city": "Olive Hill",
+    "county_name": "",
+    "lat": 38.312125,
+    "lon": -83.213336
+  },
+  {
     "site_no": "03298300",
     "name": "PENN RUN AT MT WASHINGTON RD NR LOUISVILLE, KY",
     "state": "KY",
@@ -86657,8 +86666,8 @@
     "state": "MA",
     "city": "Whately",
     "county_name": "",
-    "lat": 42.44980128,
-    "lon": -72.6935282
+    "lat": 42.4498,
+    "lon": -72.693528
   },
   {
     "site_no": "01171800",
@@ -87548,8 +87557,8 @@
     "state": "MA",
     "city": "Lenoxdale",
     "county_name": "",
-    "lat": 42.34288889,
-    "lon": -73.2451667
+    "lat": 42.342889,
+    "lon": -73.245167
   },
   {
     "site_no": "01198125",
@@ -88216,6 +88225,15 @@
     "county_name": "",
     "lat": 42.6825859,
     "lon": -72.1150812
+  },
+  {
+    "site_no": "011020635",
+    "name": "PROCTOR BROOK NR VETERANS MEM PARK, PEABODY, MA",
+    "state": "MA",
+    "city": "Veterans Mem Park",
+    "county_name": "",
+    "lat": 42.525514,
+    "lon": -70.923325
   },
   {
     "site_no": "420259070105600",
@@ -89339,8 +89357,8 @@
     "state": "MD",
     "city": "Berlin",
     "county_name": "",
-    "lat": 38.317061,
-    "lon": -75.216022
+    "lat": 38.316711,
+    "lon": -75.2163
   },
   {
     "site_no": "01585400",
@@ -139374,6 +139392,15 @@
     "lon": -75.77125
   },
   {
+    "site_no": "01505031",
+    "name": "CHENANGO RIVER AT NORWICH NY",
+    "state": "NY",
+    "city": "Norwich",
+    "county_name": "",
+    "lat": 42.537917,
+    "lon": -75.513444
+  },
+  {
     "site_no": "01505810",
     "name": "CHENANGO RIVER AT OXFORD NY",
     "state": "NY",
@@ -165371,7 +165398,7 @@
     "state": "SC",
     "city": "S. Adgers Wharf At Charleston",
     "county_name": "",
-    "lat": 32.77503056,
+    "lat": 32.775031,
     "lon": -79.92375
   },
   {
@@ -166775,8 +166802,8 @@
     "state": "SC",
     "city": "Cheraw",
     "county_name": "",
-    "lat": 34.70848979,
-    "lon": -79.8761747
+    "lat": 34.708489,
+    "lon": -79.876175
   },
   {
     "site_no": "02136350",
@@ -197051,7 +197078,7 @@
     "state": "WI",
     "city": "Hwy 35 Nr Webster",
     "county_name": "",
-    "lat": 45.8534972,
+    "lat": 45.853497,
     "lon": -92.365225
   },
   {
