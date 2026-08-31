@@ -3920,8 +3920,8 @@
     "state": "AR",
     "city": "Austin",
     "county_name": "",
-    "lat": 35.5428333,
-    "lon": -92.7213056
+    "lat": 35.542833,
+    "lon": -92.721306
   },
   {
     "site_no": "07263886",
@@ -4064,8 +4064,8 @@
     "state": "AR",
     "city": "",
     "county_name": "",
-    "lat": 35.1147222,
-    "lon": -92.5247222
+    "lat": 35.114722,
+    "lon": -92.524722
   },
   {
     "site_no": "07261000",
@@ -4226,8 +4226,8 @@
     "state": "AR",
     "city": "Scotland",
     "county_name": "",
-    "lat": 35.48919444,
-    "lon": -92.7294444
+    "lat": 35.489194,
+    "lon": -92.729444
   },
   {
     "site_no": "07259950",
@@ -4253,8 +4253,8 @@
     "state": "AR",
     "city": "Enola",
     "county_name": "",
-    "lat": 35.2183333,
-    "lon": -92.2794444
+    "lat": 35.218333,
+    "lon": -92.279444
   },
   {
     "site_no": "07257430",
@@ -4262,8 +4262,8 @@
     "state": "AR",
     "city": "Alread",
     "county_name": "",
-    "lat": 35.60666667,
-    "lon": -92.8391111
+    "lat": 35.606667,
+    "lon": -92.839111
   },
   {
     "site_no": "07257450",
@@ -4928,8 +4928,8 @@
     "state": "AR",
     "city": "Smyrna",
     "county_name": "",
-    "lat": 35.6510833,
-    "lon": -92.9194444
+    "lat": 35.651083,
+    "lon": -92.919444
   },
   {
     "site_no": "07075000",
@@ -4946,8 +4946,8 @@
     "state": "AR",
     "city": "",
     "county_name": "",
-    "lat": 35.56552778,
-    "lon": -92.9911944
+    "lat": 35.565528,
+    "lon": -92.991194
   },
   {
     "site_no": "07257473",
@@ -5027,8 +5027,8 @@
     "state": "AR",
     "city": "Quitman",
     "county_name": "",
-    "lat": 35.39416667,
-    "lon": -92.2969444
+    "lat": 35.394167,
+    "lon": -92.296944
   },
   {
     "site_no": "07257477",
@@ -5036,8 +5036,8 @@
     "state": "AR",
     "city": "Rasberry",
     "county_name": "",
-    "lat": 35.58777778,
-    "lon": -93.0124167
+    "lat": 35.587778,
+    "lon": -93.012417
   },
   {
     "site_no": "07257480",
@@ -31631,7 +31631,7 @@
     "state": "FL",
     "city": "Sunset",
     "county_name": "",
-    "lat": 25.69471944,
+    "lat": 25.694719,
     "lon": -80.35925
   },
   {
@@ -44907,7 +44907,7 @@
     "city": "",
     "county_name": "",
     "lat": 27.29875,
-    "lon": -80.25791667
+    "lon": -80.257917
   },
   {
     "site_no": "02330124",
@@ -96890,8 +96890,8 @@
     "state": "MN",
     "city": "Rapidan",
     "county_name": "",
-    "lat": 44.09593967,
-    "lon": -94.1096097
+    "lat": 44.130214,
+    "lon": -94.060361
   },
   {
     "site_no": "05051300",
@@ -101408,8 +101408,8 @@
     "state": "MO",
     "city": "Mosby",
     "county_name": "",
-    "lat": 39.33166957,
-    "lon": -94.3368922
+    "lat": 39.331778,
+    "lon": -94.337361
   },
   {
     "site_no": "07019120",
@@ -117142,6 +117142,15 @@
     "county_name": "",
     "lat": 35.830892,
     "lon": -78.598697
+  },
+  {
+    "site_no": "0208732905",
+    "name": "MARSH CREEK AT LAKE WOODARD DR AT RALEIGH, NC",
+    "state": "NC",
+    "city": "",
+    "county_name": "",
+    "lat": 35.802892,
+    "lon": -78.591797
   },
   {
     "site_no": "0208732810",
@@ -139023,6 +139032,15 @@
     "lon": -76.99746749
   },
   {
+    "site_no": "01505503",
+    "name": "CANASAWACTA CR AT NORWICH NY",
+    "state": "NY",
+    "city": "Norwich",
+    "county_name": "",
+    "lat": 42.544111,
+    "lon": -75.535
+  },
+  {
     "site_no": "01505500",
     "name": "CANASAWACTA CREEK NEAR SOUTH PLYMOUTH NY",
     "state": "NY",
@@ -144698,8 +144716,8 @@
     "state": "NY",
     "city": "Lexington",
     "county_name": "",
-    "lat": 42.236944,
-    "lon": -74.340278
+    "lat": 42.235389,
+    "lon": -74.346722
   },
   {
     "site_no": "01350212",
