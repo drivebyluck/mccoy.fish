@@ -18765,6 +18765,15 @@
     "lon": -106.316417
   },
   {
+    "site_no": "09121800",
+    "name": "CEBOLLA CREEK NEAR POWDERHORN, CO.",
+    "state": "CO",
+    "city": "Powderhorn",
+    "county_name": "",
+    "lat": 38.227361,
+    "lon": -107.07325
+  },
+  {
     "site_no": "383041107544201",
     "name": "CEDAR CREEK NEAR MOUTH",
     "state": "CO",
@@ -23911,6 +23920,15 @@
     "county_name": "",
     "lat": 40.160467,
     "lon": -105.007936
+  },
+  {
+    "site_no": "07107500",
+    "name": "ST. CHARLES RIVER AT BURNT MILL, CO.",
+    "state": "CO",
+    "city": "Burnt Mill",
+    "county_name": "",
+    "lat": 38.051453,
+    "lon": -104.793961
   },
   {
     "site_no": "07108900",
@@ -64571,8 +64589,8 @@
     "state": "ID",
     "city": "Riggins",
     "county_name": "",
-    "lat": 45.41305556,
-    "lon": -116.3252778
+    "lat": 45.413056,
+    "lon": -116.325278
   },
   {
     "site_no": "13148200",
@@ -65437,15 +65455,6 @@
     "county_name": "",
     "lat": 42.69638889,
     "lon": -114.8552778
-  },
-  {
-    "site_no": "13297380",
-    "name": "SALMON RIVER AB EAST FORK NR CLAYTON ID",
-    "state": "ID",
-    "city": "Clayton",
-    "county_name": "",
-    "lat": 44.266642,
-    "lon": -114.326758
   },
   {
     "site_no": "13302500",
@@ -76550,8 +76559,8 @@
     "state": "KS",
     "city": "Mayetta",
     "county_name": "",
-    "lat": 39.31817222,
-    "lon": -95.73905278
+    "lat": 39.318172,
+    "lon": -95.739053
   },
   {
     "site_no": "391720095445400",
@@ -81178,6 +81187,15 @@
     "county_name": "",
     "lat": 38.28034736,
     "lon": -85.7991305
+  },
+  {
+    "site_no": "03292000",
+    "name": "OHIO RIVER AT MADISON, IN",
+    "state": "KY",
+    "city": "Madison",
+    "county_name": "",
+    "lat": 38.726111,
+    "lon": -85.370278
   },
   {
     "site_no": "03277200",
@@ -85856,8 +85874,8 @@
     "state": "LA",
     "city": "Alph. Forbes Nr Greenwell Springs",
     "county_name": "",
-    "lat": 30.62110833,
-    "lon": -90.9821167
+    "lat": 30.621108,
+    "lon": -90.982117
   },
   {
     "site_no": "07377210",
@@ -85865,8 +85883,8 @@
     "state": "LA",
     "city": "Pride",
     "county_name": "",
-    "lat": 30.6707406,
-    "lon": -90.9601024
+    "lat": 30.670742,
+    "lon": -90.960103
   },
   {
     "site_no": "07344460",
@@ -99099,6 +99117,15 @@
     "lon": -91.776658
   },
   {
+    "site_no": "05222150",
+    "name": "Rice River at Nature Ave nr Kimberly, MN",
+    "state": "MN",
+    "city": "Nature Ave Nr Kimberly",
+    "county_name": "",
+    "lat": 46.555333,
+    "lon": -93.472078
+  },
+  {
     "site_no": "05124950",
     "name": "S KAWISHIWI R AT NARROWS (SEC. 24) NR ELY, MN",
     "state": "MN",
@@ -112050,6 +112077,24 @@
     "lon": -113.8669444
   },
   {
+    "site_no": "12358000",
+    "name": "McDonald Creek at Apgar, MT",
+    "state": "MT",
+    "city": "Apgar",
+    "county_name": "",
+    "lat": 48.526167,
+    "lon": -113.997356
+  },
+  {
+    "site_no": "12357500",
+    "name": "Middle Fork Flathead River at West Glacier, MT",
+    "state": "MT",
+    "city": "West Glacier",
+    "county_name": "",
+    "lat": 48.499508,
+    "lon": -113.975933
+  },
+  {
     "site_no": "12332000",
     "name": "Middle Fork Rock Cr nr Philipsburg MT",
     "state": "MT",
@@ -117637,6 +117682,15 @@
     "county_name": "",
     "lat": 35.6472222,
     "lon": -78.4052778
+  },
+  {
+    "site_no": "02088119",
+    "name": "NEUSE RIVER NEAR COX MILL, NC",
+    "state": "NC",
+    "city": "Cox Mill",
+    "county_name": "",
+    "lat": 35.374125,
+    "lon": -78.19615278
   },
   {
     "site_no": "02087183",
@@ -123827,8 +123881,8 @@
     "state": "NE",
     "city": "Thedford",
     "county_name": "",
-    "lat": 41.77858611,
-    "lon": -100.52514722
+    "lat": 41.778586,
+    "lon": -100.525147
   },
   {
     "site_no": "06836500",
@@ -124484,8 +124538,8 @@
     "state": "NE",
     "city": "Dunning",
     "county_name": "",
-    "lat": 41.83110278,
-    "lon": -100.10086667
+    "lat": 41.831103,
+    "lon": -100.100867
   },
   {
     "site_no": "06785000",
@@ -124502,8 +124556,8 @@
     "state": "NE",
     "city": "Gates",
     "county_name": "",
-    "lat": 41.66317778,
-    "lon": -99.63570556
+    "lat": 41.663178,
+    "lon": -99.635706
   },
   {
     "site_no": "06775000",
@@ -125339,8 +125393,8 @@
     "state": "NE",
     "city": "Duncan",
     "county_name": "",
-    "lat": 41.36813611,
-    "lon": -97.49473611
+    "lat": 41.368136,
+    "lon": -97.494736
   },
   {
     "site_no": "06770500",
@@ -125447,7 +125501,7 @@
     "state": "NE",
     "city": "",
     "county_name": "",
-    "lat": 41.32923333,
+    "lat": 41.329233,
     "lon": -97.67545
   },
   {
@@ -125771,8 +125825,8 @@
     "state": "NE",
     "city": "",
     "county_name": "",
-    "lat": 41.29734722,
-    "lon": -97.71403056
+    "lat": 41.297347,
+    "lon": -97.714031
   },
   {
     "site_no": "06601095",
@@ -125825,8 +125879,8 @@
     "state": "NE",
     "city": "Arnold",
     "county_name": "",
-    "lat": 41.42277778,
-    "lon": -100.20338056
+    "lat": 41.422778,
+    "lon": -100.203381
   },
   {
     "site_no": "06781900",
@@ -126158,8 +126212,8 @@
     "state": "NE",
     "city": "Central City",
     "county_name": "",
-    "lat": 41.0908333,
-    "lon": -98.0777778
+    "lat": 41.090833,
+    "lon": -98.077778
   },
   {
     "site_no": "06806500",
@@ -148869,15 +148923,6 @@
     "lon": -83.4533333
   },
   {
-    "site_no": "04194075",
-    "name": "Otter Creek blw Millard Ave at Oregon OH",
-    "state": "OH",
-    "city": "Oregon",
-    "county_name": "",
-    "lat": 41.67277778,
-    "lon": -83.46888889
-  },
-  {
     "site_no": "394653084072100",
     "name": "Outfall 1 channel nr Springfield St near Dayton OH",
     "state": "OH",
@@ -149407,6 +149452,15 @@
     "county_name": "",
     "lat": 41.35638889,
     "lon": -84.0508333
+  },
+  {
+    "site_no": "04177347",
+    "name": "St Joseph River at Montpelier OH",
+    "state": "OH",
+    "city": "Montpelier",
+    "county_name": "",
+    "lat": 41.586408,
+    "lon": -84.614222
   },
   {
     "site_no": "04178000",
@@ -170478,6 +170532,15 @@
     "lon": -99.1000955
   },
   {
+    "site_no": "06446230",
+    "name": "PORCUPINE CREEK NEAR SHARPS CORNER, SD",
+    "state": "SD",
+    "city": "Sharps Corner",
+    "county_name": "",
+    "lat": 43.336244,
+    "lon": -102.379719
+  },
+  {
     "site_no": "06473300",
     "name": "PREACHERS RUN TRIB AT IPSWICH, SD",
     "state": "SD",
@@ -179269,15 +179332,6 @@
     "county_name": "",
     "lat": 30.6618646,
     "lon": -97.7114164
-  },
-  {
-    "site_no": "08041945",
-    "name": "N Fk Taylor Bayou at IH 10 nr Hamshire, TX",
-    "state": "TX",
-    "city": "Ih 10 Nr Hamshire",
-    "county_name": "",
-    "lat": 29.9115111,
-    "lon": -94.2931667
   },
   {
     "site_no": "07299575",
