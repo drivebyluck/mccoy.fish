@@ -31235,8 +31235,8 @@
     "state": "FL",
     "city": "",
     "county_name": "",
-    "lat": 28.06850278,
-    "lon": -82.72248889
+    "lat": 28.068503,
+    "lon": -82.722489
   },
   {
     "site_no": "02322590",
@@ -31595,8 +31595,8 @@
     "state": "FL",
     "city": "Evans Road Near Dunedin",
     "county_name": "",
-    "lat": 28.02335166,
-    "lon": -82.7406565
+    "lat": 28.023353,
+    "lon": -82.740656
   },
   {
     "site_no": "02299734",
@@ -47759,8 +47759,8 @@
     "state": "FL",
     "city": "Dunnellon Fla.",
     "county_name": "",
-    "lat": 29.04279722,
-    "lon": -82.45714444
+    "lat": 29.042797,
+    "lon": -82.457144
   },
   {
     "site_no": "02312719",
@@ -63828,6 +63828,15 @@
     "lon": -116.799722
   },
   {
+    "site_no": "13204640",
+    "name": "COTTONWOOD CREEK BEL FIVEMILE CR NR BOISE ID",
+    "state": "ID",
+    "city": "Boise",
+    "county_name": "",
+    "lat": 43.628611,
+    "lon": -116.110833
+  },
+  {
     "site_no": "13265500",
     "name": "CRANE CREEK AT MOUTH NR WEISER ID",
     "state": "ID",
@@ -64159,6 +64168,15 @@
     "county_name": "",
     "lat": 43.64849557,
     "lon": -116.533186
+  },
+  {
+    "site_no": "13204990",
+    "name": "FREESTONE CR AT FREESTONE CR TRAILHEAD NR BOISE ID",
+    "state": "ID",
+    "city": "Freestone Cr Trailhead Nr Boise",
+    "county_name": "",
+    "lat": 43.624219,
+    "lon": -116.175719
   },
   {
     "site_no": "13336300",
@@ -73681,6 +73699,15 @@
     "county_name": "",
     "lat": 37.99617116,
     "lon": -87.5250123
+  },
+  {
+    "site_no": "03322095",
+    "name": "PIGEON CREEK NEAR EVANSVILLE, IN",
+    "state": "IN",
+    "city": "Evansville",
+    "county_name": "",
+    "lat": 38.012897,
+    "lon": -87.494956
   },
   {
     "site_no": "03322011",
@@ -88749,6 +88776,15 @@
     "lon": -70.9564307
   },
   {
+    "site_no": "01109380",
+    "name": "TEN MILE RIVER AT ATTLEBORO, MA",
+    "state": "MA",
+    "city": "Attleboro",
+    "county_name": "",
+    "lat": 41.943989,
+    "lon": -71.285331
+  },
+  {
     "site_no": "01105810",
     "name": "THIRD HERRING BROOK AT HANOVER, MA",
     "state": "MA",
@@ -95929,6 +95965,15 @@
     "county_name": "",
     "lat": 46.80409698,
     "lon": -88.3170724
+  },
+  {
+    "site_no": "04043165",
+    "name": "SLATE RIVER AT SKANEE ROAD NEAR SKANEE, MI",
+    "state": "MI",
+    "city": "Skanee Road Near Skanee",
+    "county_name": "",
+    "lat": 46.833333,
+    "lon": -88.258611
   },
   {
     "site_no": "04112000",
@@ -113675,8 +113720,8 @@
     "state": "MT",
     "city": "Many Glacier",
     "county_name": "",
-    "lat": 48.7988333,
-    "lon": -113.6567306
+    "lat": 48.798833,
+    "lon": -113.656731
   },
   {
     "site_no": "05016000",
@@ -125402,8 +125447,8 @@
     "state": "NE",
     "city": "Grand Island",
     "county_name": "",
-    "lat": 40.87411667,
-    "lon": -98.28219167
+    "lat": 40.874117,
+    "lon": -98.282192
   },
   {
     "site_no": "06770200",
@@ -126293,8 +126338,8 @@
     "state": "NE",
     "city": "Grand Island",
     "county_name": "",
-    "lat": 40.8747222,
-    "lon": -98.3783333
+    "lat": 40.874722,
+    "lon": -98.378333
   },
   {
     "site_no": "01137500",
@@ -127958,8 +128003,8 @@
     "state": "NJ",
     "city": "Lambertville",
     "county_name": "",
-    "lat": 40.36472222,
-    "lon": -74.94888889
+    "lat": 40.364722,
+    "lon": -74.948889
   },
   {
     "site_no": "01464040",
@@ -128219,7 +128264,7 @@
     "state": "NJ",
     "city": "Flatbrookville",
     "county_name": "",
-    "lat": 41.10611111,
+    "lat": 41.106111,
     "lon": -74.9525
   },
   {
@@ -128615,7 +128660,7 @@
     "state": "NJ",
     "city": "",
     "county_name": "",
-    "lat": 39.86772222,
+    "lat": 39.867722,
     "lon": -74.84175
   },
   {
@@ -129047,8 +129092,8 @@
     "state": "NJ",
     "city": "Route 12 At Baptistown",
     "county_name": "",
-    "lat": 40.51694444,
-    "lon": -74.99166667
+    "lat": 40.516944,
+    "lon": -74.991667
   },
   {
     "site_no": "01407868",
@@ -131595,7 +131640,7 @@
     "city": "Vincentown",
     "county_name": "",
     "lat": 39.94,
-    "lon": -74.76305556
+    "lon": -74.763056
   },
   {
     "site_no": "01396190",
@@ -134044,6 +134089,15 @@
     "county_name": "",
     "lat": 35.08916667,
     "lon": -106.6806944
+  },
+  {
+    "site_no": "354316106162510",
+    "name": "RIO GRANDE AT ARROYO MONTOSO, AT BAND NAT MON, NM",
+    "state": "NM",
+    "city": "Arroyo Montoso",
+    "county_name": "",
+    "lat": 35.7211,
+    "lon": -106.273561
   },
   {
     "site_no": "08355050",
@@ -142979,8 +143033,8 @@
     "state": "NY",
     "city": "Youngstown",
     "county_name": "",
-    "lat": 43.25188889,
-    "lon": -79.0509444
+    "lat": 43.251889,
+    "lon": -79.050944
   },
   {
     "site_no": "425515078535403",
@@ -187952,8 +188006,8 @@
     "state": "VA",
     "city": "Covington",
     "county_name": "",
-    "lat": 37.7887362,
-    "lon": -80.00061319
+    "lat": 37.788736,
+    "lon": -80.000614
   },
   {
     "site_no": "02011800",
@@ -188298,15 +188352,6 @@
     "lon": -77.2505417
   },
   {
-    "site_no": "01654197",
-    "name": "LONG BRANCH ABOVE GUINEA ROAD NR FAIRFAX, VA",
-    "state": "VA",
-    "city": "Guinea Road Nr Fairfax",
-    "county_name": "",
-    "lat": 38.82101667,
-    "lon": -77.2627806
-  },
-  {
     "site_no": "01654107",
     "name": "LONG BRANCH AT OLLEY LANE NR FAIRFAX, VA",
     "state": "VA",
@@ -188359,15 +188404,6 @@
     "county_name": "",
     "lat": 38.3506855,
     "lon": -77.9694415
-  },
-  {
-    "site_no": "01654259",
-    "name": "LONG BRANCH NR TABARD TRAIL NR FAIRFAX, VA",
-    "state": "VA",
-    "city": "Tabard Trail Nr Fairfax",
-    "county_name": "",
-    "lat": 38.8176111,
-    "lon": -77.2566556
   },
   {
     "site_no": "01621324",
@@ -204145,6 +204181,15 @@
     "county_name": "",
     "lat": 43.13,
     "lon": -89.3711111
+  },
+  {
+    "site_no": "442506089032001",
+    "name": "Wetland Outlet nr Ogdensburg, WI",
+    "state": "WI",
+    "city": "Ogdensburg",
+    "county_name": "",
+    "lat": 44.41821111,
+    "lon": -89.05563056
   },
   {
     "site_no": "04027585",
