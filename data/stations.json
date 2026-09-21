@@ -7920,6 +7920,15 @@
     "lon": -111.7520806
   },
   {
+    "site_no": "09504410",
+    "name": "OAK CREEK BELOW GRASSHOPPER POINT NEAR SEDONA, AZ",
+    "state": "AZ",
+    "city": "Grasshopper Point Near Sedona",
+    "county_name": "",
+    "lat": 34.885992,
+    "lon": -111.732286
+  },
+  {
     "site_no": "09504500",
     "name": "OAK CREEK NEAR CORNVILLE, AZ",
     "state": "AZ",
@@ -15084,6 +15093,33 @@
     "lon": -121.211361
   },
   {
+    "site_no": "11154840",
+    "name": "SAN CARLOS C A NEW IDRIA RD A IDRIA CA",
+    "state": "CA",
+    "city": "",
+    "county_name": "",
+    "lat": 36.411678,
+    "lon": -120.669378
+  },
+  {
+    "site_no": "11154880",
+    "name": "SAN CARLOS C A NEW IDRIA RD CULVERT A IDRIA CA",
+    "state": "CA",
+    "city": "",
+    "county_name": "",
+    "lat": 36.425408,
+    "lon": -120.6691
+  },
+  {
+    "site_no": "11154850",
+    "name": "SAN CARLOS C BL NEW IDRIA MINE DRAIN A IDRIA CA",
+    "state": "CA",
+    "city": "",
+    "county_name": "",
+    "lat": 36.415708,
+    "lon": -120.671367
+  },
+  {
     "site_no": "11023000",
     "name": "SAN DIEGO R A FASHION VALLEY AT SAN DIEGO CA",
     "state": "CA",
@@ -16180,6 +16216,15 @@
     "county_name": "",
     "lat": 38.196575,
     "lon": -122.0468028
+  },
+  {
+    "site_no": "11255400",
+    "name": "SILVER C A PANOCHE RD BR NR PANOCHE CA",
+    "state": "CA",
+    "city": "Panoche",
+    "county_name": "",
+    "lat": 36.594569,
+    "lon": -120.684583
   },
   {
     "site_no": "11140000",
@@ -46904,8 +46949,8 @@
     "state": "FL",
     "city": "Everglades City",
     "county_name": "",
-    "lat": 25.50129167,
-    "lon": -80.9322222
+    "lat": 25.501292,
+    "lon": -80.932222
   },
   {
     "site_no": "253357080594100",
@@ -53064,6 +53109,15 @@
     "lon": -84.3669444
   },
   {
+    "site_no": "02217293",
+    "name": "L MULBERRY R AT OLD THOMPSON MILL, NR HOSCHTON, GA",
+    "state": "GA",
+    "city": "Old Thompson Mill",
+    "county_name": "",
+    "lat": 34.062053,
+    "lon": -83.785453
+  },
+  {
     "site_no": "03499927",
     "name": "L TENNESSEE RIVER AT GA 246, NEAR DILLARD, GA",
     "state": "GA",
@@ -53395,15 +53449,6 @@
     "county_name": "",
     "lat": 34.06093999,
     "lon": -83.8037859
-  },
-  {
-    "site_no": "02217293",
-    "name": "LITTLE MULBERRY RIVER AT GA 211, NR HOSCHTON, GA",
-    "state": "GA",
-    "city": "Ga 211",
-    "county_name": "",
-    "lat": 34.06205155,
-    "lon": -83.7854517
   },
   {
     "site_no": "02327413",
@@ -54401,8 +54446,8 @@
     "state": "GA",
     "city": "Peachtree Rd",
     "county_name": "",
-    "lat": 34.07844037,
-    "lon": -83.7765624
+    "lat": 34.078439,
+    "lon": -83.776561
   },
   {
     "site_no": "02318650",
@@ -99828,6 +99873,15 @@
     "lon": -90.1677778
   },
   {
+    "site_no": "05218450",
+    "name": "Tamarack R. at 480th St nr Wright, MN",
+    "state": "MN",
+    "city": "480th St Nr Wright",
+    "county_name": "",
+    "lat": 46.708931,
+    "lon": -93.0687
+  },
+  {
     "site_no": "473428095050801",
     "name": "UNNAMED LAKE, W. SIDE, AT RAFT, SE OF PINEWOOD, MN",
     "state": "MN",
@@ -123719,8 +123773,8 @@
     "state": "NE",
     "city": "Overton",
     "county_name": "",
-    "lat": 40.73422222,
-    "lon": -99.50573333
+    "lat": 40.734222,
+    "lon": -99.505733
   },
   {
     "site_no": "06787000",
@@ -124025,8 +124079,8 @@
     "state": "NE",
     "city": "",
     "county_name": "",
-    "lat": 40.72898611,
-    "lon": -99.39861667
+    "lat": 40.728986,
+    "lon": -99.398617
   },
   {
     "site_no": "06770240",
@@ -125456,8 +125510,8 @@
     "state": "NE",
     "city": "Kearney",
     "county_name": "",
-    "lat": 40.65805556,
-    "lon": -99.0861111
+    "lat": 40.658056,
+    "lon": -99.086111
   },
   {
     "site_no": "06796500",
@@ -159125,8 +159179,8 @@
     "state": "PA",
     "city": "Spring Grove",
     "county_name": "",
-    "lat": 39.8787104,
-    "lon": -76.8533073
+    "lat": 39.878711,
+    "lon": -76.853308
   },
   {
     "site_no": "01575598",
@@ -159215,8 +159269,8 @@
     "state": "PA",
     "city": "Lancaster",
     "county_name": "",
-    "lat": 40.05009748,
-    "lon": -76.2771798
+    "lat": 40.050097,
+    "lon": -76.277181
   },
   {
     "site_no": "01576105",
@@ -159845,8 +159899,8 @@
     "state": "PA",
     "city": "Clermont",
     "county_name": "",
-    "lat": 41.64405556,
-    "lon": -78.5314444
+    "lat": 41.644056,
+    "lon": -78.531444
   },
   {
     "site_no": "01472620",
@@ -160358,8 +160412,8 @@
     "state": "PA",
     "city": "Guffey",
     "county_name": "",
-    "lat": 41.76645099,
-    "lon": -78.71863999
+    "lat": 41.76645,
+    "lon": -78.718639
   },
   {
     "site_no": "01564997",
@@ -161312,8 +161366,8 @@
     "state": "PA",
     "city": "North Charleroi",
     "county_name": "",
-    "lat": 40.06868445,
-    "lon": -79.9042146
+    "lat": 40.152017,
+    "lon": -79.904214
   },
   {
     "site_no": "03075071",
@@ -161393,8 +161447,8 @@
     "state": "PA",
     "city": "Pine Grove Furnace",
     "county_name": "",
-    "lat": 40.0309245,
-    "lon": -77.3085949
+    "lat": 40.030925,
+    "lon": -77.308594
   },
   {
     "site_no": "014755595",
@@ -161816,8 +161870,8 @@
     "state": "PA",
     "city": "Martic Forge",
     "county_name": "",
-    "lat": 39.90593409,
-    "lon": -76.32829298
+    "lat": 39.905933,
+    "lon": -76.328292
   },
   {
     "site_no": "01576767",
@@ -162824,8 +162878,8 @@
     "state": "PA",
     "city": "Sykesville",
     "county_name": "",
-    "lat": 41.0497845,
-    "lon": -78.8178092
+    "lat": 41.049786,
+    "lon": -78.817808
   },
   {
     "site_no": "01531325",
@@ -163031,8 +163085,8 @@
     "state": "PA",
     "city": "Hershey",
     "county_name": "",
-    "lat": 40.29842358,
-    "lon": -76.6677469
+    "lat": 40.298425,
+    "lon": -76.667747
   },
   {
     "site_no": "01572190",
@@ -163922,8 +163976,8 @@
     "state": "PA",
     "city": "Hyndman",
     "county_name": "",
-    "lat": 39.81202897,
-    "lon": -78.7164072
+    "lat": 39.812028,
+    "lon": -78.716408
   },
   {
     "site_no": "01548408",
@@ -207581,8 +207635,8 @@
     "state": "WY",
     "city": "Old Faithful",
     "county_name": "",
-    "lat": 44.4593333,
-    "lon": -110.8222722
+    "lat": 44.459333,
+    "lon": -110.822272
   },
   {
     "site_no": "06036905",
@@ -207590,8 +207644,8 @@
     "state": "WY",
     "city": "West Yellowstone Mt",
     "county_name": "",
-    "lat": 44.6201833,
-    "lon": -110.8635028
+    "lat": 44.620183,
+    "lon": -110.863503
   },
   {
     "site_no": "433302110504701",
@@ -208761,7 +208815,7 @@
     "city": "Norris Junction",
     "county_name": "",
     "lat": 44.732725,
-    "lon": -110.7132528
+    "lon": -110.713253
   },
   {
     "site_no": "06306020",
