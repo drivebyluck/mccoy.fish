@@ -9338,8 +9338,8 @@
     "state": "CA",
     "city": "Del Paso Heights",
     "county_name": "",
-    "lat": 38.6418268,
-    "lon": -121.3826961
+    "lat": 38.641828,
+    "lon": -121.382697
   },
   {
     "site_no": "363428118184001",
@@ -12227,8 +12227,8 @@
     "state": "CA",
     "city": "Elk Grove",
     "county_name": "",
-    "lat": 38.42321988,
-    "lon": -121.3532478
+    "lat": 38.423219,
+    "lon": -121.353247
   },
   {
     "site_no": "11465680",
@@ -19193,8 +19193,8 @@
     "state": "CO",
     "city": "Louisville",
     "county_name": "",
-    "lat": 39.9760962,
-    "lon": -105.1172068
+    "lat": 39.976097,
+    "lon": -105.117208
   },
   {
     "site_no": "09118450",
@@ -50306,8 +50306,8 @@
     "state": "GA",
     "city": "",
     "county_name": "",
-    "lat": 34.0567222,
-    "lon": -84.1083333
+    "lat": 34.056722,
+    "lon": -84.108333
   },
   {
     "site_no": "02330453",
@@ -50378,8 +50378,8 @@
     "state": "GA",
     "city": "Buford",
     "county_name": "",
-    "lat": 34.15666667,
-    "lon": -84.0784167
+    "lat": 34.156667,
+    "lon": -84.078417
   },
   {
     "site_no": "02337445",
@@ -64530,6 +64530,15 @@
     "lon": -113.0838889
   },
   {
+    "site_no": "13042010",
+    "name": "ISLAND PARK DAM NR ISLAND PARK ID",
+    "state": "ID",
+    "city": "Island Park",
+    "county_name": "",
+    "lat": 44.419722,
+    "lon": -111.397222
+  },
+  {
     "site_no": "13313000",
     "name": "JOHNSON CREEK AT YELLOW PINE ID",
     "state": "ID",
@@ -65268,6 +65277,15 @@
     "lon": -114.0469444
   },
   {
+    "site_no": "13032450",
+    "name": "PALISADES RESERVOIR NR IRWIN ID",
+    "state": "ID",
+    "city": "Irwin",
+    "county_name": "",
+    "lat": 43.330278,
+    "lon": -111.205556
+  },
+  {
     "site_no": "13345000",
     "name": "PALOUSE RIVER NR POTLATCH, ID",
     "state": "ID",
@@ -65545,6 +65563,15 @@
     "county_name": "",
     "lat": 43.44563056,
     "lon": -111.3298556
+  },
+  {
+    "site_no": "13057950",
+    "name": "RIRIE LAKE NR RIRIE ID",
+    "state": "ID",
+    "city": "Ririe",
+    "county_name": "",
+    "lat": 43.580833,
+    "lon": -111.741944
   },
   {
     "site_no": "132109853",
@@ -120308,8 +120335,8 @@
     "state": "ND",
     "city": "Velva",
     "county_name": "",
-    "lat": 48.058342,
-    "lon": -100.9504287
+    "lat": 48.055178,
+    "lon": -100.951442
   },
   {
     "site_no": "05123900",
@@ -121649,8 +121676,8 @@
     "state": "ND",
     "city": "Mouth Near Oakdale",
     "county_name": "",
-    "lat": 47.5978611,
-    "lon": -102.7664722
+    "lat": 47.597861,
+    "lon": -102.766472
   },
   {
     "site_no": "06335500",
@@ -122378,8 +122405,8 @@
     "state": "ND",
     "city": "",
     "county_name": "",
-    "lat": 46.70679167,
-    "lon": -96.79150278
+    "lat": 46.706792,
+    "lon": -96.791503
   },
   {
     "site_no": "461542096385300",
@@ -122396,8 +122423,8 @@
     "state": "ND",
     "city": "Div Inlet Structure",
     "county_name": "",
-    "lat": 46.72230833,
-    "lon": -96.90681389
+    "lat": 46.722308,
+    "lon": -96.906814
   },
   {
     "site_no": "05054000050",
@@ -123485,8 +123512,8 @@
     "state": "ND",
     "city": "Wild Rice Div Structure",
     "county_name": "",
-    "lat": 46.70618611,
-    "lon": -96.83665556
+    "lat": 46.706186,
+    "lon": -96.836656
   },
   {
     "site_no": "05053000",
@@ -150759,6 +150786,15 @@
     "lon": -96.7283672
   },
   {
+    "site_no": "07164480",
+    "name": "Arkansas River at SH 344 nr Tulsa, OK",
+    "state": "OK",
+    "city": "Sh 344 Nr Tulsa",
+    "county_name": "",
+    "lat": 36.141911,
+    "lon": -96.057369
+  },
+  {
     "site_no": "07164400",
     "name": "Arkansas River at Sand Springs , OK",
     "state": "OK",
@@ -150811,15 +150847,6 @@
     "county_name": "",
     "lat": 35.3497222,
     "lon": -94.7711111
-  },
-  {
-    "site_no": "07164480",
-    "name": "Arkansas Rv at SH 344 nr Tulsa, OK",
-    "state": "OK",
-    "city": "Sh 344 Nr Tulsa",
-    "county_name": "",
-    "lat": 36.1419111,
-    "lon": -96.0573694
   },
   {
     "site_no": "07333010",
@@ -151354,7 +151381,7 @@
   },
   {
     "site_no": "07228650",
-    "name": "Canadian River near Cogar, Ok",
+    "name": "Canadian River near Cogar, OK",
     "state": "OK",
     "city": "Cogar",
     "county_name": "",
@@ -151741,7 +151768,7 @@
   },
   {
     "site_no": "07241506",
-    "name": "Crutcho Creek at SE 29th st. at Boone Township, OK",
+    "name": "Crutcho Creek at SE 29th St. at Boone Township, OK",
     "state": "OK",
     "city": "SE 29th St. At Boone Township",
     "county_name": "",
@@ -152596,7 +152623,7 @@
   },
   {
     "site_no": "07332340",
-    "name": "Little West Blue Creek Nr Connerville, OK",
+    "name": "Little West Blue Creek nr Connerville, OK",
     "state": "OK",
     "city": "Connerville",
     "county_name": "",
@@ -153307,21 +153334,21 @@
   },
   {
     "site_no": "07191322",
-    "name": "Saline Ck at CR 490 nr Kenwood OK",
+    "name": "Saline Ck at CR 490 nr Kenwood, OK",
     "state": "OK",
     "city": "Cr 490 Nr Kenwood",
     "county_name": "",
-    "lat": 36.31161944,
-    "lon": -94.9892139
+    "lat": 36.311619,
+    "lon": -94.989214
   },
   {
     "site_no": "07191315",
-    "name": "Saline Creek near Bull Hollow OK",
+    "name": "Saline Creek near Bull Hollow, OK",
     "state": "OK",
     "city": "Bull Hollow",
     "county_name": "",
-    "lat": 36.30403889,
-    "lon": -94.8787611
+    "lat": 36.304039,
+    "lon": -94.878761
   },
   {
     "site_no": "07303404",
@@ -153478,12 +153505,12 @@
   },
   {
     "site_no": "07241513",
-    "name": "Soldier Creek S of SE 15th st. Boone Township, OK",
+    "name": "Soldier Creek S of SE 15th St. Boone Township, OK",
     "state": "OK",
     "city": "",
     "county_name": "",
-    "lat": 35.44689444,
-    "lon": -97.3732667
+    "lat": 35.446894,
+    "lon": -97.373267
   },
   {
     "site_no": "07198800",
@@ -182885,8 +182912,8 @@
     "state": "TX",
     "city": "Fm 171",
     "county_name": "",
-    "lat": 33.97043889,
-    "lon": -98.4638056
+    "lat": 33.970439,
+    "lon": -98.463806
   },
   {
     "site_no": "08065310",
