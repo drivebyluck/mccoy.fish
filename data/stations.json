@@ -6270,7 +6270,7 @@
     "city": "",
     "county_name": "",
     "lat": 34.615,
-    "lon": -111.8372222
+    "lon": -111.837222
   },
   {
     "site_no": "09414900",
@@ -8852,8 +8852,8 @@
     "state": "AZ",
     "city": "Camp Verde",
     "county_name": "",
-    "lat": 34.53863606,
-    "lon": -111.6940356
+    "lat": 34.538742,
+    "lon": -111.694131
   },
   {
     "site_no": "09504350",
@@ -19360,12 +19360,12 @@
   },
   {
     "site_no": "09163500",
-    "name": "COLORADO RIVER NEAR COLORADO-UTAH STATE LINE",
+    "name": "COLORADO RIVER NEAR COLORADO- UTAH STATE LINE",
     "state": "CO",
-    "city": "Colorado-Utah State Line",
+    "city": "Colorado- Utah State Line",
     "county_name": "",
-    "lat": 39.1327434,
-    "lon": -109.02707585
+    "lat": 39.132742,
+    "lon": -109.027075
   },
   {
     "site_no": "09093700",
@@ -21799,12 +21799,12 @@
   },
   {
     "site_no": "09372000",
-    "name": "MCELMO CREEK NEAR COLORADO-UTAH STATE LINE",
+    "name": "MCELMO CREEK NEAR COLORADO- UTAH STATE LINE",
     "state": "CO",
-    "city": "Colorado-Utah State Line",
+    "city": "Colorado- Utah State Line",
     "county_name": "",
-    "lat": 37.32415968,
-    "lon": -109.015666
+    "lat": 37.324161,
+    "lon": -109.015667
   },
   {
     "site_no": "09371500",
@@ -65844,6 +65844,15 @@
     "lon": -111.7777778
   },
   {
+    "site_no": "13163300",
+    "name": "SHEEP CREEK AT RANCH BRIDGE NR GRASMERE, ID",
+    "state": "ID",
+    "city": "Ranch Bridge Nr Grasmere",
+    "county_name": "",
+    "lat": 42.241389,
+    "lon": -115.758611
+  },
+  {
     "site_no": "13150430",
     "name": "SILVER CREEK AT SPORTSMAN ACCESS NR PICABO ID",
     "state": "ID",
@@ -81221,8 +81230,8 @@
     "state": "KY",
     "city": "Beattyville",
     "county_name": "",
-    "lat": 37.56952918,
-    "lon": -83.7066137
+    "lat": 37.569528,
+    "lon": -83.706614
   },
   {
     "site_no": "03277500",
@@ -93501,6 +93510,15 @@
     "lon": -82.951589
   },
   {
+    "site_no": "04153794",
+    "name": "COLDWATER RIVER AT BASELINE ROAD NEAR WEIDMAN, MI",
+    "state": "MI",
+    "city": "Baseline Road Near Weidman",
+    "county_name": "",
+    "lat": 43.639194,
+    "lon": -84.955578
+  },
+  {
     "site_no": "04043021",
     "name": "COLE CREEK AT HOUGHTON CANAL ROAD NR HOUGHTON, MI",
     "state": "MI",
@@ -98359,6 +98377,15 @@
     "county_name": "",
     "lat": 44.87025801,
     "lon": -93.19243534
+  },
+  {
+    "site_no": "05326450",
+    "name": "MINNESOTA RIVER AT HENDERSON, MN",
+    "state": "MN",
+    "city": "Henderson",
+    "county_name": "",
+    "lat": 44.529408,
+    "lon": -93.9008
   },
   {
     "site_no": "05311150",
@@ -110363,8 +110390,8 @@
     "state": "MT",
     "city": "Saco",
     "county_name": "",
-    "lat": 48.3567833,
-    "lon": -107.5821861
+    "lat": 48.356783,
+    "lon": -107.582186
   },
   {
     "site_no": "06139850",
@@ -159966,6 +159993,15 @@
     "lon": -75.2724064
   },
   {
+    "site_no": "01576998",
+    "name": "Deepwater Isl East Channel, Susq Riv, Holtwood PA",
+    "state": "PA",
+    "city": "",
+    "county_name": "",
+    "lat": 39.813667,
+    "lon": -76.312778
+  },
+  {
     "site_no": "03049646",
     "name": "Deer Creek near Dorseyville, PA",
     "state": "PA",
@@ -163168,15 +163204,6 @@
     "county_name": "",
     "lat": 41.9572192,
     "lon": -76.51492159
-  },
-  {
-    "site_no": "01576998",
-    "name": "Susquehanna Riv, Deepwater Island at Holtwood, PA",
-    "state": "PA",
-    "city": "Holtwood",
-    "county_name": "",
-    "lat": 39.813667,
-    "lon": -76.312778
   },
   {
     "site_no": "01553990",
@@ -177018,7 +177045,7 @@
     "city": "Fm 1485 Nr Cut And Shoot",
     "county_name": "",
     "lat": 30.2949,
-    "lon": -95.3521056
+    "lon": -95.352106
   },
   {
     "site_no": "07315200",
@@ -177341,8 +177368,8 @@
     "state": "TX",
     "city": "N Stemmons Fwy Nr Dallas",
     "county_name": "",
-    "lat": 32.91583333,
-    "lon": -96.9001667
+    "lat": 32.915833,
+    "lon": -96.900167
   },
   {
     "site_no": "08152710",
@@ -178052,8 +178079,8 @@
     "state": "TX",
     "city": "N Denton Dr At Carrollton",
     "county_name": "",
-    "lat": 32.9571611,
-    "lon": -96.9071167
+    "lat": 32.957161,
+    "lon": -96.907117
   },
   {
     "site_no": "08447020",
@@ -178115,8 +178142,8 @@
     "state": "TX",
     "city": "Willowbrook Rd",
     "county_name": "",
-    "lat": 32.86169444,
-    "lon": -96.8828889
+    "lat": 32.861694,
+    "lon": -96.882889
   },
   {
     "site_no": "08166000",
@@ -182588,8 +182615,8 @@
     "state": "TX",
     "city": "S. Edmonds Ln",
     "county_name": "",
-    "lat": 33.01469444,
-    "lon": -97.0046944
+    "lat": 33.014694,
+    "lon": -97.004694
   },
   {
     "site_no": "08050800",
@@ -185004,6 +185031,15 @@
     "lon": -110.11736111
   },
   {
+    "site_no": "10010015",
+    "name": "LAKESIDE DRAIN AT QUARRY NEAR LAKESIDE, UT",
+    "state": "UT",
+    "city": "Quarry Near Lakeside",
+    "county_name": "",
+    "lat": 41.224222,
+    "lon": -112.8825
+  },
+  {
     "site_no": "10172640",
     "name": "LEE CREEK NEAR MAGNA, UT",
     "state": "UT",
@@ -185662,12 +185698,12 @@
   },
   {
     "site_no": "09379500",
-    "name": "SAN JUAN RIVER NEAR BLUFF, UT",
+    "name": "SAN JUAN RIVER AT MEXICAN HAT, UT",
     "state": "UT",
-    "city": "Bluff",
+    "city": "Mexican Hat",
     "county_name": "",
-    "lat": 37.15067778,
-    "lon": -109.8666889
+    "lat": 37.150678,
+    "lon": -109.866689
   },
   {
     "site_no": "09328100",
@@ -193649,8 +193685,8 @@
     "state": "WA",
     "city": "Glenwood",
     "county_name": "",
-    "lat": 45.962345,
-    "lon": -121.102295
+    "lat": 45.962344,
+    "lon": -121.102294
   },
   {
     "site_no": "14113000",
@@ -200788,6 +200824,15 @@
     "county_name": "",
     "lat": 43.02444444,
     "lon": -87.8983333
+  },
+  {
+    "site_no": "04086253",
+    "name": "MILWAUKEE RIVER AT QUAAS CK PARK AT WEST BEND, WI",
+    "state": "WI",
+    "city": "Quaas Ck Park At West Bend",
+    "county_name": "",
+    "lat": 43.419911,
+    "lon": -88.146019
   },
   {
     "site_no": "040870115",
